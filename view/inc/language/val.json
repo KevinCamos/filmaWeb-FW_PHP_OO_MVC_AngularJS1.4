@@ -1,0 +1,14 @@
+{
+    "val" : {
+        "Inicio" : "Inici",
+        "Peliculas" : "Pel·lícules",
+        "Servicios" : "Serveis",
+        "Sobre nosotros" : "Sobre nosaltres",
+        "Contacta con nosotros" : "Contacta amb nosaltres",
+        
+        
+        "Valenciano": "Valencià",
+        "Castellano": "Castellà",
+         "Inglés": "Inglés" 
+    }
+}

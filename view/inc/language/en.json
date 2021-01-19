@@ -1,0 +1,14 @@
+{
+    "en" : {
+        "Inicio" : "Home",
+        "Peliculas" : "Movies",
+        "Servicios" : "Services",
+        "Sobre nosotros" : "About us",
+        "Contacta con nosotros" : "Contact us",
+
+        
+        "Valenciano": "Valencian",
+        "Castellano": "Spanish",
+         "Inglés": "English" 
+    }
+}
