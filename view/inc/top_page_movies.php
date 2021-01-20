@@ -2,9 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <!-- CACHE, COFIFICACIÓN Y FORMATO LINGÜISTICO-->
-    <meta http-equiv="Content-Type" content="no-cache" content="text/html; charset=utf-8" />
-    <title>Formulario Películas</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!--[if IE]>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <![endif]-->
+    <title>Projecte</title>
+    <!-- BOOTSTRAP CORE STYLE CSS -->
+    <link href="view/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLE CSS -->
+    <link href="view/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- CUSTOM STYLE CSS -->
+    <link href="view/css/style.css" rel="stylesheet" />
+    <!-- GOOGLE FONT -->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+
+
+
+
+
+
+
+
 
     <link href="view/css/style.css" rel="stylesheet" type="text/css" />
 
@@ -49,7 +71,7 @@
 
 
     <!-- JQUERY  ACCORDION-->
-<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
