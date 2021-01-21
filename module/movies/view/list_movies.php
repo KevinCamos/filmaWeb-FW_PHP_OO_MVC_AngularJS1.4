@@ -51,4 +51,4 @@
     
 
 <!-- MODAL PARA SACAR LA VENTANA FLOTANTE DE READ, DELETE -->
-<div id="list_modal"></div></br>
+<div id="list_modal"></div>

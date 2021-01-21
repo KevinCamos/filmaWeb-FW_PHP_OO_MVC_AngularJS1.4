@@ -1,11 +1,11 @@
 <section id="home" class="head-main-img">
-    <div class="container">
-        <div class="row text-center pad-row">
-            <div class="col-md-12">
-                <h1> UPDATE </h1>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row text-center pad-row">
+			<div class="col-md-12">
+				<h1> UPDATE </h1>
+			</div>
+		</div>
+	</div>
 </section>
 
 <form name="formmovies" id="formmovies" method="POST" ?>
@@ -136,7 +136,7 @@
 				<td>Fecha de lanzamiento</td>
 				<td><input type="text" id="anyo" name="anyo" placeholder="fecha de alquiler" value="<?php echo $movie['anyo']; ?>" required><span id="error_date" class="styerror"></span></td>
 			</tr>
-	
+
 		</tbody>
 	</table>
 	<!--SEND SEND SEND SEND SEND SEND -->
