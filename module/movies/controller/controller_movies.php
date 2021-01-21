@@ -1,5 +1,5 @@
 <?php
-$path = $_SERVER['DOCUMENT_ROOT'] . '\Kevin\Ejercicios_Kevin\Ejercicio_7.3';
+$path = $_SERVER['DOCUMENT_ROOT'] . '\Kevin\Ejercicios_Kevin\Projecte';
 include("$path.\module\movies\model\DAOMovie.php");
 include("$path.\module\movies\model\\validate_php.php");
 

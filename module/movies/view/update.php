@@ -1,3 +1,13 @@
+<section id="home" class="head-main-img">
+    <div class="container">
+        <div class="row text-center pad-row">
+            <div class="col-md-12">
+                <h1> UPDATE </h1>
+            </div>
+        </div>
+    </div>
+</section>
+
 <form name="formmovies" id="formmovies" method="POST" ?>
 	<table width="100%" border="1" cellspacing="2" cellpadding="2">
 

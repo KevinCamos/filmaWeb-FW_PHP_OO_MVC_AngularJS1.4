@@ -80,6 +80,8 @@ function validate_genere(valueText) {
 function validate_date(valueText) {
     if (valueText.length == 0) {
         $("#error_date").html("*Selecciona una fecha");
+    } else if (!valueText.match("[0-9]{4}")) {
+        $("#error_email").html("*Escribe un año correcto");
     } else {
         $("#error_date").html("");
     }

@@ -123,7 +123,7 @@ function deleterMovie() {
       
     });
 //     setInterval( function(){
-//         // $path = $_SERVER['DOCUMENT_ROOT'] . '\Kevin\Ejercicios_Kevin\Ejercicio_7.3\module\movies\\view\list_movies.php';
+//         // $path = $_SERVER['DOCUMENT_ROOT'] . '\Kevin\Ejercicios_Kevin\Projecte\module\movies\\view\list_movies.php';
 
 //         $('#feedback-bg-info').load('module\movies\\view\list_movies.php');
 

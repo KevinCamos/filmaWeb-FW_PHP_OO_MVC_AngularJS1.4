@@ -1,6 +1,6 @@
 <?php
 
-$path= $_SERVER['DOCUMENT_ROOT'].'\Kevin\Ejercicios_Kevin\Ejercicio_7.3';
+$path= $_SERVER['DOCUMENT_ROOT'].'\Kevin\Ejercicios_Kevin\Projecte';
 
 include("$path.\model\connect.php");
 
