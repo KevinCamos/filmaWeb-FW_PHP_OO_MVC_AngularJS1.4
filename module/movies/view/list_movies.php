@@ -11,17 +11,18 @@
         <div class="row">
             <!-- <p><a href="index.php?page=controller_user&op=create"><img src="view/img/anadir.png"></a></p>  -->
             <p><a href="index.php?page=movies&op=create"><img src="view/img/add.png"></a></p>
-            <table border 1 id="data_list" class="display">
+            <table border 1 id="data_list" class="display" width=1650px>
                 <thead>
                     <tr>
                     <th width=100 align="center"><b> Acción</b></th>
                         <th width=85 align="center"><b> Director</b></th>
                         <th width=85 align="center"><b> Película</b></th>
                         <th width=50 align="center"><b> Año</b></th>
+                        <th width=50 align="center"><b> Price</b></th>
+                        <th width=50 align="center"><b> Img</b></th>
                     </tr>
                 </thead>
                 <tbody>
-
                 <?php
                 if ($resultado->num_rows === 0) {
                     echo '<tr>';
@@ -41,8 +42,12 @@
                         echo '<td  align="center">' . $row['director'] . '</td>';
                         echo '<td align="center">' . $row['movie'] . '</td>';
                         echo '<td align="center">' . $row['anyo'] . '</td>';
+                        echo '<td align="center">' . $row['price'] . '</td>';
+                        echo '<td align="center">;<img src="' . $row['img'] . '"></td>';
+                        
                         echo '</td>';
                         echo '</tr>';
+
                     }
                 }
                 ?>

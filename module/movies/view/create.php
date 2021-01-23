@@ -1,26 +1,26 @@
 <section id="home" class="head-main-img">
-    <div class="container">
-        <div class="row text-center pad-row">
-            <div class="col-md-12">
-                <h1> CREATE </h1>
-            </div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="row text-center pad-row">
+			<div class="col-md-12">
+				<h1> CREATE </h1>
+			</div>
+		</div>
+	</div>
 </section>
 
 <form name="formmovies" id=formmovies method="POST" ?>
 	<table class="styled-table">
 
 		<tbody>
+			<!--REFERENCIA REFERENCIA-->
+
 			<tr>
-				<!--REFERENCIA REFERENCIA-->
 				<td>Ref.</td>
 				<td><input type="text" name="ref" id="ref" placeholder="Ejemplo: SWIV77"><span id="error_ref" class="styerror">
 						<?php echo isset($switch) ? "Este film ya existe en la base de datos" : ""; ?></span></td>
 			</tr>
+			<!--PELICULA PELICULA PELICULA-->
 			<tr>
-			<tr>
-				<!--PELICULA PELICULA PELICULA-->
 				<td>Película</td>
 				<td><input type="text" name="movie" id="movie" placeholder="introduce una película"><span id="error_movie" class="styerror"></span></td>
 			</tr>
@@ -71,14 +71,23 @@
 						<option value="Thriller">Thriller</option>
 						<option value="Comedia">comedia</option>
 						<option value="Gore">Gore</option>
-						<option value="Serie B">Serie b</option>
 					</select><span id="error_genere" class="styerror"></span>
 				</td>
 			</tr>
 			<tr>
 				<!--FECHA FECHA FECHA FECHA-->
 				<td>Fecha de lanzamiento</td>
-				<td><input type="text" id="anyo" name="anyo" placeholder="fecha de alquiler" required><span id="error_date" class="styerror"></span></td>
+				<td><input type="text" id="anyo" name="anyo" placeholder="fecha de lanzamiento" required><span id="error_date" class="styerror"></span></td>
+			</tr>
+			<tr>
+				<!--PRECIO PRECIO PRECIO -->
+				<td>Precio</td>
+				<td><input type="text" name="price" id="price" placeholder="introduce el precio"><span id="error_price" class="styerror"></span></td>
+			</tr>
+			<tr>
+				<!--IMG IMG IMG IMG IMG  -->
+				<td>Img</td>
+				<td><input type="text" name="img" id="img" placeholder="module\\movies\\img\\cinema_paradiso.jpg"><span id="error_img" class="styerror"></span></td>
 			</tr>
 		</tbody>
 	</table>

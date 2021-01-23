@@ -307,3 +307,26 @@ td {
   width: 100px;
 
 }
+
+
+.error {color: #FF0000;}
+
+.styerror {
+    color: #ff0000;
+    font-family: arial;
+    font-size: 10pt;
+    font-style:italic;
+}
+
+.item{
+  height: 100%;
+  width: 100%;
+
+}
+#title_page{
+  height: 9%;
+  width: 9%;
+  list-style : none; 
+  margin: 0; 
+  padding: 0; 
+  margin-top: 0px;}

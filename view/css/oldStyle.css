@@ -19,6 +19,12 @@ td {
 
 .error {color: #FF0000;}
 
+.styerror {
+    color: #ff0000;
+    font-family: arial;
+    font-size: 10pt;
+    font-style:italic;
+}
 #exheader {
 	background-image:url(../img/Captura.png);
     background-repeat:no-repeat;

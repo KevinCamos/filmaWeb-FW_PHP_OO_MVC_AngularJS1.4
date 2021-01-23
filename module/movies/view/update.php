@@ -134,7 +134,7 @@
 			<tr>
 				<!--FECHA FECHA FECHA FECHA-->
 				<td>Fecha de lanzamiento</td>
-				<td><input type="text" id="anyo" name="anyo" placeholder="fecha de alquiler" value="<?php echo $movie['anyo']; ?>" required><span id="error_date" class="styerror"></span></td>
+				<td><input type="text" id="anyo" name="anyo" placeholder="fecha de lanzamiento" value="<?php echo $movie['anyo']; ?>" required><span id="error_date" class="styerror"></span></td>
 			</tr>
 
 		</tbody>
