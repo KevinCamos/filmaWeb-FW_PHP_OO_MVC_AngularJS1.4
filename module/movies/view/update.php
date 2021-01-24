@@ -136,7 +136,16 @@
 				<td>Fecha de lanzamiento</td>
 				<td><input type="text" id="anyo" name="anyo" placeholder="fecha de lanzamiento" value="<?php echo $movie['anyo']; ?>" required><span id="error_date" class="styerror"></span></td>
 			</tr>
-
+			<tr>
+				<!--PRECIO PRECIO PRECIO -->
+				<td>Precio</td>
+				<td><input type="text" name="price" id="price" placeholder="introduce el precio" value="<?php echo $movie['price']; ?>"><span id="error_price" class="styerror"></span></td>
+			</tr>
+			<tr>
+				<!--IMG IMG IMG IMG IMG  -->
+				<td>Img</td>
+				<td><input type="text" name="img" id="img" placeholder="cinema_paradiso.jpg" value="<?php echo $movie['img']; ?>">><span id="error_img" class="styerror"></span></td>
+			</tr>
 		</tbody>
 	</table>
 	<!--SEND SEND SEND SEND SEND SEND -->

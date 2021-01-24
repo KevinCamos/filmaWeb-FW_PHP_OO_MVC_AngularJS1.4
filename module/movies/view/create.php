@@ -87,7 +87,7 @@
 			<tr>
 				<!--IMG IMG IMG IMG IMG  -->
 				<td>Img</td>
-				<td><input type="text" name="img" id="img" placeholder="module\\movies\\img\\cinema_paradiso.jpg"><span id="error_img" class="styerror"></span></td>
+				<td><input type="text" name="img" id="img" placeholder="cinema_paradiso.jpg"><span id="error_img" class="styerror"></span></td>
 			</tr>
 		</tbody>
 	</table>

@@ -324,9 +324,15 @@ td {
 
 }
 #title_page{
-  height: 9%;
-  width: 9%;
-  list-style : none; 
-  margin: 0; 
-  padding: 0; 
-  margin-top: 0px;}
+  height: 5%;
+  width: 5%;
+  position: fixed;
+  transform: inherit;
+}
+.line_menu {
+  border: -10;
+  background-color: gray;
+  height: 20px;
+  cursor: pointer;
+  color:whitesmoke;
+}

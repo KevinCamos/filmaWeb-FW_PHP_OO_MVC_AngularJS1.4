@@ -43,7 +43,7 @@
                         echo '<td align="center">' . $row['movie'] . '</td>';
                         echo '<td align="center">' . $row['anyo'] . '</td>';
                         echo '<td align="center">' . $row['price'] . '</td>';
-                        echo '<td align="center">;<img src="' . $row['img'] . '"></td>';
+                        echo '<td align="center">;<img src="module\movies\img\\' . $row['reference'] . '.jpg"></td>';
                         
                         echo '</td>';
                         echo '</tr>';

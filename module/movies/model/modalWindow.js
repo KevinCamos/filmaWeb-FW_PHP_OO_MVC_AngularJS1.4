@@ -5,7 +5,7 @@ $(document).ready(function () {
 })
 
 
-function readMovie() {
+function OpenMovie() {
     $(".movieRead").click(function () {
         var id = this.getAttribute('id');
         // console.log(id);//Debugeo para comprobar que entra a la función
