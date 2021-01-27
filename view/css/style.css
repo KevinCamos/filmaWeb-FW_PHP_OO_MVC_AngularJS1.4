@@ -336,3 +336,8 @@ td {
   cursor: pointer;
   color:whitesmoke;
 }
+
+#products_DIV img{
+
+  display:block;
+}

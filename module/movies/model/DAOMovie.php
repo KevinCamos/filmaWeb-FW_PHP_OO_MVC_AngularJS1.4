@@ -53,6 +53,18 @@ class DAOMovie
 		connect::close($conexion);
 		return $result;
 	}
+	function select_category_movie($category)
+	{
+		//Fincs ací aplega
+		$sql = "SELECT * 
+		FROM movies 
+		WHERE genere= '$category'
+		ORDER BY movie";
+		$conexion = connect::connect();
+		$result = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+		return $result;
+	}
 
 	function select_movie($id_movie)
 	{

@@ -5,7 +5,7 @@ $(document).ready(function () {
 })
 
 
-function OpenMovie() {
+function readMovie() {
     $(".movieRead").click(function () {
         var id = this.getAttribute('id');
         // console.log(id);//Debugeo para comprobar que entra a la función
@@ -22,13 +22,20 @@ function OpenMovie() {
 
         }).done(function (movie) {
             // console.log(movie.movie);
-            var chair = "";
+            // var chair = "";
+            $('#list_modal').empty(); //Borrar lo de dins
+
+           $('<div></div>').attr({ 'class': 'modalclass', 'id': 'modalclass' }).appendTo('#list_modal');
+
             for (var clave in movie) {
-                if (movie.hasOwnProperty(clave)) {
-                    chair += "<b class=readWindow>" + clave + ": </b>" + movie[clave] + "<br>";//Guarda una cadena de cada clau i text, més un salt de línea
+                if (movie.hasOwnProperty(clave) && clave != "img") {
+
+                    $('<p></p>').attr({ 'class': 'attrModal'}).append(document.createTextNode( clave + ":  "+movie[clave])).appendTo('.modalclass');
+                }else if(clave == "img"){
+                    $('<img>').attr({ 'class': 'attrModal', 'src': 'module\\movies\\img\\'+movie[clave]}).appendTo('.modalclass');
                 }
             }
-            $("#list_modal").html(chair);
+            // $("#list_modal").html(chair);
             $("#list_modal").show();
             $("#list_modal").dialog({
                 width: 600, //<!-- ------------- ancho de la ventana -->
@@ -69,14 +76,20 @@ function deleterMovie() {
 
 
         }).done(function (movie) {
-            var chair = "Seguro que desea eliminar la siguiente película? <br>";
+            $('#list_modal').empty(); //Borrar lo de dins
+
+            $('<div></div>').attr({ 'class': 'modalclass', 'id': 'modalclass' }).append(document.createTextNode( "Seguro que desea eliminar la siguiente película? ")).appendTo('#list_modal');
             for (var clave in movie) {
                 if (movie.hasOwnProperty(clave) && (clave === "reference" || clave === "movie" || clave === "director" || clave === "anyo")) {
 
-                    chair += "<b class=readWindow>" + clave + ": </b>" + movie[clave] + "<br>";//Guarda una cadena de cada clau i text, més un salt de línea
+                    $('<br></br>').attr({ 'class': 'attrModal'}).append(document.createTextNode( clave + ":  "+movie[clave])).appendTo('.modalclass');
+                }else if(clave == "img"){
+                    $('<img>').attr({ 'class': 'attrModal', 'src': 'module\\movies\\img\\'+movie[clave]}).appendTo('.modalclass');
                 }
+
+                
             }
-            $("#list_modal").html(chair);
+            // $("#list_modal").html(chair);
             $("#list_modal").show();
             $("#list_modal").dialog({
                 width: 600, //<!-- ------------- ancho de la ventana -->

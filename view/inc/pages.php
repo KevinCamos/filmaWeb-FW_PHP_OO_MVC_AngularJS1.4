@@ -3,7 +3,7 @@ if ((isset($_GET['page']))) {
 
 	switch ($_GET['page']) {
 		case "home";
-			include("module/home/home.html");
+			include("module\home\\view\home.html");
 			break;
 		case "movies";
 			include("module/movies/controller/controller_movies.php");
@@ -34,5 +34,5 @@ if ((isset($_GET['page']))) {
 			break;
 	}
 } else {
-	include("module/home/home.html");
+	include("module\home\\view\home.html");
 }
