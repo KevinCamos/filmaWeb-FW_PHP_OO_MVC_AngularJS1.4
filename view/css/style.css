@@ -335,9 +335,36 @@ td {
   height: 20px;
   cursor: pointer;
   color:whitesmoke;
+  
 }
-
+/* CSS controllerHomePage per a que es vetgen les imagens del carousel */
 #products_DIV img{
 
   display:block;
 }
+
+
+#font-center-home{
+  font-size: 10rem;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+  margin-top: 100px;
+
+}
+
+
+#productsHome img{
+  /* display:blox; */
+  margin-top: 100px;
+  margin-left: 400px;
+}
+/* 
+#listShop div {
+  margin-top: 100px;
+  margin-left: 400px;
+} */
+/* .shopPageCatalog{
+  margin-top: 100px;
+  margin-left: 400px;
+} */

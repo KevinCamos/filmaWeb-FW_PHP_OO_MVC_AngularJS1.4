@@ -3,49 +3,58 @@
 $path = $_SERVER['DOCUMENT_ROOT'] . '\Kevin\Ejercicios_Kevin\Projecte';
 
 //////
-include("$path.\module\home\model\DAOHomePage.php");
+include("$path.\module\shop\model\DAOShopPage.php");
 //////
 
 switch ($_GET['op']) {
 
 
     case 'homeCarousel':
-        $homeQuery = new DAOHome();
+        $homeQuery = new DAOShop();
 
         $category = $homeQuery->query("SELECT * FROM category ORDER BY id_category");
-        if ($category==true) {
-                        echo json_encode($category);
+        if ($category == true) {
+            echo json_encode($category);
 
             exit;
         } else {
-//echo json_encode($error);
+            //echo json_encode($error);
+            echo "error";
 
-            $callback = 'index.php?page=error503';
-            die('<script>window.location.href="' . $callback . '";</script>');
             // echo "error";
         } // end_else
- 
+
         break;
 
-        
-    case 'homeProducts':
-        $homeQuery = new DAOHome();
 
-        $category = $homeQuery->query("SELECT * FROM movies   ORDER BY rand()  LIMIT 2");
-        if ($category==true) {
-                        echo json_encode($category);
+    case 'listShop':
+        $homeQuery = new DAOShop();
+
+        $category = $homeQuery->query("SELECT * FROM movies   LIMIT 12");
+        if ($category == true) {
+            echo json_encode($category);
 
             exit;
         } else {
-//echo json_encode($error);
-
-            $callback = 'index.php?page=error503';
-            die('<script>window.location.href="' . $callback . '";</script>');
-            // echo "error";
+            echo "error";
         } // end_else
- 
-        break;
-        // case 'homePageCat';
+    break;
+
+    case 'openProduct':
+        $homeQuery = new DAOShop();
+
+        $category = $homeQuery->queryOneRow("SELECT * FROM movies WHERE id =".$_GET["product"]);
+        if ($category == true) {
+            echo json_encode($category);
+
+            exit;
+        } else {
+            echo "error";
+        } // end_else
+    break;
+
+
+        // case 'mPageCat';
         //     $selCatBrand = $homeQuery -> selectMultiple("SELECT * FROM brandCars ORDER BY views DESC LIMIT " . $_POST['loaded'] . ", " . $_POST['items']);
         //     if (!empty($selCatBrand)) {
         //         echo json_encode($selCatBrand);
@@ -60,7 +69,7 @@ switch ($_GET['op']) {
         //     break;
         //     //////
     default;
-        include('module/home/view/home.html');
+        include('module/shop/view/shop.html');
 
         // include ('view/inc/error404.html');
         break;

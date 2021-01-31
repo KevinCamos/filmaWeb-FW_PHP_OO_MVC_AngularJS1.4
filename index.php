@@ -2,7 +2,12 @@
 
 if ((isset($_GET['page'])) && ($_GET['page'] === "movies")) {
     include("view/inc/top_page_movies.html");
-} else if (!(isset($_GET['page'])) || ($_GET['page'] === "home")) {
+} else if((isset($_GET['page'])) && ($_GET['page'] === "shop")){
+
+
+    include("view/inc/top_page_shop.html");
+
+}else if (!(isset($_GET['page'])) || ($_GET['page'] === "home")) {
 
     include("view/inc/top_page_home.html");
 } else {

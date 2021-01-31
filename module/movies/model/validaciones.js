@@ -1,7 +1,9 @@
 function validate_nameMovie(valueText) {
+  console.log(valueText);
+
   if (valueText.length == 0) {
     $("#error_movie").html("*Escribe el nombre de la película");
-  } else if (!valueText.match("[a-zA-Z0-9- ]{3,30}")) {
+  } else if (!valueText.match("^[a-z-A-Z \D 1-9]+$")||valueText.length <3 || valueText.length >30) {
     $("#error_movie").html(
       "*Escribe el nombre de la película entre 3 y 30 letras, sin carácteres especiales"
     );
@@ -27,7 +29,7 @@ function validate_ref(valueText) {
 function validate_director(valueText) {
   if (valueText.length == 0) {
     $("#error_director").html("*Escribe el nombre del director");
-  } else if (!document.formmovies.director.value.match("[a-zA-Z- ]{3,15}")) {
+  } else if (!valueText.match("^[a-z-A-Z \D]+$")||valueText.length <3 || valueText.length >15) {
     $("#error_director").html(
       "*Escribe el nombre un nombre de director entre 3 y 15 carácteresr"
     );

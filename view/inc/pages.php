@@ -3,7 +3,7 @@ if ((isset($_GET['page']))) {
 
 	switch ($_GET['page']) {
 		case "home";
-			include("module\home\\view\home.html");
+			include("module/home/view/home.html");
 			break;
 		case "movies";
 			include("module/movies/controller/controller_movies.php");
@@ -17,9 +17,12 @@ if ((isset($_GET['page']))) {
 		case "pricing";
 			include("module/pricing/" . $_GET['page'] . ".html");
 			break;
-		case "aboutus";
-			include("module/aboutus/" . $_GET['page'] . ".html");
+		case "shop";
+			include("module/shop/view/" . $_GET['page'] . ".html");
 			break;
+			// case "aboutus";
+			// 	include("module/aboutus/" . $_GET['page'] . ".html");
+			// 	break;
 		case "contactus";
 			include("module/contactus/" . $_GET['page'] . ".html");
 			break;
@@ -34,5 +37,5 @@ if ((isset($_GET['page']))) {
 			break;
 	}
 } else {
-	include("module\home\\view\home.html");
+	include("module/home/view/home.html");
 }
