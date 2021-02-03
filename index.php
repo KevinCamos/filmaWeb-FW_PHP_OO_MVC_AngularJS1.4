@@ -2,7 +2,7 @@
 
 if ((isset($_GET['page'])) && ($_GET['page'] === "movies")) {
     include("view/inc/top_page_movies.html");
-} else if((isset($_GET['page'])) && ($_GET['page'] === "shop")){
+} else if((isset($_GET['page'])) && (($_GET['page'] === "shop")||($_GET['page'] === "controllerShopPage"))){
 
 
     include("view/inc/top_page_shop.html");

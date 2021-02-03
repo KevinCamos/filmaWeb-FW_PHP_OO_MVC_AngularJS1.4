@@ -20,6 +20,9 @@ if ((isset($_GET['page']))) {
 		case "shop";
 			include("module/shop/view/" . $_GET['page'] . ".html");
 			break;
+		case "controllerShopPage":
+			include("module/shop/controller/controllerShopPage.php");
+			break;
 			// case "aboutus";
 			// 	include("module/aboutus/" . $_GET['page'] . ".html");
 			// 	break;

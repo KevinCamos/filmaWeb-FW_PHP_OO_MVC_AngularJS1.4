@@ -1,6 +1,6 @@
 <?php
 $path = $_SERVER['DOCUMENT_ROOT'] . '\Kevin\Ejercicios_Kevin\Projecte';
-$error = $_SERVER['DOCUMENT_ROOT'] ."Kevin\Ejercicios_Kevin\Projecte\view\inc\\error\\error503.html";
+$error = $_SERVER['DOCUMENT_ROOT'] . "Kevin\Ejercicios_Kevin\Projecte\view\inc\\error\\error503.html";
 
 include("$path.\module\movies\model\DAOMovie.php");
 include("$path.\module\movies\model\\validate_php.php");
@@ -22,23 +22,23 @@ switch ($_GET['op']) {
 		}
 		break;
 		///CREATE - CREATE - CREATE - CREATE - CREATE - CREATE - //
-		case 'category':
-echo "<pre>";
-			echo print_r($_GET);
-			echo "</pre>";
-			try {
-				$daomovies = new DAOMovie();
-				$resultado = $daomovies->select_category_movie($_GET['filter']); // La flecheta sería com el punt de java, per a obrir funcions d'eixe objecte!!!
-			} catch (Exception $e) {
-				$callback = 'index,php?page=error503';
-			}
-			if (!isset($resultado)) {
-				die('<script>window.location.href="' . $callback . '";</script>');
-			} else {
-				include("$path.\module\movies\\view\list_movies.php");
-			}
-			break;
-			///CREATE - CREATE - CREATE - CREATE - CREATE - CREATE - //
+	case 'category':
+		echo "<pre>";
+		echo print_r($_GET);
+		echo "</pre>";
+		try {
+			$daomovies = new DAOMovie();
+			$resultado = $daomovies->select_category_movie($_GET['filter']); // La flecheta sería com el punt de java, per a obrir funcions d'eixe objecte!!!
+		} catch (Exception $e) {
+			$callback = 'index,php?page=error503';
+		}
+		if (!isset($resultado)) {
+			die('<script>window.location.href="' . $callback . '";</script>');
+		} else {
+			include("$path.\module\movies\\view\list_movies.php");
+		}
+		break;
+		///CREATE - CREATE - CREATE - CREATE - CREATE - CREATE - //
 	case 'create':
 		// echo '<script> console.log("Ha entrar a la creació 1")</script>';
 
@@ -104,7 +104,7 @@ echo "<pre>";
 			echo json_encode($movie);
 		}
 		break;
-		
+
 	case 'update':
 		if (isset($_POST) && !empty($_POST)) {
 			// echo "<pre>";
@@ -172,7 +172,7 @@ echo "<pre>";
 		} else {
 			$callback = 'index,php?page=error503';
 		}
-		
+
 		exit;
 
 		break;

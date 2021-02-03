@@ -59,7 +59,10 @@ function readMovie() {
                     duration: 1300
                 }
             });
-        })
+        }).fail(function() {
+
+            window.location.href = 'index.php?page=error503';
+        });
     });
 
 
