@@ -1,17 +1,3 @@
-$(document).ready(function () {
-  ///CAROUSEL CATEGORY
-  loadDivsCarousel();
-  loadCategoryCarousel();
-  loadHomeProducts();
-  // $(document).ready(function() {
-  //   $('.owl-carousel').owlCarousel({
-  //     margin: 10,
-  //     loop: true,
-  //     autoWidth: true,
-  //     items: 4
-  //   })
-  // })
-});
 function loadDivsCarousel() {
   $("#carousel-products").empty(); //Borrar lo de dins
 
@@ -33,13 +19,18 @@ function loadDivsCarousel() {
     .appendTo("#large_columns");
 }
 function loadCategoryCarousel() {
-  $.ajax({
-    url: "module/home/controller/controllerHomePage.php?op=homeCarousel",
-    // url: "module/movies/controller/controller_movies.php?op=read_modal&modal=" + 15,
-    dataType: "JSON", //  type : tipo de la petición, GET o POST (GET por defecto)
-    type: "GET",
-  })
-    .done(function (category) {
+  ajaxPromise(
+    "module/home/controller/controllerHomePage.php?op=homeCarousel",
+    "GET",
+    "JSON"
+  )
+    .then(function (category) {
+      // $.ajax({
+      //   url: "module/home/controller/controllerHomePage.php?op=homeCarousel",
+      //   dataType: "JSON", //  type : tipo de la petición, GET o POST (GET por defecto)
+      //   type: "GET",
+      // })
+      //   .done(function (category) {
       for (let i = 0; i < category.length; i++) {
         let id = "" + category[i]["id_category"];
         let ObjectCategory = category[i]["category"];
@@ -48,8 +39,6 @@ function loadCategoryCarousel() {
         let firstDiv = $("<div></div>")
           .attr({ class: "item", id: "item" + img })
           .appendTo("#products_DIV");
-        //  .html('<h4 class=h4'+img+' ><img src=module\\home\\img\\'+img+'> </h4> ');
-        // $('<h4></h4>').attr({class:'h4'+img}).appendTo(firstDiv);
         $("<img>")
           .attr({
             id: "img" + id,
@@ -59,7 +48,7 @@ function loadCategoryCarousel() {
           })
           .appendTo(firstDiv);
       }
-      $(".category").click(clickCategory);
+      $(".category").click(clickCategory); ////FUNCIÓ CLICK CATEGORY///////////////////////
 
       $("#products_DIV").owlCarousel({
         // items: category.length, //Puc canviar-la de lloc, però ¡¡ULL!! Hi hauria que deixar de gastar category.lenght
@@ -101,18 +90,18 @@ function loadCategoryCarousel() {
         },
       });
     })
-    .fail(function () {
+    // .fail(function () {
+    .catch(function () {
       window.location.href = "index.php?page=error503";
     });
 }
 function ajaxSearch(dirUrl) {
-  $.ajax({
-    url: dirUrl,
-    // url: "module/movies/controller/controller_movies.php?op=read_modal&modal=" + 15,
-    dataType: "JSON", //  type : tipo de la petición, GET o POST (GET por defecto)
-    type: "GET",
-  })
-    .done(function (category) {
+   ajaxPromise(
+    dirUrl,
+    "GET",
+    "JSON"
+  )
+    .then(function (category) {
       $("#productsHome").empty(); //Borrar lo de dins
       $("<p></p> ")
         .attr({
@@ -129,14 +118,16 @@ function ajaxSearch(dirUrl) {
 
         $("<img>")
           .attr({
-            id: "productsHomeIMG" + id,
-            class: name,
+            id: id,
+            class: "productHome",
             src: "module\\movies\\img\\" + img,
           })
           .appendTo("#productsHome");
       }
+      $(".productHome").click(clickProductHome); ////FUNCIÓ CLICK CATEGORY///////////////////////
+
     })
-    .fail(function () {
+    .catch(function () {
       window.location.href = "index.php?page=error503";
     });
 }
@@ -145,14 +136,55 @@ function loadHomeProducts() {
   ajaxSearch("module/home/controller/controllerHomePage.php?op=homeProducts");
 }
 function clickCategory() {
+  //FUNCIÓ A LA LÍNEA 45!
   var category = $(this).attr("value");
-  // console.log(category);
   sessionStorage.setItem("filterCategory", category);
-
   if (category == null) {
-    toastr["info"]("Ingresa criterios de busqueda"), {"iconClass":'toast-info'};
+    // toastr["info"]("Ingresa criterios de busqueda"), {"iconClass":'toast-info'}; // NO ESTÀ DEFINIIIIT
+    console.log(
+      "El archivo al que das click no tiene ningún criterio de búsqueda añadido"
+    );
   } else {
     // setTimetout() es una función para decirle que pasado X tiempo realice una función
     window.location.href = "index.php?page=shop";
   }
 }
+function clickProductHome() {
+  //FUNCIÓ A LA LÍNEA 45!
+  var id = $(this).attr("id");
+  console.log(id);
+  sessionStorage.setItem("id", id);
+  sessionStorage.setItem("category", null);
+  if (id == null) {
+    // toastr["info"]("Ingresa criterios de busqueda"), {"iconClass":'toast-info'}; // NO ESTÀ DEFINIIIIT
+    console.log(
+      "El archivo al que das click no tiene ningún criterio de búsqueda añadido"
+    );
+  } else {
+    // setTimetout() es una función para decirle que pasado X tiempo realice una función
+
+    window.location.href = "index.php?page=shop";
+  }
+}
+function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: sUrl,
+      type: sType,
+      dataType: sTData,
+      data: sData,
+    })
+      .done((data) => {
+        resolve(data);
+      })
+      .fail((jqXHR, textStatus, errorThrow) => {
+        reject(errorThrow);
+      });
+  });
+}
+
+$(document).ready(function () {
+  loadDivsCarousel();
+  loadCategoryCarousel();
+  loadHomeProducts();
+});
