@@ -8,20 +8,23 @@ include("$path.\module\shop\model\DAOShopPage.php");
 
 switch ($_GET['op']) {
 
+    case 'listShop':
+
+        searhQueryAllRows("SELECT * FROM movies ORDER BY movie asc");
+        break;
 
     case 'homeCarousel':
 
-        searhQueryAllRows("SELECT * FROM category  ORDER BY movie Asc");
+        searhQueryAllRows("SELECT * FROM category  ORDER BY movie asc");
         break;
 
-
-    case 'listShop':
-
-        searhQueryAllRows("SELECT * FROM movies ORDER BY movie Asc");
-        break;
     case 'countryFilter':
 
-        searhQueryAllRows("SELECT DISTINCT country FROM movies  ORDER BY movie Asc");
+        searhQueryAllRows("SELECT DISTINCT country FROM movies  ORDER BY movie asc");
+        break;
+    case 'genereFilter':
+
+        searhQueryAllRows("SELECT DISTINCT genere FROM movies ORDER BY genere asc");
         break;
 
     case 'filterCarousel':
@@ -30,22 +33,25 @@ switch ($_GET['op']) {
 
             case 'decade':
                 searhQueryAllRows("SELECT * FROM movies
-                WHERE anyo BETWEEN 1980 AND 1989  ORDER BY movie Asc");
+                WHERE anyo BETWEEN 1980 AND 1989  ORDER BY movie asc");
                 break;
             case 'formate':
                 searhQueryAllRows("SELECT * FROM movies
-                                 WHERE formats LIKE '%VHS%' ORDER BY movie Asc");
+                                 WHERE formats LIKE '%VHS%' ORDER BY movie asc");
                 break;
             case 'genere':
                 searhQueryAllRows("SELECT * FROM movies
-                                 WHERE genere = 'Fantasia'ORDER BY movie Asc");
+                                 WHERE genere = 'Fantasia'ORDER BY movie asc");
                 break;
         }
         break;
+        case 'searchQuery':
 
+            searhQueryAllRows($_GET["query"]);
+            break;
     case 'openProduct':
 
-        searhQueryOneRow("SELECT * FROM movies WHERE id =" . $_GET["product"] );
+        searhQueryOneRow("SELECT * FROM movies WHERE id =" . $_GET["product"]);
         // $homeQuery = new DAOShop();
         // $category = $homeQuery->queryOneRow("SELECT * FROM movies WHERE id =" . $_GET["product"]);
         // if ($category == true) {
@@ -61,7 +67,8 @@ switch ($_GET['op']) {
 
         break;
 }
-function searhQueryAllRows($thisQuery){
+function searhQueryAllRows($thisQuery)
+{
     $homeQuery = new DAOShop();
 
     $category = $homeQuery->query($thisQuery);
@@ -73,7 +80,8 @@ function searhQueryAllRows($thisQuery){
         echo "error";
     }
 }
-function searhQueryOneRow($thisQuery){
+function searhQueryOneRow($thisQuery)
+{
     $homeQuery = new DAOShop();
 
     $category = $homeQuery->queryOneRow($thisQuery);

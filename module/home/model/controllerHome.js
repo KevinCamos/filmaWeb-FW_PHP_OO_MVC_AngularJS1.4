@@ -96,11 +96,7 @@ function loadCategoryCarousel() {
     });
 }
 function ajaxSearch(dirUrl) {
-   ajaxPromise(
-    dirUrl,
-    "GET",
-    "JSON"
-  )
+  ajaxPromise(dirUrl, "GET", "JSON")
     .then(function (category) {
       $("#productsHome").empty(); //Borrar lo de dins
       $("<p></p> ")
@@ -125,7 +121,6 @@ function ajaxSearch(dirUrl) {
           .appendTo("#productsHome");
       }
       $(".productHome").click(clickProductHome); ////FUNCIÓ CLICK CATEGORY///////////////////////
-
     })
     .catch(function () {
       window.location.href = "index.php?page=error503";
