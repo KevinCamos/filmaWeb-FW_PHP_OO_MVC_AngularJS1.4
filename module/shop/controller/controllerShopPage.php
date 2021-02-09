@@ -11,13 +11,17 @@ switch ($_GET['op']) {
 
     case 'homeCarousel':
 
-        searhQueryAllRows("SELECT * FROM category ORDER BY id_category");
+        searhQueryAllRows("SELECT * FROM category  ORDER BY movie Asc");
         break;
 
 
     case 'listShop':
 
-        searhQueryAllRows("SELECT * FROM movies");
+        searhQueryAllRows("SELECT * FROM movies ORDER BY movie Asc");
+        break;
+    case 'countryFilter':
+
+        searhQueryAllRows("SELECT DISTINCT country FROM movies  ORDER BY movie Asc");
         break;
 
     case 'filterCarousel':
@@ -26,22 +30,22 @@ switch ($_GET['op']) {
 
             case 'decade':
                 searhQueryAllRows("SELECT * FROM movies
-                WHERE anyo BETWEEN 1980 AND 1989");
+                WHERE anyo BETWEEN 1980 AND 1989  ORDER BY movie Asc");
                 break;
             case 'formate':
                 searhQueryAllRows("SELECT * FROM movies
-                                 WHERE formats LIKE '%VHS%'");
+                                 WHERE formats LIKE '%VHS%' ORDER BY movie Asc");
                 break;
             case 'genere':
                 searhQueryAllRows("SELECT * FROM movies
-                                 WHERE genere = 'Fantasia'");
+                                 WHERE genere = 'Fantasia'ORDER BY movie Asc");
                 break;
         }
-    break;
+        break;
 
     case 'openProduct':
 
-        searhQueryOneRow("SELECT * FROM movies WHERE id =" . $_GET["product"]);
+        searhQueryOneRow("SELECT * FROM movies WHERE id =" . $_GET["product"] );
         // $homeQuery = new DAOShop();
         // $category = $homeQuery->queryOneRow("SELECT * FROM movies WHERE id =" . $_GET["product"]);
         // if ($category == true) {
@@ -57,8 +61,7 @@ switch ($_GET['op']) {
 
         break;
 }
-function searhQueryAllRows($thisQuery)
-{
+function searhQueryAllRows($thisQuery){
     $homeQuery = new DAOShop();
 
     $category = $homeQuery->query($thisQuery);
@@ -70,8 +73,7 @@ function searhQueryAllRows($thisQuery)
         echo "error";
     }
 }
-function searhQueryOneRow($thisQuery)
-{
+function searhQueryOneRow($thisQuery){
     $homeQuery = new DAOShop();
 
     $category = $homeQuery->queryOneRow($thisQuery);

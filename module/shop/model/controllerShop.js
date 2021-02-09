@@ -1,3 +1,20 @@
+function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      url: sUrl,
+      type: sType,
+      dataType: sTData,
+      data: sData,
+    })
+      .done((data) => {
+        resolve(data);
+      })
+      .fail((jqXHR, textStatus, errorThrow) => {
+        reject(errorThrow);
+      });
+  });
+}
+
 function loadDivsCarousel() {
   ///NO SE GASTA
   $("#carousel-products").empty(); //Borrar lo de dins
@@ -103,10 +120,10 @@ function loadDivsProducts() {
 
 function loadHomeProducts() {
 let homeID=sessionStorage.getItem("id")
-console.log(sessionStorage.getItem("id"))
-
+// console.log(sessionStorage.getItem("id"))
+///typeof(nomDeLaVariableOFUNCIÓ) 
   if (homeID == "null" || homeID == null) {
-    console.log(sessionStorage.getItem("id"))
+    // console.log(sessionStorage.getItem("id"))
     let filterCategory = sessionStorage.getItem("filterCategory");
     switch (filterCategory) {
       case "decade":
@@ -131,7 +148,7 @@ console.log(sessionStorage.getItem("id"))
         break;
 
       default:
-        console.log("default");
+        // console.log("default");
         searchAjaxProducts(
           "module/shop/controller/controllerShopPage.php?op=listShop"
         );
@@ -293,22 +310,32 @@ function searchAjaxProducts(dirUrl) {
       window.location.href = "index.php?page=error503";
     });
 }
+function loadFilterCountry() {
+  ///NO SE GASTA
+  $("#countryFilter").empty(); //Borrar lo de dins
 
-function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: sUrl,
-      type: sType,
-      dataType: sTData,
-      data: sData,
+  ajaxPromise(
+    "module/shop/controller/controllerShopPage.php?op=countryFilter",
+    "GET",
+    "JSON"
+  )
+    .then(function (data) {
+      // console.log(data);
+      typeof data;
+      for (var clave in data) {
+        // console.log(data[clave]["country"]);
+        let valueCountry = data[clave]["country"];
+        $("<input>")
+          .attr({ type: "checkbox", value: valueCountry, id: "country" })
+          .appendTo("#countryFilter");
+
+        $("<label>")
+          .append(document.createTextNode(valueCountry))
+          .appendTo("#countryFilter");
+        $("<br>").appendTo("#countryFilter");
+      }
     })
-      .done((data) => {
-        resolve(data);
-      })
-      .fail((jqXHR, textStatus, errorThrow) => {
-        reject(errorThrow);
-      });
-  });
+    .catch(function () {});
 }
 
 $(document).ready(function () {

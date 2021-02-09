@@ -1,7 +1,66 @@
 <body>
 
     <!-- CARROUSEL CABEZERA -->
-    <section id="carousel-products"></section>
+    <!-- <section id="carousel-products"></section> -->
 
-    
+
     <div id="listShop"></div>
+
+
+    <form id="formularioFiltro" method="POST">
+        <fieldset>
+            <!-- <legend>Filtro</legend> -->
+            Título
+            <br>
+            <input type="text" name="movie" id="movie">
+            <p>
+                Director
+                <br>
+                <input type="text" name="director" id="director" ></p>
+
+            </p>
+            Año
+            <br>
+            <input type="number" id="anyo"></p>
+
+            <span>Formato</span>
+            <br>
+            <input type=checkbox value="VHS" id="VHS"> VHS
+            <br>
+
+            <input type=checkbox value="DVD" id="DVD"> DVD
+            <br>
+
+            <input type=checkbox value="Blu-Ray" id="Blu-Ray"> Blu-Ray
+            <br>
+
+            <input type=checkbox value="4K" id="4K"> 4K
+            <br>
+
+            <input type=checkbox value="Digital" id="Digital"> Digital
+            <br>
+
+            <input type=checkbox value="Otro" id="Otro"> Otro
+
+            <p></p>
+
+            <span>País</span>
+            <br>
+            <div id="countryFilter"></div>
+            <!-- <input type=checkbox value="VHS"> España
+        <br>
+
+        <input type=checkbox value="DVD"> Inglaterra
+        <br>
+
+        <input type=checkbox value="Blu-Ray"> Estados Unidos
+        <br> -->
+
+            </p>
+            Precio
+            <br>
+            De <input type="number" name="precioMin"> hasta <input type="number" name="precioMax"></p>
+            <input value="Buscar" name="buscar" id="buscar" type="button" onclick="searchFilter()" />
+        </fieldset>
+
+    </form>

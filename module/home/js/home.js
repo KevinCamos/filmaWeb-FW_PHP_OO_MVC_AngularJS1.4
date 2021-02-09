@@ -20,7 +20,7 @@ $('<div></div>').attr({ 'class':'item active', 'id':'item1'}).appendTo('.carouse
 $('<img>').attr({'src':'view\\img\\carousel_home\\portada\\Mandalorian.jpg', 'alt':'Mandalorian', 'style':'width:100%;' }).appendTo('#item1');
 $('<div></div>').attr({'class':'carousel-caption', 'id':'carousel-head1' }).appendTo('#item1');
 $('<h3></h3>').attr({ }).append(document.createTextNode("The Mandalorian")).appendTo('#carousel-head1');
-$('<p></p>').attr({ }).append(document.createTextNode("Todas las temporadas en BLUE-RAY")).appendTo('#carousel-head1');
+$('<p></p>').attr({ }).append(document.createTextNode("Todas las temporadas en Blu-Ray")).appendTo('#carousel-head1');
 
 $('<div></div>').attr({ class:'item', 'id':'item2'}).appendTo('.carousel-inner');
 $('<img>').attr({'src':'view\\img\\carousel_home\\portada\\Esdla.jpg', 'alt':'Mundo Tolkien', 'style':'width:100%;' }).appendTo('#item2');
@@ -60,7 +60,7 @@ $('<span></span>').attr({'class':'sr-only'}).append(document.createTextNode('Sig
 //             <img src="view\img\carousel_home\portada\Mandalorian.jpg" alt="Mandalorian" style="width:100%;">
 //             <div class="carousel-caption">
 //                 <h3>The Mandalorian</h3>
-//                 <p>Todas las temporadas en BLUE-RAY</p>
+//                 <p>Todas las temporadas en Blu-Ray</p>
 //             </div>
 //         </div>
 

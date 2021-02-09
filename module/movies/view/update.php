@@ -63,10 +63,10 @@
 						DVD<input type="checkbox" id="format" name="format[]" value="DVD">&nbsp;&nbsp;&nbsp;&nbsp;
 					<?php } ?>
 
-					<?php if (in_array("Blue-Ray", $lang)) { ?>
-						Blue-Ray<input type="checkbox" id="format" name="format[]" value="Blue-Ray" checked>&nbsp;&nbsp;&nbsp;&nbsp;
+					<?php if (in_array("Blu-Ray", $lang)) { ?>
+						Blu-Ray<input type="checkbox" id="format" name="format[]" value="Blu-Ray" checked>&nbsp;&nbsp;&nbsp;&nbsp;
 					<?php } else { ?>
-						Blue-Ray<input type="checkbox" id="format" name="format[]" value="Blue-Ray">&nbsp;&nbsp;&nbsp;&nbsp;
+						Blu-Ray<input type="checkbox" id="format" name="format[]" value="Blu-Ray">&nbsp;&nbsp;&nbsp;&nbsp;
 					<?php } ?>
 
 					<?php if (in_array("4K", $lang)) { ?>

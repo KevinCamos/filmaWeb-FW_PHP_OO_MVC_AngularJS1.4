@@ -359,6 +359,11 @@ td {
   margin-top: 100px;
   margin-left: 400px;
 }
+#contenido{
+  /* display:blox; */
+  margin-top: 75px;
+}
+
 /* 
 #listShop div {
   margin-top: 100px;
@@ -368,3 +373,67 @@ td {
   margin-top: 100px;
   margin-left: 400px;
 } */
+
+
+
+/* FILTROS SHOP */
+#formularioFiltro{
+  /* margin-right:   250px; */
+  /* background-color: gray; */
+  /* display: flex; */
+  color:white;
+  /* position: static; */
+  margin-right:   800;
+  display:flex;
+  flex-wrap: wrap;
+}
+
+
+
+#formularioFiltro fieldset{
+  background-color: dimgray;
+  /* margin-right:   800px; */
+  width: 220px !important;
+
+  border-right: 2px solid #ddd;
+  word-break: break-word;
+  margin-left: 20px;
+  display: block;
+  position: absolute;
+  margin-top: -1725px;
+  margin-left: 15px;
+
+  block-size: auto;
+}
+
+
+
+#formularioFiltro span{
+  border: 100;
+  font-size: x-large;
+  color:orange;
+  /* text-decoration ; */
+  border-color:black;
+  /* background-color: darkorange; */
+  /* margin-inline-start: -14px; */
+  text-decoration: underline ;
+  height: 20px;
+  width:200 ;
+  /* cursor: pointer; */
+  /* color: whitesmoke;
+  text-decoration-line:overline; */
+}
+
+#formularioFiltro input{
+ 
+  color:black;
+  
+}
+#listShop{
+  margin-left: 350px ;
+
+}
+
+
+
+/* FIN FILTROS SHOP */

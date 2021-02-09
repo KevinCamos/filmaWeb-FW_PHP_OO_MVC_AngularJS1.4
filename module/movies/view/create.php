@@ -38,9 +38,9 @@
 				<!--FORMATO FORMATO FORMATO FORMATO FORMATO -->
 
 				<td>Formato</td>
-				<td>VHS<input type="checkbox" id="format" name="format[]" value="VHS">&nbsp;&nbsp;&nbsp;&nbsp;
-					DVD<input type="checkbox" id="format" name="format[]" value="DVD">&nbsp;&nbsp;&nbsp;&nbsp;
-					Blue-Ray<input type="checkbox" id="format" name="format[]" value="Blue-Ray">&nbsp;&nbsp;&nbsp;&nbsp;
+				<td>VHS<input type="checkbox" id="format" name="format[]" value="VHS" id="format">&nbsp;&nbsp;&nbsp;&nbsp;
+					DVD<input type="checkbox" id="format" name="format[]" value="DVD" id="format">&nbsp;&nbsp;&nbsp;&nbsp;
+					Blu-Ray<input type="checkbox" id="format" name="format[]" value="Blu-Ray">&nbsp;&nbsp;&nbsp;&nbsp;
 					4K<input type="checkbox" id="format" name="format[]" value="4K">&nbsp;&nbsp;&nbsp;&nbsp;
 					Digital<input type="checkbox" id="format" name="format[]" value="Digital">&nbsp;&nbsp;&nbsp;&nbsp;
 					Otro<input type="checkbox" name="format[]" value="Otro">
