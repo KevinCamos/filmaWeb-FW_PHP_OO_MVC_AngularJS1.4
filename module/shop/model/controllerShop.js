@@ -1,3 +1,15 @@
+importarScript("assets/api_kay.js");
+
+importarScript("module/shop/model/geolocalizacion.js");
+importarScript("module/shop/model/filter.js");
+importarScript("assets/maps.js");
+
+function importarScript(nombre) {
+  var s = document.createElement("script");
+  s.src = nombre;
+  document.querySelector("head").appendChild(s);
+}
+
 function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
   return new Promise((resolve, reject) => {
     $.ajax({
@@ -15,17 +27,43 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
   });
 }
 
-//CARREGA ELS DIVS GENÈRICS
-function loadDivsProducts( boolTrue = undefined) {
-  if (boolTrue === false) {
-    $("<h1></h1>")
-      .append(
-        document.createTextNode(
-          "No se han encontrado resultados con esta búsqueda"
-        )
-      )
-      .appendTo("#listShop");
+/////FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
+function clickerItems(itemString, id) {
+  if (
+    sessionStorage.getItem(itemString) == null ||
+    sessionStorage.getItem(itemString) == "null"
+  ) {
+    sessionStorage.setItem(itemString, id);
+  } else {
+    sessionStorage.removeItem(itemString);
   }
+  console.log(sessionStorage.getItem(itemString));
+}
+function storageFormats() {
+  $("#VHS").click(function () {
+    clickerItems("VHS", this.getAttribute("id"));
+  });
+  $("#DVD").click(function () {
+    clickerItems("DVD", this.getAttribute("id"));
+  });
+  $("#Blu-Ray").click(function () {
+    clickerItems("Blu-Ray", this.getAttribute("id"));
+  });
+  $("#4K").click(function () {
+    clickerItems("4K", this.getAttribute("id"));
+  });
+  $("#Digital").click(function () {
+    clickerItems("Digital", this.getAttribute("id"));
+  });
+  $("#Otro").click(function () {
+    clickerItems("Otro", this.getAttribute("id"));
+  });
+}
+///// FIN DE LAS FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
+
+//---------------DIVS DE TOTS ELS PRODUCTES O D'UN PRODUCTE-------------//
+//CARREGA ELS DIVS GENÈRICS, ES CARGA EN LA FUNCIÓ "loadHomeProducts"
+function loadDivsProducts() {
   let section = $("<section></section>")
     .attr({ id: "port-sec" })
     .appendTo("#listShop");
@@ -36,60 +74,6 @@ function loadDivsProducts( boolTrue = undefined) {
     .attr({ class: "portfolio-items col-3" })
     .appendTo(divContainer);
 }
-//CARREGA TOTS ELS PRODUCTES
-
-function loadHomeProducts() {
-  let homeID = sessionStorage.getItem("id");
-  // console.log(sessionStorage.getItem("id"))
-  ///typeof(nomDeLaVariableOFUNCIÓ)
-  if (homeID == "null" || homeID == null) {
-    // console.log(sessionStorage.getItem("id"))
-    let filterCategory = sessionStorage.getItem("filterCategory");
-    switch (filterCategory) {
-      case "decade":
-        console.log("decade 80 <3");
-        searchAjaxProducts(
-          "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=decade"
-        );
-        break;
-
-      case "formate":
-        console.log("fomato VHS");
-        searchAjaxProducts(
-          "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=formate"
-        );
-        break;
-
-      case "genere":
-        console.log("género fantasía ⚔");
-        searchAjaxProducts(
-          "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=genere"
-        );
-        break;
-
-      default:
-        // console.log("default");
-        searchAjaxProducts(
-          "module/shop/controller/controllerShopPage.php?op=listShop"
-        );
-        break;
-    }
-  } else {
-    divsProduct(
-      "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
-      homeID
-    );
-    console.log(sessionStorage.getItem("id"));
-
-    console.log("abriremos este producto!");
-    // sessionStorage.setItem("id", null);
-  }
-
-  clickShopMenu();
-  // console.log("vale");
-  // console.log(sessionStorage.getItem("filterCategory"));
-}
-
 //ELS DIVS GENÈRICS DELS PRODUCTES
 function divsProduct(urls, id) {
   ajaxPromise(urls + id, "GET", "JSON")
@@ -149,12 +133,73 @@ function divsProduct(urls, id) {
             "margin-left: 25px; margin-top: -330px; width: 50px; height: 50px;",
         })
         .appendTo(table);
+
+      // PRUEBA
+
+      // $("<div>").attr({id:"map"}).appendTo(table);
     })
     .catch(function () {
       window.location.href = "index.php?page=error503";
     });
 }
-//AL CLICAR SOBRE UN PRODUCTE L'OBRI I RETORNA
+//-------FIN-----DIVS DE TOTS ELS PRODUCTES O D'UN PRODUCTE-------------//
+
+//---------------CARGA ELS PRODUCTES O UN PRODUCTE-------------//
+
+//CARREGA TOTS ELS PRODUCTES
+function loadHomeProducts() {
+  let homeID = sessionStorage.getItem("id");
+  // console.log(sessionStorage.getItem("id"))
+  ///typeof(nomDeLaVariableOFUNCIÓ)
+  if (homeID == "null" || homeID == null) {
+    // console.log(sessionStorage.getItem("id"))
+    let filterCategory = sessionStorage.getItem("filterCategory");
+    switch (filterCategory) {
+      case "decade":
+        console.log("decade 80 <3");
+        searchAjaxProducts(
+          "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=decade"
+        );
+        break;
+
+      case "formate":
+        console.log("fomato VHS");
+        searchAjaxProducts(
+          "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=formate"
+        );
+        break;
+
+      case "genere":
+        console.log("género fantasía ⚔");
+        searchAjaxProducts(
+          "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=genere"
+        );
+        break;
+
+      default:
+        // console.log("default");
+        searchAjaxProducts(
+          "module/shop/controller/controllerShopPage.php?op=listShop"
+        );
+        break;
+    }
+  } else {
+    divsProduct(
+      "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
+      homeID
+    );
+    console.log(sessionStorage.getItem("id"));
+
+    console.log("abriremos este producto!");
+    // sessionStorage.setItem("id", null);
+  }
+
+  clickShopMenu();
+  // console.log("vale");
+  // console.log(sessionStorage.getItem("filterCategory"));
+}
+
+//CLICK PRODUCTE
 function clickProduct() {
   $("body").on("click", "img", function () {
     var clase = this.getAttribute("class");
@@ -162,26 +207,37 @@ function clickProduct() {
     var id = this.id;
 
     if (clase === "touch") {
+
       id = id.split("-"); ///Dividir imgShop de l'ID. Les ID están juntes a imgShop per a evitar interferències.
       id = id[1];
       divsProduct(
         "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
         id
       );
+      // console.log(API_KAY);
+      openMaps();
     } else if (idReturn === "return") {
       sessionStorage.setItem("id", null);
       loadHomeProducts(); ///Vuelve al catálogo
     }
   });
-}
 
-//BORRA ELS SESSIONSTORAGE DE MENÚ
+}
+//-------FIN-----CARGA ELS PRODUCTES O UN PRODUCTE-------------//
+
+//BORRA ELS SESSIONSTORAGE
 function clickShopMenu() {
   $("#Tienda").click(function () {
     // if (sessionStorage.getItem("filterCategory") != null) {
     //   var stop = false;
-    sessionStorage.setItem("filterCategory", null);
-    sessionStorage.setItem("id", null);
+    sessionStorage.removeItem("filterCategory");
+    sessionStorage.removeItem("id");
+    sessionStorage.removeItem("VHS");
+    sessionStorage.removeItem("DVD");
+    sessionStorage.removeItem("Blue-Ray");
+    sessionStorage.removeItem("4K");
+    sessionStorage.removeItem("Otros");
+
     // }
   });
 }
@@ -190,8 +246,20 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = undefined) {
   ajaxPromise(dirUrl, "GET", "JSON", sData)
     .then(function (category) {
       $("#listShop").empty();
-      loadDivsProducts(boolTrue);
-     
+      if (boolTrue === false) {
+        setTimeout(
+          $("<h1></h1>")
+            .append(
+              document.createTextNode(
+                "No se han encontrado resultados con esta búsqueda"
+              )
+            )
+            .appendTo("#listShop"),
+          3000
+        );
+      }
+      loadDivsProducts();
+
       for (let i = 0; i < category.length; i++) {
         let id = "" + category[i]["id"];
         let name = category[i]["name"];
@@ -237,6 +305,7 @@ function spanFilter(textSpan) {
   $("<span>").append(document.createTextNode(textSpan)).appendTo("#filters");
   $("<br>").appendTo("#filters");
 }
+
 function genereFilter() {
   ajaxPromise(
     "module/shop/controller/controllerShopPage.php?op=genereFilter",
@@ -291,7 +360,6 @@ function countryFilter() {
           .append(document.createTextNode(valueCountry))
           .appendTo("#country");
       }
-
     })
     .catch(function () {});
 }
@@ -300,6 +368,8 @@ function formatsFilter() {
   spanFilter("Formato");
 
   for (let i = 0; i < formatsMatrix.length; i++) {
+    // console.log(sessionStorage.getItem(formatsMatrix[i]));
+    // console.log(typeof sessionStorage.getItem(formatsMatrix[i]));
     if (sessionStorage.getItem(formatsMatrix[i]) == formatsMatrix[i]) {
       $("<input>")
         .attr({
@@ -324,16 +394,20 @@ function formatsFilter() {
     $("<br>").appendTo("#filters");
   }
 }
-function filters() {
+function filtersInput() {
   $("#filters").empty(); //Borrar lo de dins
   genereFilter();
   formatsFilter();
   countryFilter();
+  
 }
+//   <!-- <script src="module\shop\model\filter.js"></script> -->
+// <!-- <script src="module\shop\model\geolocalizacion.js"></script> -->
+
 $(document).ready(function () {
+  // script_maps();
   loadHomeProducts();
   clickProduct();
-  filters();
+  filtersInput();
   storageFormats();
-
 });

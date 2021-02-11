@@ -32,59 +32,37 @@ function queryPrice(minPrice, maxPrice) {
   minPrice = minPrice == "" || minPrice < 1 ? 0 : minPrice;
   maxPrice = maxPrice == "" || maxPrice < 1 ? 0 : maxPrice;
 
-  if (minPrice == maxPrice || minPrice <= 0) {
+  if (minPrice == maxPrice && minPrice <= 0) {
     return "";
-  } else if (minPrice < maxPrice) {
+  } else if (minPrice <= maxPrice) {
+    console.log("el preu menor es menor");
     return " price BETWEEN " + minPrice + " AND " + maxPrice + " AND";
   } else if (minPrice > maxPrice) {
+    console.log("el preu menor es major");
+
     return " price BETWEEN " + maxPrice + " AND " + minPrice + " AND";
   }
   return "";
   // return " country BETWEEN'" + minPrice + "' AND '" + maxPrice + "' AND";
-}
-function clickerItems(itemString, id) {
-  if (
-    sessionStorage.getItem(itemString) == null ||
-    sessionStorage.getItem(itemString) == "null"
-  ) {
-    sessionStorage.setItem(itemString, id);
-  } else {
-    sessionStorage.removeItem(itemString);
-  }
-  console.log(sessionStorage.getItem(itemString));
-}
-function storageFormats() {
-  $("#VHS").click(function () {
-    clickerItems("VHS", this.getAttribute("id"));
-  });
-  $("#DVD").click(function () {
-    clickerItems("DVD", this.getAttribute("id"));
-  });
-  $("#Blu-Ray").click(function () {
-    clickerItems("Blu-Ray", this.getAttribute("id"));
-  });
-  $("#4K").click(function () {
-    clickerItems("4K", this.getAttribute("id"));
-  });
-  $("#Digital").click(function () {
-    clickerItems("Digital", this.getAttribute("id"));
-  });
-  $("#Otro").click(function () {
-    clickerItems("Otro", this.getAttribute("id"));
-  });
 }
 
 function chairsFormats() {
   var chairformats = "";
   var formatsMatrix = ["VHS", "DVD", "Blu-Ray", "4K", "Digital", "Otro"];
   for (let i = 0; i < formatsMatrix.length; i++) {
+
     if (sessionStorage.getItem(formatsMatrix[i]) == formatsMatrix[i]) {
-      chairformats +=
-        " formats  LIKE '%" +
+
+      console.log(chairformats);
+
+      chairformats += " formats  LIKE '%" +
         sessionStorage.getItem(formatsMatrix[i]) +
         "%' OR";
+   
+
     }
   }
+  console.log(chairformats);
   chairformats = chairformats
     .split(" ") // separa el string según espacios en blanco
     .slice(0, -1) // toma todos los elementos menos el último
@@ -140,5 +118,6 @@ function searchFilter() {
   // searchAjaxProducts("module/shop/controller/controllerShopPage.php?op=searchQuery&query="+chairQUERY, cData=undefined);
 }
 // $(document).ready(function () {
-//   storageFormats();
+//   // storageFormats();
+
 // });
