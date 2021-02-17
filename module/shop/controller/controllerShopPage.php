@@ -45,27 +45,33 @@ switch ($_GET['op']) {
                 break;
         }
         break;
-        case 'searchQuery':
+    case 'searchQuery':
 
-            searhQueryAllRows($_GET["query"]);
-            break;
+        searhQueryAllRows($_GET["query"]);
+        break;
     case 'openProduct':
 
         searhQueryOneRow("SELECT * FROM movies WHERE id =" . $_GET["product"]);
-       
-        break;
-        case 'shopsGeolocation':
 
-            searhQueryAllRows("SELECT tiene.id, shop.*
+        break;
+    case 'shopsGeolocation':
+
+        searhQueryAllRows("SELECT tiene.id, shop.*
             FROM tiene, shop
             WHERE tiene.cod_shop = shop.cod_shop
-            AND tiene.id=". $_GET["product"]);
-           
-            break;
-    default;
-        include('module/shop/view/shop.html');
+            AND tiene.id=" . $_GET["product"]);
 
         break;
+    // case 'countClick':
+
+    //     updateMovie("SELECT * FROM filmoteca.movies;
+    //     UPDATE movies SET clicks = clicks+1 
+    //     WHERE (id = " . $_GET["product"]);
+    //     break;
+    // default;
+    //     include('module/shop/view/shop.html');
+
+    //     break;
 }
 function searhQueryAllRows($thisQuery)
 {
@@ -80,6 +86,7 @@ function searhQueryAllRows($thisQuery)
         echo "error";
     }
 }
+
 function searhQueryOneRow($thisQuery)
 {
     $homeQuery = new DAOShop();
@@ -93,3 +100,11 @@ function searhQueryOneRow($thisQuery)
         echo "error";
     }
 }
+
+// function updateMovie($thisQuery)
+// {
+//     $homeQuery = new DAOShop();
+
+//     $homeQuery->queryUpdate($thisQuery);
+//     exit;
+// }

@@ -17,6 +17,17 @@ class DAOHome
         return $result;
 
 
-        
+
+
+       
+    }
+    function updateQuery($select)
+    {
+
+        $sql = $select;
+        $conexion = connect::connect();
+        $res = mysqli_query($conexion, $sql);
+        connect::close($conexion);
+        return $res;
     }
 }

@@ -2,28 +2,6 @@ importarScript("assets/api_kay.js");
 importarScript("module/shop/model/geolocalizacion.js");
 importarScript("module/shop/model/filter.js");
 importarScript("assets/maps.js");
-// function importarScript(nombre) {
-//   var scriptImport = document.createElement("script");
-//   scriptImport.src = nombre;
-//   document.querySelector("head").appendChild(scriptImport);
-// }
-
-// function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
-//   return new Promise((resolve, reject) => {
-//     $.ajax({
-//       url: sUrl,
-//       type: sType,
-//       dataType: sTData,
-//       data: sData,
-//     })
-//       .done((data) => {
-//         resolve(data);
-//       })
-//       .fail((jqXHR, textStatus, errorThrow) => {
-//         reject(errorThrow);
-//       });
-//   });
-// }
 
 /////FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
 function clickerItems(itemString, id) {
@@ -148,50 +126,78 @@ function divsProduct(urls, id) {
 
 //CARREGA TOTS ELS PRODUCTES
 function loadHomeProducts() {
-  let homeID = sessionStorage.getItem("id");
   // console.log(sessionStorage.getItem("id"))
   ///typeof(nomDeLaVariableOFUNCIÓ)
-  if (homeID == "null" || homeID == null) {
-    // console.log(sessionStorage.getItem("id"))
-    let filterCategory = sessionStorage.getItem("filterCategory");
-    switch (filterCategory) {
-      case "decade":
-        console.log("decade 80 <3");
-        searchAjaxProducts(
-          "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=decade"
-        );
-        break;
+  // if (homeID == "null" || homeID == null) {
+  // console.log(sessionStorage.getItem("id"))
 
-      case "formate":
-        console.log("fomato VHS");
-        searchAjaxProducts(
-          "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=formate"
-        );
-        break;
+  let op = sessionStorage.getItem("op");
+  console.log(op);
+  switch (op) {
+    case "category":
+      let filterCategory = sessionStorage.getItem("filterCategory");
+      switch (filterCategory) {
+        case "decade":
+          console.log("decade 80 <3");
+          searchAjaxProducts(
+            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=decade"
+          );
+          break;
 
-      case "genere":
-        console.log("género fantasía ⚔");
-        searchAjaxProducts(
-          "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=genere"
-        );
-        break;
+        case "formate":
+          console.log("fomato VHS");
+          searchAjaxProducts(
+            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=formate"
+          );
+          break;
 
-      default:
-        // console.log("default");
-        searchAjaxProducts(
-          "module/shop/controller/controllerShopPage.php?op=listShop"
-        );
-        break;
-    }
-  } else {
-    divsProduct(
-      "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
-      homeID
-    );
-    console.log(sessionStorage.getItem("id"));
+        case "genere":
+          console.log("género fantasía ⚔");
+          searchAjaxProducts(
+            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=genere"
+          );
+          break;
 
-    console.log("abriremos este producto!");
-    // sessionStorage.setItem("id", null);
+        default:
+          // console.log("default");
+          searchAjaxProducts(
+            "module/shop/controller/controllerShopPage.php?op=listShop"
+          );
+          break;
+      }
+
+      break;
+    case "details":
+      let homeID = sessionStorage.getItem("id");
+
+      divsProduct(
+        "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
+        homeID
+      );
+      break;
+    case "search":
+      console.log("search");
+      var search = sessionStorage.getItem("search");
+      console.log(search);
+
+      searchAjaxProducts(
+        "module/search/controller/controllerSearch.php?op=search&search=" +
+          search
+      );
+      break;
+
+    case null:
+      searchAjaxProducts(
+        "module/shop/controller/controllerShopPage.php?op=listShop"
+      );
+      break;
+
+    default:
+      // console.log("default");
+      searchAjaxProducts(
+        "module/shop/controller/controllerShopPage.php?op=listShop"
+      );
+      break;
   }
 
   clickShopMenu();
@@ -220,7 +226,8 @@ function clickProduct() {
       $("#formularioFiltro").show();
 
       $("#map").empty();
-      sessionStorage.setItem("id", null);
+      sessionStorage.removeItem("op");
+      // sessionStorage.setItem("id", null);
       loadHomeProducts(); ///Vuelve al catálogo
     }
   });
@@ -232,13 +239,14 @@ function clickShopMenu() {
   $("#Tienda").click(function () {
     // if (sessionStorage.getItem("filterCategory") != null) {
     //   var stop = false;
-    sessionStorage.removeItem("filterCategory");
-    sessionStorage.removeItem("id");
+    // sessionStorage.removeItem("filterCategory");
+    // sessionStorage.removeItem("id");
     sessionStorage.removeItem("VHS");
     sessionStorage.removeItem("DVD");
     sessionStorage.removeItem("Blue-Ray");
     sessionStorage.removeItem("4K");
     sessionStorage.removeItem("Otros");
+    sessionStorage.removeItem("op");
 
     // }
   });
@@ -247,50 +255,58 @@ function clickShopMenu() {
 function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = undefined) {
   ajaxPromise(dirUrl, "GET", "JSON", sData)
     .then(function (category) {
-      $("#listShop").empty();
-      if (boolTrue === false) {
-        setTimeout(
-          $("<h1></h1>")
-            .append(
-              document.createTextNode(
-                "No se han encontrado resultados con esta búsqueda"
-              )
-            )
-            .appendTo("#listShop"),
-          3000
+      if (category.length === 1) {
+        divsProduct(
+          "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
+          category[0]["id"]
         );
-      }
-      loadDivsProducts();
+      } else {
+        console.log(category);
+        $("#listShop").empty();
+        if (boolTrue === false) {
+          setTimeout(
+            $("<h1></h1>")
+              .append(
+                document.createTextNode(
+                  "No se han encontrado resultados con esta búsqueda"
+                )
+              )
+              .appendTo("#listShop"),
+            3000
+          );
+        }
+        loadDivsProducts();
 
-      for (let i = 0; i < category.length; i++) {
-        let id = "" + category[i]["id"];
-        let name = category[i]["name"];
-        let img = "";
-        img = "" + category[i]["img"];
+        for (let i = 0; i < category.length; i++) {
+          let id = "" + category[i]["id"];
+          let name = category[i]["name"];
+          let img = "";
+          img = "" + category[i]["img"];
 
-        let li = $("<li></li>")
-          .attr({ id: "li" + i + "-" + id, class: "portfolio-item" })
-          .appendTo(".portfolio-items");
-        let div1 = $("<div></div>")
-          .attr({ id: "div1" + i + "-" + id, class: "item-main" })
-          .appendTo(li);
-        let div2 = $("<div></div>")
-          .attr({ id: "div2" + i + "-" + id, class: "portfolio-image" })
-          .appendTo(div1);
-        $("<img>")
-          .attr({
-            id: "imgShop-" + id,
-            class: "touch",
-            src: "module\\movies\\img\\" + img,
-          })
-          .appendTo(div2);
+          let li = $("<li></li>")
+            .attr({ id: "li" + i + "-" + id, class: "portfolio-item" })
+            .appendTo(".portfolio-items");
+          let div1 = $("<div></div>")
+            .attr({ id: "div1" + i + "-" + id, class: "item-main" })
+            .appendTo(li);
+          let div2 = $("<div></div>")
+            .attr({ id: "div2" + i + "-" + id, class: "portfolio-image" })
+            .appendTo(div1);
+          $("<img>")
+            .attr({
+              id: "imgShop-" + id,
+              class: "touch",
+              src: "module\\movies\\img\\" + img,
+            })
+            .appendTo(div2);
 
-        $("<h5></h5>")
-          .append(document.createTextNode(category[i]["movie"]))
-          .appendTo(div2);
-        $("<h2></h2>")
-          .append(document.createTextNode(category[i]["price"] + "€"))
-          .appendTo(div2);
+          $("<h5></h5>")
+            .append(document.createTextNode(category[i]["movie"]))
+            .appendTo(div2);
+          $("<h2></h2>")
+            .append(document.createTextNode(category[i]["price"] + "€"))
+            .appendTo(div2);
+        }
       }
     })
     .catch(function () {

@@ -120,6 +120,7 @@ function ajaxSearch(dirUrl) {
           })
           .appendTo("#productsHome");
       }
+
       $(".productHome").click(clickProductHome); ////FUNCIÓ CLICK CATEGORY///////////////////////
     })
     .catch(function () {
@@ -133,6 +134,8 @@ function loadHomeProducts() {
 function clickCategory() {
   //FUNCIÓ A LA LÍNEA 45!
   var category = $(this).attr("value");
+  sessionStorage.setItem("op", "category");
+
   sessionStorage.setItem("filterCategory", category);
   if (category == null) {
     // toastr["info"]("Ingresa criterios de busqueda"), {"iconClass":'toast-info'}; // NO ESTÀ DEFINIIIIT
@@ -148,8 +151,10 @@ function clickProductHome() {
   //FUNCIÓ A LA LÍNEA 45!
   var id = $(this).attr("id");
   console.log(id);
+  sessionStorage.setItem("op", "details");
+
   sessionStorage.setItem("id", id);
-  sessionStorage.setItem("category", null);
+  sessionStorage.removeItem("category");
   if (id == null) {
     // toastr["info"]("Ingresa criterios de busqueda"), {"iconClass":'toast-info'}; // NO ESTÀ DEFINIIIIT
     console.log(
@@ -157,26 +162,24 @@ function clickProductHome() {
     );
   } else {
     // setTimetout() es una función para decirle que pasado X tiempo realice una función
-
+    countClickProduct(id);
+    // return false;
     window.location.href = "index.php?page=shop";
   }
 }
-// function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
-//   return new Promise((resolve, reject) => {
-//     $.ajax({
-//       url: sUrl,
-//       type: sType,
-//       dataType: sTData,
-//       data: sData,
-//     })
-//       .done((data) => {
-//         resolve(data);
-//       })
-//       .fail((jqXHR, textStatus, errorThrow) => {
-//         reject(errorThrow);
-//       });
-//   });
-// }
+function countClickProduct(id) {
+  dirUrl =
+    "module/home/controller/controllerHomePage.php?op=countClick&count=" + id;
+  console.log(dirUrl);
+  // return false;
+  ajaxPromise(dirUrl, "GET", "JSON")
+    .then(function (data) {
+      console.log(data);
+    })
+    .catch(function () {
+      console.log("ERROR, click no registrado");
+    });
+}
 
 $(document).ready(function () {
   loadDivsCarousel();
