@@ -29,8 +29,9 @@ function queryCountry(valueText) {
   return " country = '" + valueText + "' AND";
 }
 function queryPrice(minPrice, maxPrice) {
-  minPrice = minPrice == "" || minPrice < 1 ? 0 : minPrice;
-  maxPrice = maxPrice == "" || maxPrice < 1 ? 0 : maxPrice;
+  minPrice = minPrice == "" || minPrice < 1 ? 0 :  parseFloat(minPrice);
+  maxPrice = maxPrice == "" || maxPrice < 1 ? 0 :  parseFloat(maxPrice);
+
 
   if (minPrice == maxPrice && minPrice <= 0) {
     return "";

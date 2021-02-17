@@ -161,22 +161,22 @@ function clickProductHome() {
     window.location.href = "index.php?page=shop";
   }
 }
-function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: sUrl,
-      type: sType,
-      dataType: sTData,
-      data: sData,
-    })
-      .done((data) => {
-        resolve(data);
-      })
-      .fail((jqXHR, textStatus, errorThrow) => {
-        reject(errorThrow);
-      });
-  });
-}
+// function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
+//   return new Promise((resolve, reject) => {
+//     $.ajax({
+//       url: sUrl,
+//       type: sType,
+//       dataType: sTData,
+//       data: sData,
+//     })
+//       .done((data) => {
+//         resolve(data);
+//       })
+//       .fail((jqXHR, textStatus, errorThrow) => {
+//         reject(errorThrow);
+//       });
+//   });
+// }
 
 $(document).ready(function () {
   loadDivsCarousel();

@@ -1,31 +1,29 @@
 importarScript("assets/api_kay.js");
-
 importarScript("module/shop/model/geolocalizacion.js");
 importarScript("module/shop/model/filter.js");
 importarScript("assets/maps.js");
+// function importarScript(nombre) {
+//   var scriptImport = document.createElement("script");
+//   scriptImport.src = nombre;
+//   document.querySelector("head").appendChild(scriptImport);
+// }
 
-function importarScript(nombre) {
-  var s = document.createElement("script");
-  s.src = nombre;
-  document.querySelector("head").appendChild(s);
-}
-
-function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
-  return new Promise((resolve, reject) => {
-    $.ajax({
-      url: sUrl,
-      type: sType,
-      dataType: sTData,
-      data: sData,
-    })
-      .done((data) => {
-        resolve(data);
-      })
-      .fail((jqXHR, textStatus, errorThrow) => {
-        reject(errorThrow);
-      });
-  });
-}
+// function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
+//   return new Promise((resolve, reject) => {
+//     $.ajax({
+//       url: sUrl,
+//       type: sType,
+//       dataType: sTData,
+//       data: sData,
+//     })
+//       .done((data) => {
+//         resolve(data);
+//       })
+//       .fail((jqXHR, textStatus, errorThrow) => {
+//         reject(errorThrow);
+//       });
+//   });
+// }
 
 /////FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
 function clickerItems(itemString, id) {
@@ -78,6 +76,8 @@ function loadDivsProducts() {
 function divsProduct(urls, id) {
   ajaxPromise(urls + id, "GET", "JSON")
     .then(function (category) {
+      //// .hide PER A OCULTAR EL FORMULARI QUE REOBRIREM AL EIXIR
+      $("#formularioFiltro").hide();
       $("#listShop").empty(); //Borrar lo de dins
       let count = 0;
       for (var clave in category) {
@@ -207,7 +207,6 @@ function clickProduct() {
     var id = this.id;
 
     if (clase === "touch") {
-
       id = id.split("-"); ///Dividir imgShop de l'ID. Les ID están juntes a imgShop per a evitar interferències.
       id = id[1];
       divsProduct(
@@ -215,13 +214,16 @@ function clickProduct() {
         id
       );
       // console.log(API_KAY);
-      openMaps();
+      console.log("la ID es " + id);
+      openMaps(id);
     } else if (idReturn === "return") {
+      $("#formularioFiltro").show();
+
+      $("#map").empty();
       sessionStorage.setItem("id", null);
       loadHomeProducts(); ///Vuelve al catálogo
     }
   });
-
 }
 //-------FIN-----CARGA ELS PRODUCTES O UN PRODUCTE-------------//
 
@@ -399,7 +401,6 @@ function filtersInput() {
   genereFilter();
   formatsFilter();
   countryFilter();
-  
 }
 //   <!-- <script src="module\shop\model\filter.js"></script> -->
 // <!-- <script src="module\shop\model\geolocalizacion.js"></script> -->

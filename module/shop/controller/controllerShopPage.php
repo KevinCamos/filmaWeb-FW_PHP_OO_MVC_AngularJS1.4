@@ -52,16 +52,16 @@ switch ($_GET['op']) {
     case 'openProduct':
 
         searhQueryOneRow("SELECT * FROM movies WHERE id =" . $_GET["product"]);
-        // $homeQuery = new DAOShop();
-        // $category = $homeQuery->queryOneRow("SELECT * FROM movies WHERE id =" . $_GET["product"]);
-        // if ($category == true) {
-        //     echo json_encode($category);
-        //     exit;
-        // } else {
-        //     echo "error";
-        // } // end_else
+       
         break;
+        case 'shopsGeolocation':
 
+            searhQueryAllRows("SELECT tiene.id, shop.*
+            FROM tiene, shop
+            WHERE tiene.cod_shop = shop.cod_shop
+            AND tiene.id=". $_GET["product"]);
+           
+            break;
     default;
         include('module/shop/view/shop.html');
 

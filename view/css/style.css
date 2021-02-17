@@ -391,7 +391,7 @@ td {
 
 
 #formularioFiltro fieldset{
-  background-color: dimgray;
+  background-color:#242424 ;
   /* margin-right:   800px; */
   width: 220px !important;
 
@@ -400,7 +400,7 @@ td {
   margin-left: 20px;
   display: block;
   position: absolute;
-  margin-top: -1725px;
+  margin-top:5px;
   margin-left: 15px;
 
   block-size: auto;
