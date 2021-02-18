@@ -15,11 +15,10 @@ function script_maps() {
     script.async;
     script.defer;
     document.getElementsByTagName("script")[0].parentNode.appendChild(script);
-    console.log(script);
+    // console.log(script);
   }
 }
 function initMap() {
-
   //Opciones de mapa
   var options = {
     zoom: 10,
@@ -60,18 +59,18 @@ function initMap() {
 }
 
 function OpenCoords() {
-let id =sessionStorage.getItem("idmaps")
+  let id = sessionStorage.getItem("idmaps");
   var url =
     "module/shop/controller/controllerShopPage.php?op=shopsGeolocation&product=" +
     id;
-  console.log(url);
+  // console.log(url);
 
   ajaxPromise(url, "GET", "JSON")
     .then(function (data) {
       var pointMarker = new Array();
 
-      console.log("Sí apleguen les coordenades");
-      console.log(data);
+      // console.log("Sí apleguen les coordenades");
+      // console.log(data);
       pointMarker = setPoint(data);
       return pointMarker;
     })

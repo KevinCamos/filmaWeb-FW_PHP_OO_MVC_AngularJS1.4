@@ -3,7 +3,7 @@
 function geolocation(){
 if (navigator.geolocation) {
 
-    console.log("Tu navegador permite la geolocalización ");
+    // console.log("Tu navegador permite la geolocalización ");
     
     } else {
     console.log("Tu navegador NO permite la geolocalización ");

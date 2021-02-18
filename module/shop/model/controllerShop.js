@@ -1,3 +1,4 @@
+
 importarScript("assets/api_kay.js");
 importarScript("module/shop/model/geolocalizacion.js");
 importarScript("module/shop/model/filter.js");
@@ -220,7 +221,8 @@ function clickProduct() {
         id
       );
       // console.log(API_KAY);
-      console.log("la ID es " + id);
+      // console.log("la ID es " + id);
+      countClickProduct(id);
       openMaps(id);
     } else if (idReturn === "return") {
       $("#formularioFiltro").show();
@@ -231,6 +233,19 @@ function clickProduct() {
       loadHomeProducts(); ///Vuelve al catálogo
     }
   });
+}
+function countClickProduct(id) {
+  dirUrl =
+    "module/home/controller/controllerHomePage.php?op=countClick&count=" + id;
+  console.log(dirUrl);
+  // return false;
+  ajaxPromise(dirUrl, "GET", "JSON")
+    .then(function (data) {
+      console.log(data);
+    })
+    .catch(function () {
+      console.log("ERROR, click no registrado");
+    });
 }
 //-------FIN-----CARGA ELS PRODUCTES O UN PRODUCTE-------------//
 

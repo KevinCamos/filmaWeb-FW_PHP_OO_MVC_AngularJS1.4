@@ -62,16 +62,22 @@ switch ($_GET['op']) {
             AND tiene.id=" . $_GET["product"]);
 
         break;
-    // case 'countClick':
 
-    //     updateMovie("SELECT * FROM filmoteca.movies;
-    //     UPDATE movies SET clicks = clicks+1 
-    //     WHERE (id = " . $_GET["product"]);
-    //     break;
-    // default;
-    //     include('module/shop/view/shop.html');
 
-    //     break;
+    case 'countClick':
+        $homeQuery = new DAOShop();
+
+        // console_log("entra ací");
+        $result = $homeQuery->updateQuery("UPDATE movies SET clicks = clicks+ 1 
+                    WHERE id = " . $_GET["count"]);
+        echo json_encode($result);
+        if ($result == true) {
+            echo json_encode($result);
+            exit;
+        } else {
+            echo json_encode("eeeh");
+            break;
+        }
 }
 function searhQueryAllRows($thisQuery)
 {

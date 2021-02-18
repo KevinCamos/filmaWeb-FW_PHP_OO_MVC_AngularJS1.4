@@ -10,12 +10,7 @@ switch ($_GET['op']) {
 
     case 'search':
 
-        // echo '<script>';
-        // echo 'console.log(' . $_GET['search'] . ')';
-        // echo '</script>';
-
         $search = $_GET['search'];
-        // $search = "ea";
         searhQueryAllRows('SELECT * FROM movies
         WHERE  movie LIKE  "%' . $search . '%"
          OR movie LIKE  "%' . $search . '%"
@@ -24,36 +19,13 @@ switch ($_GET['op']) {
         OR genere LIKE  "%' . $search . '%"
         OR anyo LIKE "%' . $search . '%" ');
 
+        break;
 
-        // $homeQuery = new DAOSearch();
-        // $search = $mysqli->real_escape_string($_GET['search']);
-        // $search = "%" +  $search + "%";
-        // // $query = "SELECT * FROM movies
-        // WHERE reference LIKE \"" . $search . "\"
-        // OR movie LIKE \"" . $search . "\"
-        // OR formats LIKE \"" . $search . "\"
-        // OR director LIKE \"" . $search . "\"
-        // OR genere LIKE \"" . $search . "\"
-        // OR anyo LIKE \"" . $search . "\" ";
+    case 'autoComplete':
 
-        // // console_log($query);
-        // // echo json_encode($search);
+        
+        searhQueryAllRows('SELECT movie, anyo FROM movies');
 
-        // $category = $homeQuery->query("SELECT * FROM movies
-        // WHERE reference LIKE \"" . $search . "\"
-        // OR movie LIKE \"" . $search . "\"
-        // OR formats LIKE \"" . $search . "\"
-        // OR director LIKE \"" . $search . "\"
-        // OR genere LIKE \"" . $search . "\"
-        // OR anyo LIKE \"" . $search . "\" ");
-        // return false;
-        // if ($category == true) {
-        //     echo json_encode($category);
-
-        //     exit;
-        // } else {
-        //     echo "error";
-        // }
         break;
 
     default;
