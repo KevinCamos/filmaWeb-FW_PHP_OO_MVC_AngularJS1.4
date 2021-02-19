@@ -1,8 +1,9 @@
-
+importarScript("module/shop/model/filter.js");
 importarScript("assets/api_kay.js");
 importarScript("module/shop/model/geolocalizacion.js");
-importarScript("module/shop/model/filter.js");
 importarScript("assets/maps.js");
+
+importarScript("module/shop/model/orderby.js");
 
 /////FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
 function clickerItems(itemString, id) {
@@ -127,11 +128,11 @@ function divsProduct(urls, id) {
 
 //CARREGA TOTS ELS PRODUCTES
 function loadHomeProducts() {
-  // console.log(sessionStorage.getItem("id"))
-  ///typeof(nomDeLaVariableOFUNCIÓ)
-  // if (homeID == "null" || homeID == null) {
-  // console.log(sessionStorage.getItem("id"))
-
+  if (sessionStorage.getItem("order") === null) {
+    alert("a vore...");
+    sessionStorage.setItem("order", "clicks asc");
+  }
+  var order = sessionStorage.getItem("order");
   let op = sessionStorage.getItem("op");
   console.log(op);
   switch (op) {
@@ -140,29 +141,34 @@ function loadHomeProducts() {
       switch (filterCategory) {
         case "decade":
           console.log("decade 80 <3");
+
           searchAjaxProducts(
-            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=decade"
+            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=decade&od=" +
+              order
           );
           break;
 
         case "formate":
           console.log("fomato VHS");
           searchAjaxProducts(
-            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=formate"
+            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=formate&od=" +
+              order
           );
           break;
 
         case "genere":
           console.log("género fantasía ⚔");
           searchAjaxProducts(
-            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=genere"
+            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=genere&od=" +
+              order
           );
           break;
 
         default:
-          // console.log("default");
+          alert("DEFINIR CATEGORÍA");
           searchAjaxProducts(
-            "module/shop/controller/controllerShopPage.php?op=listShop"
+            "module/shop/controller/controllerShopPage.php?op=listShop&od=" +
+              order
           );
           break;
       }
@@ -186,24 +192,24 @@ function loadHomeProducts() {
           search
       );
       break;
+    case "filter":
+      var filter = sessionStorage.getItem("filter");
+      alert(filter);
 
-    case null:
       searchAjaxProducts(
-        "module/shop/controller/controllerShopPage.php?op=listShop"
+        "module/shop/controller/controllerShopPage.php?op=searchQuery&query=" +
+          filter
       );
       break;
-
     default:
       // console.log("default");
       searchAjaxProducts(
-        "module/shop/controller/controllerShopPage.php?op=listShop"
+        "module/shop/controller/controllerShopPage.php?op=listShop&od=" + order
       );
       break;
   }
 
   clickShopMenu();
-  // console.log("vale");
-  // console.log(sessionStorage.getItem("filterCategory"));
 }
 
 //CLICK PRODUCTE
@@ -325,8 +331,10 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = undefined) {
       }
     })
     .catch(function () {
+      var order = sessionStorage.getItem("order");
+
       searchAjaxProducts(
-        "module/shop/controller/controllerShopPage.php?op=listShop",
+        "module/shop/controller/controllerShopPage.php?op=listShop&od=" + order,
         (cData = undefined),
         false
       );
@@ -437,8 +445,8 @@ function filtersInput() {
 // <!-- <script src="module\shop\model\geolocalizacion.js"></script> -->
 
 $(document).ready(function () {
-  // script_maps();
   loadHomeProducts();
+
   clickProduct();
   filtersInput();
   storageFormats();

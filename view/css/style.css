@@ -440,5 +440,18 @@ td {
   /* The width is the width of the web page */
 }
 
+#orderBy{
+  float: right;
+/* position: relative;   */
+  margin-right: 500px;
+  margin-top: 20px;
+}
 
+.category,.touch,#return{
+  cursor:pointer
+}
+/* 
+.touch{
+  cursor:pointer
+} */
 /* FIN FILTROS SHOP */

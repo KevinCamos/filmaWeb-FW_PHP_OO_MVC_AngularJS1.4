@@ -29,9 +29,8 @@ function queryCountry(valueText) {
   return " country = '" + valueText + "' AND";
 }
 function queryPrice(minPrice, maxPrice) {
-  minPrice = minPrice == "" || minPrice < 1 ? 0 :  parseFloat(minPrice);
-  maxPrice = maxPrice == "" || maxPrice < 1 ? 0 :  parseFloat(maxPrice);
-
+  minPrice = minPrice == "" || minPrice < 1 ? 0 : parseFloat(minPrice);
+  maxPrice = maxPrice == "" || maxPrice < 1 ? 0 : parseFloat(maxPrice);
 
   if (minPrice == maxPrice && minPrice <= 0) {
     return "";
@@ -51,16 +50,13 @@ function chairsFormats() {
   var chairformats = "";
   var formatsMatrix = ["VHS", "DVD", "Blu-Ray", "4K", "Digital", "Otro"];
   for (let i = 0; i < formatsMatrix.length; i++) {
-
     if (sessionStorage.getItem(formatsMatrix[i]) == formatsMatrix[i]) {
-
       console.log(chairformats);
 
-      chairformats += " formats  LIKE '%" +
+      chairformats +=
+        " formats  LIKE '%" +
         sessionStorage.getItem(formatsMatrix[i]) +
         "%' OR";
-   
-
     }
   }
   console.log(chairformats);
@@ -103,17 +99,19 @@ function searchFilter() {
   // return false;
   if (chairQUERY == "") {
     console.log("home!");
+    sessionStorage.removeItem("op");
+
     loadHomeProducts();
   } else {
     console.log("búsqueda!");
 
     chairQUERY = "SELECT * FROM  movies WHERE " + chairQUERY;
     console.log(chairQUERY);
-    searchAjaxProducts(
-      "module/shop/controller/controllerShopPage.php?op=searchQuery&query=" +
-        chairQUERY,
-      (cData = undefined)
-    );
+
+    sessionStorage.setItem("op", "filter");
+
+    sessionStorage.setItem("filter", chairQUERY);
+    loadHomeProducts();
   }
 
   // searchAjaxProducts("module/shop/controller/controllerShopPage.php?op=searchQuery&query="+chairQUERY, cData=undefined);

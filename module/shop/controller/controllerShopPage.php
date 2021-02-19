@@ -10,21 +10,16 @@ switch ($_GET['op']) {
 
     case 'listShop':
 
-        searhQueryAllRows("SELECT * FROM movies ORDER BY movie asc");
+        searhQueryAllRows("SELECT * FROM movies ORDER BY ".$_GET['od']. " , movie asc");
         break;
-
-    case 'homeCarousel':
-
-        searhQueryAllRows("SELECT * FROM category  ORDER BY movie asc");
-        break;
-
+        
     case 'countryFilter':
 
-        searhQueryAllRows("SELECT DISTINCT country FROM movies  ORDER BY movie asc");
+        searhQueryAllRows("SELECT DISTINCT country FROM movies ORDER BY  movie asc");
         break;
     case 'genereFilter':
 
-        searhQueryAllRows("SELECT DISTINCT genere FROM movies ORDER BY genere asc");
+        searhQueryAllRows("SELECT DISTINCT genere FROM movies ORDER BY  movie asc");
         break;
 
     case 'filterCarousel':
@@ -33,15 +28,15 @@ switch ($_GET['op']) {
 
             case 'decade':
                 searhQueryAllRows("SELECT * FROM movies
-                WHERE anyo BETWEEN 1980 AND 1989  ORDER BY movie asc");
+                WHERE anyo BETWEEN 1980 AND 1989  ORDER BY ".$_GET['od']. " , movie asc");
                 break;
             case 'formate':
                 searhQueryAllRows("SELECT * FROM movies
-                                 WHERE formats LIKE '%VHS%' ORDER BY movie asc");
+                                 WHERE formats LIKE '%VHS%' ORDER BY ".$_GET['od']. " , movie asc");
                 break;
             case 'genere':
                 searhQueryAllRows("SELECT * FROM movies
-                                 WHERE genere = 'Fantasia'ORDER BY movie asc");
+                                 WHERE genere = 'Fantasia' ORDER BY ".$_GET['od']. " , movie asc");
                 break;
         }
         break;

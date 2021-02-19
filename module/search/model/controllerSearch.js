@@ -1,4 +1,3 @@
-
 function searchMenu() {
   var chairSearch = $("#inputSearch").val();
   console.log(chairSearch);
@@ -52,7 +51,18 @@ function cargarSearch() {
     });
 }
 
+function formSubmit() {
+  ///GRÀCIES JOSE ANTONIO <3
+  $(".formuSearch").on("submit", function () {
+    event.preventDefault();
+    ///GRÀCIES JOSE ANTONIO <3
+
+    searchMenu();
+  });
+}
+
 $(document).ready(function () {
   importarScript("assets/jquery.easy-autocomplete.min.js");
   cargarSearch();
+  formSubmit();
 });
