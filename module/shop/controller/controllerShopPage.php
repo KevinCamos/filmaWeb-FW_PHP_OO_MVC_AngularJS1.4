@@ -10,9 +10,9 @@ switch ($_GET['op']) {
 
     case 'listShop':
 
-        searhQueryAllRows("SELECT * FROM movies ORDER BY ".$_GET['od']. " , movie asc");
+        searhQueryAllRows("SELECT * FROM movies ORDER BY " . $_GET['od'] . " , movie asc");
         break;
-        
+
     case 'countryFilter':
 
         searhQueryAllRows("SELECT DISTINCT country FROM movies ORDER BY  movie asc");
@@ -28,21 +28,21 @@ switch ($_GET['op']) {
 
             case 'decade':
                 searhQueryAllRows("SELECT * FROM movies
-                WHERE anyo BETWEEN 1980 AND 1989  ORDER BY ".$_GET['od']. " , movie asc");
+                WHERE anyo BETWEEN 1980 AND 1989  ORDER BY " . $_GET['od'] . " , movie asc");
                 break;
             case 'formate':
                 searhQueryAllRows("SELECT * FROM movies
-                                 WHERE formats LIKE '%VHS%' ORDER BY ".$_GET['od']. " , movie asc");
+                                 WHERE formats LIKE '%VHS%' ORDER BY " . $_GET['od'] . " , movie asc");
                 break;
             case 'genere':
                 searhQueryAllRows("SELECT * FROM movies
-                                 WHERE genere = 'Fantasia' ORDER BY ".$_GET['od']. " , movie asc");
+                                 WHERE genere = 'Fantasia' ORDER BY " . $_GET['od'] . " , movie asc");
                 break;
         }
         break;
     case 'searchQuery':
-
-        searhQueryAllRows($_GET["query"]);
+        $searchQuery = base64_decode($_GET["query"]);
+        searhQueryAllRows($searchQuery);
         break;
     case 'openProduct':
 
@@ -84,7 +84,9 @@ function searhQueryAllRows($thisQuery)
 
         exit;
     } else {
-        echo "error";
+        echo ($thisQuery);
+
+        // echo "error";
     }
 }
 

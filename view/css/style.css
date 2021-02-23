@@ -13,160 +13,147 @@
    GENERAL STYLES
  ============================================================ */
 body {
-    font-family: 'Open Sans', sans-serif;
-   
+  font-family: "Open Sans", sans-serif;
 }
 .pad-top {
-    padding-top:60px;
+  padding-top: 60px;
 }
 .text-center {
-    text-align:center;
+  text-align: center;
 }
 i.fa {
-    padding:5px;
+  padding: 5px;
 }
 section {
-    padding-top:50px;
+  padding-top: 50px;
 }
 
 p {
-    font-weight:300;
-    line-height:30px;
+  font-weight: 300;
+  line-height: 30px;
 }
 .pad-row {
-    padding-top:40px;
-    padding-bottom:40px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 .pad-bottom {
-    padding-bottom:50px;
+  padding-bottom: 50px;
 }
 
 /* NAVBAR STYLE */
 
-
 .navbar-inverse .navbar-nav > li > a {
-color: #FFF;
+  color: #fff;
 }
 
 .navbar-inverse .navbar-brand {
-color: #FFF;
+  color: #fff;
 }
-
 
 /* ADDED PADDING IN NAVBAR */
 
-
 .navbar {
-    padding:15px;
-     -webkit-transition: background .8s ease-out,padding .8s ease-out;
-        -moz-transition: background .8s ease-out,padding .8s ease-out;
-        transition: background .8s ease-out,padding .8s ease-out;
+  padding: 15px;
+  -webkit-transition: background 0.8s ease-out, padding 0.8s ease-out;
+  -moz-transition: background 0.8s ease-out, padding 0.8s ease-out;
+  transition: background 0.8s ease-out, padding 0.8s ease-out;
 }
-
 
 /* CLASS FOR REMOVING PADDING IN NAVBAR*/
 
-
 .navbar-pad-original {
-      padding:0px;
+  padding: 0px;
 }
-
-
 
 /* CARUOSEL STYLE OR SLIDESHOW STYLE*/
 
-
 .back-light {
-    background-color:rgba(0, 0, 0, 0.50);
-    padding:10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
 }
 /*NOTE SECION STYLE*/
 .note-sec {
-     padding-bottom:50px;
-    background: url(../img/4.jpg) no-repeat 50% 50%;
-background-attachment: fixed;
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
-width: 100%;
-display: block;
-height: auto;
-   min-height:300px;
-    color:#fff;
+  padding-bottom: 50px;
+  background: url(../img/4.jpg) no-repeat 50% 50%;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  display: block;
+  height: auto;
+  min-height: 300px;
+  color: #fff;
 }
 
 /*HEADINGS IMAGE STYLE*/
 
-
 .head-main-img {
-     padding-bottom:50px;
-    background: url(../img/4.jpg) no-repeat 50% 50%;
-background-attachment: fixed;
--webkit-background-size: cover;
--moz-background-size: cover;
--o-background-size: cover;
-background-size: cover;
-width: 100%;
-display: block;
-height: auto;
-   min-height:300px;
-    color:#fff;
+  padding-bottom: 50px;
+  background: url(../img/4.jpg) no-repeat 50% 50%;
+  background-attachment: fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  display: block;
+  height: auto;
+  min-height: 300px;
+  color: #fff;
 }
-    .head-main-img h1 {
-        padding: 50px 2px 2px 10px;
-        text-transform:uppercase;
-    }
+.head-main-img h1 {
+  padding: 50px 2px 2px 10px;
+  text-transform: uppercase;
+}
 
+/* PRICING STYLE */
 
- /* PRICING STYLE */
-
-
- .plan {
-padding: 0 0 15px 0;
-margin: 30px 0px;
-list-style: none;
-text-align: center;
+.plan {
+  padding: 0 0 15px 0;
+  margin: 30px 0px;
+  list-style: none;
+  text-align: center;
 }
 
 .plan li {
-padding: 15px 0px;
-font-size: 16px;
-border-bottom: 1px dotted #e1e1e1;
+  padding: 15px 0px;
+  font-size: 16px;
+  border-bottom: 1px dotted #e1e1e1;
 }
 
 .price {
-    font-size:45px!important;
+  font-size: 45px !important;
 }
 
 small {
-    font-size:15px;
-    padding-left:10px;
+  font-size: 15px;
+  padding-left: 10px;
 }
 
-    .plan li i {
-        padding-right:10px;
-    }
+.plan li i {
+  padding-right: 10px;
+}
 .price-two {
-    font-size:30px!important;
-    padding: 15px 0px;
-background-color: rgba(162, 188, 253, 1);
-color: #fff;
-border: none;
-font-weight: 900;
+  font-size: 30px !important;
+  padding: 15px 0px;
+  background-color: rgba(162, 188, 253, 1);
+  color: #fff;
+  border: none;
+  font-weight: 900;
 }
 
 .adjust-border-radius {
-    -webkit-border-radius: 0px;
--moz-border-radius: 0px;
-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
 }
 
 .adjust-border {
-    border-top-left-radius: 0px;
- border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 }
-
 
 /*    PORTFOLIO STYLES*/
 
@@ -193,8 +180,7 @@ border-radius: 0px;
   text-align: center;
   background: #fff;
   padding: 10px;
-  border:1px solid #E8EAEE;
-  
+  border: 1px solid #e8eaee;
 }
 .portfolio-item img {
   width: 100%;
@@ -204,10 +190,10 @@ border-radius: 0px;
 }
 .portfolio-item h5 {
   margin: 0;
-padding: 30px 0 30px 0;
-background-color: #000;
-color: #fff;
-font-size: 20px;
+  padding: 30px 0 30px 0;
+  background-color: #000;
+  color: #fff;
+  font-size: 20px;
 }
 .portfolio-item .overlay {
   position: absolute;
@@ -236,94 +222,85 @@ font-size: 20px;
 
 /*CONTACT STYLES*/
 
-
 .cnt {
-width: 100%;
-min-height: 350px;
-border: 1px solid #e1e1e1;
+  width: 100%;
+  min-height: 350px;
+  border: 1px solid #e1e1e1;
 }
 .add {
-    font-size:20px;
-    font-weight:800;
-    padding:30px;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 30px;
 }
 #contact-sec {
-  padding-top:0px;
+  padding-top: 0px;
 }
-
 
 /* FOOTER STYLE*/
 
-
 #footer-sec {
-    background-color:#000;
-    color:#808080;
+  background-color: #000;
+  color: #808080;
 }
-    #footer-sec h4 {
-        text-transform:uppercase;
-        color:#fff;
-    }
+#footer-sec h4 {
+  text-transform: uppercase;
+  color: #fff;
+}
 
-   /* TABLE STYLE FROM KEVIN*/
+/* TABLE STYLE FROM KEVIN*/
 
-    .movieRead{
-      content:url(../img/read.png);
-      /* background-color: purple;   */
-        text-align: left;
-  
-      text-align: left;
-  
-  }
-  .movieUpdate{
-      content:url(../img/update.png);
-      text-align: center;     
-  
-  
-  }
-  .movieDelete{
-      content:url(../img/delete.png);
-      text-align: right;       
-  
-  
-  }
-  
-  table  {
-    width: 1040px;
-    align-content:center;
-    margin: auto;
-    background-color: wheat;
-    border-color: orange;
+.movieRead {
+  content: url(../img/read.png);
+  /* background-color: purple;   */
+  text-align: left;
+
+  text-align: left;
+}
+.movieUpdate {
+  content: url(../img/update.png);
+  text-align: center;
+}
+.movieDelete {
+  content: url(../img/delete.png);
+  text-align: right;
+}
+
+table {
+  width: 1040px;
+  align-content: center;
+  margin: auto;
+  background-color: wheat;
+  border-color: orange;
 }
 
 td {
-    width: "24%";
+  width: "24%";
 }
 /* @font-face {
   font-family: "FontAwesome";
   src: url("fontawesome-webfont.woff");
 } */
 
-.lang-btn{
+.lang-btn {
   width: 100px;
-
 }
 
-
-.error {color: #FF0000;}
+.error {
+  color: #ff0000;
+}
 
 .styerror {
-    color: #ff0000;
-    font-family: arial;
-    font-size: 10pt;
-    font-style:italic;
+  color: #ff0000;
+  font-family: arial;
+  font-size: 10pt;
+  font-style: italic;
 }
 
-.item{
+.item {
   height: 100%;
   width: 100%;
-
 }
-#title_page{
+#title_page {
   height: 5%;
   width: 5%;
   position: fixed;
@@ -334,32 +311,22 @@ td {
   background-color: gray;
   height: 20px;
   cursor: pointer;
-  color:whitesmoke;
-  
+  color: whitesmoke;
 }
 /* CSS controllerHomePage per a que es vetgen les imagens del carousel */
-#products_DIV img{
-
-  display:block;
+#products_DIV img {
+  display: block;
 }
 
-
-#font-center-home{
+#font-center-home {
   font-size: 10rem;
   font-weight: 700;
   line-height: normal;
   text-align: center;
   margin-top: 100px;
-
 }
 
-
-#productsHome img{
-  /* display:blox; */
-  margin-top: 100px;
-  margin-left: 400px;
-}
-#contenido{
+#contenido {
   /* display:blox; */
   margin-top: 75px;
 }
@@ -374,24 +341,20 @@ td {
   margin-left: 400px;
 } */
 
-
-
 /* FILTROS SHOP */
-#formularioFiltro{
+#formularioFiltro {
   /* margin-right:   250px; */
   /* background-color: gray; */
   /* display: flex; */
-  color:white;
+  color: white;
   /* position: static; */
-  margin-right:   800;
-  display:flex;
+  margin-right: 800;
+  display: flex;
   flex-wrap: wrap;
 }
 
-
-
-#formularioFiltro fieldset{
-  background-color:#242424 ;
+#formularioFiltro fieldset {
+  background-color: #242424;
   /* margin-right:   800px; */
   width: 220px !important;
 
@@ -400,38 +363,33 @@ td {
   margin-left: 20px;
   display: block;
   position: absolute;
-  margin-top:5px;
+  margin-top: 5px;
   margin-left: 15px;
 
   block-size: auto;
 }
 
-
-
-#formularioFiltro span{
+#formularioFiltro span {
   border: 100;
   font-size: x-large;
-  color:orange;
+  color: orange;
   /* text-decoration ; */
-  border-color:black;
+  border-color: black;
   /* background-color: darkorange; */
   /* margin-inline-start: -14px; */
-  text-decoration: underline ;
+  text-decoration: underline;
   height: 20px;
-  width:200 ;
+  width: 200;
   /* cursor: pointer; */
   /* color: whitesmoke;
   text-decoration-line:overline; */
 }
 
-#formularioFiltro input{
- 
-  color:black;
-  
+#formularioFiltro input {
+  color: black;
 }
-#listShop{
-  margin-left: 350px ;
-
+#listShop {
+  margin-left: 350px;
 }
 #map {
   height: 400px;
@@ -440,18 +398,35 @@ td {
   /* The width is the width of the web page */
 }
 
-#orderBy{
+#orderBy {
   float: right;
-/* position: relative;   */
+  /* position: relative;   */
   margin-right: 500px;
   margin-top: 20px;
 }
 
-.category,.touch,#return{
-  cursor:pointer
+.category,
+.touch,
+#return {
+  cursor: pointer;
 }
-/* 
-.touch{
-  cursor:pointer
-} */
-/* FIN FILTROS SHOP */
+
+/* #productsHome img{
+  /* display:blox; */
+/* margin-top: 100px;
+  margin-left:200px; */
+/* position: center; */
+
+#productsHome {
+  margin-right: 50px;
+  text-align: center;  
+}
+.productHome {
+  margin-left: 100px;
+
+  margin-top: 100px;
+}
+
+.loading {
+  background-image: url("../img/ajax-loader.gif") 0 0;
+}

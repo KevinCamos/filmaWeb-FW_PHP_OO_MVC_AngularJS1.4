@@ -49,23 +49,19 @@ function loadCategoryCarousel() {
           .appendTo(firstDiv);
       }
       $(".category").click(clickCategory); ////FUNCIÓ CLICK CATEGORY///////////////////////
-
+      // var zoom = $(window).height()
+      // itemsCalcul = zoom/300
       $("#products_DIV").owlCarousel({
         // items: category.length, //Puc canviar-la de lloc, però ¡¡ULL!! Hi hauria que deixar de gastar category.lenght
         loop: true,
         center: true,
-        nav: true,
+        // nav: true,
         margin: 0, //Separación entre imágenes
-        URLhashListener: true,
-        // startPosition: "URLHash",
-
+        // URLhashListener: true,
+        // autoplay:true,
+        // autoplayTimeout:1000,
+        // autoplayHoverPause:true,
         responsive: {
-          // 0: {
-          //   items: 1,
-          // },
-          // 350: {
-          //   items: 2,
-          // },
           1000: {
             items: 3,
           },
@@ -96,19 +92,14 @@ function loadCategoryCarousel() {
     });
 }
 function ajaxSearch(dirUrl) {
+  $("<div>").addClass("loading").appendTo("#productsHome"); //NO VAAAAA :(
   ajaxPromise(dirUrl, "GET", "JSON")
     .then(function (category) {
-      $("#productsHome").empty(); //Borrar lo de dins
-      $("<p></p> ")
-        .attr({
-          id: "font-center-home",
-        })
-        .append(document.createTextNode("Nuestros mejores productos"))
-        .appendTo("#productsHome");
+      // $("#messages-list").removeClass("loading");
 
       for (let i = 0; i < category.length; i++) {
         let id = "" + category[i]["id"];
-        let name = category[i]["name"];
+        // let name = category[i]["name"];
         let img = "";
         img = "" + category[i]["img"];
 
@@ -120,16 +111,46 @@ function ajaxSearch(dirUrl) {
           })
           .appendTo("#productsHome");
       }
-
+      // $(".loading").removeItem();
       $(".productHome").click(clickProductHome); ////FUNCIÓ CLICK CATEGORY///////////////////////
     })
     .catch(function () {
       window.location.href = "index.php?page=error503";
     });
 }
+function detectScrollBrands() {
+  var count = 1;
 
-function loadHomeProducts() {
-  ajaxSearch("module/home/controller/controllerHomePage.php?op=homeProducts");
+  $(document).on("scroll", function () {
+    console.log($(window).scrollTop() + "ScrollTop");
+    console.log($(window).height() + "height");
+    console.log($(document).height() + "documentheight");
+    if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+      console.log("ENTRA!");
+
+      if (count < 7) {
+        console.log("CARGAR SCROLL");
+        var offset = count * 2;
+        loadHomeProducts(offset);
+        count++;
+      }
+    } // end_if
+  });
+}
+function loadHomeProducts(offset = 0) {
+  ajaxSearch(
+    "module/home/controller/controllerHomePage.php?op=homeProducts&offset=" +
+      offset
+  );
+}
+
+function dialogBeastProducts() {
+  $("<p></p> ")
+    .attr({
+      id: "font-center-home",
+    })
+    .append(document.createTextNode("Nuestros mejores productos"))
+    .appendTo("#productsHome");
 }
 function clickCategory() {
   //FUNCIÓ A LA LÍNEA 45!
@@ -182,7 +203,10 @@ function countClickProduct(id) {
 }
 
 $(document).ready(function () {
+  $("#productsHome").empty(); //Borrar lo de dins
   loadDivsCarousel();
   loadCategoryCarousel();
+  dialogBeastProducts();
   loadHomeProducts();
+  detectScrollBrands();
 });

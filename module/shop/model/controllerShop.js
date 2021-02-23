@@ -129,7 +129,7 @@ function divsProduct(urls, id) {
 //CARREGA TOTS ELS PRODUCTES
 function loadHomeProducts() {
   if (sessionStorage.getItem("order") === null) {
-    alert("a vore...");
+    // alert("a vore...");
     sessionStorage.setItem("order", "clicks asc");
   }
   var order = sessionStorage.getItem("order");
@@ -195,10 +195,10 @@ function loadHomeProducts() {
     case "filter":
       var filter = sessionStorage.getItem("filter");
       alert(filter);
-
+      filter= window.btoa(unescape(encodeURIComponent( filter )));
       searchAjaxProducts(
         "module/shop/controller/controllerShopPage.php?op=searchQuery&query=" +
-          filter
+          filter,
       );
       break;
     default:

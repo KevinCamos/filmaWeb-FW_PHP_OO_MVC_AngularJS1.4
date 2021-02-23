@@ -21,15 +21,15 @@ switch ($_GET['op']) {
         break;
 
     case 'homeProducts':
+        $offset = $_GET['offset'];
         $homeQuery = new DAOHome();
-        $category = $homeQuery->query("SELECT * FROM movies   ORDER BY rand()  LIMIT 2");
+        $category = $homeQuery->query("SELECT * FROM movies ORDER BY clicks DESC    LIMIT $offset, 2");
         if ($category == true) {
             echo json_encode($category);
             exit;
         } else {
             //echo json_encode($error);
-            $callback = 'index.php?page=error503';
-            die('<script>window.location.href="' . $callback . '";</script>');
+            echo json_encode('error');
             // echo "error";
         } // end_else
 
