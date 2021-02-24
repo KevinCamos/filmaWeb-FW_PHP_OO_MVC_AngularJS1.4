@@ -209,4 +209,6 @@ $(document).ready(function () {
   dialogBeastProducts();
   loadHomeProducts();
   detectScrollBrands();
+
+
 });

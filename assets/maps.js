@@ -10,7 +10,7 @@ function script_maps() {
     var script = document.createElement("script");
     script.src =
       "https://maps.googleapis.com/maps/api/js?key=" +
-      API_KAY +
+      API_KEY +
       "&callback=initMap";
     script.async;
     script.defer;

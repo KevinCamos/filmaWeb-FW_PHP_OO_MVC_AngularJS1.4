@@ -4,6 +4,7 @@ importarScript("module/shop/model/geolocalizacion.js");
 importarScript("assets/maps.js");
 
 importarScript("module/shop/model/orderby.js");
+importarScript("module/shop/model/API_SPAM.js");
 
 /////FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
 function clickerItems(itemString, id) {
@@ -133,8 +134,9 @@ function divsProduct(urls, id) {
 function loadHomeProducts(offset = 0) {
   if (sessionStorage.getItem("order") === null) {
     // alert("a vore...");
-    sessionStorage.setItem("order", "clicks asc");
+    sessionStorage.setItem("order", "clicks desc");
   }
+  console.log(sessionStorage.getItem("order"));
   var order = sessionStorage.getItem("order");
   let op = sessionStorage.getItem("op");
   console.log(op);
@@ -235,6 +237,7 @@ function clickProduct() {
       // console.log("la ID es " + id);
       countClickProduct(id);
       openMaps(id);
+      APIspam();
     } else if (idReturn === "return") {
       $("#formularioFiltro").show();
       $("#orderBy").show();
@@ -261,23 +264,6 @@ function countClickProduct(id) {
 }
 //-------FIN-----CARGA ELS PRODUCTES O UN PRODUCTE-------------//
 
-//BORRA ELS SESSIONSTORAGE
-function clickShopMenu() {
-  $("#Tienda").click(function () {
-    // if (sessionStorage.getItem("filterCategory") != null) {
-    //   var stop = false;
-    // sessionStorage.removeItem("filterCategory");
-    // sessionStorage.removeItem("id");
-    sessionStorage.removeItem("VHS");
-    sessionStorage.removeItem("DVD");
-    sessionStorage.removeItem("Blue-Ray");
-    sessionStorage.removeItem("4K");
-    sessionStorage.removeItem("Otros");
-    sessionStorage.removeItem("op");
-
-    // }
-  });
-}
 
 function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = undefined) {
   ajaxPromise(dirUrl, "GET", "JSON", sData)
@@ -447,6 +433,25 @@ function filtersInput() {
   formatsFilter();
   countryFilter();
 }
+//BORRA ELS SESSIONSTORAGE
+function clickShopMenu() {
+  $("#Tienda").click(function () {
+    // if (sessionStorage.getItem("filterCategory") != null) {
+    //   var stop = false;
+    // sessionStorage.removeItem("filterCategory");
+    // sessionStorage.removeItem("id");
+    sessionStorage.removeItem("VHS");
+    sessionStorage.removeItem("DVD");
+    sessionStorage.removeItem("Blue-Ray");
+    sessionStorage.removeItem("4K");
+    sessionStorage.removeItem("Otros");
+    sessionStorage.removeItem("op");
+    sessionStorage.removeItem("order");
+
+    // }
+  });
+}
+
 //   <!-- <script src="module\shop\model\filter.js"></script> -->
 // <!-- <script src="module\shop\model\geolocalizacion.js"></script> -->
 function pagination() {
@@ -482,7 +487,6 @@ function pagination() {
           console.log(offset);
           loadHomeProducts(offset);
         });
-        
     })
     .catch(function (data) {
       console.log("error");

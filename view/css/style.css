@@ -431,7 +431,15 @@ td {
   background-image: url("../img/ajax-loader.gif");
 }
 
+#apiPublicidad{
+  margin-right: 50px;
+  text-align: center;  
+  margin-left: 100px;
 
+  margin-top: 20px;
+  height: 10%;
+  width: 10%;
+}
 
 
 
