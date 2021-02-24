@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 
     $("#orderBy").on("change", function () {
@@ -20,6 +21,8 @@ $(document).ready(function () {
           break;
       }
       loadHomeProducts();
+      pagination();
 
   });
+  
 });

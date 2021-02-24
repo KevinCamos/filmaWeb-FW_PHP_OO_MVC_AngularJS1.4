@@ -24,7 +24,7 @@ function cargarSearch() {
   )
     .then(function (datas) {
       $("#inputSearch").empty();
-      console.log(datas);
+      // console.log(datas);
 
       var options = {
         data: datas,

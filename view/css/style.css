@@ -428,5 +428,17 @@ td {
 }
 
 .loading {
-  background-image: url("../img/ajax-loader.gif") 0 0;
+  background-image: url("../img/ajax-loader.gif");
+}
+
+
+
+
+
+
+/* SALTO DE PÁGINA */
+
+#pagination{
+  text-align: center;  
+
 }
