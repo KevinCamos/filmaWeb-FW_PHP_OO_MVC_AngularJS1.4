@@ -105,7 +105,7 @@ function searchFilter() {
   } else {
     console.log("búsqueda!");
 
-    chairQUERY = "SELECT * FROM  movies WHERE " + chairQUERY;
+    chairQUERY = "WHERE " + chairQUERY;
     console.log(chairQUERY);
 
     sessionStorage.setItem("op", "filter");

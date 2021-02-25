@@ -132,22 +132,35 @@ function divsProduct(urls, id) {
 
 //CARREGA TOTS ELS PRODUCTES
 function loadHomeProducts(offset = 0) {
+  pagOne(offset); //Si la busqueda tiene un nuevo filtro, termina de asegurar que la página por defecto sea la 1.
+
+  let urlCategory = "module/shop/controller/controllerShopPage.php?op=";
   if (sessionStorage.getItem("order") === null) {
     // alert("a vore...");
     sessionStorage.setItem("order", "clicks desc");
   }
-  console.log(sessionStorage.getItem("order"));
+
+  // console.log(sessionStorage.getItem("order"));
   var order = sessionStorage.getItem("order");
   let op = sessionStorage.getItem("op");
   console.log(op);
   switch (op) {
+    case "details":
+      let homeID = sessionStorage.getItem("id");
+
+      divsProduct(urlCategory + "openProduct&product=", homeID);
+      break;
     case "category":
       let filterCategory = sessionStorage.getItem("filterCategory");
       switch (filterCategory) {
         case "decade":
           console.log("decade 80 <3");
+          pagination(
+            urlCategory + "countPage&count=filterCarousel&category=decade"
+          );
           searchAjaxProducts(
-            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=decade&od=" +
+            urlCategory +
+              "filterCarousel&category=decade&od=" +
               order +
               "&offset=" +
               offset
@@ -156,8 +169,12 @@ function loadHomeProducts(offset = 0) {
 
         case "formate":
           console.log("fomato VHS");
+          pagination(
+            urlCategory + "countPage&count=filterCarousel&category=formate"
+          );
           searchAjaxProducts(
-            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=formate&od=" +
+            urlCategory +
+              "filterCarousel&category=formate&od=" +
               order +
               "&offset=" +
               offset
@@ -166,8 +183,12 @@ function loadHomeProducts(offset = 0) {
 
         case "genere":
           console.log("género fantasía ⚔");
+          pagination(
+            urlCategory + "countPage&count=filterCarousel&category=genere"
+          );
           searchAjaxProducts(
-            "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=genere&od=" +
+            urlCategory +
+              "filterCarousel&category=genere&od=" +
               order +
               "&offset=" +
               offset
@@ -177,54 +198,51 @@ function loadHomeProducts(offset = 0) {
         default:
           alert("DEFINIR CATEGORÍA");
           searchAjaxProducts(
-            "module/shop/controller/controllerShopPage.php?op=listShop&od=" +
-              order +
-              "&offset=" +
-              offset
+            urlCategory + "listShop&od=" + order + "&offset=" + offset
           );
           break;
       }
 
       break;
-    case "details":
-      let homeID = sessionStorage.getItem("id");
 
-      divsProduct(
-        "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
-        homeID
-      );
-      break;
     case "search":
       console.log("search");
       var search = sessionStorage.getItem("search");
       console.log(search);
-
+      pagination(
+        "module/search/controller/controllerSearch.php?op=countPage&search=" +
+          search
+      );
       searchAjaxProducts(
         "module/search/controller/controllerSearch.php?op=search&search=" +
           search +
+          "&od=" +
+          order +
           "&offset=" +
           offset
       );
       break;
     case "filter":
       var filter = sessionStorage.getItem("filter");
-      alert(filter);
+      // alert(filter);
       filter = window.btoa(unescape(encodeURIComponent(filter)));
+      pagination(urlCategory + "countPage&count=searchQuery&query=" + filter);
+
       searchAjaxProducts(
-        "module/shop/controller/controllerShopPage.php?op=searchQuery&query=" +
+        urlCategory +
+          "searchQuery&query=" +
           filter +
+          "&od=" +
+          order +
           "&offset=" +
           offset
       );
       break;
     default:
       // console.log("default");
-
+      pagination();
       searchAjaxProducts(
-        "module/shop/controller/controllerShopPage.php?op=listShop&od=" +
-          order +
-          "&offset=" +
-          offset
+        urlCategory + "listShop&od=" + order + "&offset=" + offset
       );
       break;
   }
@@ -453,48 +471,58 @@ function filtersInput() {
 
 //   <!-- <script src="module\shop\model\filter.js"></script> -->
 // <!-- <script src="module\shop\model\geoloclizacion.js"></script> -->
-function pagination() {
+function pagination(
+  url = "module/shop/controller/controllerShopPage.php?op=countPage&count=listShop"
+) {
   let op = sessionStorage.getItem("op");
-
-  ajaxPromise(
-    "module/shop/controller/controllerShopPage.php?op=countPage",
-    "GET",
-    "JSON"
-  )
+  ajaxPromise(url, "GET", "JSON")
     .then(function (data) {
-      // console.log(data["countPage"]);
-      // if (sessionStorage.getItem("countItems") > 0) {
-      //   countItems = sessionStorage.getItem("countItems");
-      //   var numPage = countItems / 6;
-      // } else {
+      console.log(data);
       var countItems = data["countPage"];
       var numPage = countItems / 6;
-      // }
       if (countItems % 6 != 0) {
         numPage++;
       }
 
-      $("#pagination")
-        .bootpag({
-          total: numPage, // total pages
-          page: 1, // default page
-          maxVisible: 5, // visible pagination
-          leaps: true, // next/prev leaps through maxVisible
-        })
-        .on("page", function (event, num) {
-          var offset = (num - 1) * 6;
-          console.log(offset);
-          loadHomeProducts(offset);
-        });
+      $("#pagination").bootpag({
+        total: numPage, // total pages
+      });
+      return;
     })
     .catch(function (data) {
-      console.log("error");
+      console.log(data);
     }); ////END AJAX
 }
+function clickPage() {
+  $("#pagination")
+    .bootpag({
+      maxVisible: 5, // visible pagination
+      leaps: true, // next/prev leaps through maxVisible
+    })
+    .on("page", function (event, num) {
+      var offset = (num - 1) * 6;
+      // alert(offset);
+      sessionStorage.setItem("offset", offset);
+
+      console.log(offset);
+      loadHomeProducts(offset);
+    });
+}
+function pagOne(offset) {
+  if (offset == 0) {
+    $("#pagination").bootpag({
+      page: 1,
+    });
+  }
+  return;
+}
+
 $(document).ready(function () {
   loadHomeProducts();
-  clickProduct();
   filtersInput();
   storageFormats();
   pagination();
+
+  clickProduct();
+  clickPage();
 });

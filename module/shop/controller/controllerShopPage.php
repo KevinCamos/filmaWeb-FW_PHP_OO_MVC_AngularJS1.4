@@ -14,14 +14,7 @@ switch ($_GET['op']) {
 
         break;
     case 'listShop':
-        // $offset = $_GET['offset'];
-        // $offset = $offset > 0 ?  $offset : 0;
-        // if ($_GET['offset'] > 0) {
-        //     $offset = $_GET['offset'];
-        // } else {
-        //     $offset = 0;
-        // }
-        // $offset = 0;
+
         $searchQuery = base64_decode($_GET["od"]);
 
         searhQueryAllRows("SELECT * FROM movies ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
@@ -30,19 +23,10 @@ switch ($_GET['op']) {
 
     case 'searchQuery':
         $searchQuery = base64_decode($_GET["query"]);
-        
-        searhQueryAllRows($searchQuery." LIMIT  ".$_GET['offset'].", 6");
+
+        searhQueryAllRows("SELECT * FROM  movies ".$searchQuery ." ORDER BY " . $_GET['od'] . " , movie asc LIMIT   " . $_GET['offset'] . ", 6");
         break;
 
-    case 'shopsGeolocation':
-
-        searhQueryAllRows("SELECT tiene.id, shop.*
-            FROM tiene, shop
-            WHERE tiene.cod_shop = shop.cod_shop
-            AND tiene.cantidad >0
-            AND tiene.id=" . $_GET["product"]);
-
-        break;
 
 
     case 'filterCarousel':
@@ -76,14 +60,52 @@ switch ($_GET['op']) {
             echo json_encode("eeeh");
             break;
         }
-    case 'countPage':
-        $homeQuery = new DAOShop();
+    case 'shopsGeolocation':
 
-        // console_log("entra ací");
-        // $result = $homeQuery->updateQuery("SELECT COUNT(*) FROM MOVIES");
-        searhQueryOneRow("SELECT COUNT(*) AS countPage FROM MOVIES");
+        searhQueryAllRows("SELECT tiene.id, shop.*
+                FROM tiene, shop
+                WHERE tiene.cod_shop = shop.cod_shop
+                AND tiene.cantidad >0
+                AND tiene.id=" . $_GET["product"]);
 
         break;
+
+    case 'countPage':
+
+        $selCountFrom = "SELECT COUNT(*) AS countPage FROM MOVIES ";
+        switch ($_GET['count']) {
+
+            case 'listShop':
+                searhQueryOneRow($selCountFrom);
+                break;
+            case 'searchQuery':
+                $searchQuery = base64_decode($_GET["query"]);
+                searhQueryOneRow($selCountFrom . $searchQuery);
+
+
+                // searhQueryAllRows($searchQuery . " LIMIT  " . $_GET['offset'] . ", 6");
+                break;
+            case 'filterCarousel':
+                switch ($_GET['category']) {
+
+                    case 'decade':
+                        searhQueryOneRow($selCountFrom . "WHERE anyo BETWEEN 1980 AND 1989");
+
+                        break;
+                    case 'formate':
+                        searhQueryOneRow($selCountFrom . "WHERE formats LIKE '%VHS%'");
+                        break;
+                    case 'genere':
+                        searhQueryOneRow($selCountFrom . "WHERE genere = 'Fantasia'");
+                        break;
+                }
+                break;
+        }
+        break;
+
+
+
+
 
     case 'countryFilter':
 

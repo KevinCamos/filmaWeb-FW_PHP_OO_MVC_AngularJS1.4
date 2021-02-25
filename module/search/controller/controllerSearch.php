@@ -12,15 +12,38 @@ switch ($_GET['op']) {
         $offset = $_GET['offset'];
 
         $search = $_GET['search'];
-        searhQueryAllRows('SELECT * FROM movies
-        WHERE  movie LIKE  "%' . $search . '%"
-         OR movie LIKE  "%' . $search . '%"
-        OR formats LIKE  "%' . $search . '%"
-        OR director LIKE  "%' . $search . '%"
-        OR genere LIKE  "%' . $search . '%"
-        OR anyo LIKE "%' . $search . '% "LIMIT '.$offset.',6 ' );
-        
+        searhQueryAllRows("SELECT * FROM movies
+        WHERE  movie LIKE  '%$search%'
+        OR formats LIKE '%$search%'
+        OR director LIKE '%$search%' 
+        OR genere LIKE '%$search%' 
+        OR anyo LIKE '%$search%'  ORDER BY " . $_GET['od'] . " , movie asc  LIMIT $offset, 6  ");
+
         break;
+    case 'countPage':
+
+
+        $search = $_GET['search'];
+        $selCountFrom = "SELECT COUNT(*) AS countPage FROM MOVIES
+           WHERE movie LIKE '%$search%'
+        OR formats LIKE '%$search%'
+        OR director LIKE '%$search%' 
+        OR genere LIKE '%$search%' 
+        OR anyo LIKE '%$search%'
+        ";
+
+
+        //     . 'WHERE  movie LIKE  "%' . $search . '%"
+        //     OR movie LIKE  "%' . $search . '%"
+        //    OR formats LIKE  "%' . $search . '%"
+        //    OR director LIKE  "%' . $search . '%"
+        //    OR genere LIKE  "%' . $search . '%"
+        //    OR anyo LIKE "%' . $search . '%'
+
+        searhQueryOneRow($selCountFrom);
+
+        break;
+
 
     case 'autoComplete':
 
@@ -46,6 +69,20 @@ function searhQueryAllRows($thisQuery)
         exit;
     } else {
         echo "error";
+    }
+}
+
+function searhQueryOneRow($thisQuery)
+{
+    $homeQuery = new DAOSearch();
+
+    $category = $homeQuery->queryOneRow($thisQuery);
+    if ($category == true) {
+        echo json_encode($category);
+
+        exit;
+    } else {
+        echo json_encode($category);
     }
 }
 
