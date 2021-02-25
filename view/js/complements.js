@@ -23,6 +23,30 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
   });
 }
 
+function clickShopMenu() {
+  $("#Tienda").click(function () {
+    // if (sessionStorage.getItem("filterCategory") != null) {
+    //   var stop = false;
+    // sessionStorage.removeItem("filterCategory");
+    // sessionStorage.removeItem("id");
+
+    cleanItems();
+
+    // }
+  });
+}
+
+function cleanItems() {
+  sessionStorage.removeItem("VHS");
+  sessionStorage.removeItem("DVD");
+  sessionStorage.removeItem("Blu-Ray");
+  sessionStorage.removeItem("4K");
+  sessionStorage.removeItem("Digital");
+  sessionStorage.removeItem("Otro");
+  sessionStorage.removeItem("op");
+  sessionStorage.removeItem("order");
+}
+
 function cleanSQLInyection(chairSearch) {
   chairSearch = chairSearch
     .split("'") // separa el string según espacios en blanco

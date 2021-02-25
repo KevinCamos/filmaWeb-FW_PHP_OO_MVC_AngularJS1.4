@@ -1,5 +1,6 @@
 function openMaps(id) {
   sessionStorage.setItem("idmaps", id);
+$("#map").attr({ style: "height: 400px;width: 100%;" });
 
   geolocation();
   script_maps();
@@ -43,19 +44,19 @@ function initMap() {
   });
   OpenCoords();
 
-  const cityCircle = new google.maps.Circle({
-    strokeColor: "#FF0000",
-    strokeOpacity: 0.2,
-    strokeWeight: 2,
-    fillColor: "#FF0000",
-    fillOpacity: 0.35,
-    map,
-    center: {
-      lat: parseFloat(sessionStorage.getItem("latitude")),
-      lng: parseFloat(sessionStorage.getItem("longitude")),
-    },
-    radius: Math.sqrt(3000) * 100,
-  });
+  // const cityCircle = new google.maps.Circle({
+  //   strokeColor: "#FF0000",
+  //   strokeOpacity: 0.2,
+  //   strokeWeight: 2,
+  //   fillColor: "#FF0000",
+  //   fillOpacity: 0.35,
+  //   map,
+  //   center: {
+  //     lat: parseFloat(sessionStorage.getItem("latitude")),
+  //     lng: parseFloat(sessionStorage.getItem("longitude")),
+  //   },
+  //   radius: Math.sqrt(3000) * 100,
+  // });
 }
 
 function OpenCoords() {

@@ -9,6 +9,7 @@ include("$path.\module\search\model\DAOSearch.php");
 switch ($_GET['op']) {
 
     case 'search':
+        $offset = $_GET['offset'];
 
         $search = $_GET['search'];
         searhQueryAllRows('SELECT * FROM movies
@@ -17,14 +18,14 @@ switch ($_GET['op']) {
         OR formats LIKE  "%' . $search . '%"
         OR director LIKE  "%' . $search . '%"
         OR genere LIKE  "%' . $search . '%"
-        OR anyo LIKE "%' . $search . '%" ');
-
+        OR anyo LIKE "%' . $search . '% "LIMIT '.$offset.',6 ' );
+        
         break;
 
     case 'autoComplete':
 
-        
-        searhQueryAllRows('SELECT movie, anyo FROM movies');
+
+        searhQueryAllRows('SELECT movie, anyo FROM movies ORDER BY movie');
 
         break;
 

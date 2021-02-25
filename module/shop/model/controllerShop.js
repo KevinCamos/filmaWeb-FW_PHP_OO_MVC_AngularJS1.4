@@ -148,7 +148,9 @@ function loadHomeProducts(offset = 0) {
           console.log("decade 80 <3");
           searchAjaxProducts(
             "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=decade&od=" +
-              order
+              order +
+              "&offset=" +
+              offset
           );
           break;
 
@@ -156,7 +158,9 @@ function loadHomeProducts(offset = 0) {
           console.log("fomato VHS");
           searchAjaxProducts(
             "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=formate&od=" +
-              order
+              order +
+              "&offset=" +
+              offset
           );
           break;
 
@@ -164,7 +168,9 @@ function loadHomeProducts(offset = 0) {
           console.log("género fantasía ⚔");
           searchAjaxProducts(
             "module/shop/controller/controllerShopPage.php?op=filterCarousel&category=genere&od=" +
-              order
+              order +
+              "&offset=" +
+              offset
           );
           break;
 
@@ -172,7 +178,9 @@ function loadHomeProducts(offset = 0) {
           alert("DEFINIR CATEGORÍA");
           searchAjaxProducts(
             "module/shop/controller/controllerShopPage.php?op=listShop&od=" +
-              order
+              order +
+              "&offset=" +
+              offset
           );
           break;
       }
@@ -193,7 +201,9 @@ function loadHomeProducts(offset = 0) {
 
       searchAjaxProducts(
         "module/search/controller/controllerSearch.php?op=search&search=" +
-          search
+          search +
+          "&offset=" +
+          offset
       );
       break;
     case "filter":
@@ -202,11 +212,14 @@ function loadHomeProducts(offset = 0) {
       filter = window.btoa(unescape(encodeURIComponent(filter)));
       searchAjaxProducts(
         "module/shop/controller/controllerShopPage.php?op=searchQuery&query=" +
-          filter
+          filter +
+          "&offset=" +
+          offset
       );
       break;
     default:
       // console.log("default");
+
       searchAjaxProducts(
         "module/shop/controller/controllerShopPage.php?op=listShop&od=" +
           order +
@@ -242,7 +255,9 @@ function clickProduct() {
       $("#formularioFiltro").show();
       $("#orderBy").show();
       $("#pagination").show();
-      $("#map").empty();
+      $("#map").empty().removeAttr("style");
+      $("#apispam").empty();
+
       sessionStorage.removeItem("op");
       // sessionStorage.setItem("id", null);
       loadHomeProducts(); ///Vuelve al catálogo
@@ -264,8 +279,7 @@ function countClickProduct(id) {
 }
 //-------FIN-----CARGA ELS PRODUCTES O UN PRODUCTE-------------//
 
-
-function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = undefined) {
+function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
   ajaxPromise(dirUrl, "GET", "JSON", sData)
     .then(function (category) {
       if (category.length === 1) {
@@ -276,17 +290,10 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = undefined) {
       } else {
         console.log(category);
         $("#listShop").empty();
-        if (boolTrue === false) {
-          setTimeout(
-            $("<h1></h1>")
-              .append(
-                document.createTextNode(
-                  "No se han encontrado resultados con esta búsqueda"
-                )
-              )
-              .appendTo("#listShop"),
-            3000
-          );
+        if (boolTrue === true) {
+          $("<h1></h1>")
+            .text("No se han encontrado resultados con esta búsqueda")
+            .appendTo("#listShop");
         }
         loadDivsProducts();
 
@@ -324,12 +331,21 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = undefined) {
     })
     .catch(function () {
       var order = sessionStorage.getItem("order");
+      if (boolTrue === true) {
+        $("#listShop").empty();
+        $("<h1></h1>")
+          .text("Ha habido un problema en tu búsqueda")
 
-      searchAjaxProducts(
-        "module/shop/controller/controllerShopPage.php?op=listShop&od=" + order,
-        (cData = undefined),
-        false
-      );
+          .appendTo("#listShop");
+      } else {
+        searchAjaxProducts(
+          "module/shop/controller/controllerShopPage.php?op=listShop&od=" +
+            order +
+            "&offset=0",
+          (sData = undefined),
+          true
+        );
+      }
     });
 }
 
@@ -434,26 +450,9 @@ function filtersInput() {
   countryFilter();
 }
 //BORRA ELS SESSIONSTORAGE
-function clickShopMenu() {
-  $("#Tienda").click(function () {
-    // if (sessionStorage.getItem("filterCategory") != null) {
-    //   var stop = false;
-    // sessionStorage.removeItem("filterCategory");
-    // sessionStorage.removeItem("id");
-    sessionStorage.removeItem("VHS");
-    sessionStorage.removeItem("DVD");
-    sessionStorage.removeItem("Blue-Ray");
-    sessionStorage.removeItem("4K");
-    sessionStorage.removeItem("Otros");
-    sessionStorage.removeItem("op");
-    sessionStorage.removeItem("order");
-
-    // }
-  });
-}
 
 //   <!-- <script src="module\shop\model\filter.js"></script> -->
-// <!-- <script src="module\shop\model\geolocalizacion.js"></script> -->
+// <!-- <script src="module\shop\model\geoloclizacion.js"></script> -->
 function pagination() {
   let op = sessionStorage.getItem("op");
 

@@ -154,6 +154,8 @@ function dialogBeastProducts() {
 }
 function clickCategory() {
   //FUNCIÓ A LA LÍNEA 45!
+  cleanItems();
+
   var category = $(this).attr("value");
   sessionStorage.setItem("op", "category");
 
@@ -164,12 +166,15 @@ function clickCategory() {
       "El archivo al que das click no tiene ningún criterio de búsqueda añadido"
     );
   } else {
+
     // setTimetout() es una función para decirle que pasado X tiempo realice una función
     window.location.href = "index.php?page=shop";
   }
 }
 function clickProductHome() {
   //FUNCIÓ A LA LÍNEA 45!
+  cleanItems();
+
   var id = $(this).attr("id");
   console.log(id);
   sessionStorage.setItem("op", "details");
@@ -185,6 +190,7 @@ function clickProductHome() {
     // setTimetout() es una función para decirle que pasado X tiempo realice una función
     countClickProduct(id);
     // return false;
+
     window.location.href = "index.php?page=shop";
   }
 }
@@ -209,6 +215,6 @@ $(document).ready(function () {
   dialogBeastProducts();
   loadHomeProducts();
   detectScrollBrands();
-
+  clickShopMenu();
 
 });

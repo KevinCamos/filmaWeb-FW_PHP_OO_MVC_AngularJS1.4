@@ -14,7 +14,7 @@ switch ($_GET['op']) {
 
         break;
     case 'listShop':
-        $offset = $_GET['offset'];
+        // $offset = $_GET['offset'];
         // $offset = $offset > 0 ?  $offset : 0;
         // if ($_GET['offset'] > 0) {
         //     $offset = $_GET['offset'];
@@ -22,14 +22,16 @@ switch ($_GET['op']) {
         //     $offset = 0;
         // }
         // $offset = 0;
+        $searchQuery = base64_decode($_GET["od"]);
 
-        searhQueryAllRows("SELECT * FROM movies ORDER BY " . $_GET['od'] . " , movie asc LIMIT  $offset, 6");
+        searhQueryAllRows("SELECT * FROM movies ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
         break;
 
 
     case 'searchQuery':
         $searchQuery = base64_decode($_GET["query"]);
-        searhQueryAllRows($searchQuery);
+        
+        searhQueryAllRows($searchQuery." LIMIT  ".$_GET['offset'].", 6");
         break;
 
     case 'shopsGeolocation':
@@ -48,15 +50,15 @@ switch ($_GET['op']) {
 
             case 'decade':
                 searhQueryAllRows("SELECT * FROM movies
-                    WHERE anyo BETWEEN 1980 AND 1989  ORDER BY " . $_GET['od'] . " , movie asc");
+                    WHERE anyo BETWEEN 1980 AND 1989  ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
                 break;
             case 'formate':
                 searhQueryAllRows("SELECT * FROM movies
-                                     WHERE formats LIKE '%VHS%' ORDER BY " . $_GET['od'] . " , movie asc");
+                                     WHERE formats LIKE '%VHS%' ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
                 break;
             case 'genere':
                 searhQueryAllRows("SELECT * FROM movies
-                                     WHERE genere = 'Fantasia' ORDER BY " . $_GET['od'] . " , movie asc");
+                                     WHERE genere = 'Fantasia' ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
                 break;
         }
         break;
