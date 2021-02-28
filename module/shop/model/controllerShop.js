@@ -215,10 +215,8 @@ function loadHomeProducts(offset = 0) {
       );
       searchAjaxProducts(
         "module/search/controller/controllerSearch.php?op=search&search=" +
-          search +
-          "&od=" +
-          order +
-          "&offset=" +
+          search + "&od=" +
+          order +"&offset=" +
           offset
       );
       break;
@@ -229,14 +227,9 @@ function loadHomeProducts(offset = 0) {
       pagination(urlCategory + "countPage&count=searchQuery&query=" + filter);
 
       searchAjaxProducts(
-        urlCategory +
-          "searchQuery&query=" +
-          filter +
-          "&od=" +
-          order +
-          "&offset=" +
-          offset
-      );
+        urlCategory + "searchQuery&query=" + filter + "&od=" +
+        order +"&offset=" +
+        offset      );
       break;
     default:
       // console.log("default");

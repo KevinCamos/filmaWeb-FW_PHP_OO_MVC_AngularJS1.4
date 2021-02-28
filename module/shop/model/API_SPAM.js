@@ -10,8 +10,6 @@ function APIspam() {
   //   $("#apispam").addClass("owl-carousel");
   // var four = 4;
   for (i = 0; i < 4; i++) {
-    // var count = 0;
-    // while(count<4){
     var number = Math.round(Math.random() * 100);
     console.log(number);
     ajaxPromise(
@@ -21,7 +19,7 @@ function APIspam() {
     )
       .then(function (data) {
         // console.log(data);
-        if (!data.Poster == "N/A") {
+        if (data.Poster != "N/A") {
           console.log(data.Title);
           var hrefWeb = $("<a>")
             .attr({ href: data.Website, id: "websiteAPI" })
@@ -30,14 +28,11 @@ function APIspam() {
           $("<img>")
             .attr({ src: data.Poster, id: "apiPublicidad" })
             .appendTo(hrefWeb);
-            // count++;
-        } 
-        
-
+        }
         // $.each(data, function (index, list) {});
       })
       .catch(function () {
-        console.log("error");
+        console.log("error API_SPAM");
       });
   }
   //   $("#apispam").owlCarousel({
