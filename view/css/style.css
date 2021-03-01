@@ -429,7 +429,7 @@ td {
   margin-right: 50px;
   text-align: center;  
 }
-.productHome {
+.productHome, .productShop {
   margin-left: 100px;
 
   margin-top: 100px;
@@ -440,7 +440,7 @@ td {
   padding: 10px;
   border: 1px solid #e8eaee;
 }
-}
+
 
 .loading {
   background-image: url("../img/ajax-loader.gif");
@@ -466,3 +466,10 @@ td {
 
 }
 
+#attribute-item{
+  margin-left: 500px;
+}
+
+#item-shop{
+  margin-top:40px;
+}

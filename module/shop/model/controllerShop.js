@@ -1,10 +1,9 @@
 importarScript("module/shop/model/filter.js");
-importarScript("assets/api_kay.js");
-importarScript("module/shop/model/geolocalizacion.js");
-importarScript("assets/maps.js");
+// importarScript("module/shop/model/geolocalizacion.js");
+// importarScript("assets/maps.js");
 
 importarScript("module/shop/model/orderby.js");
-importarScript("module/shop/model/API_SPAM.js");
+// importarScript("module/shop/model/API_SPAM.js");
 
 /////FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
 function clickerItems(itemString, id) {
@@ -63,12 +62,14 @@ function divsProduct(urls, id) {
       $("#pagination").hide();
 
       $("#listShop").empty(); //Borrar lo de dins
-      let count = 0;
+      var count = 0;
+      var id = "" + category.id;
+      var img = "" + category.img;
+
+      // let name = category.movie;
+
       for (var clave in category) {
         // console.log(clave);
-        let id = "" + category["id"];
-        let name = category["name"];
-        let img = "" + category["img"];
 
         var table = $("<p></p>")
           .attr({ id: "p" + id })
@@ -77,40 +78,40 @@ function divsProduct(urls, id) {
         if (clave == "img") {
           $("<img>")
             .attr({
-              id: "listShopIMG" + id,
-              class: name,
+              // class: "productShop", Anyandint-la d'aquesta forma, per alguna raó, al salt del home
+
+              id: category.id,
               src: "module\\movies\\img\\" + img,
               align: "left",
               style: "margin-top: -275px;       margin-left: 25px;",
-            })
+            }).addClass("productShop")
             .appendTo(table);
-        } else if (count == 0) {
+        } else if (count == 0) {////Estas lineas else if/else es para la lista de atributos del producto, para que haya un único "UL"
           $("<ul>")
             .attr({
               id: "item-shop",
-              style: "margin-top:20px;",
             })
             .appendTo(table);
           $("<li></li>")
             .attr({
               id: "attribute-item",
-              style: "margin-left: 500px;",
             })
             .append(document.createTextNode(clave + ": " + category[clave]))
             .appendTo("#item-shop");
+            count=1;
         } else {
           $("<li></li>")
-            .attr({
-              id: "attribute-item",
-            })
-            .append(document.createTextNode(clave + ": " + category[clave]))
-            .appendTo("#item-shop");
+          .attr({
+            id: "attribute-item",
+          })
+          .append(document.createTextNode(clave + ": " + category[clave]))
+          .appendTo("#item-shop");
         }
       }
       $("<img>")
         .attr({
           id: "return",
-          class: name,
+          // class: name,
           src: "module\\shop\\img\\return.png",
           align: "left",
           style:
@@ -121,6 +122,12 @@ function divsProduct(urls, id) {
       // PRUEBA
 
       // $("<div>").attr({id:"map"}).appendTo(table);
+      openMaps(id);
+      APIspam();
+
+
+
+
     })
     .catch(function () {
       window.location.href = "index.php?page=error503";
@@ -251,6 +258,7 @@ function clickProduct() {
     var id = this.id;
 
     if (clase === "touch") {
+      sessionStorage.setItem("opStore", sessionStorage.getItem("op"))
       id = id.split("-"); ///Dividir imgShop de l'ID. Les ID están juntes a imgShop per a evitar interferències.
       id = id[1];
       divsProduct(
@@ -260,16 +268,17 @@ function clickProduct() {
       // console.log(API_KAY);
       // console.log("la ID es " + id);
       countClickProduct(id);
-      openMaps(id);
-      APIspam();
+      // openMaps(id);
+      // APIspam();
     } else if (idReturn === "return") {
       $("#formularioFiltro").show();
       $("#orderBy").show();
       $("#pagination").show();
       $("#map").empty().removeAttr("style");
       $("#apispam").empty();
+      sessionStorage.setItem("op", sessionStorage.getItem("opStore"))
 
-      sessionStorage.removeItem("op");
+      // sessionStorage.removeItem("op");
       // sessionStorage.setItem("id", null);
       loadHomeProducts(); ///Vuelve al catálogo
     }
