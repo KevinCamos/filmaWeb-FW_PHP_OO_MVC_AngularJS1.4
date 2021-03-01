@@ -4,8 +4,8 @@
 1. [FilmaWeb](#FilmaWeb)
 2. [Estado](#Estado)
 3. [Funciones](#Funciones)
-4. [Tecnologías Empleadas](#Tecnologías)
-5. [Librerías Empleadas](#Librerías)
+4. [Tecnologías Empleadas](#Tecnologías-empleadas)
+5. [Librerías Empleadas](#Librerías-empleadas)
 
 # FilmaWeb!
 
