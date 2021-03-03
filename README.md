@@ -76,4 +76,6 @@ Lista de librerías utilizadas en este proyecto:
 * [Bootpag](https://github.com/botmonster/jquery-bootpag)
 * [Modal](https://jquery.com/)
 * [API Google Maps Javascript](https://developers.google.com/maps/documentation/javascript/overview?utm_source=google&utm_medium=cpc&utm_campaign=FY18-Q2-global-demandgen-paidsearchonnetworkhouseads-cs-maps_contactsal_saf&utm_content=text-ad-none-none-DEV_c-CRE_432247684706-ADGP_Hybrid%20%7C%20AW%20SEM%20%7C%20BKWS%20~%20Brand%20%7C%20BMM%20%7C%20Google%20Maps%20Javascript%20API-KWID_43700053307523945-aud-559916008220%3Akwd-341556983684-userloc_20297&utm_term=KW_%2Bmaps%20%2Bjavascript%20%2Bapi-ST_%2Bmaps%20%2Bjavascript%20%2Bapi&gclid=CjwKCAiAm-2BBhANEiwAe7eyFNz-sz73jZyJLvbtR5R80suEJs_TX9BHDKSXlRwucwJV_7L83bKthhoCePcQAvD_BwE)
+* [EasyAutocomplete](http://easyautocomplete.com/)
+* [DataTables](https://datatables.net/)
 
