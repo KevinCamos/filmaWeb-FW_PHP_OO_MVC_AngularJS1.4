@@ -1,10 +1,5 @@
 importarScript("module/shop/model/filter.js");
-// importarScript("module/shop/model/geolocalizacion.js");
-// importarScript("assets/maps.js");
-
 importarScript("module/shop/model/orderby.js");
-// importarScript("module/shop/model/API_SPAM.js");
-
 /////FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
 function clickerItems(itemString, id) {
   if (
@@ -84,9 +79,11 @@ function divsProduct(urls, id) {
               src: "module\\movies\\img\\" + img,
               align: "left",
               style: "margin-top: -275px;       margin-left: 25px;",
-            }).addClass("productShop")
+            })
+            .addClass("productShop")
             .appendTo(table);
-        } else if (count == 0) {////Estas lineas else if/else es para la lista de atributos del producto, para que haya un único "UL"
+        } else if (count == 0) {
+          ////Estas lineas else if/else es para la lista de atributos del producto, para que haya un único "UL"
           $("<ul>")
             .attr({
               id: "item-shop",
@@ -98,14 +95,14 @@ function divsProduct(urls, id) {
             })
             .append(document.createTextNode(clave + ": " + category[clave]))
             .appendTo("#item-shop");
-            count=1;
+          count = 1;
         } else {
           $("<li></li>")
-          .attr({
-            id: "attribute-item",
-          })
-          .append(document.createTextNode(clave + ": " + category[clave]))
-          .appendTo("#item-shop");
+            .attr({
+              id: "attribute-item",
+            })
+            .append(document.createTextNode(clave + ": " + category[clave]))
+            .appendTo("#item-shop");
         }
       }
       $("<img>")
@@ -124,10 +121,6 @@ function divsProduct(urls, id) {
       // $("<div>").attr({id:"map"}).appendTo(table);
       openMaps(id);
       APIspam();
-
-
-
-
     })
     .catch(function () {
       window.location.href = "index.php?page=error503";
@@ -222,8 +215,10 @@ function loadHomeProducts(offset = 0) {
       );
       searchAjaxProducts(
         "module/search/controller/controllerSearch.php?op=search&search=" +
-          search + "&od=" +
-          order +"&offset=" +
+          search +
+          "&od=" +
+          order +
+          "&offset=" +
           offset
       );
       break;
@@ -234,9 +229,14 @@ function loadHomeProducts(offset = 0) {
       pagination(urlCategory + "countPage&count=searchQuery&query=" + filter);
 
       searchAjaxProducts(
-        urlCategory + "searchQuery&query=" + filter + "&od=" +
-        order +"&offset=" +
-        offset      );
+        urlCategory +
+          "searchQuery&query=" +
+          filter +
+          "&od=" +
+          order +
+          "&offset=" +
+          offset
+      );
       break;
     default:
       // console.log("default");
@@ -258,7 +258,7 @@ function clickProduct() {
     var id = this.id;
 
     if (clase === "touch") {
-      sessionStorage.setItem("opStore", sessionStorage.getItem("op"))
+      sessionStorage.setItem("opStore", sessionStorage.getItem("op"));
       id = id.split("-"); ///Dividir imgShop de l'ID. Les ID están juntes a imgShop per a evitar interferències.
       id = id[1];
       divsProduct(
@@ -276,7 +276,7 @@ function clickProduct() {
       $("#pagination").show();
       $("#map").empty().removeAttr("style");
       $("#apispam").empty();
-      sessionStorage.setItem("op", sessionStorage.getItem("opStore"))
+      sessionStorage.setItem("op", sessionStorage.getItem("opStore"));
 
       // sessionStorage.removeItem("op");
       // sessionStorage.setItem("id", null);
