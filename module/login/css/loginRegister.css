@@ -3,7 +3,15 @@
   color:gainsboro;
  cursor: pointer;
 }
+.loginMenu{
 
+  color:gainsboro;
+ cursor: pointer;
+}
+.login-page a{
+  cursor: pointer;
+
+}
 
 /* PLANTILLA LOGIN */
   /* https://codepen.io/colorlib/pen/rxddKy plantilla */
@@ -17,7 +25,7 @@
 .login-page .form {
   position: relative;
   z-index: 1;
-  background: #FFFFFF;
+  background: rgb(224, 226, 240);
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
@@ -35,7 +43,7 @@
   box-sizing: border-box;
   font-size: 14px;
 }
-.login-page .form button {
+.login-page .form #submit {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;

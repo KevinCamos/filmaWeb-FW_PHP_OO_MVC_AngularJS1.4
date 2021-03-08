@@ -1,19 +1,30 @@
 <body>
   <!--   https://codepen.io/colorlib/pen/rxddKy plantilla -->
   <div class="login-page">
-    <div class="form">
-      <form class="register-form" id="register">
-        <input type="text" id="nameUser" placeholder="Nombre: por ejemplo: hitchcock99" />
-        <input type="password" id="password" placeholder="Contraseña" />
-        <input type="text" id="email" placeholder="Dirección e-mail" />
-        <button>Crear Usuario</button>
-        <p class="message">¿Tienes una cuenta de usuario? <a href="#">Sign In</a></p>
+    <div class="form" id="form">
+      <form class="register-form modLog">
+
+        <label>CREAR USUARIO</label>
+        <input type="text" id="nameUserRegister" placeholder="Nombre: por ejemplo: hitchcock99"
+          autocomplete="username" />
+        <input type="password" id="passwordRegister" placeholder="Contraseña" autocomplete="current-password" />
+        <input type="password" id="passwordRegister2" placeholder="Repite la contraseña" autocomplete="off" />
+        <input type="text" id="emailRegister" placeholder="Dirección e-mail" />
+        <!-- <button>Crear Usuario</button> -->
+        <input type="submit" value="Crear Usuario" id="submit" class="submit"/>
+        <p class="message">¿Tienes una cuenta de usuario? <a>Sign In</a></p>
       </form>
-      <form class="login-form" id="register">
-        <input type="text" id="nameUser" placeholder="Usuario o Correo" />
-        <input type="password" id="password" placeholder="Contraseña" />
-        <button>Iniciar Sesión</button>
-        <p class="message">¿Todavía no estás registrado/a? <a href="#">Register</a></p>
+
+
+      <form class="login-form modLog">
+        <label>INICIAR SESION</label>
+        <input type="text" id="nameUserLogin" placeholder="Usuario o Correo" autocomplete="username" />
+        <input type="password" id="passwordLogin" placeholder="Contraseña" autocomplete="current-password" />
+        <!-- <button>Iniciar Sesión</button> -->
+        <!-- <input type="submit" name="submit" value="Iniciar Sesión" /> -->
+
+        <p class="message">¿Todavía no estás registrado/a? <a>Register</a></p>
       </form>
+      <p class="error"></p>
     </div>
   </div>
