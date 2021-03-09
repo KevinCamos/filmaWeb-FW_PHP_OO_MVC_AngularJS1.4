@@ -76,19 +76,22 @@ function loginAnimate() {
 /**
  * typeForm="register"/"login"
  */
-function ajaxSend(typeForm, serialize) {
+function ajaxSendForm(typeForm, serialize) {
   console.log("entra a ajaxSend");
-
   ajaxPromise(
     "module/login/controller/controllerLogin.php?op=" + typeForm, //typeForm =
     "POST",
-    "JSON",
-    {serialize:serialize}
+    undefined,
+    { serialize: serialize }
   )
     .then(function (data) {
-      console.log("entra a Then");
-
-      console.log(data);
+      console.log(typeof(data));
+      console.log(data.trim());
+      if (data.trim() == "false") {
+        $(".error").text("Lo sentimos, este usuario o correo electrónico ya se encuentra registrado");
+      }else{
+      console.log("¿Se ha registrado corréctamente?"); //Será un Alert
+    }
     })
     .catch(function (data) {
       console.log(data);
@@ -98,8 +101,9 @@ function sendRegisterForm() {
   if (validateUser() === true) {
     console.log("valida y entra");
 
-    let serialize = $("formRegister").serializeArray();
-    ajaxSend("register", serialize);
+    let serialize = $("#formRegister").serializeArray();
+    // console.log(serialize)
+    ajaxSendForm("register", serialize);
   }
 }
 
