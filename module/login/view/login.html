@@ -2,26 +2,27 @@
   <!--   https://codepen.io/colorlib/pen/rxddKy plantilla -->
   <div class="login-page">
     <div class="form" id="form">
-      <form class="register-form modLog">
+      <form class="register-form modLog" id="formRegister">
 
-        <label>CREAR USUARIO</label>
-        <input type="text" id="nameUserRegister" placeholder="Nombre: por ejemplo: hitchcock99"
+        <!-- <label>CREAR USUARIO</label> -->
+        <input type="text" id="nameUserRegister" value="Kevin" name="nameUser" placeholder="Nombre: por ejemplo: hitchcock99"
           autocomplete="username" />
-        <input type="password" id="passwordRegister" placeholder="Contraseña" autocomplete="current-password" />
-        <input type="password" id="passwordRegister2" placeholder="Repite la contraseña" autocomplete="off" />
-        <input type="text" id="emailRegister" placeholder="Dirección e-mail" />
-        <!-- <button>Crear Usuario</button> -->
-        <input type="submit" value="Crear Usuario" id="submit" class="submit"/>
+        <input type="password" id="passwordRegister" value="Kevin"  name="password1" placeholder="Contraseña"
+          autocomplete="current-password" />
+        <input type="password" id="passwordRegister2" value="Kevin" name="password2" placeholder="Repite la contraseña"
+          autocomplete="off" />
+        <input type="text" id="emailRegister" value="Kevin" name="email" placeholder="Dirección e-mail" />
+        <input type="button" value="Crear Usuario" id="buttonR" class="submit" />
         <p class="message">¿Tienes una cuenta de usuario? <a>Sign In</a></p>
       </form>
 
 
-      <form class="login-form modLog">
-        <label>INICIAR SESION</label>
-        <input type="text" id="nameUserLogin" placeholder="Usuario o Correo" autocomplete="username" />
-        <input type="password" id="passwordLogin" placeholder="Contraseña" autocomplete="current-password" />
-        <!-- <button>Iniciar Sesión</button> -->
-        <!-- <input type="submit" name="submit" value="Iniciar Sesión" /> -->
+      <form class="login-form modLog" id="logRegister">
+        <!-- <label>INICIAR SESION</label> -->
+        <input type="text" id="nameUserLogin" name="nameUser" placeholder="Usuario o Correo" autocomplete="username" />
+        <input type="password" id="passwordLogin" name="password" placeholder="Contraseña"
+          autocomplete="current-password" />
+        <input type="button" name="submit" name="email" value="Iniciar Sesión" id="buttonL" class="submit" />
 
         <p class="message">¿Todavía no estás registrado/a? <a>Register</a></p>
       </form>

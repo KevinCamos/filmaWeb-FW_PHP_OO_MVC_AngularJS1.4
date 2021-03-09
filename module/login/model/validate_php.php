@@ -3,8 +3,8 @@
                 function validate($formulario)
                 {
                     try {
-                        $daomovies = new DAOMovie();
-                        $resultado = $daomovies->select_all_movie(); // La flecheta sería com el punt de java, per a obrir funcions d'eixe objecte!!!
+                        $daologin = new DAOLogin();
+                        $resultado = $daologin->queryValidateRegister(); // La flecheta sería com el punt de java, per a obrir funcions d'eixe objecte!!!
                     } catch (Exception $e) {
                         $callback = 'index.php?page=503';
                         die('<script>window.location.href="' . $callback . '";</script>');
@@ -16,11 +16,9 @@
                         return $validate = true;
                     } else {
                         foreach ($resultado as $row) { //Row = Fila, sería cada fila, amb els seus atributs per columna 
-                      
-                            if ($formulario["ref"] === $row["reference"]) {
-                                if(isset($formulario["id"]) && $formulario["id"] === $row["id"]) {
-                                    continue;
-                                }
+
+                            if ($formulario["userName"] === $row["username"] || $formulario["email"] === $row["email"]) {
+
                                 // $movieError = "Esta película ya existe en la base de datoas";
                                 return $validate = false;
                             }

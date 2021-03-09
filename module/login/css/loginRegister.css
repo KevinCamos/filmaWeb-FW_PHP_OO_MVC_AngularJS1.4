@@ -43,7 +43,7 @@
   box-sizing: border-box;
   font-size: 14px;
 }
-.login-page .form #submit {
+.login-page .form .submit {
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;

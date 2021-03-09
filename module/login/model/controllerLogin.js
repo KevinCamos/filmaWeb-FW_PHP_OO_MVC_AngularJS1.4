@@ -47,47 +47,6 @@ function validateUser() {
   return true;
 }
 
-function getForm() {
-  //LOGIN
-  $(".login-form").keypress(function (event) {
-    if (event.which == 13) {
-      console.log($("#nameUserLogin").val());
-      console.log($("#passwordLogin").val());
-    }
-  });
-  //REGISTER
-  $(".register-form").keypress(function (event) {
-    if (event.which == 13) {
-      console.log("entra");
-      if (validateUser() === true) {
-        ///ficar el que s'hatja de ficar
-        ///ficar el que s'hatja de ficar
-        ///ficar el que s'hatja de ficar
-      }
-    }
-  });
-
-  $(".register-form").submit(function (event) {
-    event.preventDefault();
-    console.log("entra a submit register");
-
-    console.log($(this).serialize());
-    console.log($("form").serialize());
-    console.log($(".register-form").serialize());
-    console.log($(event).serialize());
-  });
-
-
-  // $(".form .login-form").submit(function (e) {
-  //   var texto = $(".login-form").serialize();
-  //   console.log("login form");
-  //   console.log(texto);
-  //   var texto = $(this).serialize();
-  //   console.log(texto);
-
-  // });
-}
-
 function loginMenu() {
   $("#loginMenu").text("Login").addClass("loginMenu").css("color", "gainsboro");
 
@@ -114,9 +73,69 @@ function loginAnimate() {
     $(".error").empty();
   });
 }
+/**
+ * typeForm="register"/"login"
+ */
+function ajaxSend(typeForm, serialize) {
+  console.log("entra a ajaxSend");
+
+  ajaxPromise(
+    "module/login/controller/controllerLogin.php?op=" + typeForm, //typeForm =
+    "POST",
+    "JSON",
+    {serialize:serialize}
+  )
+    .then(function (data) {
+      console.log("entra a Then");
+
+      console.log(data);
+    })
+    .catch(function (data) {
+      console.log(data);
+    });
+}
+function sendRegisterForm() {
+  if (validateUser() === true) {
+    console.log("valida y entra");
+
+    let serialize = $("formRegister").serializeArray();
+    ajaxSend("register", serialize);
+  }
+}
+
+function getClickEnterForm() {
+  //REGISTER
+  //REGISTER
+  //REGISTER
+  $(".register-form").keypress(function (event) {
+    if (event.which == 13) {
+      event.preventDefault();
+      sendRegisterForm();
+    }
+  });
+
+  $("#buttonR").click(function (event) {
+    event.preventDefault();
+    sendRegisterForm();
+  });
+
+  //LOGIN
+  //LOGIN
+  //LOGIN
+  $(".login-form").keypress(function (event) {
+    if (event.which == 13) {
+      // FER FER FER sendLoginForm();
+    }
+  });
+
+  $("#buttonL").click(function (event) {
+    event.preventDefault();
+    // FER FER FER sendLoginForm();
+  });
+}
 
 $(document).ready(function () {
   loginMenu();
   loginAnimate();
-  getForm();
+  getClickEnterForm();
 });

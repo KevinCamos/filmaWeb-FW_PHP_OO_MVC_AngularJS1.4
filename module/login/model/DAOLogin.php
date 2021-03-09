@@ -4,7 +4,7 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '\Kevin\Ejercicios_Kevin\Projecte';
 
 include("$path.\model\connect.php");
 
-class DAOHome
+class DAOLogin
 {
 
     function query($select)
@@ -15,11 +15,6 @@ class DAOHome
         // ->fetch_object(); //Si me tornara NULL a AJAX; tal volta es perquè falta el fetch_object
         connect::close($conexion);
         return $result;
-
-
-
-
-       
     }
     function updateQuery($select)
     {
@@ -29,5 +24,15 @@ class DAOHome
         $res = mysqli_query($conexion, $sql);
         connect::close($conexion);
         return $res;
+    }
+
+    function queryValidateRegister()
+    {
+     
+        $sql = "SELECT username, email FROM users";
+		$conexion = connect::connect();
+		$result = mysqli_query($conexion, $sql);
+		connect::close($conexion);
+		return $result;
     }
 }
