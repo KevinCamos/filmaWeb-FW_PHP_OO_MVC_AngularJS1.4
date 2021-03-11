@@ -11,45 +11,63 @@ class DAOLogin
         $nameUser =  strtolower($formulario[0]['value']);
         $password =  strtolower($formulario[1]['value']);
         $email = strtolower($formulario[3]['value']);
-        $avatar = "avatar";
-
+        $hashavatar = md5(strtolower(trim($email)));
+        $hashed_pass = password_hash($password, PASSWORD_DEFAULT);
+        $avatar = "https://www.gravatar.com/avatar/$hashavatar?s=40&d=identicon";
 
         $sql = "INSERT INTO `users` (`email`, `username`, `pssword`, `avatar`, `type`)
-			VALUES ( '$email', '$nameUser', '$password','$avatar', 'user')";
+			VALUES ( '$email', '$nameUser', '$hashed_pass','$avatar', 'user')";
 
-        $conexion = connect::connect();
-        $result = mysqli_query($conexion, $sql);
-        connect::close($conexion);
-        return  $result ;
+        return  close_fetch_all($sql);
+    }
+    function login_user($formulario)
+    {
+        $nameUser =  strtolower($formulario[0]['value']);
+        $password =  strtolower($formulario[1]['value']);
+
+        $sql = "SELECT *
+        FROM users
+        WHERE username LIKE '$nameUser'";
+
+        return  close_fetch_all($sql);
     }
 
 
-    // function query($select)
-    // {
-    //     $sql = $select;
-    //     $conexion = connect::connect();
-    //     $result = mysqli_query($conexion, $sql)->fetch_all(MYSQLI_ASSOC);
-    //     // ->fetch_object(); //Si me tornara NULL a AJAX; tal volta es perquè falta el fetch_object
-    //     connect::close($conexion);
-    //     return $result;
-    // }
-    // function updateQuery($select)
-    // {
 
-    //     $sql = $select;
-    //     $conexion = connect::connect();
-    //     $res = mysqli_query($conexion, $sql);
-    //     connect::close($conexion);
-    //     return $res;
-    // }
-
-    function queryValidateRegister()
+    function queryValidateRegister($nameUser, $email)
     {
 
-        $sql = "SELECT username, email FROM users";
-        $conexion = connect::connect();
-        $result = mysqli_query($conexion, $sql)->fetch_all(MYSQLI_ASSOC);
-        connect::close($conexion);
-        return $result;
+        $sql = "SELECT username, email 
+        FROM users
+        WHERE username LIKE '$nameUser'
+        OR email LIKE  '$email'";
+
+        return  close_fetch_all($sql);
     }
+    function queryLogin($nameUser)
+    {
+
+        $sql = "SELECT *
+        FROM users
+        WHERE username LIKE '$nameUser'
+        OR email LIKE '$nameUser'";
+
+        return  close_fetch_all($sql);
+    }
+}
+
+
+function close_fetch_all($sql)
+{
+    $conexion = connect::connect();
+    $result = mysqli_query($conexion, $sql)->fetch_all(MYSQLI_ASSOC);
+    connect::close($conexion);
+    return $result;
+}
+function close_fetch_object($sql)
+{
+    $conexion = connect::connect();
+    $result = mysqli_query($conexion, $sql)->fetch_object();
+    connect::close($conexion);
+    return $result;
 }

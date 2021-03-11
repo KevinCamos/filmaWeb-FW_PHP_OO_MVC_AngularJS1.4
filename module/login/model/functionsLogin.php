@@ -1,5 +1,24 @@
 
                 <?php
+
+
+                function validateLogin($nameUser)
+                {
+
+
+                    try {
+                        $daologin = new DAOLogin();
+                        $resultado = $daologin->queryLogin($nameUser); // La flecheta sería com el punt de java, per a obrir funcions d'eixe objecte!!!
+                    } catch (Exception $e) {
+                        die('<script>window.location.href=index.php?page=503;</script>');
+                    }
+                    count($resultado) === 0 ? $resultado = false : $resultado = $resultado;
+                    return $resultado;
+                }
+
+
+
+
                 function validateRegister($formulario)
                 {
 
@@ -8,35 +27,10 @@
 
                     try {
                         $daologin = new DAOLogin();
-                        $resultado = $daologin->queryValidateRegister(); // La flecheta sería com el punt de java, per a obrir funcions d'eixe objecte!!!
+                        $resultado = $daologin->queryValidateRegister($nameUser, $email); // La flecheta sería com el punt de java, per a obrir funcions d'eixe objecte!!!
                     } catch (Exception $e) {
-                        $callback = 'index.php?page=503';
-                        die('<script>window.location.href="' . $callback . '";</script>');
+                        die('<script>window.location.href=index.php?page=503;</script>');
                     }
-                    // echo $resultado->num_rows;
-                    // echo "IEEEEEEEEEEEEE";
-
-                    if (count($resultado) === 0) {
-                        return $validate = true;
-                    } else {
-                        foreach ($resultado as $row) { //Row = Fila, sería cada fila, amb els seus atributs per columna 
-                            //    return gettype($row["username"]);
-                            // $prueba =  $row["username"] +""+ $email;
-                            // return strtolower($row["username"]). $email;
-
-                            if ($nameUser == strtolower($row["username"]) ||   $email  == strtolower($row["email"])) {
-
-                                // $movieError = "Esta película ya existe en la base de datoas";
-                                return $validate = false;
-                            }
-                        }
-                        return $validate = true;
-                    }
-                }
-
-                function console_log($data) //per a mostrar en console
-                {
-                    echo '<script>';
-                    echo 'console.log(' . json_encode($data) . ')';
-                    echo '</script>';
+                    count($resultado) === 0 ? $resultado = true : $resultado = false;
+                    return $resultado;
                 }

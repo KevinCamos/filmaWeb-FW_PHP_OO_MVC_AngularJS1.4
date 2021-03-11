@@ -9,18 +9,30 @@ include("$path.\module\login\model\\functionsLogin.php");
 switch ($_GET['op']) {
 
     case 'login':
-        // $homeQuery = new DAOHome();
-        // $category = $homeQuery->query("SELECT * FROM category ORDER BY id_category");
-        // if ($category == true) {
-        //     echo json_encode($category);
-        //     exit;
-        // } else {
-        //     //echo json_encode($error);
-        //     $callback = 'index.php?page=error503';
-        //     die('<script>window.location.href="' . $callback . '";</script>');
-        //     // echo "error";
-        // } // end_else
+        // echo json_encode(validateLogin($_POST['serialize']));
+        $nameUser =  strtolower($_POST['serialize'][0]['value']);
+        $psswordUser =  strtolower($_POST['serialize'][1]['value']);
+
+        $userSQL = validateLogin($nameUser);
+        if ($userSQL != false) {
+            echo json_encode($userSQL);
+
+            if (password_verify($psswordUser, $userSQL['pssword'])==true) {
+            echo json_encode($userSQL);
+            }
+        } else {
+            echo json_encode(false);
+        }
         break;
+
+
+
+
+
+
+
+
+
     case 'register':
         // echo json_encode(validate($_POST['serialize']));
         if (validateRegister($_POST['serialize']) == true) {

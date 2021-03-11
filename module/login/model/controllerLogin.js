@@ -1,4 +1,4 @@
-function validateUser() {
+function validateRegister() {
   var username = $("#nameUserRegister").val();
   var password = $("#passwordRegister").val();
   var password2 = $("#passwordRegister2").val();
@@ -23,7 +23,6 @@ function validateUser() {
     return false;
   }
   //VALIDACION PASSWORD
-
   if (password.length < 5 || password.length > 12) {
     $(".error").text("La contraseña debe de tener de 4 y 12 carácteres");
     return false;
@@ -31,7 +30,6 @@ function validateUser() {
     $(".error").text("Repite la contraseña corréctamente");
     return false;
   }
-
   if (password.length < 5 || password.length > 12) {
     $(".error").text("La contraseña debe de tener de 4 y 12 carácteres");
     return false;
@@ -46,7 +44,16 @@ function validateUser() {
   $(".error").empty();
   return true;
 }
-
+function validateLogin() {
+  var username = $("#nameUserLogin").val();
+  var password = $("#passwordLogin").val();
+  if (username.length == 0 || password.length == 0) {
+    $(".error").text("Rellena todos los campos");
+    return false;
+  }
+  $(".error").empty();
+  return true;
+}
 function loginMenu() {
   $("#loginMenu").text("Login").addClass("loginMenu").css("color", "gainsboro");
 
@@ -76,8 +83,8 @@ function loginAnimate() {
 /**
  * typeForm="register"/"login"
  */
-function ajaxSendForm(typeForm, serialize) {
-  console.log("entra a ajaxSend");
+function ajaxSendForm(serialize, typeForm = "login") {
+  console.log(serialize);
   ajaxPromise(
     "module/login/controller/controllerLogin.php?op=" + typeForm, //typeForm =
     "POST",
@@ -85,32 +92,49 @@ function ajaxSendForm(typeForm, serialize) {
     { serialize: serialize }
   )
     .then(function (data) {
-      console.log(typeof(data));
-      console.log(data.trim());
-      if (data.trim() == "false") {
-        $(".error").text("Lo sentimos, este usuario o correo electrónico ya se encuentra registrado");
-      }else{
-      console.log("¿Se ha registrado corréctamente?"); //Será un Alert
-    }
+      console.log(typeof data);
+      console.log(data.trim()); //lleva els espais
+      switch (typeForm) {
+        case "login":
+          if (data.trim() == "false") {
+            $(".error").text(
+              "Lo sentimos, este usuario o correo electrónico no se encuentra registrado"
+            );
+          }
+
+          break;
+        case "register":
+          if (data.trim() == "false") {
+            $(".error").text(
+              "Lo sentimos, este usuario o correo electrónico ya se encuentra registrado"
+            );
+          } else if (typeForm == "register") {
+            alert("Se ha registrado corréctamente");
+            window.location.href = "index.php?page=home";
+
+          }
+          break;
+      }
+
     })
     .catch(function (data) {
       console.log(data);
     });
 }
 function sendRegisterForm() {
-  if (validateUser() === true) {
+  if (validateRegister() === true) {
     console.log("valida y entra");
 
     let serialize = $("#formRegister").serializeArray();
     // console.log(serialize)
-    ajaxSendForm("register", serialize);
+    ajaxSendForm(serialize, "register");
   }
 }
 
 function getClickEnterForm() {
-  //REGISTER
-  //REGISTER
-  //REGISTER
+  //REGISTER REGISTER REGISTER REGISTER REGISTER
+  //REGISTER REGISTER REGISTER REGISTER REGISTER
+  //REGISTER REGISTER REGISTER REGISTER REGISTER
   $(".register-form").keypress(function (event) {
     if (event.which == 13) {
       event.preventDefault();
@@ -123,18 +147,24 @@ function getClickEnterForm() {
     sendRegisterForm();
   });
 
-  //LOGIN
-  //LOGIN
-  //LOGIN
+  //LOGIN LOGIN LOGIN LOGIN LOGIN LOGIN LOGIN
+  //LOGIN LOGIN LOGIN LOGIN LOGIN LOGIN LOGIN
+  //LOGIN LOGIN LOGIN LOGIN LOGIN LOGIN LOGIN
   $(".login-form").keypress(function (event) {
     if (event.which == 13) {
-      // FER FER FER sendLoginForm();
+      event.preventDefault();
+      if (validateLogin() === true) {
+        ajaxSendForm($("#formLogin").serializeArray());
+      }
     }
   });
 
   $("#buttonL").click(function (event) {
     event.preventDefault();
-    // FER FER FER sendLoginForm();
+    if (validateLogin() === true) {
+      ajaxSendForm($("#formLogin").serializeArray());
+      // $("#formLogin").serializeArray()
+    }
   });
 }
 
