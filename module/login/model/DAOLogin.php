@@ -54,9 +54,18 @@ class DAOLogin
 
         return  close_fetch_all($sql);
     }
+
+    function login_user_token($user)
+    {
+
+
+        $sql = "SELECT idusers, email, username, avatar, type
+    FROM users
+    WHERE username LIKE '$user'";
+
+        return  close_fetch_all($sql);
+    }
 }
-
-
 function close_fetch_all($sql)
 {
     $conexion = connect::connect();

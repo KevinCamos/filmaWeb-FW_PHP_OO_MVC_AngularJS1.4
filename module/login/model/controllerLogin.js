@@ -54,22 +54,6 @@ function validateLogin() {
   $(".error").empty();
   return true;
 }
-function loginMenu() {
-  $("#loginMenu").text("Login").addClass("loginMenu").css("color", "gainsboro");
-
-  ////El cambio de color al pasar el ratón por el login
-  $("#loginMenu").mouseenter(function () {
-    $("#loginMenu").css("color", "white");
-  });
-  $("#loginMenu").mouseleave(function () {
-    $("#loginMenu").css("color", "gainsboro");
-  });
-  ////Fin cambio de color
-
-  $("#loginMenu").click(function () {
-    window.location.href = "index.php?page=login";
-  });
-}
 function loginAnimate() {
   // https://codepen.io/colorlib/pen/rxddKy plantilla
   $(".message a").click(function () {
@@ -80,42 +64,53 @@ function loginAnimate() {
     $(".error").empty();
   });
 }
-/**
- * typeForm="register"/"login"
- */
+function logoutMenu() {}
+// function cleanResponse(data) {
+//   // esta función elimina los espacios ajenos al string y limpia las comas.
+//   return data.trim().replace(/['"]+/g, "");
+// }
 function ajaxSendForm(serialize, typeForm = "login") {
-  console.log(serialize);
+  // console.log(serialize);
   ajaxPromise(
     "module/login/controller/controllerLogin.php?op=" + typeForm, //typeForm =
     "POST",
-    undefined,
+    "JSON",
     { serialize: serialize }
   )
     .then(function (data) {
+      console.log(typeForm);
       console.log(typeof data);
-      console.log(data.trim()); //lleva els espais
+      console.log(data);
+
       switch (typeForm) {
         case "login":
-          if (data.trim() == "false") {
+          if (data == false) {
+            console.log(1);
             $(".error").text(
               "Lo sentimos, este usuario o correo electrónico no se encuentra registrado"
             );
+          } else if (data == "falsePssword") {
+            console.log(2);
+            $(".error").text("La contraseña es incorrecta");
+          } else {
+            console.log("id");
+            sessionStorage.setItem("token", data);
+
+            window.location.href = "index.php?page=home";
           }
 
           break;
         case "register":
-          if (data.trim() == "false") {
+          if (data == "false") {
             $(".error").text(
               "Lo sentimos, este usuario o correo electrónico ya se encuentra registrado"
             );
-          } else if (typeForm == "register") {
+          } else {
             alert("Se ha registrado corréctamente");
             window.location.href = "index.php?page=home";
-
           }
           break;
       }
-
     })
     .catch(function (data) {
       console.log(data);
@@ -169,7 +164,7 @@ function getClickEnterForm() {
 }
 
 $(document).ready(function () {
-  loginMenu();
-  loginAnimate();
   getClickEnterForm();
+  loginAnimate();
+
 });

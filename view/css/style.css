@@ -482,3 +482,28 @@ td {
 #item-shop{
   margin-top:40px;
 }
+
+/* STYLE MENU LOGIN */
+
+.loginMenu{
+
+  color:gainsboro;
+ cursor: pointer;
+}
+.loginMenu{
+
+  color:gainsboro;
+ cursor: pointer;
+}
+.login-page a{
+  cursor: pointer;
+
+}
+#menuAvatar{
+  margin-right: 10px;
+  width: 2%;
+  height: 2%;
+  border-radius: 50%;
+  /* border:21px;
+  border-color:black; */
+}

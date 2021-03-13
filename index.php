@@ -9,6 +9,9 @@ if ((isset($_GET['page'])) && ($_GET['page'] === "movies")) {
 } else if (!(isset($_GET['page'])) || ($_GET['page'] === "home")) {
 
     include("view/inc/top_page_home.html");
+} else if (!(isset($_GET['page'])) || ($_GET['page'] === "login")) {
+
+    include("view/inc/top_page_login.html");
 } else {
     include("view/inc/top_page.html");
 }
