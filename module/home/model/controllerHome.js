@@ -122,14 +122,14 @@ function detectScrollBrands() {
   var count = 1;
 
   $(document).on("scroll", function () {
-    console.log($(window).scrollTop() + "ScrollTop");
-    console.log($(window).height() + "height");
-    console.log($(document).height() + "documentheight");
+    // console.log($(window).scrollTop() + "ScrollTop");
+    // console.log($(window).height() + "height");
+    // console.log($(document).height() + "documentheight");
     if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-      console.log("ENTRA!");
+      // console.log("ENTRA!");
 
       if (count < 7) {
-        console.log("CARGAR SCROLL");
+        // console.log("CARGAR SCROLL");
         var offset = count * 2;
         loadHomeProducts(offset);
         count++;

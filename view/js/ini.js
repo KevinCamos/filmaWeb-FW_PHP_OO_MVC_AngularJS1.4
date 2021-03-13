@@ -212,15 +212,21 @@ function APIspam() {
       });
   }
 }
-
+function removeItemLogin() {
+  console.log("entra");
+   localStorage.removeItem("id");
+      localStorage.removeItem("user");
+      localStorage.removeItem("type");
+      localStorage.removeItem("avatar");
+      localStorage.removeItem("email");
+      localStorage.removeItem("token");
+}
 function DOMLogin() {
   $("#loginUser").empty();
 
   $("#loginMenu").text("Login").addClass("loginMenu").css("color", "gainsboro");
 }
 function loginMenu() {
-  console.log(localStorage.getItem("user"));
-
   $("#loginMenu").empty();
   $("#loginUser").empty();
 
@@ -248,12 +254,9 @@ function loginMenu() {
   ////Fin cambio de color
 
   $("#loginMenu").click(function () {
+    console.log(localStorage.getItem("user"));
     if (localStorage.getItem("user") != null) {
-      localStorage.removeItem("id");
-      localStorage.removeItem("user");
-      localStorage.removeItem("type");
-      localStorage.removeItem("avatar");
-      localStorage.removeItem("email");
+      removeItemLogin();
       DOMLogin();
     } else {
       window.location.href = "index.php?page=login";
@@ -304,11 +307,7 @@ function loginMenu() {
 
   $("#loginMenu").click(function () {
     if (localStorage.getItem("user") != null) {
-      localStorage.removeItem("id");
-      localStorage.removeItem("user");
-      localStorage.removeItem("type");
-      localStorage.removeItem("avatar");
-      localStorage.removeItem("email");
+      removeItemLogin();
       DOMLogin();
     } else {
       window.location.href = "index.php?page=login";
@@ -316,8 +315,8 @@ function loginMenu() {
   });
 }
 function checkToken() {
-  if (sessionStorage.getItem("token") != null) {
-    var token = sessionStorage.getItem("token");
+  if (localStorage.getItem("token") != null) {
+    var token = localStorage.getItem("token");
     ajaxPromise(
       "module/login/controller/controllerLogin.php?op=menu", //typeForm =
       "POST",
@@ -330,6 +329,8 @@ function checkToken() {
         if (data == false) {
           localStorage.removeItem("token");
           alert("la sesión ha finalizado");
+          removeItemLogin();
+          loginMenu();
         } else if (typeof data == "object") {
           console.log(data.username);
           localStorage.setItem("id", data.id);
@@ -337,19 +338,17 @@ function checkToken() {
           localStorage.setItem("type", data.type);
           localStorage.setItem("avatar", data.avatar);
           localStorage.setItem("email", data.email);
-          // loginMenu();
+          loginMenu();
         }
       })
       .catch(function (data) {
         console.log(data);
       });
+  } else {
+    loginMenu();
   }
 }
-function proba() {
-  console.log(sessionStorage.getItem("user"));
-}
+
 $(document).ready(function () {
   checkToken();
-  loginMenu();
-  proba();
 });

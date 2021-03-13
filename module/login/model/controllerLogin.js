@@ -94,7 +94,7 @@ function ajaxSendForm(serialize, typeForm = "login") {
             $(".error").text("La contraseña es incorrecta");
           } else {
             console.log("id");
-            sessionStorage.setItem("token", data);
+            localStorage.setItem("token", data);
 
             window.location.href = "index.php?page=home";
           }
