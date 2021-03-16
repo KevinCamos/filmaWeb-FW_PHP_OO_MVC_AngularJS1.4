@@ -101,7 +101,7 @@ function ajaxSendForm(serialize, typeForm = "login") {
 
           break;
         case "register":
-          if (data == "false") {
+          if (data == false) {
             $(".error").text(
               "Lo sentimos, este usuario o correo electrónico ya se encuentra registrado"
             );

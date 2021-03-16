@@ -1,5 +1,6 @@
 importarScript("module/shop/model/filter.js");
 importarScript("module/shop/model/orderby.js");
+
 /////FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
 function clickerItems(itemString, id) {
   if (
@@ -340,12 +341,20 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
             })
             .appendTo(div2);
 
-          $("<h5></h5>")
-            .append(document.createTextNode(category[i]["movie"]))
+          $("<h5></h5>").text(category[i]["movie"]).appendTo(div2);
+
+          var h2 = $("<h2></h2>")
+            .text(category[i]["price"] + "€")
             .appendTo(div2);
-          $("<h2></h2>")
-            .append(document.createTextNode(category[i]["price"] + "€"))
-            .appendTo(div2);
+          //ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ
+          $("<svg>")
+            .attr({
+              class: "far fa-heart like",
+              id: "like-" + id,
+              onMouseover: "this.style.color='tomato'",
+              onMouseout: "this.style.color='black'",
+            })
+            .appendTo(h2);
         }
       }
     })
@@ -371,7 +380,7 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
 
 function spanFilter(textSpan) {
   $("<br>").appendTo("#filters");
-  $("<span>").append(document.createTextNode(textSpan)).appendTo("#filters");
+  $("<span>").text(textSpan).appendTo("#filters");
   $("<br>").appendTo("#filters");
 }
 
@@ -390,14 +399,14 @@ function genereFilter() {
 
       $("<option>")
         .attr({ value: "default" })
-        .append(document.createTextNode("Todos los géneros"))
+        .text("Todos los géneros")
         .appendTo("#genere");
       for (var clave in data) {
         let valueGenere = data[clave]["genere"];
 
         $("<option>")
           .attr({ value: valueGenere })
-          .append(document.createTextNode(valueGenere))
+          .text(valueGenere)
           .appendTo("#genere");
       }
     })
@@ -419,14 +428,14 @@ function countryFilter() {
 
       $("<option>")
         .attr({ value: "default" })
-        .append(document.createTextNode("Todo el mundo"))
+        .text("Todo el mundo")
         .appendTo("#country");
       for (var clave in data) {
         let valueCountry = data[clave]["country"];
 
         $("<option>")
           .attr({ value: valueCountry })
-          .append(document.createTextNode(valueCountry))
+          .text(valueCountry)
           .appendTo("#country");
       }
     })
@@ -527,4 +536,5 @@ $(document).ready(function () {
 
   clickProduct();
   clickPage();
+  like();
 });

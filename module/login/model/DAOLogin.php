@@ -13,7 +13,7 @@ class DAOLogin
         $email = strtolower($formulario[3]['value']);
         $hashavatar = md5(strtolower(trim($email)));
         $hashed_pass = password_hash($password, PASSWORD_DEFAULT);
-        $avatar = "https://www.gravatar.com/avatar/$hashavatar?s=40&d=identicon";
+        $avatar = "https://www.gravatar.com/avatar/$hashavatar?s=40&d=robohash";
 
         $sql = "INSERT INTO `users` (`email`, `username`, `pssword`, `avatar`, `type`)
 			VALUES ( '$email', '$nameUser', '$hashed_pass','$avatar', 'user')";

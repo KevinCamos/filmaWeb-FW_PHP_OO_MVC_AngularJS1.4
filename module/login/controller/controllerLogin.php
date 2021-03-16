@@ -60,12 +60,18 @@ switch ($_GET['op']) {
 
         if ($user != false) {
             echo json_encode($user);
-            
         } else {
             echo json_encode(false);
         }
         //DAO - username, avatar
         //echo json_encode(datos del usuari)
+
+        break;
+
+    case 'updateToken':
+        $token = encodeToken($_POST['user']);
+
+        echo json_encode($token);
 
         break;
 }

@@ -213,13 +213,12 @@ function APIspam() {
   }
 }
 function removeItemLogin() {
-  console.log("entra");
-   localStorage.removeItem("id");
-      localStorage.removeItem("user");
-      localStorage.removeItem("type");
-      localStorage.removeItem("avatar");
-      localStorage.removeItem("email");
-      localStorage.removeItem("token");
+  localStorage.removeItem("id");
+  localStorage.removeItem("user");
+  localStorage.removeItem("type");
+  localStorage.removeItem("avatar");
+  localStorage.removeItem("email");
+  localStorage.removeItem("token");
 }
 function DOMLogin() {
   $("#loginUser").empty();
@@ -331,6 +330,7 @@ function checkToken() {
           alert("la sesión ha finalizado");
           removeItemLogin();
           loginMenu();
+          return false;
         } else if (typeof data == "object") {
           console.log(data.username);
           localStorage.setItem("id", data.id);
@@ -338,7 +338,9 @@ function checkToken() {
           localStorage.setItem("type", data.type);
           localStorage.setItem("avatar", data.avatar);
           localStorage.setItem("email", data.email);
+          // updateToken();
           loginMenu();
+          return true;
         }
       })
       .catch(function (data) {
@@ -346,9 +348,43 @@ function checkToken() {
       });
   } else {
     loginMenu();
+    return "3";
   }
 }
+function tokenTrue() {
+  if (checkToken() != false) {
+    if (localStorage.getItem("token") != null) {
+      return true;
+    } else {
+      alert("debes registrarte para continuar");
+    }
+  } else {
+    alert("debes registrarte para continuar");
+  }
+  return false;
+}
 
+function updateToken() {
+  if( localStorage.getItem("user")!=null){
+  var user = localStorage.getItem("user");
+  ajaxPromise(
+    "module/login/controller/controllerLogin.php?op=updateToken", //typeForm =
+    "POST",
+    "JSON",
+    { user: user }
+  )
+    .then(function (data) {
+      console.log("token actualizado");
+      localStorage.setItem("token", data);
+      alert("actualitzat");
+    })
+    .catch(function (data) {
+      console.log(data);
+    });
+}
+}
 $(document).ready(function () {
   checkToken();
+  updateToken();
+
 });

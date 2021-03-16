@@ -12,14 +12,13 @@
 /* =============================================================
    GENERAL STYLES
  ============================================================ */
-body #contenido{
+body #contenido {
   font-family: "Open Sans", sans-serif;
-  background-color: #eaeaea
-}
-#contenido{
   background-color: #eaeaea;
 }
-
+#contenido {
+  background-color: #eaeaea;
+}
 
 .pad-top {
   padding-top: 60px;
@@ -365,7 +364,7 @@ td {
   /* margin-right:   800px; */
   width: 220px !important;
   padding: 0 10px 0 20px;
-    border-right: 2px solid #ddd;
+  border-right: 2px solid #ddd;
   word-break: break-word;
   /* margin-left: 20px; */
   display: block;
@@ -427,9 +426,10 @@ td {
 
 #productsHome {
   margin-right: 50px;
-  text-align: center;  
+  text-align: center;
 }
-.productHome, .productShop {
+.productHome,
+.productShop {
   margin-left: 100px;
 
   margin-top: 100px;
@@ -441,69 +441,61 @@ td {
   border: 1px solid #e8eaee;
 }
 
-
 .loading {
   background-image: url("../img/ajax-loader.gif");
 }
 
-#apiPublicidad{
+#apiPublicidad {
   margin-right: 50px;
-  text-align: center;  
+  text-align: center;
   margin-left: 100px;
 
   margin-top: 20px;
   height: 10%;
   width: 10%;
 
-
-
   text-align: center;
   background: #fff;
   padding: 10px;
   border: 1px solid grey;
-
-
 }
-
-
-
 
 /* SALTO DE PÁGINA */
 
-#pagination{
-  text-align: center;  
-
+#pagination {
+  text-align: center;
 }
 
-#attribute-item{
+#attribute-item {
   margin-left: 500px;
 }
 
-#item-shop{
-  margin-top:40px;
+#item-shop {
+  margin-top: 40px;
 }
 
 /* STYLE MENU LOGIN */
 
-.loginMenu{
-
-  color:gainsboro;
- cursor: pointer;
-}
-.loginMenu{
-
-  color:gainsboro;
- cursor: pointer;
-}
-.login-page a{
+.loginMenu {
+  color: gainsboro;
   cursor: pointer;
-
 }
-#menuAvatar{
+.login-page a {
+  cursor: pointer;
+}
+#menuAvatar {
   margin-right: 10px;
   width: 2%;
   height: 2%;
   border-radius: 50%;
   /* border:21px;
   border-color:black; */
+}
+
+.like {
+  font-size: 1em;
+  color: black;
+  margin-left: 20px;
+  cursor: pointer;
+
 }

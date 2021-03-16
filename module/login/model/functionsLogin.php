@@ -47,6 +47,7 @@
                             return false;
                         }
                         list($daologin) = $daologin;
+
                         return  $daologin ;
 
                     }
