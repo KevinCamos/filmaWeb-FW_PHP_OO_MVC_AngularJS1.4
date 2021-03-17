@@ -16,7 +16,6 @@ class DAOShop
         connect::close($conexion);
         return $result;
 
-
         
     }
 

@@ -213,7 +213,7 @@ function APIspam() {
   }
 }
 function removeItemLogin() {
-  localStorage.removeItem("id");
+  localStorage.removeItem("idusers");
   localStorage.removeItem("user");
   localStorage.removeItem("type");
   localStorage.removeItem("avatar");
@@ -307,7 +307,7 @@ function loginMenu() {
   $("#loginMenu").click(function () {
     if (localStorage.getItem("user") != null) {
       removeItemLogin();
-      DOMLogin();
+      location.reload();
     } else {
       window.location.href = "index.php?page=login";
     }
@@ -333,7 +333,7 @@ function checkToken() {
           return false;
         } else if (typeof data == "object") {
           console.log(data.username);
-          localStorage.setItem("id", data.id);
+          localStorage.setItem("idusers", data.idusers);
           localStorage.setItem("user", data.username);
           localStorage.setItem("type", data.type);
           localStorage.setItem("avatar", data.avatar);
@@ -365,26 +365,33 @@ function tokenTrue() {
 }
 
 function updateToken() {
-  if( localStorage.getItem("user")!=null){
-  var user = localStorage.getItem("user");
-  ajaxPromise(
-    "module/login/controller/controllerLogin.php?op=updateToken", //typeForm =
-    "POST",
-    "JSON",
-    { user: user }
-  )
-    .then(function (data) {
-      console.log("token actualizado");
-      localStorage.setItem("token", data);
-      alert("actualitzat");
-    })
-    .catch(function (data) {
-      console.log(data);
-    });
+  if (localStorage.getItem("user") != null) {
+    var user = localStorage.getItem("user");
+    ajaxPromise(
+      "module/login/controller/controllerLogin.php?op=updateToken", //typeForm =
+      "POST",
+      "JSON",
+      { user: user }
+    )
+      .then(function (data) {
+        console.log("token actualizado");
+        // localStorage.setItem("token", data);
+        // alert("actualitzat");
+      })
+      .catch(function (data) {
+        console.log(data);
+      });
+  }
 }
+
+function getUser() {
+  if (localStorage.getItem("idusers") != null) {
+    return localStorage.getItem("idusers");
+  } else {
+    return -1;
+  }
 }
 $(document).ready(function () {
   checkToken();
   updateToken();
-
 });

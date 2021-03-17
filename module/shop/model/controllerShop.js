@@ -50,8 +50,12 @@ function loadDivsProducts() {
 }
 //ELS DIVS GENÈRICS DELS PRODUCTES
 function divsProduct(urls, id) {
-  ajaxPromise(urls + id, "GET", "JSON")
+  var idUser = localStorage.getItem("idusers");
+  // alert(idUser);
+  alert(id);
+  ajaxPromise(urls + id, "GET", "JSON", { idUser: idUser })
     .then(function (category) {
+      console.log(category);
       //// .hide PER A OCULTAR EL FORMULARI QUE REOBRIREM AL EIXIR
       $("#formularioFiltro").hide();
       $("#orderBy").hide();
@@ -91,21 +95,42 @@ function divsProduct(urls, id) {
             })
             .appendTo(table);
           $("<li></li>")
-            .attr({
-              id: "attribute-item",
-            })
-            .append(document.createTextNode(clave + ": " + category[clave]))
+            .addClass("attribute-item")
+            .text(clave + ": " + category[clave])
             .appendTo("#item-shop");
           count = 1;
         } else {
           $("<li></li>")
-            .attr({
-              id: "attribute-item",
-            })
-            .append(document.createTextNode(clave + ": " + category[clave]))
+            .addClass("attribute-item")
+
+            .text(clave + ": " + category[clave])
             .appendTo("#item-shop");
         }
       }
+      //ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI
+      if (category.likes != null && clave == "likes") {
+        $("<avg>")
+          .addClass("attribute-item")
+
+          .attr({
+            class: "attribute-item fas fa-heart unlike ",
+            id: "unlike-" + id,
+            onMouseover: "this.style.color='black'",
+            onMouseout: "this.style.color='tomato'",
+          })
+          .appendTo("#item-shop");
+      } else {
+        $("<avg>")
+          .attr({
+            class: "attribute-item far fa-heart like",
+            id: "like-" + id,
+            onMouseover: "this.style.color='tomato'",
+            onMouseout: "this.style.color='black'",
+          })
+          .appendTo("#item-shop");
+      }
+      //ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI
+
       $("<img>")
         .attr({
           id: "return",
@@ -257,7 +282,6 @@ function clickProduct() {
     var clase = this.getAttribute("class");
     var idReturn = this.getAttribute("id");
     var id = this.id;
-
     if (clase === "touch") {
       sessionStorage.setItem("opStore", sessionStorage.getItem("op"));
       id = id.split("-"); ///Dividir imgShop de l'ID. Les ID están juntes a imgShop per a evitar interferències.
@@ -301,7 +325,8 @@ function countClickProduct(id) {
 //-------FIN-----CARGA ELS PRODUCTES O UN PRODUCTE-------------//
 
 function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
-  ajaxPromise(dirUrl, "GET", "JSON", sData)
+  var idUser = getUser();
+  ajaxPromise(dirUrl, "GET", "JSON", { idUser: idUser })
     .then(function (category) {
       if (category.length === 1) {
         divsProduct(
@@ -347,14 +372,25 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
             .text(category[i]["price"] + "€")
             .appendTo(div2);
           //ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ ACÍ
-          $("<svg>")
-            .attr({
-              class: "far fa-heart like",
-              id: "like-" + id,
-              onMouseover: "this.style.color='tomato'",
-              onMouseout: "this.style.color='black'",
-            })
-            .appendTo(h2);
+          if (category[i]["likes"] != null) {
+            $("<svg>")
+              .attr({
+                class: "fas fa-heart unlike",
+                id: "unlike-" + id,
+                onMouseover: "this.style.color='black'",
+                onMouseout: "this.style.color='tomato'",
+              })
+              .appendTo(h2);
+          } else {
+            $("<svg>")
+              .attr({
+                class: "far fa-heart like",
+                id: "like-" + id,
+                onMouseover: "this.style.color='tomato'",
+                onMouseout: "this.style.color='black'",
+              })
+              .appendTo(h2);
+          }
         }
       }
     })
@@ -536,5 +572,6 @@ $(document).ready(function () {
 
   clickProduct();
   clickPage();
-  like();
+  like("svg");
+  like("li");
 });

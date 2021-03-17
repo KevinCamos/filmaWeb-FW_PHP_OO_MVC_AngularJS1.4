@@ -12,7 +12,7 @@ function encodeToken($user) //60*10 == 10 minuts
     $secret = SECRET;
     $payload = '{
             "iat":-' . time() . '-, 
-            "exp":-' . time() + (60 * 5) . '-,
+            "exp":-' . time() + (60 * 90) . '-,
             "name":-' . $user . '-}';
     $JWT = new JWT;
     return  $JWT->encode($header, $payload, $secret);

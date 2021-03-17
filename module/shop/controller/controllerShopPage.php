@@ -9,22 +9,37 @@ include("$path.\module\shop\model\DAOShopPage.php");
 switch ($_GET['op']) {
 
     case 'openProduct':
+        $user = $_GET['idUser'];
 
-        searhQueryOneRow("SELECT * FROM movies WHERE id =" . $_GET["product"]);
+
+        searhQueryOneRow("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        FROM liketo li
+        WHERE li.idusers=  $user) AS B)
+        ON mo.id = B.idmovies
+        WHERE mo.id=" . $_GET["product"]);
 
         break;
     case 'listShop':
+        $user = $_GET['idUser'];
 
-        $searchQuery = base64_decode($_GET["od"]);
 
-        searhQueryAllRows("SELECT * FROM movies ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
+        // $searchQuery = base64_decode($_GET["od"]);
+        // searhQueryAllRows("SELECT * FROM movies ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
+
+        searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        FROM liketo li
+        WHERE li.idusers=  $user) AS B)
+        ON mo.id = B.idmovies
+        ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
         break;
 
 
     case 'searchQuery':
         $searchQuery = base64_decode($_GET["query"]);
 
-        searhQueryAllRows("SELECT * FROM  movies ".$searchQuery ." ORDER BY " . $_GET['od'] . " , movie asc LIMIT   " . $_GET['offset'] . ", 6");
+        searhQueryAllRows("SELECT * FROM  movies " . $searchQuery . " ORDER BY " . $_GET['od'] . " , movie asc LIMIT   " . $_GET['offset'] . ", 6");
         break;
 
 
@@ -104,9 +119,6 @@ switch ($_GET['op']) {
         break;
 
 
-
-
-
     case 'countryFilter':
 
         searhQueryAllRows("SELECT DISTINCT country FROM movies ORDER BY  movie asc");
@@ -114,6 +126,33 @@ switch ($_GET['op']) {
     case 'genereFilter':
 
         searhQueryAllRows("SELECT DISTINCT genere FROM movies ORDER BY  movie asc");
+        break;
+
+
+    case 'likeds':
+        switch ($_GET['typeLike']) {
+
+            case 'like':
+                $idUser =  $_GET['idUser'];
+                $idProduct = $_GET['idProduct'];
+
+                $homeQuery = new DAOShop();
+                $thisQuery = "INSERT INTO liketo 
+                VALUES ($idUser, $idProduct)";
+                $category = $homeQuery->query($thisQuery);
+
+                // echo json_encode($category);
+
+                break;
+            case 'unlike':
+                $idUser =  $_GET['idUser'];
+                $idProduct = $_GET['idProduct'];
+                $homeQuery = new DAOShop();
+                $thisQuery = "DELETE FROM liketo 
+               WHERE idusers=$idUser AND idmovies= $idProduct";
+                $category = $homeQuery->query($thisQuery);
+                break;
+        }
         break;
 }
 function searhQueryAllRows($thisQuery)
