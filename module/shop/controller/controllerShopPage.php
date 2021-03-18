@@ -37,27 +37,48 @@ switch ($_GET['op']) {
 
 
     case 'searchQuery':
+        $user = $_GET['idUser'];
+
         $searchQuery = base64_decode($_GET["query"]);
 
-        searhQueryAllRows("SELECT * FROM  movies " . $searchQuery . " ORDER BY " . $_GET['od'] . " , movie asc LIMIT   " . $_GET['offset'] . ", 6");
+        searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        FROM liketo li
+        WHERE li.idusers=  $user) AS B)
+        ON mo.id = B.idmovies " . $searchQuery . " ORDER BY " . $_GET['od'] . " , movie asc LIMIT   " . $_GET['offset'] . ", 6");
         break;
 
 
 
     case 'filterCarousel':
+        $user = $_GET['idUser'];
+
         switch ($_GET['category']) {
 
             case 'decade':
-                searhQueryAllRows("SELECT * FROM movies
-                    WHERE anyo BETWEEN 1980 AND 1989  ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
+                searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+                ((SELECT DISTINCT li.idmovies, 'like' as likes 
+                FROM liketo li
+                WHERE li.idusers=  $user) AS B)
+                ON mo.id = B.idmovies                     
+                WHERE anyo BETWEEN 1980 AND 1989  
+                ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
                 break;
             case 'formate':
-                searhQueryAllRows("SELECT * FROM movies
-                                     WHERE formats LIKE '%VHS%' ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
+                searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+                ((SELECT DISTINCT li.idmovies, 'like' as likes 
+                FROM liketo li
+                WHERE li.idusers=  $user) AS B)
+                ON mo.id = B.idmovies               
+                 WHERE formats LIKE '%VHS%' ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
                 break;
             case 'genere':
-                searhQueryAllRows("SELECT * FROM movies
-                                     WHERE genere = 'Fantasia' ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
+                searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+                ((SELECT DISTINCT li.idmovies, 'like' as likes 
+                FROM liketo li
+                WHERE li.idusers=  $user) AS B)
+                ON mo.id = B.idmovies               
+                WHERE genere = 'Fantasia' ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
                 break;
         }
         break;

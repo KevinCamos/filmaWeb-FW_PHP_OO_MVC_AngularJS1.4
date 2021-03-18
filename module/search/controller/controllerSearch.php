@@ -10,9 +10,15 @@ switch ($_GET['op']) {
 
     case 'search':
         $offset = $_GET['offset'];
-
+        $user = $_GET['idUser'];
         $search = $_GET['search'];
-        searhQueryAllRows("SELECT * FROM movies
+
+
+        searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        FROM liketo li
+        WHERE li.idusers=  $user) AS B)
+        ON mo.id = B.idmovies
         WHERE  movie LIKE  '%$search%'
         OR formats LIKE '%$search%'
         OR director LIKE '%$search%' 

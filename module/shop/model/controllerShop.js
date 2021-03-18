@@ -52,7 +52,7 @@ function loadDivsProducts() {
 function divsProduct(urls, id) {
   var idUser = localStorage.getItem("idusers");
   // alert(idUser);
-  alert(id);
+  // alert(id);
   ajaxPromise(urls + id, "GET", "JSON", { idUser: idUser })
     .then(function (category) {
       console.log(category);
