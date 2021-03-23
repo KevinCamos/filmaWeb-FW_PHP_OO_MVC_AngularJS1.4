@@ -1,7 +1,7 @@
                 <?php
 
 
-                function validateLogin($idUser, $idProduct)
+                function addLineShop($idUser, $idProduct)
                 {
 
 
@@ -35,12 +35,33 @@
                     } catch (Exception $e) {
                         return "error";
                     }
-                    // count($resultado) === 0 ? $resultado = false : $resultado = $resultado;
+                }
+
+                function countCart($idUser)
+                {
 
 
+                    try {
+                        $daologin = new DAOCart();
+                        $idAlbaran = $daologin->getAlbaran($idUser); // La flecheta sería com el punt de java, per a obrir funcions d'eixe objecte!!!
 
+                        // return $idAlbaran[0]['idalbaran'];
+                        if (!isset($idAlbaran)) {
 
+                            return null;
+                            // $idAlbaran = $idAlbaran->idalbaran;
+                            // return $idAlbaran;
+                        }
+                        $idAlbaran = $idAlbaran->idalbaran;
 
-
-                    // return $idAlbaran;
+                        $countCart = $daologin->countCart($idAlbaran);
+                        // return $idLinea;
+                        if (!isset($countCart)) {
+                            return null;
+                        } else {
+                            return $countCart;
+                        }
+                    } catch (Exception $e) {
+                        return "error";
+                    }
                 }

@@ -70,11 +70,12 @@ function cartShop(addCart) {
     ajaxPromise(
       "module/cart/controller/controllerCart.php", //typeForm =
       "POST",
-      undefined,
+      "JSON",
       { op: "addLine", idProduct: id, idUser: idUser }
     )
       .then(function (data) {
         console.log(data);
+        getCart()
       })
       .catch(function () {
         alert("error");

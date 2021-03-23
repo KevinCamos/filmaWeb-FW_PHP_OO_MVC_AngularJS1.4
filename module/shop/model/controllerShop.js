@@ -66,29 +66,35 @@ function divsProduct(urls, id) {
       var id = "" + category.id;
       var img = "" + category.img;
 
+      var table = $("<p></p>")
+        .attr({ id: "p" + id })
+        .appendTo("#listShop");
+
       // let name = category.movie;
 
       for (var clave in category) {
         // console.log(clave);
 
-        var table = $("<p></p>")
-          .attr({ id: "p" + id })
-          .appendTo("#listShop");
-
         if (clave == "img") {
           $("<img>")
             .attr({
-              // class: "productShop", Anyandint-la d'aquesta forma, per alguna raó, al salt del home
+              id: "return",
+              // class: name,
+              src: "module\\shop\\img\\return.png",
+              align: "left",
+            })
+            .appendTo(table);
 
+          $("<img>")
+            .attr({
               id: category.id,
               src: "module\\movies\\img\\" + img,
               align: "left",
-              style: "margin-top: -275px;       margin-left: 25px;",
+              style: "margin-top: -250px;       margin-left: 25px;",
             })
             .addClass("productShop")
             .appendTo(table);
         } else if (count == 0) {
-          ////Estas lineas else if/else es para la lista de atributos del producto, para que haya un único "UL"
           $("<ul>")
             .attr({
               id: "item-shop",
@@ -99,7 +105,12 @@ function divsProduct(urls, id) {
             .text(clave + ": " + category[clave])
             .appendTo("#item-shop");
           count = 1;
-        } else {
+        } else if (
+          clave != "formats" &&
+          clave != "awards" &&
+          clave != "clicks" &&
+          clave != "likes"
+        ) {
           $("<li></li>")
             .addClass("attribute-item")
 
@@ -113,7 +124,7 @@ function divsProduct(urls, id) {
           .addClass("attribute-item")
 
           .attr({
-            class: "attribute-item fas fa-heart unlike ",
+            class: "fas fa-heart unlike ",
             id: "unlike-" + id,
             onMouseover: "this.style.color='black'",
             onMouseout: "this.style.color='tomato'",
@@ -122,35 +133,25 @@ function divsProduct(urls, id) {
       } else {
         $("<svg>")
           .attr({
-            class: "attribute-item far fa-heart like",
+            class: "far fa-heart like",
             id: "like-" + id,
             onMouseover: "this.style.color='tomato'",
             onMouseout: "this.style.color='black'",
+            style: "color:'gray';",
           })
           .appendTo("#item-shop");
       }
       $("<svg>")
-      .attr({
-        class: "attribute-item fas fa-cart-plus",
-        id: "cart-" + id,
-        onMouseover: "this.style.color='green'",
-        onMouseout: "this.style.color='gray'",
-        style:"color:'gray';"
-      })
-      .appendTo("#item-shop");
-  
-      //ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI
-
-      $("<img>")
         .attr({
-          id: "return",
-          // class: name,
-          src: "module\\shop\\img\\return.png",
-          align: "left",
-          style:
-            "margin-left: 25px; margin-top: -330px; width: 50px; height: 50px;",
+          class: "fas fa-cart-plus",
+          id: "cart-" + id,
+          onMouseover: "this.style.color='green'",
+          onMouseout: "this.style.color='gray'",
         })
-        .appendTo(table);
+        .text("comprar")
+        .appendTo("#item-shop");
+
+      //ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI
 
       // PRUEBA
 
@@ -402,16 +403,14 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
               .appendTo(h2);
           }
           $("<svg>")
-          .attr({
-            class: "fas fa-cart-plus",
-            id: "cart-" + id,
-            onMouseover: "this.style.color='green'",
-            onMouseout: "this.style.color='#303030'",
-
-          })
-          .appendTo(h2);
+            .attr({
+              class: "fas fa-cart-plus",
+              id: "cart-" + id,
+              onMouseover: "this.style.color='green'",
+              onMouseout: "this.style.color='#303030'",
+            })
+            .appendTo(h2);
         }
-        
       }
     })
     .catch(function () {

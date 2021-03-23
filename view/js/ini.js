@@ -313,7 +313,7 @@ function loginMenu() {
     }
   });
 }
-function checkToken() {
+function checkToken(countCart = false) {
   if (localStorage.getItem("token") != null) {
     var token = localStorage.getItem("token");
     console.log(token);
@@ -331,6 +331,7 @@ function checkToken() {
           alert("la sesión ha finalizado");
           removeItemLogin();
           loginMenu();
+          getCart();
           return false;
         } else if (typeof data == "object") {
           console.log(data.username);
@@ -339,6 +340,9 @@ function checkToken() {
           localStorage.setItem("type", data.type);
           localStorage.setItem("avatar", data.avatar);
           localStorage.setItem("email", data.email);
+          if (countCart == true) {
+            getCart();
+          }
           // updateToken();
           loginMenu();
           return true;
@@ -357,13 +361,12 @@ function tokenTrue() {
     if (localStorage.getItem("token") != null) {
       return true;
     } else {
-      window.location.href = "index.php?page=login";
-      alert("debes registrarte para continuar");
+      return false;
     }
-  } else {
-    window.location.href = "index.php?page=login";
-    alert("debes registrarte para continuar");
   }
+  // window.location.href = "index.php?page=login";
+  // alert("debes registrarte para continuar");
+
   return false;
 }
 
@@ -394,7 +397,33 @@ function getUser() {
     return -1;
   }
 }
+
+function getCart() {
+  var idUser = getUser();
+  if (idUser != -1) {
+    ajaxPromise(
+      "module/cart/controller/controllerCart.php", //typeForm =
+      "POST",
+      "JSON",
+      { op: "countCart", idUser: idUser }
+    )
+      .then(function (data) {
+        console.log(data.cantidad);
+if(data.cantidad!=0){
+$("#countCart").text(data.cantidad)
+}else{
+  $("#countCart").text('')
+
+}
+        // localStorage.setItem("token", data);
+        // alert("actualitzat");
+      })
+      .catch(function (data) {
+        console.log(data);
+      });
+  }
+}
 $(document).ready(function () {
-  checkToken();
+  checkToken(true);
   updateToken();
 });

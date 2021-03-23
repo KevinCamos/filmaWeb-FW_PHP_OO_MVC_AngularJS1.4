@@ -48,8 +48,7 @@
                         }
                         list($daologin) = $daologin;
 
-                        return  $daologin ;
-
+                        return  $daologin;
                     }
-return false;
+                    return false;
                 }

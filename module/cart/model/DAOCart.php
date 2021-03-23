@@ -51,74 +51,36 @@ class DAOCart
         $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`+1 WHERE (`idlinea` = '$idLinea') and (`idalbaran` = '$idAlbaran')";
         return  close_no_fetch($sql);
     }
-
-
-
-
-
-
-
-    function register_user($formulario)
+    function countCart($idAlbaran)
     {
-        $nameUser =  strtolower($formulario[0]['value']);
-        $password =  strtolower($formulario[1]['value']);
-        $email = strtolower($formulario[3]['value']);
-        $hashavatar = md5(strtolower(trim($email)));
-        $hashed_pass = password_hash($password, PASSWORD_DEFAULT);
-        $avatar = "https://www.gravatar.com/avatar/$hashavatar?s=40&d=robohash";
 
-        $sql = "INSERT INTO `users` (`email`, `username`, `pssword`, `avatar`, `type`)
-			VALUES ( '$email', '$nameUser', '$hashed_pass','$avatar', 'user')";
-
-        return  close_fetch_all($sql);
-    }
-    function login_user($formulario)
-    {
-        $nameUser =  strtolower($formulario[0]['value']);
-        $password =  strtolower($formulario[1]['value']);
-
-        $sql = "SELECT *
-        FROM users
-        WHERE username LIKE '$nameUser'";
-
-        return  close_fetch_all($sql);
+        $sql = "SELECT SUM(cantidad) as cantidad
+        FROM linea_producto
+        WHERE idalbaran = $idAlbaran
+        GROUP BY idalbaran";
+        return  close_fetch_object($sql);
     }
 
-
-
-    function queryValidateRegister($nameUser, $email)
+    function getCart($idAlbaran)
     {
 
-        $sql = "SELECT username, email 
-        FROM users
-        WHERE username LIKE '$nameUser'
-        OR email LIKE  '$email'";
-
-        return  close_fetch_all($sql);
-    }
-    function queryLogin($nameUser)
-    {
-
-        $sql = "SELECT *
-        FROM users
-        WHERE username LIKE '$nameUser'
-        OR email LIKE '$nameUser'";
-
-        return  close_fetch_all($sql);
-    }
-
-    function login_user_token($user)
-    {
-
-
-        $sql = "SELECT idusers, email, username, avatar, type
-    FROM users
-    WHERE username LIKE '$user'
-    OR email LIKE '$user'";
-
-        return  close_fetch_all($sql);
+        $sql = "SELECT l.*, m.movie,  m.price
+        FROM linea_producto l, movies m
+        WHERE l.idalbaran = $idAlbaran
+        AND l.idproducto = m.id";
+        return  close_fetch_object($sql);
     }
 }
+
+
+
+
+
+
+
+
+
+
 function close_fetch_all($sql)
 {
     $conexion = connect::connect();
