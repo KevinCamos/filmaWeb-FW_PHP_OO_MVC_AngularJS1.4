@@ -316,6 +316,7 @@ function loginMenu() {
 function checkToken() {
   if (localStorage.getItem("token") != null) {
     var token = localStorage.getItem("token");
+    console.log(token);
     ajaxPromise(
       "module/login/controller/controllerLogin.php?op=menu", //typeForm =
       "POST",
@@ -356,9 +357,11 @@ function tokenTrue() {
     if (localStorage.getItem("token") != null) {
       return true;
     } else {
+      window.location.href = "index.php?page=login";
       alert("debes registrarte para continuar");
     }
   } else {
+    window.location.href = "index.php?page=login";
     alert("debes registrarte para continuar");
   }
   return false;

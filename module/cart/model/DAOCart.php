@@ -4,8 +4,60 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '\Kevin\Ejercicios_Kevin\Projecte';
 
 include("$path.\model\connect.php");
 
-class DAOLogin
+class DAOCart
 {
+
+
+
+    function getAlbaran($idUser)
+    {
+
+        $sql = "SELECT idalbaran 
+        FROM albaran
+        WHERE idcliente = $idUser
+        AND estado LIKE  'proceso'";
+
+        return  close_fetch_object($sql);
+    }
+    function setAlbaran($idUser)
+    {
+
+        $sql = "INSERT INTO `albaran` (`idcliente`)
+            VALUES ($idUser)";
+        return  close_no_fetch($sql);
+    }
+
+    function getLine($idAlbaran, $idProduct)
+    {
+
+        $sql = "SELECT idlinea 
+        FROM linea_producto
+        WHERE idalbaran = $idAlbaran
+        AND idproducto =  $idProduct";
+
+        return  close_fetch_object($sql);
+    }
+
+    function setLine($idAlbaran, $idProduct)
+    {
+
+        $sql = "INSERT INTO `linea_producto` (`idalbaran`, `idproducto`)
+        VALUES ($idAlbaran, $idProduct)";
+        return  close_no_fetch($sql);
+    }
+    function updateLineIncrease($idAlbaran, $idLinea)
+    {
+
+        $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`+1 WHERE (`idlinea` = '$idLinea') and (`idalbaran` = '$idAlbaran')";
+        return  close_no_fetch($sql);
+    }
+
+
+
+
+
+
+
     function register_user($formulario)
     {
         $nameUser =  strtolower($formulario[0]['value']);
@@ -78,6 +130,13 @@ function close_fetch_object($sql)
 {
     $conexion = connect::connect();
     $result = mysqli_query($conexion, $sql)->fetch_object();
+    connect::close($conexion);
+    return $result;
+}
+function close_no_fetch($sql)
+{
+    $conexion = connect::connect();
+    $result = mysqli_query($conexion, $sql);
     connect::close($conexion);
     return $result;
 }

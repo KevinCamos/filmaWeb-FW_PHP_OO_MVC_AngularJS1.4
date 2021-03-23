@@ -496,13 +496,15 @@ td {
   font-size: 1em;
   color: black;
   margin-left: 20px;
-  cursor: pointer;
 
 }
 .unlike {
   font-size: 1em;
   color: tomato;
   margin-left: 20px;
+
+}
+.fas, .far{
   cursor: pointer;
 
 }

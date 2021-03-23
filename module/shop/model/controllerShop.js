@@ -109,7 +109,7 @@ function divsProduct(urls, id) {
       }
       //ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI
       if (category.likes != null && clave == "likes") {
-        $("<avg>")
+        $("<svg>")
           .addClass("attribute-item")
 
           .attr({
@@ -120,7 +120,7 @@ function divsProduct(urls, id) {
           })
           .appendTo("#item-shop");
       } else {
-        $("<avg>")
+        $("<svg>")
           .attr({
             class: "attribute-item far fa-heart like",
             id: "like-" + id,
@@ -129,6 +129,16 @@ function divsProduct(urls, id) {
           })
           .appendTo("#item-shop");
       }
+      $("<svg>")
+      .attr({
+        class: "attribute-item fas fa-cart-plus",
+        id: "cart-" + id,
+        onMouseover: "this.style.color='green'",
+        onMouseout: "this.style.color='gray'",
+        style:"color:'gray';"
+      })
+      .appendTo("#item-shop");
+  
       //ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI ACI
 
       $("<img>")
@@ -391,7 +401,17 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
               })
               .appendTo(h2);
           }
+          $("<svg>")
+          .attr({
+            class: "fas fa-cart-plus",
+            id: "cart-" + id,
+            onMouseover: "this.style.color='green'",
+            onMouseout: "this.style.color='#303030'",
+
+          })
+          .appendTo(h2);
         }
+        
       }
     })
     .catch(function () {
@@ -572,6 +592,6 @@ $(document).ready(function () {
 
   clickProduct();
   clickPage();
-  like("svg");
-  like("li");
+  likeCart("svg");
+  // like("li");
 });

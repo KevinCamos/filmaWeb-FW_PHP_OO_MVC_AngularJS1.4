@@ -14,9 +14,9 @@ if ((isset($_GET['page']))) {
 		case "login";
 			include("module/login/view/" . $_GET['page'] . ".html");
 			break;
-			// case "services";
-			// 	include("module/services/" . $_GET['page'] . ".html");
-			// 	break;
+		case "cart";
+			include("module/cart/view/" . $_GET['page'] . ".html");
+			break;
 			// case "portfolio";
 			// 	include("module/portfolio/" . $_GET['page'] . ".html");
 			// 	break;
