@@ -23,4 +23,11 @@ switch ($_POST['op']) {
                 echo json_encode($result);
 
                 break;
+        case 'getCart':
+
+                $result = getCart($_POST['idUser']);
+
+                echo json_encode($result);
+
+                break;
 }

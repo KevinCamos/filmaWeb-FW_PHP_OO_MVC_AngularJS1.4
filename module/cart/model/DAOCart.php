@@ -64,11 +64,11 @@ class DAOCart
     function getCart($idAlbaran)
     {
 
-        $sql = "SELECT l.*, m.movie,  m.price
+        $sql = "SELECT l.*, m.movie,  m.price,  m.img
         FROM linea_producto l, movies m
         WHERE l.idalbaran = $idAlbaran
         AND l.idproducto = m.id";
-        return  close_fetch_object($sql);
+        return  close_fetch_all($sql);
     }
 }
 

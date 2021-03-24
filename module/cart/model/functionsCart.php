@@ -48,7 +48,7 @@
                         // return $idAlbaran[0]['idalbaran'];
                         if (!isset($idAlbaran)) {
 
-                            return null;
+                            return -1;
                             // $idAlbaran = $idAlbaran->idalbaran;
                             // return $idAlbaran;
                         }
@@ -57,7 +57,33 @@
                         $countCart = $daologin->countCart($idAlbaran);
                         // return $idLinea;
                         if (!isset($countCart)) {
-                            return null;
+                            return -1;
+                        } else {
+                            return $countCart;
+                        }
+                    } catch (Exception $e) {
+                        return "error";
+                    }
+                }
+                function getCart($idUser)
+                {
+
+
+                    try {
+                        $daologin = new DAOCart();
+                        $idAlbaran = $daologin->getAlbaran($idUser); // La flecheta sería com el punt de java, per a obrir funcions d'eixe objecte!!!
+
+                        if (!isset($idAlbaran)) {
+
+                            return -1;
+                            // $idAlbaran = $idAlbaran->idalbaran;
+                            // return $idAlbaran;
+                        }
+                        $idAlbaran = $idAlbaran->idalbaran;
+
+                        $countCart = $daologin->getCart($idAlbaran);
+                        if (!isset($countCart)) {
+                            return -1;
                         } else {
                             return $countCart;
                         }

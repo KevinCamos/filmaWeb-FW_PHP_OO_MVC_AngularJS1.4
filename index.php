@@ -12,6 +12,9 @@ if ((isset($_GET['page'])) && ($_GET['page'] === "movies")) {
 } else if (!(isset($_GET['page'])) || ($_GET['page'] === "login")) {
 
     include("view/inc/top_page_login.html");
+} else if (!(isset($_GET['page'])) || ($_GET['page'] === "cart")) {
+
+    include("view/inc/top_page_cart.html");
 } else {
     include("view/inc/top_page.html");
 }

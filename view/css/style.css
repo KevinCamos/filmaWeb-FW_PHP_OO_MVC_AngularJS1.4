@@ -534,10 +534,55 @@ td {
   height: 50px;
 }
 #countCart {
-  margin-right: 10px;
-  width: 2%;
-  height: 2%;
-  border-radius: 50%;
+
   font-size:30px;
   color:rgb(247, 247, 247);
 }
+
+
+
+/* https://codepen.io/roalroga/pen/aGPmJV */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=number] { -moz-appearance:textfield; }
+
+
+ input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=date] { -moz-appearance:textfield; }
+
+
+#cartMenu {
+  
+  margin-top: 100px;
+}
+
+#cartMenu  img{
+
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+
+  text-align: center;
+  background: rgb(250, 250, 250);
+  padding: 10px;
+}
+
+.inputNum{
+  margin-left: 1em;
+  margin-right: 1em;
+
+
+}
+.fa-trash-alt{
+  margin-left: 3em;
+
+}
+
+

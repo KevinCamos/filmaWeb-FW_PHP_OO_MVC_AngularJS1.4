@@ -124,7 +124,7 @@ function divsProduct(urls, id) {
           .addClass("attribute-item")
 
           .attr({
-            class: "fas fa-heart unlike ",
+            class: "fas fa-heart unlike",
             id: "unlike-" + id,
             onMouseover: "this.style.color='black'",
             onMouseout: "this.style.color='tomato'",

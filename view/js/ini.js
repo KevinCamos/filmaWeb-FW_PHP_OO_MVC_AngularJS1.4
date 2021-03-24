@@ -409,12 +409,11 @@ function getCart() {
     )
       .then(function (data) {
         console.log(data.cantidad);
-if(data.cantidad!=0){
-$("#countCart").text(data.cantidad)
-}else{
-  $("#countCart").text('')
-
-}
+        if (data.cantidad != 0) {
+          $("#countCart").text(data.cantidad);
+        } else {
+          $("#countCart").text("");
+        }
         // localStorage.setItem("token", data);
         // alert("actualitzat");
       })
