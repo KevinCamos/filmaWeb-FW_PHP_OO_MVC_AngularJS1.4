@@ -45,12 +45,34 @@ class DAOCart
         VALUES ($idAlbaran, $idProduct)";
         return  close_no_fetch($sql);
     }
-    function updateLineIncrease($idAlbaran, $idLinea)
+    function updateLineIncreaseLine($idAlbaran, $idLinea)
     {
 
         $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`+1 WHERE (`idlinea` = '$idLinea') and (`idalbaran` = '$idAlbaran')";
         return  close_no_fetch($sql);
     }
+
+    function updateLineIncreaseSum($idAlbaran, $idProduct)
+    {
+
+        $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`+1 WHERE (`idproducto` = '$idProduct') and (`idalbaran` = '$idAlbaran')";
+        return  close_no_fetch($sql);
+    }
+
+    function updateLineIncreaseRest($idAlbaran, $idProduct)
+    {
+
+        $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`-1 WHERE (`idproducto` = '$idProduct') and (`idalbaran` = '$idAlbaran')";
+        return  close_no_fetch($sql);
+    }
+    function DeleteLineIncrease($idAlbaran, $idProduct)
+    {
+
+    
+        $sql = "UPDATE `linea_producto` SET `cantidad` = 0 WHERE (`idproducto` = '$idProduct') and (`idalbaran` = '$idAlbaran')";
+        return  close_no_fetch($sql);
+    }
+
     function countCart($idAlbaran)
     {
 
@@ -67,7 +89,8 @@ class DAOCart
         $sql = "SELECT l.*, m.movie,  m.price,  m.img
         FROM linea_producto l, movies m
         WHERE l.idalbaran = $idAlbaran
-        AND l.idproducto = m.id";
+        AND l.idproducto = m.id
+        AND l.cantidad <> 0";
         return  close_fetch_all($sql);
     }
 }

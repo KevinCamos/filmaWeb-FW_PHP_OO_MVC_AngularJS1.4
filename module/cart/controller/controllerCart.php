@@ -30,4 +30,15 @@ switch ($_POST['op']) {
                 echo json_encode($result);
 
                 break;
+
+
+        case 'updateAmount':
+
+
+
+                $result = updateAmount($_POST['type'], $_POST['idAlbaran'], $_POST['idProduct']);
+
+                echo json_encode($result);
+
+                break;
 }

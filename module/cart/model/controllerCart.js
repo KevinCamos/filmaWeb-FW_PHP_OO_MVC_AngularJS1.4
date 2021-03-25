@@ -103,42 +103,148 @@ function cartEmpty() {
   $("<tr>").attr({ id: "tileLine" }).appendTo(table);
   $("<th>").html("<h1>La Cesta está vacía</h1>").appendTo(tileLine);
 }
+function modalDelete(thisProduct, idProduct) {
+  $("#modalCart")
+    .text("¿De verdad deseas quitar esta película del carrito?")
+    .dialog({
+      width: 400, //<!-- ------------- ancho de la ventana -->
+      height: 150, //<!--  ------------- altura de la ventana -->
+      //show: "scale", <!-- ----------- animación de la ventana al aparecer -->
+      //hide: "scale", <!-- ----------- animación al cerrar la ventana -->
+      resizable: "true", //<!-- ------ fija o redimensionable si ponemos este valor a "true" -->
+      //position: "down",<!--  ------ posicion de la ventana en la pantalla (left, top, right...) -->
+      modal: "true", //<!-- ------------ si esta en true bloquea el contenido de la web mientras la ventana esta activa (muy elegante) -->
+      buttons: {
+        No: function () {
+          $(this).dialog("close");
 
-function clickAction(etiqueta) {
-  $("body").on("click", etiqueta, function () {
-    console.log(this);
-    var thisClass = $(this).attr("class");
-    if (thisClass == "fas fa-minus" || thisClass == "fas fa-plus") {
-      console.log("entra");
-      if (tokenTrue() == true) {
-        id = $(this).attr("id");
-        var id = id.split("-");
-        var type = id[0];
-        var idproducto = id[1];
-        var idalbaran = id[2];
-        var idUser = localStorage.getItem("idusers");
+          return false;
+        },
+        Eliminar: function () {
+          $(this).dialog("close");
+          ajaxUpdateRemoProduct(thisProduct, true);
+          $("#lineProduct" + idProduct).remove();
+          getCart()
+        },
+      },
+      show: {
+        effect: "blind",
+        duration: 100,
+      },
+      hide: {
+        effect: "blind",
+        duration: 100,
+      },
+    });
+}
+
+function restrictionSumRestDelete(
+  thisProduct,
+  type,
+  idProduct,
+  deleteQuest2True = false
+) {
+  if (deleteQuest2True == true) {
+    return true;
+  }
+  cantidad = parseInt($("#totalAmount" + idProduct).text(), 10);
+  // return type;
+  // alert(cantidad);
+  switch (type) {
+    case "rest":
+      if (cantidad == 1) {
+        modalDelete(thisProduct, idProduct);
+        return false;
+      } else {
+        return true;
+      }
+    case "sum":
+      return true;
+
+    case "delete":
+      modalDelete(thisProduct, idProduct);
+
+      break;
+  }
+}
+function ajaxUpdateRemoProduct(thisProduct, deleteQuest2True = false) {
+  console.log(thisProduct);
+  var thisClass = $(thisProduct).attr("class");
+  if (
+    thisClass == "fas fa-minus" ||
+    thisClass == "fas fa-plus" ||
+    thisClass == "fas fa-trash-alt"
+  ) {
+    console.log("entra");
+    if (tokenTrue() == true) {
+      id = $(thisProduct).attr("id");
+      var id = id.split("-");
+      var type = id[0];
+      var idProduct = id[1];
+      var idAlbaran = id[2];
+      var idUser = localStorage.getItem("idusers");
+      var deleteQuest = restrictionSumRestDelete(
+        thisProduct,
+        type,
+        idProduct,
+        deleteQuest2True
+      );
+
+      if (deleteQuest == true) {
         console.log(
-          idproducto + " i " + idalbaran + " i " + type + " i " + idUser
+          idProduct + " i " + idAlbaran + " i " + type + " i " + idUser
         );
 
-        // ajaxPromise(
-        //   "module/shop/controller/controllerShopPage.php", //typeForm =
-        //   "GET",
-        //   undefined,
-        //   { op: "likeds", typeLike: typeLike, idProduct: id, idUser: idUser }
-        // )
-        //   .then(function () {
+        ajaxPromise(
+          "module/cart/controller/controllerCart.php", //typeForm =
+          "POST",
+          "JSON",
+          {
+            op: "updateAmount",
+            type: type,
+            idProduct: idProduct,
+            idUser: idUser,
+            idAlbaran: idAlbaran,
+          }
+        )
+          .then(function (date) {
+            getCart()
 
-        //   })
-        //   .catch(function () {
-        //     alert("error");
-        //   });
+            switch (type) {
+              case "rest":
+                sumRestAmount(idProduct, -1);
+                break;
+
+              case "sum":
+                sumRestAmount(idProduct, 1);
+                break;
+              case "delete":
+                $("#lineProduct" + idProduct).remove();
+
+                break;
+            }
+
+            // alert(date);
+            console.log(date);
+          })
+          .catch(function (date) {
+            // alert(date);
+          });
       }
     }
+  }
+}
+function clickAction() {
+  $("body").on("click", "svg", function () {
+    ajaxUpdateRemoProduct(this);
   });
+}
+function sumRestAmount(idProduct, num) {
+  cantidad = parseInt($("#totalAmount" + idProduct).text(), 10);
+  $("#totalAmount" + idProduct).text(cantidad + num);
 }
 
 $(document).ready(function () {
   getAllCart();
-  clickAction("svg");
+  clickAction();
 });

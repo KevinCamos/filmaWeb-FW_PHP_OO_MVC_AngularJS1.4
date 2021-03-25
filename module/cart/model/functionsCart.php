@@ -29,7 +29,7 @@
                             return "ha afegit una linea";
                         } else {
                             $idLinea = $idLinea->idlinea;
-                            $daologin->updateLineIncrease($idAlbaran, $idLinea);
+                            $daologin->updateLineIncreaseLine($idAlbaran, $idLinea);
                             return "ha aumentat la quantitat";
                         }
                     } catch (Exception $e) {
@@ -86,6 +86,35 @@
                             return -1;
                         } else {
                             return $countCart;
+                        }
+                    } catch (Exception $e) {
+                        return "error";
+                    }
+                }
+                function updateAmount($type, $idAlbaran, $idProduct)
+                {
+
+                    // return "entra";
+                    try {
+                        $daologin = new DAOCart();
+
+                        switch ($type) {
+                            case 'rest':
+
+                                $daologin->updateLineIncreaseRest($idAlbaran, $idProduct);
+                                return "Cantidad disminuida";
+                            case 'sum':
+
+                                $daologin->updateLineIncreaseSum($idAlbaran, $idProduct);
+                                return "Cantidad aumentada";
+
+                                break;
+
+                            case 'delete':
+                                $daologin->DeleteLineIncrease($idAlbaran, $idProduct);
+                                return "Cantidad eliminada";
+
+                                break;
                         }
                     } catch (Exception $e) {
                         return "error";
