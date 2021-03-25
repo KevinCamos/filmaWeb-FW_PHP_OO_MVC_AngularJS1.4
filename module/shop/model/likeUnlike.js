@@ -40,6 +40,9 @@ function like(like) {
               onMouseout: "this.style.color='tomato'",
               style: "color: tomato",
             });
+           
+            toastr.success("'Me Gusta' añadido correctamente!");
+
             break;
           case "unlike":
             $("#" + typeLike + "-" + id).attr({
@@ -49,6 +52,8 @@ function like(like) {
               onMouseout: "this.style.color='black'",
               style: "color: black",
             });
+            toastr.success("'Me Gusta' eliminado correctamente!");
+
             break;
         }
       })
@@ -75,7 +80,10 @@ function cartShop(addCart) {
     )
       .then(function (data) {
         console.log(data);
-        getCart()
+        toastr.success("Se ha añadido al carrito correctamente");
+
+        getCart();
+
       })
       .catch(function () {
         alert("error");

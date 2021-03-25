@@ -41,4 +41,14 @@ switch ($_POST['op']) {
                 echo json_encode($result);
 
                 break;
+        case 'totalPrice':
+
+                // echo json_encode($_POST['idAlbaran'], $_POST['idProduct']);
+
+
+                $result = totalPrice($_POST['idAlbaran'], $_POST['idProduct']);
+
+                echo json_encode($result);
+
+                break;
 }

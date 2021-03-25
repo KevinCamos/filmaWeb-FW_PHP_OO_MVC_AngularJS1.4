@@ -46,7 +46,11 @@ function getAllCart() {
               .appendTo(columna);
             $("<div>")
               .attr({ id: "price" + idproducto })
-              .html("<h1 class='linePrice'>" + totalPrice + "<h2>") /////recalcular!!!!! OJO!
+              .text(price + "€") /////recalcular!!!!! OJO!
+              .appendTo(columna);
+            $("<div>")
+              .attr({ id: "totalprice" + idproducto })
+              .html("<h1 class='linePrice'>" + totalPrice + "€<h2>") /////recalcular!!!!! OJO!
               .appendTo(columna);
             var amount = $("<div>")
               .attr({ id: "amount" + idproducto, class: "amount" })
@@ -60,9 +64,7 @@ function getAllCart() {
                 style: "color:'gray';",
               })
               .appendTo(amount);
-            // $("<input>")
-            // .attr({ type:"number",id: "totalAmount" + idproducto, class:"inputNum" })
-            // .appendTo(amount);
+
             $("<span>")
               .attr({ id: "totalAmount" + idproducto, class: "inputNum" })
               .text(cantidad)
@@ -103,39 +105,30 @@ function cartEmpty() {
   $("<tr>").attr({ id: "tileLine" }).appendTo(table);
   $("<th>").html("<h1>La Cesta está vacía</h1>").appendTo(tileLine);
 }
-function modalDelete(thisProduct, idProduct) {
-  $("#modalCart")
-    .text("¿De verdad deseas quitar esta película del carrito?")
-    .dialog({
-      width: 400, //<!-- ------------- ancho de la ventana -->
-      height: 150, //<!--  ------------- altura de la ventana -->
-      //show: "scale", <!-- ----------- animación de la ventana al aparecer -->
-      //hide: "scale", <!-- ----------- animación al cerrar la ventana -->
-      resizable: "true", //<!-- ------ fija o redimensionable si ponemos este valor a "true" -->
-      //position: "down",<!--  ------ posicion de la ventana en la pantalla (left, top, right...) -->
-      modal: "true", //<!-- ------------ si esta en true bloquea el contenido de la web mientras la ventana esta activa (muy elegante) -->
-      buttons: {
-        No: function () {
-          $(this).dialog("close");
-
-          return false;
-        },
-        Eliminar: function () {
-          $(this).dialog("close");
-          ajaxUpdateRemoProduct(thisProduct, true);
-          $("#lineProduct" + idProduct).remove();
-          getCart()
-        },
-      },
-      show: {
-        effect: "blind",
-        duration: 100,
-      },
-      hide: {
-        effect: "blind",
-        duration: 100,
-      },
-    });
+function modalDelete(thisProduct) {
+  Swal.fire({
+    title: "¿De verdad quieres eliminar este producto? :'(",
+    text: "No te olvides de que el cine es cultura, no te deshagas de él",
+    icon: "ask",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "¡Eliminar!",
+    cancelButtonText: "Mantener en el carrito",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        "¡Eliminado!",
+        "El producto ha sido eliminado con éxito",
+        "success"
+      );
+      ajaxUpdateRemoProduct(thisProduct, true, "delete");
+      // $("#lineProduct" + idProduct).remove();
+      // getCart();
+    } else {
+      return false;
+    }
+  });
 }
 
 function restrictionSumRestDelete(
@@ -153,7 +146,7 @@ function restrictionSumRestDelete(
   switch (type) {
     case "rest":
       if (cantidad == 1) {
-        modalDelete(thisProduct, idProduct);
+        modalDelete(thisProduct);
         return false;
       } else {
         return true;
@@ -162,12 +155,16 @@ function restrictionSumRestDelete(
       return true;
 
     case "delete":
-      modalDelete(thisProduct, idProduct);
+      modalDelete(thisProduct);
 
       break;
   }
 }
-function ajaxUpdateRemoProduct(thisProduct, deleteQuest2True = false) {
+function ajaxUpdateRemoProduct(
+  thisProduct,
+  deleteQuest2True = false,
+  typeQuest = null
+) {
   console.log(thisProduct);
   var thisClass = $(thisProduct).attr("class");
   if (
@@ -191,6 +188,9 @@ function ajaxUpdateRemoProduct(thisProduct, deleteQuest2True = false) {
       );
 
       if (deleteQuest == true) {
+        if (typeQuest != null) {
+          type = typeQuest;
+        }
         console.log(
           idProduct + " i " + idAlbaran + " i " + type + " i " + idUser
         );
@@ -208,27 +208,32 @@ function ajaxUpdateRemoProduct(thisProduct, deleteQuest2True = false) {
           }
         )
           .then(function (date) {
-            getCart()
-
             switch (type) {
               case "rest":
-                sumRestAmount(idProduct, -1);
-                break;
+                updateTotalPrice(idProduct, idAlbaran);
+                // sumRestAmount(idProduct, -1);
+                toastr.success("Producto disminuido con éxito!");
 
+                break;
               case "sum":
-                sumRestAmount(idProduct, 1);
+                updateTotalPrice(idProduct, idAlbaran);
+                // sumRestAmount(idProduct, 1);
+                toastr.success("Producto sumado con éxito!");
+
                 break;
               case "delete":
                 $("#lineProduct" + idProduct).remove();
+                toastr.success("Producto eliminado con éxito!");
 
                 break;
             }
 
-            // alert(date);
+            getCart();
+
             console.log(date);
           })
           .catch(function (date) {
-            // alert(date);
+            toastr.error("Error en el proceso de eliminación");
           });
       }
     }
@@ -242,6 +247,33 @@ function clickAction() {
 function sumRestAmount(idProduct, num) {
   cantidad = parseInt($("#totalAmount" + idProduct).text(), 10);
   $("#totalAmount" + idProduct).text(cantidad + num);
+}
+function updateTotalPrice(idProduct, idAlbaran) {
+  ajaxPromise(
+    "module/cart/controller/controllerCart.php", //typeForm =
+    "POST",
+    "JSON",
+    { op: "totalPrice", idProduct: idProduct, idAlbaran: idAlbaran }
+  )
+    .then(function (data) {
+      console.log(data);
+      // totalPrice = totalPrice.toFixed(2).replace(".", ",");
+      var price = parseFloat(data.price);
+      var cantidad = parseFloat(data.cantidad);
+      var totalPrice = price * cantidad;
+      
+      price = price.toFixed(2).replace(".", ",");
+      totalPrice = totalPrice.toFixed(2).replace(".", ",");
+
+      $("#price" + idProduct).text(price + "€");
+      $("#totalprice" + idProduct).html(
+        "<h1 class='linePrice'>" + totalPrice + "€<h2>"
+      );
+      $("#totalAmount" + idProduct).text(cantidad);
+    })
+    .catch(function (data) {
+      toastr.error("Error en el proceso de eliminación");
+    });
 }
 
 $(document).ready(function () {

@@ -313,6 +313,7 @@ function loginMenu() {
     }
   });
 }
+
 function checkToken(countCart = false) {
   if (localStorage.getItem("token") != null) {
     var token = localStorage.getItem("token");
@@ -422,7 +423,28 @@ function getCart() {
       });
   }
 }
+
+function toastrOptions() {
+  toastr.options = {
+    closeButton: false,
+    debug: false,
+    newestOnTop: false,
+    progressBar: false,
+    positionClass: "toast-top-right",
+    preventDuplicates: false,
+    onclick: null,
+    showDuration: "100",
+    hideDuration: "1000",
+    timeOut: "  1000",
+    extendedTimeOut: "1000",
+    showEasing: "swing",
+    hideEasing: "linear",
+    showMethod: "fadeIn",
+    hideMethod: "fadeOut",
+  };
+}
 $(document).ready(function () {
   checkToken(true);
   updateToken();
+  toastrOptions();
 });

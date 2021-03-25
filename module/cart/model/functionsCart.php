@@ -120,3 +120,18 @@
                         return "error";
                     }
                 }
+                function totalPrice($idAlbaran, $idProduct)
+                {
+
+                    // return "entra";
+                    try {
+                                            // return "entra";
+
+                        $daologin = new DAOCart();
+                        $countCart = $daologin-> getTotalPrice($idAlbaran, $idProduct);
+                        return $countCart;
+
+                    } catch (Exception $e) {
+                        return "error";
+                    }
+                }

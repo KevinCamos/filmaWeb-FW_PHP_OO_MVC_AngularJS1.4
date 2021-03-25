@@ -496,118 +496,109 @@ td {
   font-size: 1em;
   color: black;
   margin-left: 20px;
-
 }
 .unlike {
   font-size: 1em;
   color: tomato;
   margin-left: 20px;
-
 }
-.fas, .far{
+.fas,
+.far {
   cursor: pointer;
-  
 }
-.fa-cart-plus{
-  color:'gray';
+.fa-cart-plus {
+  color: "gray";
   font-size: 1em;
-
 }
-#item-shop > .fa-heart{
-  font-size: 2em;    
-   position: absolute; 
-   margin-left: -215px ;  
-     margin-top: -25px
-}
-
-#item-shop > .fa-cart-plus{
-  font-size: 2em;     
+#item-shop > .fa-heart {
+  font-size: 2em;
   position: absolute;
-  margin-left: -175px ;  
-  margin-top: -25px; color:#929191;
+  margin-left: -215px;
+  margin-top: -25px;
 }
-#return{
- 
+
+#item-shop > .fa-cart-plus {
+  font-size: 2em;
+  position: absolute;
+  margin-left: -175px;
+  margin-top: -25px;
+  color: #929191;
+}
+#return {
   margin-left: -50px;
   margin-top: -250px;
   width: 50px;
   height: 50px;
 }
 #countCart {
-
-  font-size:30px;
-  color:rgb(247, 247, 247);
+  font-size: 30px;
+  color: rgb(247, 247, 247);
 }
-
-
 
 /* https://codepen.io/roalroga/pen/aGPmJV */
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-input[type=number] { -moz-appearance:textfield; }
-
-
- input[type=date]::-webkit-inner-spin-button, 
-input[type=date]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type="number"] {
+  -moz-appearance: textfield;
 }
-input[type=date] { -moz-appearance:textfield; }
 
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="date"] {
+  -moz-appearance: textfield;
+}
 
 #cartMenu {
-  
   margin-top: 100px;
 }
 
-#cartMenu  img{
-
+#cartMenu img {
   margin-top: 20px;
   margin-bottom: 20px;
-
 
   text-align: center;
   background: rgb(250, 250, 250);
   padding: 10px;
 }
 
-.inputNum{
+.inputNum {
   margin-left: 1em;
   margin-right: 1em;
-
-
 }
-.fa-trash-alt{
+.fa-trash-alt {
   margin-left: 3em;
-
 }
 
-
-#modalCart{
-  color:white;
+.ui-dialog-content{
+  color: white;
   background-color: #242424;
-  text-align:center
-  ;border:10px dotted #000; 
+  text-align: center;
+  border: 10px dotted #000;
   /* padding:8px; */
-  font-size:20px;
-
+  font-size: 20px;
 }
 
- .ui-dialog-titlebar, .ui-dialog-buttonset{
+.ui-dialog-titlebar,
+.ui-dialog-buttonset {
   background-color: #646464;
 }
-.ui-dialog-titlebar-close { display: none }
-.ui-dialog-buttonset .ui-button{
+.ui-dialog-titlebar-close {
+  display: none;
+}
+.ui-dialog-buttonset .ui-button {
   background-color: rgb(58, 58, 160);
-  color:white;
+  color: white;
   margin-left: 1em;
   margin-right: 3em;
 
-  text-align:center;
-  background-color: #4CAF50;
+  text-align: center;
+  background-color: #4caf50;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -617,4 +608,12 @@ input[type=date] { -moz-appearance:textfield; }
   font-size: 16px;
   margin: 2px 2px;
   cursor: pointer;
+}
+
+table tr:hover {
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+table img{
+  height: 150px;
 }

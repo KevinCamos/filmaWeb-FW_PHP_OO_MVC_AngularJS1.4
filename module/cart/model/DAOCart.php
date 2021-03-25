@@ -68,7 +68,7 @@ class DAOCart
     function DeleteLineIncrease($idAlbaran, $idProduct)
     {
 
-    
+
         $sql = "UPDATE `linea_producto` SET `cantidad` = 0 WHERE (`idproducto` = '$idProduct') and (`idalbaran` = '$idAlbaran')";
         return  close_no_fetch($sql);
     }
@@ -93,8 +93,19 @@ class DAOCart
         AND l.cantidad <> 0";
         return  close_fetch_all($sql);
     }
+    
+function getTotalPrice($idAlbaran, $idProduct)
+{
+
+    $sql = "SELECT l.idproducto, l.cantidad,  m.price
+    FROM linea_producto l, movies m
+    WHERE l.idalbaran = $idAlbaran
+    and m.id=l.idproducto
+    AND l.idproducto = $idProduct";
+    return  close_fetch_object($sql);
 }
 
+}
 
 
 
