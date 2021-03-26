@@ -48,28 +48,28 @@ class DAOCart
     function updateLineIncreaseLine($idAlbaran, $idLinea)
     {
 
-        $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`+1 WHERE (`idlinea` = '$idLinea') and (`idalbaran` = '$idAlbaran')";
+        $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`+1 WHERE (`idlinea` = '$idLinea') AND (`idalbaran` = '$idAlbaran')";
         return  close_no_fetch($sql);
     }
 
     function updateLineIncreaseSum($idAlbaran, $idProduct)
     {
 
-        $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`+1 WHERE (`idproducto` = '$idProduct') and (`idalbaran` = '$idAlbaran')";
+        $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`+1 WHERE (`idproducto` = '$idProduct') AND (`idalbaran` = '$idAlbaran')";
         return  close_no_fetch($sql);
     }
 
     function updateLineIncreaseRest($idAlbaran, $idProduct)
     {
 
-        $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`-1 WHERE (`idproducto` = '$idProduct') and (`idalbaran` = '$idAlbaran')";
+        $sql = "UPDATE `linea_producto` SET `cantidad` = `cantidad`-1 WHERE (`idproducto` = '$idProduct') AND (`idalbaran` = '$idAlbaran')";
         return  close_no_fetch($sql);
     }
     function DeleteLineIncrease($idAlbaran, $idProduct)
     {
 
 
-        $sql = "UPDATE `linea_producto` SET `cantidad` = 0 WHERE (`idproducto` = '$idProduct') and (`idalbaran` = '$idAlbaran')";
+        $sql = "UPDATE `linea_producto` SET `cantidad` = 0 WHERE (`idproducto` = '$idProduct') AND (`idalbaran` = '$idAlbaran')";
         return  close_no_fetch($sql);
     }
 
@@ -118,7 +118,7 @@ class DAOCart
     function endCart($idAlbaran)
 {
 
-    $sql = "UPDATE `albaran` SET `estado` = `F` WHERE (`idalbaran` = '$idAlbaran')";
+    $sql = "UPDATE albaran SET estado = 'F' WHERE idalbaran = $idAlbaran";
     return  close_no_fetch($sql);
 }
 

@@ -73,9 +73,8 @@ switch ($_POST['op']) {
 
 
 
-                // $result = endCart($_POST['idAlbaran']);
+                $result = endCart($_POST['idAlbaran']);
 
-                // echo json_encode($result);
-                echo json_encode(1);
+                echo json_encode($result);
                 break;
 }

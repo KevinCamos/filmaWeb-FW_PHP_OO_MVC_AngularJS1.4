@@ -376,6 +376,7 @@ function returnEndClick(idAlbaran) {
         idAlbaran: idAlbaran,
       })
         .then(function (data) {
+          // alert(data)
           window.location.href = "index.php?page=home";
 
         })
