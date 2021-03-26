@@ -93,17 +93,35 @@ class DAOCart
         AND l.cantidad <> 0";
         return  close_fetch_all($sql);
     }
-    
-function getTotalPrice($idAlbaran, $idProduct)
-{
 
-    $sql = "SELECT l.idproducto, l.cantidad,  m.price
+    function getTotalPrice($idAlbaran, $idProduct)
+    {
+
+        $sql = "SELECT l.idproducto, l.cantidad,  m.price
     FROM linea_producto l, movies m
     WHERE l.idalbaran = $idAlbaran
     and m.id=l.idproducto
     AND l.idproducto = $idProduct";
-    return  close_fetch_object($sql);
+        return  close_fetch_object($sql);
+    }
+    function getTotal($idAlbaran)
+    {
+
+        $sql = "SELECT l.idproducto, l.idalbaran, l.cantidad, m.movie, m.price, (l.cantidad*m.price) AS totalPrice
+        FROM linea_producto l, movies m
+        WHERE l.idproducto=m.id
+        AND l.cantidad <> 0 
+        AND  l.idalbaran = $idAlbaran;";
+
+        return  close_fetch_all($sql);
+    }
+    function endCart($idAlbaran)
+{
+
+    $sql = "UPDATE `albaran` SET `estado` = `F` WHERE (`idalbaran` = '$idAlbaran')";
+    return  close_no_fetch($sql);
 }
+
 
 }
 
@@ -136,3 +154,4 @@ function close_no_fetch($sql)
     connect::close($conexion);
     return $result;
 }
+

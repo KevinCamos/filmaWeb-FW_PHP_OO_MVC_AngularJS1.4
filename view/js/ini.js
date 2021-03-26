@@ -329,7 +329,7 @@ function checkToken(countCart = false) {
         console.log(data);
         if (data == false) {
           localStorage.removeItem("token");
-          alert("la sesión ha finalizado");
+          toastr.warning("La sesión se ha cerrado por seguridad");
           removeItemLogin();
           loginMenu();
           getCart();

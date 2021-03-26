@@ -51,4 +51,31 @@ switch ($_POST['op']) {
                 echo json_encode($result);
 
                 break;
+        case 'getAlbaran':
+
+
+
+                $result = getAlbaran($_POST['idUser']);
+
+                echo json_encode($result);
+
+                break;
+        case 'getTotal':
+
+
+
+                $result = getTotal($_POST['idAlbaran']);
+
+                echo json_encode($result);
+
+                break;
+        case 'endCart':
+
+
+
+                // $result = endCart($_POST['idAlbaran']);
+
+                // echo json_encode($result);
+                echo json_encode(1);
+                break;
 }

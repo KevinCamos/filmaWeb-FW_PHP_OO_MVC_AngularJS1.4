@@ -125,12 +125,55 @@
 
                     // return "entra";
                     try {
-                                            // return "entra";
+                        // return "entra";
 
                         $daologin = new DAOCart();
-                        $countCart = $daologin-> getTotalPrice($idAlbaran, $idProduct);
+                        $countCart = $daologin->getTotalPrice($idAlbaran, $idProduct);
                         return $countCart;
+                    } catch (Exception $e) {
+                        return "error";
+                    }
+                }
 
+                function getAlbaran($idUser)
+                {
+
+                    // return "entra";
+                    try {
+                        // return "entra";
+
+                        $daologin = new DAOCart();
+                        $idAlbaran = $daologin->getAlbaran($idUser);
+                        return $idAlbaran;
+                    } catch (Exception $e) {
+                        return "error";
+                    }
+                }
+
+                function getTotal($idAlbaran)
+                {
+
+                    // return "entra";
+                    try {
+                        // return "entra";
+
+                        $daologin = new DAOCart();
+                        $countCart = $daologin->getTotal($idAlbaran);
+                        return $countCart;
+                    } catch (Exception $e) {
+                        return "error";
+                    }
+                }
+                function endCart($idAlbaran)
+                {
+
+                    // return "entra";
+                    try {
+                        // return "entra";
+
+                        $daologin = new DAOCart();
+                        $countCart = $daologin->endCart($idAlbaran);
+                        return $countCart;
                     } catch (Exception $e) {
                         return "error";
                     }

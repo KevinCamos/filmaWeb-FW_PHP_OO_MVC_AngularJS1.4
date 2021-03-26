@@ -12,9 +12,10 @@ function getAllCart() {
         console.log(data);
         if (data != -1) {
           console.log(Object.keys(data).length);
+          $("<h2>").text("Cesta").appendTo("#cartMenu");
+
           var table = $("<table>").appendTo("#cartMenu");
-          $("<tr>").attr({ id: "tileLine" }).appendTo(table);
-          $("<th>").html("<h2>Cesta</h2>").appendTo(tileLine);
+
           for (var i = 0; i < Object.keys(data).length; i++) {
             var cantidad = data[i]["cantidad"];
             var idalbaran = data[i]["idalbaran"];
@@ -88,6 +89,10 @@ function getAllCart() {
               })
               .appendTo(amount);
           }
+          $("<input>")
+            .attr({ id: "buyMe", type: "button", value: "Comprar" })
+            .appendTo("#cartMenu");
+          buyMe();
         } else {
           cartEmpty();
         }
@@ -111,8 +116,8 @@ function modalDelete(thisProduct) {
     text: "No te olvides de que el cine es cultura, no te deshagas de él",
     icon: "ask",
     showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
+    confirmButtonColor: "#d33",
+    cancelButtonColor: "#3085d6",
     confirmButtonText: "¡Eliminar!",
     cancelButtonText: "Mantener en el carrito",
   }).then((result) => {
@@ -145,7 +150,7 @@ function restrictionSumRestDelete(
   // alert(cantidad);
   switch (type) {
     case "rest":
-      if (cantidad == 1) {
+      if (cantidad < 2) {
         modalDelete(thisProduct);
         return false;
       } else {
@@ -212,18 +217,18 @@ function ajaxUpdateRemoProduct(
               case "rest":
                 updateTotalPrice(idProduct, idAlbaran);
                 // sumRestAmount(idProduct, -1);
-                toastr.success("Producto disminuido con éxito!");
+                // toastr.success("Producto disminuido con éxito!");
 
                 break;
               case "sum":
                 updateTotalPrice(idProduct, idAlbaran);
                 // sumRestAmount(idProduct, 1);
-                toastr.success("Producto sumado con éxito!");
+                // toastr.success("Producto sumado con éxito!");
 
                 break;
               case "delete":
                 $("#lineProduct" + idProduct).remove();
-                toastr.success("Producto eliminado con éxito!");
+                // toastr.success("Producto eliminado con éxito!");
 
                 break;
             }
@@ -261,7 +266,7 @@ function updateTotalPrice(idProduct, idAlbaran) {
       var price = parseFloat(data.price);
       var cantidad = parseFloat(data.cantidad);
       var totalPrice = price * cantidad;
-      
+
       price = price.toFixed(2).replace(".", ",");
       totalPrice = totalPrice.toFixed(2).replace(".", ",");
 
@@ -274,6 +279,109 @@ function updateTotalPrice(idProduct, idAlbaran) {
     .catch(function (data) {
       toastr.error("Error en el proceso de eliminación");
     });
+}
+function buyMe() {
+  $("#buyMe").click(function () {
+    checkToken();
+    if (tokenTrue() == true) {
+      idUser = localStorage.getItem("idusers");
+
+      ajaxPromise("module/cart/controller/controllerCart.php", "POST", "JSON", {
+        op: "getAlbaran",
+        idUser: idUser,
+      })
+        .then(function (data) {
+          var idAlbaran = data.idalbaran;
+          ajaxPromise(
+            "module/cart/controller/controllerCart.php",
+            "POST",
+            "JSON",
+            { op: "getTotal", idAlbaran: idAlbaran }
+          )
+            .then(function (data) {
+              console.log(data);
+              continueBuy(data);
+              // totalPrice = totalPrice.toFixed(2).replace(".", ",");
+            })
+            .catch(function (data) {
+              alert(data);
+              console.log(data);
+            });
+        })
+        .catch(function (data) {
+          alert(data);
+          console.log(data);
+          toastr.error("Error");
+        });
+    }
+  });
+}
+function continueBuy(data) {
+  $("#cartMenu").empty();
+  $("<h2>").text("Proceso de compra").appendTo("#cartMenu");
+
+  var table = $("<table>").appendTo("#cartMenu").addClass("albaranTable");
+
+  var totalPrice = 0;
+  var idAlbaran = data[0]["idalbaran"];
+
+  for (var i = 0; i < Object.keys(data).length; i++) {
+    var cantidad = data[i]["cantidad"];
+    var idproducto = data[i]["idproducto"];
+    var movie = data[i]["movie"];
+    var price = parseFloat(data[i]["price"]);
+    var totalPriceProduct = parseFloat(data[i]["totalPrice"]);
+    totalPrice += parseFloat(totalPriceProduct);
+
+    price = price.toFixed(2).replace(".", ",");
+    totalPriceProduct = totalPriceProduct.toFixed(2).replace(".", ",");
+
+    var line = $("<tr>")
+      .attr({ id: "lineProduct" + idproducto })
+      .appendTo(table);
+    $("<th>").text(cantidad).appendTo(line);
+    $("<th>")
+      .text(price + "€")
+      .addClass("albaranPrice")
+      .appendTo(line);
+    $("<th>").text(movie).appendTo(line);
+
+    $("<th>")
+      .text(totalPriceProduct + "€")
+      .appendTo(line);
+  }
+  totalPrice = totalPrice.toFixed(2).replace(".", ",");
+
+  $("<input>")
+    .attr({ id: "returnCart", type: "button", value: "Volver a la cesta" })
+    .appendTo("#cartMenu");
+  $("<input>")
+    .attr({ id: "endCart", type: "button", value: "Finalizar Compra" })
+    .appendTo("#cartMenu");
+  returnEndClick(idAlbaran);
+}
+
+function returnEndClick(idAlbaran) {
+  $("#returnCart").click(function () {
+    getAllCart();
+  });
+  $("#endCart").click(function () {
+    Swal.fire(
+      "¡Compra finalizada!",
+      "Gracias por confiar en nuestos servicios",
+      "success"
+    ).then(() => {
+      ajaxPromise("module/cart/controller/controllerCart.php", "POST", "JSON", {
+        op: "endCart",
+        idAlbaran: idAlbaran,
+      })
+        .then(function (data) {
+          window.location.href = "index.php?page=home";
+
+        })
+        .catch(function (data) {});
+    });
+  });
 }
 
 $(document).ready(function () {

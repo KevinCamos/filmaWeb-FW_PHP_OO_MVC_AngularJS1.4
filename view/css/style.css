@@ -12,9 +12,14 @@
 /* =============================================================
    GENERAL STYLES
  ============================================================ */
+ html{
+  background-color: #eaeaea;
+
+ }
 body #contenido {
   font-family: "Open Sans", sans-serif;
   background-color: #eaeaea;
+  margin-bottom:10em;
 }
 #contenido {
   background-color: #eaeaea;
@@ -555,7 +560,8 @@ input[type="date"] {
 }
 
 #cartMenu {
-  margin-top: 100px;
+  margin-top: 150px;
+ 
 }
 
 #cartMenu img {
@@ -591,12 +597,13 @@ input[type="date"] {
 .ui-dialog-titlebar-close {
   display: none;
 }
-.ui-dialog-buttonset .ui-button {
+#buyMe {
   background-color: rgb(58, 58, 160);
   color: white;
-  margin-left: 1em;
+  margin-left:50em;
   margin-right: 3em;
-
+  margin-bottom: 40px;
+display:block;
   text-align: center;
   background-color: #4caf50;
   border: none;
@@ -606,7 +613,27 @@ input[type="date"] {
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 2px 2px;
+  cursor: pointer;
+}
+
+#returnCart, #endCart {
+  background-color: rgb(58, 58, 160);
+  color: white;
+  margin-left:20em;
+  margin-right: 3em;
+  margin-bottom: 40px;
+  margin-top: 10px;
+
+display:block;
+  text-align: center;
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
   cursor: pointer;
 }
 
@@ -616,4 +643,18 @@ table tr:hover {
 }
 table img{
   height: 150px;
+}
+/* albaranTable > th{
+  
+} */
+
+.albaranPrice{
+    text-align: right;
+    width:40px;
+;
+}
+
+
+#cartMenu > h2{
+  text-align: center;
 }
