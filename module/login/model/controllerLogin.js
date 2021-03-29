@@ -64,11 +64,7 @@ function loginAnimate() {
     $(".error").empty();
   });
 }
-function logoutMenu() {}
-// function cleanResponse(data) {
-//   // esta función elimina los espacios ajenos al string y limpia las comas.
-//   return data.trim().replace(/['"]+/g, "");
-// }
+
 function ajaxSendForm(serialize, typeForm = "login") {
   // console.log(serialize);
   ajaxPromise(
@@ -93,9 +89,7 @@ function ajaxSendForm(serialize, typeForm = "login") {
             console.log(2);
             $(".error").text("La contraseña es incorrecta");
           } else {
-            console.log("id");
             localStorage.setItem("token", data);
-
             window.location.href = "index.php?page=home";
           }
 
@@ -106,7 +100,7 @@ function ajaxSendForm(serialize, typeForm = "login") {
               "Lo sentimos, este usuario o correo electrónico ya se encuentra registrado"
             );
           } else {
-            alert("Se ha registrado corréctamente");
+            toastr.success("Se ha registrado corréctamente");
             window.location.href = "index.php?page=home";
           }
           break;
@@ -117,7 +111,7 @@ function ajaxSendForm(serialize, typeForm = "login") {
     });
 }
 function sendRegisterForm() {
-  if (validateRegister() === true) {
+  if (validateRegister() == true) {
     console.log("valida y entra");
 
     let serialize = $("#formRegister").serializeArray();
@@ -166,5 +160,4 @@ function getClickEnterForm() {
 $(document).ready(function () {
   getClickEnterForm();
   loginAnimate();
-
 });

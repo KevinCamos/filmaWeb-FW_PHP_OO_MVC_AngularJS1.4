@@ -18,7 +18,7 @@ class DAOLogin
         $sql = "INSERT INTO `users` (`email`, `username`, `pssword`, `avatar`, `type`)
 			VALUES ( '$email', '$nameUser', '$hashed_pass','$avatar', 'user')";
 
-        return  close_fetch_all($sql);
+        return  close_no_fetch($sql);
     }
     function login_user($formulario)
     {
@@ -78,6 +78,13 @@ function close_fetch_object($sql)
 {
     $conexion = connect::connect();
     $result = mysqli_query($conexion, $sql)->fetch_object();
+    connect::close($conexion);
+    return $result;
+}
+function close_no_fetch($sql)
+{
+    $conexion = connect::connect();
+    $result = mysqli_query($conexion, $sql);
     connect::close($conexion);
     return $result;
 }

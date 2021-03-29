@@ -1,3 +1,6 @@
+BASE_IMPONIBLE = 0;
+IVA = 1;
+PRECIO_TOTAL = 2;
 function getAllCart() {
   $("#cartMenu").empty();
   var idUser = getUser();
@@ -339,19 +342,54 @@ function continueBuy(data) {
     var line = $("<tr>")
       .attr({ id: "lineProduct" + idproducto })
       .appendTo(table);
-    $("<th>").text(cantidad).appendTo(line);
-    $("<th>")
+    $("<td>").text(cantidad).appendTo(line);
+    $("<td>")
       .text(price + "€")
       .addClass("albaranPrice")
       .appendTo(line);
-    $("<th>").text(movie).appendTo(line);
+    $("<td>").text(movie).css("padding-left", "80px").appendTo(line);
 
-    $("<th>")
+    $("<td>")
       .text(totalPriceProduct + "€")
       .appendTo(line);
   }
+  BaseImponible = (totalPrice / 1.21).toFixed(2).replace(".", ",");
+  iva = ((totalPrice / 1.21) * 0.21).toFixed(2).replace(".", ",");
   totalPrice = totalPrice.toFixed(2).replace(".", ",");
+  
+  for (var i = 0; i < 3; i++) {
+    var line = $("<tr>").appendTo(table);
 
+    for (var j = 0; j < 2; j++) {
+      $("<td>").appendTo(line);
+
+      console.log(i);
+      console.log(BASE_IMPONIBLE);
+      console.log(IVA);
+      console.log(PRECIO_TOTAL);
+    }
+
+    switch (i) {
+      case BASE_IMPONIBLE:
+        $("<td>").text("Base Imponible").appendTo(line);
+        $("<td>")
+          .text(BaseImponible + "€")
+          .appendTo(line);
+        break;
+      case IVA:
+        $("<td>").text("IVA").appendTo(line);
+        $("<td>")
+          .text(iva + "€")
+          .appendTo(line);
+        break;
+      case PRECIO_TOTAL:
+        $("<td>").text("Precio Total").appendTo(line);
+        $("<td>")
+          .text(totalPrice + "€")
+          .appendTo(line);
+        break;
+    }
+  }
   $("<input>")
     .attr({ id: "returnCart", type: "button", value: "Volver a la cesta" })
     .appendTo("#cartMenu");
@@ -378,7 +416,6 @@ function returnEndClick(idAlbaran) {
         .then(function (data) {
           // alert(data)
           window.location.href = "index.php?page=home";
-
         })
         .catch(function (data) {});
     });
