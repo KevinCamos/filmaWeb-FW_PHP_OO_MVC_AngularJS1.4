@@ -6,7 +6,7 @@
 		
 		function list_contact_dogs(){
 			////ENTRA!!!
-			require_once(VIEW_PATH_INC . "top_page.html"); ///top_page.html
+			require_once(VIEW_PATH_INC . "top_page_contact.html"); ///top_page.html
 			require(VIEW_PATH_INC . "header.html");
 			require(VIEW_PATH_INC . "menu.html");
 			require("module/contact/view/contact_list.html");
