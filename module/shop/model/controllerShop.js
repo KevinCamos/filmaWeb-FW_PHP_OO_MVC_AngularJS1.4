@@ -51,6 +51,7 @@ function loadDivsProducts() {
 //ELS DIVS GENÈRICS DELS PRODUCTES
 function divsProduct(urls, id) {
   var idUser = localStorage.getItem("idusers");
+  idUser == null? idUser=-1: idUser=idUser;
   // alert(idUser);
   // alert(id);
   ajaxPromise(urls + id, "GET", "JSON", { idUser: idUser })

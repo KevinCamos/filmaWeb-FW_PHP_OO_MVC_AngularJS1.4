@@ -28,9 +28,9 @@ if ((isset($_GET['page']))) {
 			// 	include("module/shop/controller/controllerShopPage.php");
 			// 	break;
 
-			// case "contactus";
-			// 	include("module/contactus/" . $_GET['page'] . ".html");
-			// 	break;
+			case "contact";
+				include("module/contactus/contactus.html");
+				break;
 		case "404";
 			include("view/inc/error/" . $_GET['page'] . ".html");
 			break;

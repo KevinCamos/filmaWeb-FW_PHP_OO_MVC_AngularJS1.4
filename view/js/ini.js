@@ -21,7 +21,50 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
       });
   });
 }
+function friendlyURL(url) {
+  return new Promise(function (resolve, reject) {
+    //////
+    $.ajax({
+      url: 'http://' + window.location.hostname + '/Kevin/Ejercicios_Kevin/Projecte/paths.php?op=get',
+      type: 'POST',
+      dataType: 'JSON'
+    }).done(function (data) {
+      let link = "";
+      if (data === true) {
+        url = url.replace("?", "");
+        url = url.split("&");
+        for (let i = 0; i < url.length; i++) {
+          let aux = url[i].split("=");
+          link += "/" + aux[1];
+        }// end_for
+      } else {
+        link = '/' + url;
+      }// end_else
+      resolve("http://" + window.location.hostname + "/Kevin/Ejercicios_Kevin/Projecte" + link);
+    }).fail(function (error) {
+      reject(error);
+    });
+  });
+}
+function loadMenu() {
+  //////
+  Promise.all([friendlyURL('?page=home'), friendlyURL('?page=movies&op=list'), friendlyURL('?page=shop'), friendlyURL('?page=contact'), friendlyURL('?page=cart')])
+    .then(function (values) {
+      console.log(values)
+      $('<li></li>').html('<a href="' + values[0] + '" id="Inicio" data-tr="Inicio"></a>').appendTo('#fixed-menu');
+      $('<li></li>').html('<a href="' + values[1] + '" id="Peliculas" data-tr="Peliculas"></a>').appendTo('#fixed-menu');
+      $('<li></li>').html('<a href="' + values[2] + '" id="Tienda" data-tr="Tienda"></a>').appendTo('#fixed-menu');
+      $('<li></li>').html('<a href="' + values[2] + '" id="Contacta con nosotros"  data-tr="Contacta con nosotros"></a>').appendTo('#fixed-menu');
+      $('<li></li>').html('<a href="' + values[3] + '" id="Tienda" data-tr="Tienda"></a>').appendTo('#fixed-menu');
+      $('<li></li>').html(' <button class="lang-btn" data-tr="Valenciano" id="btn-val"></buttton>').appendTo('#fixed-menu');
+      $('<li></li>').html(' <button class="lang-btn" data-tr="Castellano" id="btn-es"></buttton>').appendTo('#fixed-menu');
+      $('<li></li>').html(' <button class="lang-btn" data-tr="Inglés" id="btn-en"></buttton>').appendTo('#fixed-menu');
+      $('<li></li>').html('<a href="' + values[4] + '" id="Cart" class="fas fa-shopping-cart" style="font-size: 3em;"><label id="countCart"></label></a>').appendTo('#fixed-menu');
 
+
+    });
+  //////
+}
 function clickShopMenu() {
   $("#Tienda").click(function () {
     // if (sessionStorage.getItem("filterCategory") != null) {

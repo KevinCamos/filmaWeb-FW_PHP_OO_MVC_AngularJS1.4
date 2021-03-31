@@ -1,0 +1,22 @@
+RewriteEngine on
+RewriteBase /frameworkCars.v.1.3/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+Rewriterule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?page=$1&op=$2&param=$3&param2=$4&param3=$5 [L,NC,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+Rewriterule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?page=$1&op=$2&param=$3&param2=$4 [L,NC,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+Rewriterule ^([^/]*)/([^/]*)/([^/]*)$ index.php?page=$1&op=$2&param=$3 [L,NC,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+Rewriterule ^([^/]*)/([^/]*)$ index.php?page=$1&op=$2 [L,NC,QSA]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+Rewriterule ^([^/]*)$ index.php?page=$1 [L,NC,QSA]

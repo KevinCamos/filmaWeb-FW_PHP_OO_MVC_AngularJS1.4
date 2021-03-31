@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modules>
+    <!-- <module>
+        <name>home</name>
+        <uri>home</uri>
+    </module>
+    <module>
+        <name>shop</name>
+        <uri>shop</uri>
+    </module>
+    <module>
+        <name>search</name>
+        <uri>search</uri>
+    </module> -->
+    <module>
+        <name>contact</name>
+        <uri>contact</uri>
+    </module>
+    <!-- <module>
+        <name>login</name>
+        <uri>login</uri>
+        <uri>register</uri>
+    </module>
+    <module>
+        <name>cart</name>
+        <uri>cart</uri>
+    </module>
+    <module>
+        <name>movies</name>
+        <uri>movies</uri>
+    </module> -->
+
+</modules>

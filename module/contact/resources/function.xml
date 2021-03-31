@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>list_contact_dogs</name>
+        <uri>list_contact</uri>
+    </function>
+    <function>
+        <name>send_contact_dogs</name>
+        <uri>send_cont</uri>
+    </function>
+</functions>
