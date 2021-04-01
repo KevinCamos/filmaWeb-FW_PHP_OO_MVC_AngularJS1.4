@@ -1,6 +1,6 @@
-<!-- ///de moment no es gasta -->
 
 <?php
+// NOTA DE KEVIN!!  de moment no es gasta
 // function upload_files(){
 // 	$error = "";
 //     $copyfile = false;

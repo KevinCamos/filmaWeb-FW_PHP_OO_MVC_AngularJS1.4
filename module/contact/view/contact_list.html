@@ -1,42 +1,44 @@
-
-<br><br><br><br>	
+<br><br><br><br>
 <h2>Contact</h2>
+<form id="contactForm">
 
-<table>
-    <tr>
-       	<td>Nombre y Apellidos: </td>
-       		<td id="error_name"><input type="text" name="cname" id="cname" required="required" placeholder="Nombre" value=""/>
-      	</td>
-    </tr>
-    <tr>
-       	<td>Correo electronico: </td>
-       		<td id="error_emial"><input type="text" name="cemail" id="cemail" required="required" placeholder="Correo electronico" value=""/>
-       	</td>
-    </tr>
-    <tr>
-      	<td>Asunto: </td>
-      	<td>
-	      	<select name="matter" id="matter">
-	         	<option selected>Seleccione un asunto</option>
-	         	<option>Problemas con la pagina</option>
-	         	<option>Mejoras para la pagina</option>
-                <option>Problemas con el registro</option>
-                <option>Problemas al insertar un perro</option>
-                <option>Problemas al intentar adoptar</option>
-                <option>Contacto para una promoción</option>
-                <option>Otros</option>
-	        </select>
-       	</td>
-     </tr>
- 	<tr>
-   		<td>Mensaje: </td>
-       	<td id="error_dinfo">
-       		<textarea rows="4" cols="50" name="message" id="message"></textarea>
-       	</td>
-    </tr>
-</table>
-<br/>
-<button type="button" name="send_contact" id="send_contact">Enviar</button>
-
+	<table>
+		<tr>
+			<td>Nombre y Apellidos: </td>
+			<td id="error_name"><input type="text" name="cname" id="cname" required="required" placeholder="Nombre"
+					value="Kevin" />
+			</td>
+		</tr>
+		<tr>
+			<td>Correo electronico: </td>
+			<td id="error_emial"><input type="text" name="cemail" id="cemail" required="required"
+					placeholder="Correo electronico" value="kevincamossoto@gmail.com" />
+			</td>
+		</tr>
+		<tr>
+			<td>Asunto: </td>
+			<td>
+				<select name="matter" id="matter">
+					<option>Seleccione un asunto</option>
+					<option selected>Problemas con la pagina</option>
+					<option>Mejoras para la pagina</option>
+					<option>Problemas con el registro</option>
+					<option>Problemas al insertar un perro</option>
+					<option>Problemas al intentar adoptar</option>
+					<option>Contacto para una promoción</option>
+					<option>Otros</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Mensaje: </td>
+			<td id="error_dinfo">
+				<textarea rows="4" cols="50" name="message" id="message"></textarea>
+			</td>
+		</tr>
+	</table>
+	<br />
+	<button type="button" name="send_contact" id="send_contact">Enviar</button>
+</form>
 <!-- <img src="<?php echo IMG_PATH; ?>ajax-loader.gif" alt="ajax loader icon" class="ajaxLoader" /><br/><br/> -->
 <div id="rltsendmessage" style="display: none;"></div>

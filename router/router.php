@@ -30,7 +30,6 @@ function handlerRouter()
 
     if (!empty($_GET['function'])) {
         $URI_function = $_GET['function'];
-
     } else {
         $URI_function = 'list_home';
     }
@@ -41,7 +40,7 @@ function handlerModule($URI_module, $URI_function)
 {
     $modules = simplexml_load_file('resources/modules.xml');
     $exist = false;
-   
+
 
     foreach ($modules->module as $module) {
         if (($URI_module === (string) $module->uri)) {
@@ -50,13 +49,12 @@ function handlerModule($URI_module, $URI_function)
             $path = MODULES_PATH . $URI_module . "/controller/controller_" . $URI_module . ".class.php";
 
             if (file_exists($path)) {
-                
+
                 require_once($path);
                 $controllerClass = "controller_" . $URI_module;
                 $obj = new $controllerClass;
-
             } else {
-                require_once(VIEW_PATH_INC . "top_page.html"); ///top_page.html
+                require_once(VIEW_PATH_INC . "top_page_home.html"); ///top_page.html
                 require_once(VIEW_PATH_INC . "header.html");
                 require_once(VIEW_PATH_INC . "menu.html");
                 // require_once(VIEW_PATH_INC . "404.php");
@@ -67,9 +65,11 @@ function handlerModule($URI_module, $URI_function)
         }
     }
     if (!$exist) {
-        require_once(VIEW_PATH_INC . "top_page.html"); ///top_page.html
+        require_once(VIEW_PATH_INC . "top_page_home.html"); ///top_page.html
         require_once(VIEW_PATH_INC . "header.html");
         require_once(VIEW_PATH_INC . "menu.html");
+        // require_once(VIEW_PATH_INC . "404.php");
+
         // require_once(VIEW_PATH_INC . "404.php");
         require_once(VIEW_PATH_INC . "footer.html");
     }
@@ -83,12 +83,11 @@ function handlerfunction($module, $obj, $URI_function)
 
     foreach ($functions->function as $function) {
         if (($URI_function === (string) $function->uri)) {
-            
+
             $exist = true;
             $event = (string) $function->name;
             break;
-        }else{
-
+        } else {
         }
     }
 

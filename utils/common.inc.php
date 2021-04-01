@@ -29,7 +29,7 @@
         $view_path = $rutaVista . $templateName;
         $arrData = '';
           if (file_exists($view_path)) {
-              echo ($view_path);
+            //   echo ($view_path);
             if (isset($arrPassValue))
                       
 

@@ -22,30 +22,23 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
   });
 }
 function friendlyURL(url) {
-  return new Promise(function (resolve, reject) {
-    //////
-    $.ajax({
-      url: 'http://' + window.location.hostname + '/Kevin/Ejercicios_Kevin/Projecte/paths.php?op=get',
-      type: 'POST',
-      dataType: 'JSON'
-    }).done(function (data) {
-      let link = "";
-      if (data === true) {
-        url = url.replace("?", "");
-        url = url.split("&");
-        for (let i = 0; i < url.length; i++) {
-          let aux = url[i].split("=");
-          link += "/" + aux[1];
-        }// end_for
-      } else {
-        link = '/' + url;
-      }// end_else
-      resolve("http://" + window.location.hostname + "/Kevin/Ejercicios_Kevin/Projecte" + link);
-    }).fail(function (error) {
-      reject(error);
-    });
-  });
+  var link="";
+  url = url.replace("?", "");
+  url = url.split("&");
+  cont = 0;
+  for (var i=0;i<url.length;i++) {
+    cont++;
+      var aux = url[i].split("=");
+      if (cont == 2) {
+        link +=  "/"+aux[1]+"/";	
+      }else{
+        link +=  "/"+aux[1];
+      }
+  }
+
+  return "http://" + window.location.hostname + "/Kevin/Ejercicios_Kevin/Projecte" + link;
 }
+
 function loadMenu() {
   //////
   Promise.all([friendlyURL('?page=home'), friendlyURL('?page=movies&op=list'), friendlyURL('?page=shop'), friendlyURL('?page=contact'), friendlyURL('?page=cart')])
