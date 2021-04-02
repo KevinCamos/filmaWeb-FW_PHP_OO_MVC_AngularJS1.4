@@ -61,7 +61,7 @@ function sendEmail() {
 		if (validateEmail() == true) {
 			$('#send_contact').attr('disabled', true);
 			$('.ajaxLoader').fadeIn("fast");
-			var fin_data = $('#contactForm').serializeObject();
+			var fin_data = $('#contactForm').serializeArray();
 			// var data = {
 			// 	"cname": $("#cname").val(),
 			// 	"cemail": $("#cemail").val(),

@@ -1,6 +1,8 @@
 <?php
-function enviar_email($arr)
+function send_email($arr)
 {
+
+    // return "hola";
     $html = '';
     $subject = '';
     $body = '';
@@ -8,21 +10,21 @@ function enviar_email($arr)
     $return = '';
 
     switch ($arr['type']) {
-        case 'alta':
-            $subject = 'Tu Alta en Ohana dogs';
-            $ruta = "<a href='" . amigable("?module=home&function=active_user&param=" . $arr['token'], true) . "'>aqu&iacute;</a>";
-            $body = 'Gracias por unirte a nuestra aplicaci&oacute;n<br> Para finalizar el registro, pulsa ' . $ruta;
-            break;
+            // case 'alta':
+            //     $subject = 'Tu Alta en Ohana dogs';
+            //     $ruta = "<a href='" . amigable("?module=home&function=active_user&param=" . $arr['token'], true) . "'>aqu&iacute;</a>";
+            //     $body = 'Gracias por unirte a nuestra aplicaci&oacute;n<br> Para finalizar el registro, pulsa ' . $ruta;
+            //     break;
 
-        case 'changepass':
-            $subject = 'Tu Nuevo Password en Ohana dogs<br>';
-            $ruta = '<a href="' . amigable("?module=login&function=changepass&aux=" . $arr['token'], true) . '">aqu&iacute;</a>';
-            $body = 'Para recordar tu password pulsa ' . $ruta;
-            break;
+            // case 'changepass':
+            //     $subject = 'Tu Nuevo Password en Ohana dogs<br>';
+            //     $ruta = '<a href="' . amigable("?module=login&function=changepass&aux=" . $arr['token'], true) . '">aqu&iacute;</a>';
+            //     $body = 'Para recordar tu password pulsa ' . $ruta;
+            //     break;
 
         case 'contact':
-            $subject = 'Tu Petici&oacute;n a Ohana_dogs ha sido enviada<br>';
-            $ruta = '<a href=' . 'http://localhost/1_Fw_PHP_OO_MVC_jQuery_AngularJS/Framework/9_adoptions_dogs/' . '>aqu&iacute;</a>';
+            $subject = 'Tu Petición a Filmaweb ha sido enviada<br>';
+            // $ruta = '<a href=' . 'http://localhost/1_Fw_PHP_OO_MVC_jQuery_AngularJS/Framework/9_adoptions_dogs/'. '>aqu&iacute;</a>';
             $body = 'Para visitar nuestra web, pulsa ' . $ruta;
             break;
 
@@ -53,11 +55,16 @@ function enviar_email($arr)
 
     //set_error_handler('ErrorHandler');
     try {
-        if ($arr['type'] === 'admin')
-            $address = 'ruralshoponti@gmail.com';
-        else
-            $address = $arr['inputEmail'];
-        $result = send_mailgun('ruralshoponti@gmail.com', $address, $subject, $html);
+        if ($arr['type'] === 'admin') {
+            $from = 'filmawebdaw@gmail.com';
+            $email = $arr['inputEmail'];
+        } else {
+            $from = $arr['inputEmail'];
+            $email = 'filmawebdaw@gmail.com';
+        }
+        // $result = ["from" => $from,  "email" => $email, "subject" => $subject, "html" => $html];
+        // return $result;
+        $result = send_mailgun($from,  $email, $subject, $html);
     } catch (Exception $e) {
         $return = 0;
     }
@@ -68,8 +75,8 @@ function enviar_email($arr)
 function send_mailgun($from, $email, $subject, $html)
 {
     $config = array();
-    $config['api_key'] = "key-c342d7c7154ef13444ccc0cbb66fd89f"; //API Key
-    $config['api_url'] = "https://api.mailgun.net/v2/sandbox1811da627e3e450ebabe2e836ed20a3a.mailgun.org/messages"; //API Base URL
+    $config['api_key'] = EMAIL_KEY; //API Key
+    $config['api_url'] = EMAIL_URL; //API Base URL
 
     $message = array();
     $message['from'] = $from;

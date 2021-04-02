@@ -1,6 +1,5 @@
 RewriteEngine on
-RewriteBase /Ejercicios_Kevin/Projecte/
-
+RewriteBase /Kevin/Ejercicios_Kevin/Projecte/
 RewriteCond %{REQUEST_FILENAME} !-f
 Rewriterule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?module=$1&function=$2&param=$3&param2=$4 [L,NC]
 

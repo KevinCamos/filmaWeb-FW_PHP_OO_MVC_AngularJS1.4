@@ -1,5 +1,6 @@
 <?php
 require 'autoload.php';
+require 'assets/JWTKey.php';
 // require_once("paths.php");
 // include(UTILS . "utils.inc.php");
 // include(UTILS . "common.inc.php");
