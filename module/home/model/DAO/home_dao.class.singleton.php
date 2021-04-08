@@ -22,13 +22,18 @@ class home_dao
         return $db->listar($stmt);
     }
 
-    // public function select_data_details($db, $arrArgument)
-    // {
-    //     $sql = "SELECT name,chip,breed,sex,stature,picture,date_birth,tlp,country,province,city,cinfo,dinfo FROM dogs WHERE chip = '$arrArgument'";
-    //     $stmt = $db->ejecutar($sql);
-    //     return $db->listar($stmt);
-    // }
-
+    public function select_data_homeProducts($db, $offset)
+    {
+        $sql = "SELECT * FROM movies ORDER BY clicks DESC LIMIT $offset, 2";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+    public function update_countClick($db, $arrArgument)
+    {
+        $sql = "UPDATE movies SET clicks = clicks+ 1 
+        WHERE id = $arrArgument";
+        return $db->ejecutar($sql);
+    }
     // public function select_best_breed($db, $arrArgument)
     // {
     //     $sql = "SELECT breed FROM dogs GROUP BY breed ORDER BY count(*) DESC LIMIT $arrArgument,2";

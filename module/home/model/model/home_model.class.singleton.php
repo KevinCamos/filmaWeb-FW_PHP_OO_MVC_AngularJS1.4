@@ -20,9 +20,14 @@ class home_model {
     }
 
 
-    // public function obtain_data_list($arrArgument){
-    //     return $this->bll->obtain_data_list_BLL($arrArgument);
-    // }
+    public function homeProducts($arrArgument){
+        // return "hola";
+        return $this->bll->obtain_homeProducts_BLL($arrArgument);
+    }
+    public function countClick($arrArgument){
+        // return "hola";
+        return $this->bll->update_countClick_BLL($arrArgument);
+    }
     // public function obtain_data_details($arrArgument){
     //     return $this->bll->obtain_data_details_BLL($arrArgument);
     // }

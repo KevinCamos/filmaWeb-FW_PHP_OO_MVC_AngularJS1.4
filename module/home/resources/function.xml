@@ -8,15 +8,15 @@
         <name>carousel</name>
         <uri>carousel</uri>
     </function>
-     <!-- <function>
-        <name>best_breed</name>
-        <uri>best_breed</uri>
+     <function>
+        <name>homeProducts</name>
+        <uri>homeProducts</uri>
     </function>
     <function>
-        <name>select_auto_name</name>
-        <uri>select_auto_name</uri>
+        <name>countClick</name>
+        <uri>countClick</uri>
     </function>
-    <function>
+   <!--  <function>
         <name>load_name</name>
         <uri>load_name</uri>
     </function>

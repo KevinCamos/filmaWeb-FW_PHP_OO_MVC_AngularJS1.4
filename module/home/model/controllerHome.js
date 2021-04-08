@@ -35,9 +35,8 @@ function loadCategoryCarousel() {
       "index.php?module=home&function=carousel", "GET", "JSON"
     )
     .then(function (category) {
-      alert(category);
       console.log(category);
-            for (let i = 0; i < category.length; i++) {
+      for (let i = 0; i < category.length; i++) {
         let id = "" + category[i]["id_category"];
         let ObjectCategory = category[i]["category"];
         let img = "" + category[i]["img"];
@@ -102,12 +101,13 @@ function loadCategoryCarousel() {
     });
 }
 
-function ajaxSearch(dirUrl) {
+function ajaxSearch(dirUrl, offset=0) {
   $("<div>").addClass("loading").appendTo("#productsHome"); //NO VAAAAA :(
-  ajaxPromise(dirUrl, "GET", "JSON")
+
+  ajaxPromise(dirUrl, "GET", "JSON", {offset:offset})
     .then(function (category) {
       // $("#messages-list").removeClass("loading");
-
+      console.log(category);
       for (let i = 0; i < category.length; i++) {
         let id = "" + category[i]["id"];
         // let name = category[i]["name"];
@@ -125,8 +125,9 @@ function ajaxSearch(dirUrl) {
       // $(".loading").removeItem();
       $(".productHome").click(clickProductHome); ////FUNCIÓ CLICK CATEGORY///////////////////////
     })
-    .catch(function () {
-      window.location.href = "index.php?page=error503";
+    .catch(function (data) {
+      alert(data);
+      console.log(data);
     });
 }
 
@@ -151,9 +152,12 @@ function detectScrollBrands() {
 }
 
 function loadHomeProducts(offset = 0) {
+
+
   ajaxSearch(
-    "module/home/controller/controllerHomePage.php?op=homeProducts&offset=" +
-    offset
+    "index.php?module=home&function=homeProducts", offset
+    
+
   );
 }
 
@@ -211,16 +215,21 @@ function clickProductHome() {
 }
 
 function countClickProduct(id) {
-  dirUrl =
-    "module/home/controller/controllerHomePage.php?op=countClick&count=" + id;
+  dirUrl ="index.php?module=home&function=countClick";
+
   console.log(dirUrl);
   // return false;
-  ajaxPromise(dirUrl, "GET", "JSON")
+  
+  ajaxPromise(dirUrl, "GET", "JSON",{id:id})
     .then(function (data) {
       console.log(data);
     })
-    .catch(function () {
-      console.log("ERROR, click no registrado");
+    .catch(function (data) {
+      
+      alert(data);
+
+      console.log(data);
+      
     });
 }
 
@@ -230,7 +239,7 @@ $(document).ready(function () {
   // loadCategoryCarousel();
   dialogBeastProducts();
   loadHomeProducts();
-  // detectScrollBrands();
-  // clickShopMenu();
+  detectScrollBrands();
+  clickShopMenu();
 
 });

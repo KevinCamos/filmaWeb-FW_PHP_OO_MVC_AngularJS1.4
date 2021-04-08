@@ -25,22 +25,26 @@ class controller_home
 	}
 
 
-	// function best_breed()
-	// {
-	// 	if ((isset($_POST["best_breed"])) && ($_POST["best_breed"] == true)) {
-	// 		$json = array();
-	// 		$json = loadModel(MODEL_HOME, "home_model", "best_breed_home", $_POST['position']);
-	// 		echo json_encode($json);
-	// 	}
-	// }
+	function homeProducts()
+	{
+		// echo json_encode($_GET["offset"]);
 
-	// function select_auto_name() {
-	// 	if ((isset($_POST["select_auto_name"])) && ($_POST["select_auto_name"] == true)){
-	// 		$json = array();
-	// 	 	$json = loadModel(MODEL_HOME, "home_model", "select_auto_name",$_POST['keyword']);
-	// 	 	echo json_encode($json);
-	// 	}
-	// }
+		if (isset($_GET["offset"])) {
+			$json = array();
+			$json = loadModel(MODEL_HOME, "home_model", "homeProducts", $_GET["offset"]);
+			echo json_encode($json);
+		}
+	}
+	function countClick()
+	{
+		// echo json_encode($_GET["id"]);
+
+		if (isset($_GET["id"])) {
+			$json = array();
+			$json = loadModel(MODEL_HOME, "home_model", "countClick", $_GET["id"]);
+			echo json_encode($json);
+		}
+	}
 
 	// function load_name(){
 	// 	if ((isset($_POST["load_name"])) && ($_POST["load_name"] == true)){
