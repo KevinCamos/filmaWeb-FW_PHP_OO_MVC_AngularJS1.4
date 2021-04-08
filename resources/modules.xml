@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modules>
-    <!-- <module>
+    <module>
         <name>home</name>
         <uri>home</uri>
     </module>
-    <module>
+    <!--  <module>
         <name>shop</name>
         <uri>shop</uri>
     </module>

@@ -1,14 +1,22 @@
 function loadDivsCarousel() {
-  $("#carousel-products").empty(); //Borrar lo de dins
+  $("#carousel-products").empty(); //Borrar lo de 
 
   $("<div></div>")
-    .attr({ class: "row", id: "row_products" })
+    .attr({
+      class: "row",
+      id: "row_products"
+    })
     .appendTo("#carousel-products");
   $("<div></div>")
-    .attr({ class: "large-12 columns", id: "large_columns" })
+    .attr({
+      class: "large-12 columns",
+      id: "large_columns"
+    })
     .appendTo("#row_products");
   $("<h4></h4>")
-    .attr({ class: "line_menu" })
+    .attr({
+      class: "line_menu"
+    })
     .append(document.createTextNode("Categorías"))
     .appendTo("#large_columns");
   $("<div></div>")
@@ -17,27 +25,28 @@ function loadDivsCarousel() {
       id: "products_DIV",
     })
     .appendTo("#large_columns");
+  loadCategoryCarousel()
+
 }
+
 function loadCategoryCarousel() {
+
   ajaxPromise(
-    "module/home/controller/controllerHomePage.php?op=homeCarousel",
-    "GET",
-    "JSON"
-  )
+      "index.php?module=home&function=carousel", "GET", "JSON"
+    )
     .then(function (category) {
-      // $.ajax({
-      //   url: "module/home/controller/controllerHomePage.php?op=homeCarousel",
-      //   dataType: "JSON", //  type : tipo de la petición, GET o POST (GET por defecto)
-      //   type: "GET",
-      // })
-      //   .done(function (category) {
-      for (let i = 0; i < category.length; i++) {
+      alert(category);
+      console.log(category);
+            for (let i = 0; i < category.length; i++) {
         let id = "" + category[i]["id_category"];
         let ObjectCategory = category[i]["category"];
         let img = "" + category[i]["img"];
 
         let firstDiv = $("<div></div>")
-          .attr({ class: "item", id: "item" + img })
+          .attr({
+            class: "item",
+            id: "item" + img
+          })
           .appendTo("#products_DIV");
         $("<img>")
           .attr({
@@ -87,10 +96,12 @@ function loadCategoryCarousel() {
       });
     })
     // .fail(function () {
-    .catch(function () {
-      window.location.href = "index.php?page=error503";
+    .catch(function (data) {
+      alert(data);
+      console.log(data);
     });
 }
+
 function ajaxSearch(dirUrl) {
   $("<div>").addClass("loading").appendTo("#productsHome"); //NO VAAAAA :(
   ajaxPromise(dirUrl, "GET", "JSON")
@@ -118,6 +129,7 @@ function ajaxSearch(dirUrl) {
       window.location.href = "index.php?page=error503";
     });
 }
+
 function detectScrollBrands() {
   var count = 1;
 
@@ -137,10 +149,11 @@ function detectScrollBrands() {
     } // end_if
   });
 }
+
 function loadHomeProducts(offset = 0) {
   ajaxSearch(
     "module/home/controller/controllerHomePage.php?op=homeProducts&offset=" +
-      offset
+    offset
   );
 }
 
@@ -152,6 +165,7 @@ function dialogBeastProducts() {
     .append(document.createTextNode("Nuestros mejores productos"))
     .appendTo("#productsHome");
 }
+
 function clickCategory() {
   //FUNCIÓ A LA LÍNEA 45!
   cleanItems();
@@ -171,6 +185,7 @@ function clickCategory() {
     window.location.href = "index.php?page=shop";
   }
 }
+
 function clickProductHome() {
   //FUNCIÓ A LA LÍNEA 45!
   cleanItems();
@@ -194,6 +209,7 @@ function clickProductHome() {
     window.location.href = "index.php?page=shop";
   }
 }
+
 function countClickProduct(id) {
   dirUrl =
     "module/home/controller/controllerHomePage.php?op=countClick&count=" + id;
@@ -211,10 +227,10 @@ function countClickProduct(id) {
 $(document).ready(function () {
   $("#productsHome").empty(); //Borrar lo de dins
   loadDivsCarousel();
-  loadCategoryCarousel();
+  // loadCategoryCarousel();
   dialogBeastProducts();
   loadHomeProducts();
-  detectScrollBrands();
-  clickShopMenu();
+  // detectScrollBrands();
+  // clickShopMenu();
 
 });

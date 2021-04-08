@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>list_home</name>
+        <uri>list_home</uri>
+    </function>
+   <function>
+        <name>carousel</name>
+        <uri>carousel</uri>
+    </function>
+     <!-- <function>
+        <name>best_breed</name>
+        <uri>best_breed</uri>
+    </function>
+    <function>
+        <name>select_auto_name</name>
+        <uri>select_auto_name</uri>
+    </function>
+    <function>
+        <name>load_name</name>
+        <uri>load_name</uri>
+    </function>
+    <function>
+        <name>selected_best_breed</name>
+        <uri>selected_best_breed</uri>
+    </function>
+    <function>
+        <name>details_list</name>
+        <uri>details_list</uri>
+    </function>
+    <function>
+        <name>get_breed</name>
+        <uri>get_breed</uri>
+    </function>
+    <function>
+        <name>load_list</name>
+        <uri>load_list</uri>
+    </function>
+    <function>
+        <name>active_user</name>
+        <uri>active_user</uri>
+    </function> -->
+</functions>

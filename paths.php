@@ -21,7 +21,13 @@ define ('JS_VIEW_CONTACT', VIEW_PATH_CONTACT . 'js/');
 
 //Home
 define ('VIEW_PATH_HOME', SITE_ROOT . 'module/home/view/');
-define ('MODEL_PATH_HOME', SITE_ROOT . 'module/home/model/model/');
+define('MODEL_PATH_HOME', SITE_ROOT . 'module/home/model/');
+define('UTILS_HOME', SITE_ROOT . 'module/home/utils/');
+define('DAO_HOME', SITE_ROOT . 'module/home/model/DAO/');
+define('BLL_HOME', SITE_ROOT . 'module/home/model/BLL/');
+define('MODEL_HOME', SITE_ROOT . 'module/home/model/model/');
+define('JS_VIEW_HOME', SITE_PATH . 'module/home/view/js/');
+
 
 //Shop
 define ('VIEW_PATH_SHOP', SITE_ROOT . 'module/shop/view/');

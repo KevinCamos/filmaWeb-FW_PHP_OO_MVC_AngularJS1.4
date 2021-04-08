@@ -1,19 +1,3 @@
-// function friendlyURL(url) {
-// 	var link = "";
-// 	url = url.replace("?", "");
-// 	url = url.split("&");
-// 	cont = 0;
-// 	for (var i = 0; i < url.length; i++) {
-// 		cont++;
-// 		var aux = url[i].split("=");
-// 		if (cont == 2) {
-// 			link += "/" + aux[1] + "/";
-// 		} else {
-// 			link += "/" + aux[1];
-// 		}
-// 	}
-// 	return "http://" + window.location.hostname + "/Kevin/Ejercicios_Kevin/Projecte" + link;
-// }
 
 function validateEmail() {
 	$(".error").remove();
@@ -89,35 +73,6 @@ function sendEmail() {
 
 				})
 
-			// console.log(friendlyURL("?module=contact_dogs&function=send_cont"))
-			// ajaxPromise("?module=contact_dogs&function=send_cont", "POST", "JSON", 
-			// {"fin_data": fin_data})
-			// .then(function (data, event) {
-			// 	alert(data)
-			// 	alert(event)
-			// }).catch(function (data, event) {
-			// 	$('.ajaxLoader').fadeOut("fast");
-			// 	console.log(data);
-			// 	$("#rltsendmessage").html(data).fadeIn("slow");
-
-			// 	setTimeout(function () {
-			// 		$("#rltsendmessage").fadeOut("slow")
-			// 	}, 5000);
-
-			// })
-
-			// $.post(amigable("?module=contact_dogs&function=send_cont"), {
-			// 	"fin_data": fin_data
-			// }, function (data, event) {
-			// 	// $.post("../../index.php?module=contact_dogs&function=send_cont",{"fin_data":fin_data},function(data,event){
-			// 	$('.ajaxLoader').fadeOut("fast");
-			// 	console.log(data);
-			// 	$("#rltsendmessage").html(data).fadeIn("slow");
-
-			// 	setTimeout(function () {
-			// 		$("#rltsendmessage").fadeOut("slow")
-			// 	}, 5000);
-			// });
 		}
 	});
 

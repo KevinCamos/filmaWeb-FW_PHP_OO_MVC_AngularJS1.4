@@ -32,7 +32,7 @@ function handlerRouter()
     if (!empty($_GET['function'])) {
         $URI_function = $_GET['function'];
     } else {
-        $URI_function = 'list_home';
+        $URI_function = 'home';
     }
     handlerModule($URI_module, $URI_function);
 }
@@ -55,24 +55,14 @@ function handlerModule($URI_module, $URI_function)
                 $controllerClass = "controller_" . $URI_module;
                 $obj = new $controllerClass;
             } else {
-                require_once(VIEW_PATH_INC . "top_page_home.html"); ///top_page.html
-                require_once(VIEW_PATH_INC . "header.html");
-                require_once(VIEW_PATH_INC . "menu.html");
-                // require_once(VIEW_PATH_INC . "404.php");
-                require_once(VIEW_PATH_INC . "footer.html");
+                ifNoExistPage();
             }
             handlerfunction(((string) $module->name), $obj, $URI_function);
             break;
         }
     }
     if (!$exist) {
-        require_once(VIEW_PATH_INC . "top_page_home.html"); ///top_page.html
-        require_once(VIEW_PATH_INC . "header.html");
-        require_once(VIEW_PATH_INC . "menu.html");
-        // require_once(VIEW_PATH_INC . "404.php");
-
-        // require_once(VIEW_PATH_INC . "404.php");
-        require_once(VIEW_PATH_INC . "footer.html");
+        ifNoExistPage();
     }
 }
 
@@ -93,14 +83,18 @@ function handlerfunction($module, $obj, $URI_function)
     }
 
     if (!$exist) {
-        require_once(VIEW_PATH_INC . "top_page.html"); ///top_page.html
-        require_once(VIEW_PATH_INC . "header.html");
-        require_once(VIEW_PATH_INC . "menu.html");
-        // require_once(VIEW_PATH_INC . "404.php");
-        require_once(VIEW_PATH_INC . "footer.html");
+        ifNoExistPage();
     } else {
         call_user_func(array($obj, $event));
     }
 }
+function ifNoExistPage()
+{
+    require_once(VIEW_PATH_INC . "top_page_home.html");
+    require_once(VIEW_PATH_INC . "header.html");
+    require_once(VIEW_PATH_INC . "menu.html");
+    loadView(VIEW_PATH_HOME. 'home.html');
 
+    require_once(VIEW_PATH_INC . "footer.html");
+}
 handlerRouter();
