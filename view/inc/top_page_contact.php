@@ -12,18 +12,18 @@
         <![endif]-->
     <title>Projecte</title>
     <!-- BOOTSTRAP CORE STYLE CSS -->
-    <link href="view/css/bootstrap.css" rel="stylesheet" />
+    <link href="<?php echo CSS_PATH ?>bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLE CSS -->
-    <link href="view/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="<?php echo CSS_PATH ?>font-awesome.min.css" rel="stylesheet" />
     <!-- CUSTOM STYLE CSS -->
-    <link href="view/css/style.css" rel="stylesheet" />
+    <!-- <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" /> -->
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
 
 
     <!-- Mis links -->
-    <link href="view/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo CSS_PATH?>/style.css" rel="stylesheet" type="text/css" />
 
 
     <!--Mis JavaScripts-->
@@ -33,22 +33,22 @@
 
 
     <!-- COMPLEMENTS  COMPLEMENTS  COMPLEMENTS  COMPLEMENTS   -->
-    <script src="view\js\ini.js"></script>
-
+    <script src="<?php echo JS_PATH?>ini.js"></script>
     <!-- SEARCH SEARCH SEARCH SEARCH -->
-    <script src="module\search\model\controllerSearch.js"></script>
+    <script src="<?php echo MODEL_SEARCH ?>controllerSearch.js"></script>
 
     <!-- Custom scripts for this template -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-clean-blog/3.3.7/js/clean-blog.min.js"></script>
-    <script type="text/javascript" src="view/inc/translate.js"></script>
+    <!-- <script type="text/javascript" src="view/inc/translate.js"></script> -->
+    <script type="text/javascript" src="<?php echo VIEW_INC?>/translate.js"></script>
 
-    
+    <?php echo JS_PATH?>
     <!-- CAROUSEL W3SCHOOL -->
 
-    <script type="text/javascript" src="module/contact/model/controllerContact_list.js"></script>
+    <script type="text/javascript" src="<?php echo MODEL_PATH_CONTACT ?>controllerContact_list.js"></script>
 
     <!-- CAROUSEL POR LIBRERÍAS  -->
-    <script src="view\plugins\jquery.min.js"></script>
+    <!-- <script src="view\plugins\jquery.min.js"></script> -->
 
 
 

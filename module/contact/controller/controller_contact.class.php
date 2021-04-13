@@ -9,13 +9,13 @@ class controller_contact
 	function list_contact_dogs()
 	{
 		////ENTRA!!!
-		require_once(VIEW_PATH_INC . "top_page_contact.html"); ///top_page.html
-		require(VIEW_PATH_INC . "header.html");
-		require(VIEW_PATH_INC . "menu.html");
-		require("module/contact/view/contact_list.html");
+		require_once(VIEW_PATH_INC . "top_page_contact.php");
+		require_once(VIEW_PATH_INC . "header.html");
+		require_once(VIEW_PATH_INC . "menu.html");
+		loadView(VIEW_PATH_CONTACT. "contact_list.html");
 
-		loadView('module/contact/view/', 'contact_list.html');
-		require(VIEW_PATH_INC . "footer.html");
+		require_once(VIEW_PATH_INC . "footer.html");
+
 	}
 
 

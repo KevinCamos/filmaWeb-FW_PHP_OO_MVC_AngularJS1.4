@@ -8,7 +8,7 @@ class controller_home
 
 	function home()
 	{
-		require_once(VIEW_PATH_INC . "top_page_home.html");
+		require_once(VIEW_PATH_INC . "top_page_home.php");
 		require_once(VIEW_PATH_INC . "header.html");
 		require_once(VIEW_PATH_INC . "menu.html");
 		loadView(VIEW_PATH_HOME . 'home.html');

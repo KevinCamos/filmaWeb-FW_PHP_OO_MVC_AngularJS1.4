@@ -25,6 +25,7 @@ function loadDivsCarousel() {
       id: "products_DIV",
     })
     .appendTo("#large_columns");
+    
   loadCategoryCarousel()
 
 }

@@ -8,11 +8,11 @@ function importarScript(nombre) {
 function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
   return new Promise((resolve, reject) => {
     $.ajax({
-      url: sUrl,
-      type: sType,
-      dataType: sTData,
-      data: sData,
-    })
+        url: sUrl,
+        type: sType,
+        dataType: sTData,
+        data: sData,
+      })
       .done((data) => {
         resolve(data);
       })
@@ -21,19 +21,20 @@ function ajaxPromise(sUrl, sType, sTData, sData = undefined) {
       });
   });
 }
+
 function friendlyURL(url) {
-  var link="";
+  var link = "";
   url = url.replace("?", "");
   url = url.split("&");
   cont = 0;
-  for (var i=0;i<url.length;i++) {
+  for (var i = 0; i < url.length; i++) {
     cont++;
-      var aux = url[i].split("=");
-      if (cont == 2) {
-        link +=  "/"+aux[1]+"/";	
-      }else{
-        link +=  "/"+aux[1];
-      }
+    var aux = url[i].split("=");
+    if (cont == 2) {
+      link += "/" + aux[1] + "/";
+    } else {
+      link += "/" + aux[1];
+    }
   }
 
   return "http://" + window.location.hostname + "/Kevin/Ejercicios_Kevin/Projecte" + link;
@@ -41,23 +42,25 @@ function friendlyURL(url) {
 
 function loadMenu() {
   //////
-  Promise.all([friendlyURL('?page=home'), friendlyURL('?page=movies&op=list'), friendlyURL('?page=shop'), friendlyURL('?page=contact'), friendlyURL('?page=cart')])
+  Promise.all([friendlyURL('?module=home'), friendlyURL('?page=movies&op=list'), friendlyURL('?page=shop'), friendlyURL('?module=contact&function=list_contact'), friendlyURL('?page=cart')])
     .then(function (values) {
-      console.log(values)
+    //  alert(values)
+    $('#fixed-menu').empty();
       $('<li></li>').html('<a href="' + values[0] + '" id="Inicio" data-tr="Inicio"></a>').appendTo('#fixed-menu');
       $('<li></li>').html('<a href="' + values[1] + '" id="Peliculas" data-tr="Peliculas"></a>').appendTo('#fixed-menu');
       $('<li></li>').html('<a href="' + values[2] + '" id="Tienda" data-tr="Tienda"></a>').appendTo('#fixed-menu');
-      $('<li></li>').html('<a href="' + values[2] + '" id="Contacta con nosotros"  data-tr="Contacta con nosotros"></a>').appendTo('#fixed-menu');
-      $('<li></li>').html('<a href="' + values[3] + '" id="Tienda" data-tr="Tienda"></a>').appendTo('#fixed-menu');
+      $('<li></li>').html('<a href="' + values[3] + '" id="Contacta con nosotros"  data-tr="Contacta con nosotros"></a>').appendTo('#fixed-menu');
       $('<li></li>').html(' <button class="lang-btn" data-tr="Valenciano" id="btn-val"></buttton>').appendTo('#fixed-menu');
       $('<li></li>').html(' <button class="lang-btn" data-tr="Castellano" id="btn-es"></buttton>').appendTo('#fixed-menu');
       $('<li></li>').html(' <button class="lang-btn" data-tr="Inglés" id="btn-en"></buttton>').appendTo('#fixed-menu');
       $('<li></li>').html('<a href="' + values[4] + '" id="Cart" class="fas fa-shopping-cart" style="font-size: 3em;"><label id="countCart"></label></a>').appendTo('#fixed-menu');
+      translate();
 
 
     });
   //////
 }
+
 function clickShopMenu() {
   $("#Tienda").click(function () {
     // if (sessionStorage.getItem("filterCategory") != null) {
@@ -95,7 +98,9 @@ function cleanSQLInyection(chairSearch) {
 
 function openMaps(id) {
   sessionStorage.setItem("idmaps", id);
-  $("#map").attr({ style: "height: 400px;width: 100%;" });
+  $("#map").attr({
+    style: "height: 400px;width: 100%;"
+  });
 
   geolocation();
   script_maps();
@@ -114,6 +119,7 @@ function script_maps() {
     // console.log(script);
   }
 }
+
 function initMap() {
   //Opciones de mapa
   var options = {
@@ -174,6 +180,7 @@ function OpenCoords() {
       console.log("No apleguen les coordenades");
     });
 }
+
 function setPoint(coords) {
   var pointMarker = new Array();
 
@@ -184,8 +191,7 @@ function setPoint(coords) {
         lng: parseFloat(coords[i]["longitude"]),
       },
       map: map,
-      icon:
-        "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+      icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
     });
   }
   return pointMarker;
@@ -213,7 +219,9 @@ function geolocation() {
 function APIspam() {
   $("#apispam").empty();
   $("<h2>")
-    .attr({ style: "text-align: center;  margin-top: 40px;  " })
+    .attr({
+      style: "text-align: center;  margin-top: 40px;  "
+    })
     .text(
       "¡Hola cinemaniaco! Creo que las siguientes películas te pueden interesar"
     )
@@ -225,20 +233,26 @@ function APIspam() {
     var number = Math.round(Math.random() * 100);
     console.log(number);
     ajaxPromise(
-      "http://www.omdbapi.com/?t=" + number + "&apikey=" + API_MOVIES_KEY,
-      "GET",
-      "JSON"
-    )
+        "http://www.omdbapi.com/?t=" + number + "&apikey=" + API_MOVIES_KEY,
+        "GET",
+        "JSON"
+      )
       .then(function (data) {
         // console.log(data);
         if (data.Poster != "N/A") {
           console.log(data.Title);
           var hrefWeb = $("<a>")
-            .attr({ href: data.Website, id: "websiteAPI" })
+            .attr({
+              href: data.Website,
+              id: "websiteAPI"
+            })
             .appendTo("#apispam");
 
           $("<img>")
-            .attr({ src: data.Poster, id: "apiPublicidad" })
+            .attr({
+              src: data.Poster,
+              id: "apiPublicidad"
+            })
             .appendTo(hrefWeb);
         }
         // $.each(data, function (index, list) {});
@@ -248,6 +262,7 @@ function APIspam() {
       });
   }
 }
+
 function removeItemLogin() {
   localStorage.removeItem("idusers");
   localStorage.removeItem("user");
@@ -256,11 +271,13 @@ function removeItemLogin() {
   localStorage.removeItem("email");
   localStorage.removeItem("token");
 }
+
 function DOMLogin() {
   $("#loginUser").empty();
 
   $("#loginMenu").text("Login").addClass("loginMenu").css("color", "gainsboro");
 }
+
 function loginMenu() {
   $("#loginMenu").empty();
   $("#loginUser").empty();
@@ -298,21 +315,27 @@ function loginMenu() {
     }
   });
 }
+
 function loginAnimate() {
   // https://codepen.io/colorlib/pen/rxddKy plantilla
   $(".message a").click(function () {
-    $(".form .modLog").animate(
-      { height: "toggle", width: "toggle", opacity: "toggle" },
+    $(".form .modLog").animate({
+        height: "toggle",
+        width: "toggle",
+        opacity: "toggle"
+      },
       "slow"
     );
     $(".error").empty();
   });
 }
+
 function DOMLogin() {
   $("#loginUser").empty();
 
   $("#loginMenu").text("Login").addClass("loginMenu").css("color", "gainsboro");
 }
+
 function loginMenu() {
   $("#loginMenu").empty();
   $("#loginUser").empty();
@@ -355,11 +378,12 @@ function checkToken(countCart = false) {
     var token = localStorage.getItem("token");
     console.log(token);
     ajaxPromise(
-      "module/login/controller/controllerLogin.php?op=menu", //typeForm =
-      "POST",
-      "JSON",
-      { token: token }
-    )
+        "module/login/controller/controllerLogin.php?op=menu", //typeForm =
+        "POST",
+        "JSON", {
+          token: token
+        }
+      )
       .then(function (data) {
         console.log(typeof data);
         console.log(data);
@@ -393,6 +417,7 @@ function checkToken(countCart = false) {
     return "3";
   }
 }
+
 function tokenTrue() {
   if (checkToken() != false) {
     if (localStorage.getItem("token") != null) {
@@ -411,11 +436,12 @@ function updateToken() {
   if (localStorage.getItem("user") != null) {
     var user = localStorage.getItem("user");
     ajaxPromise(
-      "module/login/controller/controllerLogin.php?op=updateToken", //typeForm =
-      "POST",
-      "JSON",
-      { user: user }
-    )
+        "module/login/controller/controllerLogin.php?op=updateToken", //typeForm =
+        "POST",
+        "JSON", {
+          user: user
+        }
+      )
       .then(function (data) {
         console.log("token actualizado");
         // localStorage.setItem("token", data);
@@ -439,11 +465,13 @@ function getCart() {
   var idUser = getUser();
   if (idUser != -1) {
     ajaxPromise(
-      "module/cart/controller/controllerCart.php", //typeForm =
-      "POST",
-      "JSON",
-      { op: "countCart", idUser: idUser }
-    )
+        "module/cart/controller/controllerCart.php", //typeForm =
+        "POST",
+        "JSON", {
+          op: "countCart",
+          idUser: idUser
+        }
+      )
       .then(function (data) {
         console.log(data.cantidad);
         if (data.cantidad != 0) {
@@ -483,4 +511,5 @@ $(document).ready(function () {
   checkToken(true);
   updateToken();
   toastrOptions();
+  loadMenu();
 });

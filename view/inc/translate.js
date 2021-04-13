@@ -17,7 +17,7 @@ $.ajax({
     }
 })
 }
-$(document).ready(function() {
+function translate(){
     changeLanguage();
 
     $("#btn-es").on("click", function() {
@@ -29,4 +29,5 @@ $(document).ready(function() {
     $("#btn-val").on("click", function() {
         changeLanguage('val')
     });
-});
+};
+
