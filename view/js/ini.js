@@ -40,12 +40,18 @@ function friendlyURL(url) {
   return "http://" + window.location.hostname + "/Kevin/Ejercicios_Kevin/Projecte" + link;
 }
 
+function friendlyModFunc(varModule, varFunction) {
+  url = "?module=" + varModule + "&function=" + varFunction;
+
+  return friendlyURL(url);
+}
+
 function loadMenu() {
   //////
-  Promise.all([friendlyURL('?module=home'), friendlyURL('?page=movies&op=list'), friendlyURL('?page=shop'), friendlyURL('?module=contact&function=list_contact'), friendlyURL('?page=cart')])
+  Promise.all([friendlyURL('?module=home'), friendlyURL('?page=movies&op=list'), friendlyURL('?module=shop&function=shop'), friendlyURL('?module=contact&function=list_contact'), friendlyURL('?page=cart')])
     .then(function (values) {
-    //  alert(values)
-    $('#fixed-menu').empty();
+      //  alert(values)
+      $('#fixed-menu').empty();
       $('<li></li>').html('<a href="' + values[0] + '" id="Inicio" data-tr="Inicio"></a>').appendTo('#fixed-menu');
       $('<li></li>').html('<a href="' + values[1] + '" id="Peliculas" data-tr="Peliculas"></a>').appendTo('#fixed-menu');
       $('<li></li>').html('<a href="' + values[2] + '" id="Tienda" data-tr="Tienda"></a>').appendTo('#fixed-menu');

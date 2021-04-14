@@ -1,5 +1,5 @@
-importarScript("module/shop/model/filter.js");
-importarScript("module/shop/model/orderby.js");
+importarScript("http://localhost/Kevin/Ejercicios_Kevin/Projecte/module/shop/model/filter.js");
+importarScript("http://localhost/Kevin/Ejercicios_Kevin/Projecte/module/shop/model/orderby.js");
 
 /////FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
 function clickerItems(itemString, id) {
@@ -13,6 +13,7 @@ function clickerItems(itemString, id) {
   }
   console.log(sessionStorage.getItem(itemString));
 }
+
 function storageFormats() {
   $("#VHS").click(function () {
     clickerItems("VHS", this.getAttribute("id"));
@@ -39,22 +40,30 @@ function storageFormats() {
 //CARREGA ELS DIVS GENÈRICS, ES CARGA EN LA FUNCIÓ "loadHomeProducts"
 function loadDivsProducts() {
   let section = $("<section></section>")
-    .attr({ id: "port-sec" })
+    .attr({
+      id: "port-sec"
+    })
     .appendTo("#listShop");
   let divContainer = $("<div></div>")
-    .attr({ class: "container" })
+    .attr({
+      class: "container"
+    })
     .appendTo(section);
   return $("<ul></ul>")
-    .attr({ class: "portfolio-items col-3" })
+    .attr({
+      class: "portfolio-items col-3"
+    })
     .appendTo(divContainer);
 }
 //ELS DIVS GENÈRICS DELS PRODUCTES
 function divsProduct(urls, id) {
   var idUser = localStorage.getItem("idusers");
-  idUser == null? idUser=-1: idUser=idUser;
+  idUser == null ? idUser = -1 : idUser = idUser;
   // alert(idUser);
   // alert(id);
-  ajaxPromise(urls + id, "GET", "JSON", { idUser: idUser })
+  ajaxPromise(urls + id, "GET", "JSON", {
+      idUser: idUser
+    })
     .then(function (category) {
       console.log(category);
       //// .hide PER A OCULTAR EL FORMULARI QUE REOBRIREM AL EIXIR
@@ -68,7 +77,9 @@ function divsProduct(urls, id) {
       var img = "" + category.img;
 
       var table = $("<p></p>")
-        .attr({ id: "p" + id })
+        .attr({
+          id: "p" + id
+        })
         .appendTo("#listShop");
 
       // let name = category.movie;
@@ -198,10 +209,10 @@ function loadHomeProducts(offset = 0) {
           );
           searchAjaxProducts(
             urlCategory +
-              "filterCarousel&category=decade&od=" +
-              order +
-              "&offset=" +
-              offset
+            "filterCarousel&category=decade&od=" +
+            order +
+            "&offset=" +
+            offset
           );
           break;
 
@@ -212,10 +223,10 @@ function loadHomeProducts(offset = 0) {
           );
           searchAjaxProducts(
             urlCategory +
-              "filterCarousel&category=formate&od=" +
-              order +
-              "&offset=" +
-              offset
+            "filterCarousel&category=formate&od=" +
+            order +
+            "&offset=" +
+            offset
           );
           break;
 
@@ -226,10 +237,10 @@ function loadHomeProducts(offset = 0) {
           );
           searchAjaxProducts(
             urlCategory +
-              "filterCarousel&category=genere&od=" +
-              order +
-              "&offset=" +
-              offset
+            "filterCarousel&category=genere&od=" +
+            order +
+            "&offset=" +
+            offset
           );
           break;
 
@@ -249,15 +260,15 @@ function loadHomeProducts(offset = 0) {
       console.log(search);
       pagination(
         "module/search/controller/controllerSearch.php?op=countPage&search=" +
-          search
+        search
       );
       searchAjaxProducts(
         "module/search/controller/controllerSearch.php?op=search&search=" +
-          search +
-          "&od=" +
-          order +
-          "&offset=" +
-          offset
+        search +
+        "&od=" +
+        order +
+        "&offset=" +
+        offset
       );
       break;
     case "filter":
@@ -268,20 +279,20 @@ function loadHomeProducts(offset = 0) {
 
       searchAjaxProducts(
         urlCategory +
-          "searchQuery&query=" +
-          filter +
-          "&od=" +
-          order +
-          "&offset=" +
-          offset
+        "searchQuery&query=" +
+        filter +
+        "&od=" +
+        order +
+        "&offset=" +
+        offset
       );
       break;
     default:
       // console.log("default");
       pagination();
-      searchAjaxProducts(
-        urlCategory + "listShop&od=" + order + "&offset=" + offset
-      );
+      friendlyModFunc("shop", "listShop")
+
+      searchAjaxProducts(friendlyModFunc("shop", "listShop"), order, offset);
       break;
   }
 
@@ -321,6 +332,7 @@ function clickProduct() {
     }
   });
 }
+
 function countClickProduct(id) {
   dirUrl =
     "module/home/controller/controllerHomePage.php?op=countClick&count=" + id;
@@ -336,9 +348,13 @@ function countClickProduct(id) {
 }
 //-------FIN-----CARGA ELS PRODUCTES O UN PRODUCTE-------------//
 
-function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
+function searchAjaxProducts(dirUrl, order, offset, sData = undefined, boolTrue = false) {
   var idUser = getUser();
-  ajaxPromise(dirUrl, "GET", "JSON", { idUser: idUser })
+  ajaxPromise(dirUrl, "GET", "JSON", {
+      order: order,
+      offset: offset,
+      idUser: -1 //Cambiar per -1, modificació per al framework
+    })
     .then(function (category) {
       if (category.length === 1) {
         divsProduct(
@@ -362,19 +378,28 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
           img = "" + category[i]["img"];
 
           let li = $("<li></li>")
-            .attr({ id: "li" + i + "-" + id, class: "portfolio-item" })
+            .attr({
+              id: "li" + i + "-" + id,
+              class: "portfolio-item"
+            })
             .appendTo(".portfolio-items");
           let div1 = $("<div></div>")
-            .attr({ id: "div1" + i + "-" + id, class: "item-main" })
+            .attr({
+              id: "div1" + i + "-" + id,
+              class: "item-main"
+            })
             .appendTo(li);
           let div2 = $("<div></div>")
-            .attr({ id: "div2" + i + "-" + id, class: "portfolio-image" })
+            .attr({
+              id: "div2" + i + "-" + id,
+              class: "portfolio-image"
+            })
             .appendTo(div1);
           $("<img>")
             .attr({
               id: "imgShop-" + id,
               class: "touch",
-              src: "module\\movies\\img\\" + img,
+              src: "http://localhost/Kevin/Ejercicios_Kevin/Projecte/module/movies/img/" + img,
             })
             .appendTo(div2);
 
@@ -414,7 +439,9 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
         }
       }
     })
-    .catch(function () {
+    .catch(function (category) {
+      alert(category);
+      console.log(category);
       var order = sessionStorage.getItem("order");
       if (boolTrue === true) {
         $("#listShop").empty();
@@ -423,12 +450,9 @@ function searchAjaxProducts(dirUrl, sData = undefined, boolTrue = false) {
 
           .appendTo("#listShop");
       } else {
-        searchAjaxProducts(
-          "module/shop/controller/controllerShopPage.php?op=listShop&od=" +
-            order +
-            "&offset=0",
-          (sData = undefined),
+        searchAjaxProducts(searchAjaxProducts(friendlyModFunc("shop", "listShop"), order, 0, undefined,
           true
+        )
         );
       }
     });
@@ -442,61 +466,77 @@ function spanFilter(textSpan) {
 
 function genereFilter() {
   ajaxPromise(
-    "module/shop/controller/controllerShopPage.php?op=genereFilter",
-    "GET",
-    "JSON"
-  )
+      "module/shop/controller/controllerShopPage.php?op=genereFilter",
+      "GET",
+      "JSON"
+    )
     .then(function (data) {
       // console.log(data);
       spanFilter("Género");
       $("<select>")
-        .attr({ id: "genere", style: "color: black" })
+        .attr({
+          id: "genere",
+          style: "color: black"
+        })
         .appendTo("#filters");
 
       $("<option>")
-        .attr({ value: "default" })
+        .attr({
+          value: "default"
+        })
         .text("Todos los géneros")
         .appendTo("#genere");
       for (var clave in data) {
         let valueGenere = data[clave]["genere"];
 
         $("<option>")
-          .attr({ value: valueGenere })
+          .attr({
+            value: valueGenere
+          })
           .text(valueGenere)
           .appendTo("#genere");
       }
     })
     .catch(function () {});
 }
+
 function countryFilter() {
   ajaxPromise(
-    "module/shop/controller/controllerShopPage.php?op=countryFilter",
-    "GET",
-    "JSON"
-  )
+      "module/shop/controller/controllerShopPage.php?op=countryFilter",
+      "GET",
+      "JSON"
+    )
     .then(function (data) {
       // console.log(data);
       spanFilter("País");
 
       $("<select>")
-        .attr({ id: "country", style: "color: black" })
+        .attr({
+          id: "country",
+          style: "color: black"
+        })
         .appendTo("#filters");
 
       $("<option>")
-        .attr({ value: "default" })
+        .attr({
+          value: "default"
+        })
         .text("Todo el mundo")
         .appendTo("#country");
       for (var clave in data) {
         let valueCountry = data[clave]["country"];
 
         $("<option>")
-          .attr({ value: valueCountry })
+          .attr({
+            value: valueCountry
+          })
           .text(valueCountry)
           .appendTo("#country");
       }
     })
     .catch(function () {});
 }
+
 function formatsFilter() {
   var formatsMatrix = ["VHS", "DVD", "Blu-Ray", "4K", "Digital", "Otro"];
   spanFilter("Formato");
@@ -528,6 +568,7 @@ function formatsFilter() {
     $("<br>").appendTo("#filters");
   }
 }
+
 function filtersInput() {
   $("#filters").empty(); //Borrar lo de dins
   genereFilter();
@@ -541,25 +582,26 @@ function filtersInput() {
 function pagination(
   url = "module/shop/controller/controllerShopPage.php?op=countPage&count=listShop"
 ) {
-  let op = sessionStorage.getItem("op");
-  ajaxPromise(url, "GET", "JSON")
-    .then(function (data) {
-      console.log(data);
-      var countItems = data["countPage"];
-      var numPage = countItems / 6;
-      if (countItems % 6 != 0) {
-        numPage++;
-      }
+  // let op = sessionStorage.getItem("op");
+  // ajaxPromise(url, "GET", "JSON")
+  //   .then(function (data) {
+  //     console.log(data);
+  //     var countItems = data["countPage"];
+  //     var numPage = countItems / 6;
+  //     if (countItems % 6 != 0) {
+  //       numPage++;
+  //     }
 
-      $("#pagination").bootpag({
-        total: numPage, // total pages
-      });
-      return;
-    })
-    .catch(function (data) {
-      console.log(data);
-    }); ////END AJAX
+  //     $("#pagination").bootpag({
+  //       total: numPage, // total pages
+  //     });
+  //     return;
+  //   })
+  //   .catch(function (data) {
+  //     console.log(data);
+  //   }); ////END AJAX
 }
+
 function clickPage() {
   $("#pagination")
     .bootpag({
@@ -575,6 +617,7 @@ function clickPage() {
       loadHomeProducts(offset);
     });
 }
+
 function pagOne(offset) {
   if (offset == 0) {
     $("#pagination").bootpag({
@@ -586,12 +629,17 @@ function pagOne(offset) {
 
 $(document).ready(function () {
   loadHomeProducts();
-  filtersInput();
-  storageFormats();
-  pagination();
+  // filtersInput();
+  // storageFormats();
+  // pagination();
 
-  clickProduct();
-  clickPage();
-  likeCart("svg");
-  // like("li");
+  // clickProduct();
+  // clickPage();
+  // likeCart("svg");
+
+
+
+
+
+  // like("li"); en principi este ja estava així, si al acabar de migrar-ho tot funciona, a tope!
 });

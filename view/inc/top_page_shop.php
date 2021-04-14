@@ -12,21 +12,20 @@
         <![endif]-->
     <title>Projecte</title>
     <!-- BOOTSTRAP CORE STYLE CSS -->
-    <link href="view/css/bootstrap.css" rel="stylesheet" />
+    <link href="<?php echo CSS_PATH ?>bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLE CSS -->
-    <link href="view/css/font-awesome.min.css" rel="stylesheet" />
-    <!-- CUSTOM STYLE CSS -->
-    <link href="view/css/style.css" rel="stylesheet" />
+    <link href="<?php echo CSS_PATH ?>font-awesome.min.css" rel="stylesheet" />
+   
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
     <!-- CAROUSEL POR LIBRERÍAS  -->
-    <link rel="stylesheet" href="view\css\carousel\owl.carousel.css">
-    <link rel="stylesheet" href="view\css\carousel\owl.theme.default.min.css">
+    <!-- <link rel="stylesheet" href="view\css\carousel\owl.carousel.css">
+    <link rel="stylesheet" href="view\css\carousel\owl.theme.default.min.css"> -->
 
 
     <!-- Mis links -->
-    <link href="view/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
 
 
 
@@ -41,7 +40,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <!-- Custom scripts for this template -->
-    <script type="text/javascript" src="view/inc/translate.js"></script>
+    <script type="text/javascript" src="<?php echo VIEW_INC ?>translate.js"></script>
 
     <!-- CAROUSEL W3SCHOOL -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -49,33 +48,33 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <!-- AUTOCOMPLETAR -->
-    <link rel="stylesheet" href="assets/easy-autocomplete.min.css">
-    <script src="assets/jquery.easy-autocomplete.min.js"></script>
+    <link rel="stylesheet" href="<?php echo ASSETS_PATH ?>easy-autocomplete.min.css">
+    <script src="<?php echo ASSETS_PATH ?>jquery.easy-autocomplete.min.js"></script>
 
 
 
     <!-- COMPLEMENTS  COMPLEMENTS  COMPLEMENTS  COMPLEMENTS   -->
-    <script src="view\js\ini.js"></script>
+    <script src="<?php echo JS_PATH ?>ini.js"></script>
 
     <!-- SEARCH SEARCH SEARCH SEARCH -->
-    <script src="module\search\model\controllerSearch.js"></script>
+    <script src="<?php echo MODEL_PATH_SEARCH ?>controllerSearch.js"></script>
 
     <!---->
     <!-- CAROUSEL POR LIBRERÍAS  -->
-    <script src="view\plugins\jquery.min.js"></script>
-    <script src="view\plugins\owl.carousel.min.js"></script>
+    <script src="<?php echo VIEW_PLUGINS ?>jquery.min.js"></script>
+    <script src="<?php echo VIEW_PLUGINS ?>owl.carousel.min.js"></script>
     <!-- <script src="module\shop\js\shop.js"></script> -->
-    <script src="assets/api_kay.js"></script>
-    <script src="module\shop\model\controllerShop.js"></script>
-    <script src="module\shop\model\filter.js"></script>
-    <script src="module\shop\model\likeUnlike.js"></script>
+    <script src="<?php echo ASSETS_PATH ?>api_kay.js"></script>
+    <script src="<?php echo MODEL_SHOP_JS ?>controllerShop.js"></script>
+    <!-- <script src="<?php echo MODEL_SHOP_JS ?>filter.js"></script> -->
+    <script src="<?php echo MODEL_SHOP_JS ?>likeUnlike.js"></script>
 
 
     <!--Librerías para google maps-->
     <!-- <script src="module\shop\model\geolocalizacion.js"></script> -->
 
     <!-- <script src="module\shop\model\jquery.bootpag.js"></script> -->
-    <script src="module\shop\model\jquery.bootpag.min.js"></script>
+    <script src="<?php echo MODEL_SHOP_JS ?>jquery.bootpag.min.js"></script>
 
 
 

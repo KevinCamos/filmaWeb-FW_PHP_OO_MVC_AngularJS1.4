@@ -25,16 +25,13 @@ function loadDivsCarousel() {
       id: "products_DIV",
     })
     .appendTo("#large_columns");
-    
+
   loadCategoryCarousel()
 
 }
 
 function loadCategoryCarousel() {
-
-  ajaxPromise(
-      "index.php?module=home&function=carousel", "GET", "JSON"
-    )
+  ajaxPromise(friendlyModFunc("home","carousel"), "GET", "JSON")
     .then(function (category) {
       console.log(category);
       for (let i = 0; i < category.length; i++) {
@@ -102,10 +99,12 @@ function loadCategoryCarousel() {
     });
 }
 
-function ajaxSearch(dirUrl, offset=0) {
+function ajaxSearch(dirUrl, offset = 0) {
   $("<div>").addClass("loading").appendTo("#productsHome"); //NO VAAAAA :(
 
-  ajaxPromise(dirUrl, "GET", "JSON", {offset:offset})
+  ajaxPromise(dirUrl, "GET", "JSON", {
+      offset: offset
+    })
     .then(function (category) {
       // $("#messages-list").removeClass("loading");
       console.log(category);
@@ -155,9 +154,8 @@ function detectScrollBrands() {
 function loadHomeProducts(offset = 0) {
 
 
-  ajaxSearch(
-    "index.php?module=home&function=homeProducts", offset
-    
+  ajaxSearch(friendlyModFunc("home","homeProducts"), offset
+
 
   );
 }
@@ -187,7 +185,7 @@ function clickCategory() {
   } else {
 
     // setTimetout() es una función para decirle que pasado X tiempo realice una función
-    window.location.href = "index.php?page=shop";
+    window.location.href = friendlyModFunc("shop","shop");
   }
 }
 
@@ -211,26 +209,27 @@ function clickProductHome() {
     countClickProduct(id);
     // return false;
 
-    window.location.href = "index.php?page=shop";
+    window.location.href = friendlyModFunc("shop","shop");
   }
 }
 
 function countClickProduct(id) {
-  dirUrl ="index.php?module=home&function=countClick";
-
+  dirUrl =   friendlyModFunc("home","countClick");
   console.log(dirUrl);
   // return false;
-  
-  ajaxPromise(dirUrl, "GET", "JSON",{id:id})
+
+  ajaxPromise(dirUrl, "GET", "JSON", {
+      id: id
+    })
     .then(function (data) {
       console.log(data);
     })
     .catch(function (data) {
-      
+
       alert(data);
 
       console.log(data);
-      
+
     });
 }
 

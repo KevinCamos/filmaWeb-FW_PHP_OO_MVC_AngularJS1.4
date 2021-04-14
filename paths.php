@@ -6,6 +6,7 @@ define ('SITE_ROOT', $_SERVER['DOCUMENT_ROOT'] . PROJECT); // Site Root
 define ('SITE_PATH', 'http://' . $_SERVER['HTTP_HOST'] . PROJECT); // Site Path
 
 define ('VIEW_PATH', SITE_PATH . 'view/'); // Css Path
+define ('ASSETS_PATH', SITE_PATH . 'assets/'); // Css Path
 define ('CSS_PATH', VIEW_PATH . 'css/'); // Css Path
 define ('JS_PATH', VIEW_PATH . 'js/'); // JS Path
 define ('IMG_PATH',VIEW_PATH . 'img/'); // IMG Path
@@ -14,6 +15,7 @@ define ('MODEL_PATH', SITE_ROOT . 'model/'); // Model Path
 define ('MODULES_PATH', SITE_ROOT . 'module/'); // Modules Path
 define ('VIEW_PATH_INC', SITE_ROOT . 'view/inc/'); // View Path Inc
 define ('VIEW_INC', VIEW_PATH . 'inc/'); // View Path Inc
+define ('VIEW_PLUGINS', VIEW_PATH . 'plugins/'); // View Path Inc
 
 define ('RESOURCES', SITE_ROOT . 'resources/'); // Resources Path
 define ('UTILS', SITE_ROOT . 'utils/'); // Utils Path
@@ -41,12 +43,15 @@ define('JS_HOME', SITE_PATH . 'module/home/js/');
 
 //Shop
 define ('VIEW_PATH_SHOP', SITE_ROOT . 'module/shop/view/');
+define ('MODEL_SHOP_JS', SITE_PATH . 'module/shop/model/');
+define('MODEL_SHOP', SITE_ROOT . 'module/shop/model/model/');
+
 define ('MODEL_PATH_SHOP', SITE_ROOT . 'module/shop/model/model/');
 
 //Search
 define ('MODEL_SEARCH', SITE_PATH . '/module/search/model/');
 
-define ('MODEL_PATH_SEARCH', MODEL_SEARCH . '/model/');
+define ('MODEL_PATH_SEARCH', SITE_PATH . '/model/');
 
 //Login
 define('VIEW_PATH_LOGIN', SITE_ROOT . 'module/login/view/');

@@ -26,7 +26,7 @@
 
 
     <!-- Mis links -->
-    <link href="<?php echo CSS_PATH?>/style.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo CSS_PATH?>style.css" rel="stylesheet" type="text/css" />
 
 
     <!--Mis JavaScripts-->
@@ -43,10 +43,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- TRANSLATE -->
-    <script type="text/javascript" src="<?php echo VIEW_INC?>/translate.js"></script>
-<!-- 
-    <script type="text/javascript" src="<?php echo VIEW_PATH_INC ?>translate.js"></script>
-    <?php echo VIEW_PATH_INC ?> -->
+    <script type="text/javascript" src="<?php echo VIEW_INC?>translate.js"></script>
 <!-- C:/xampp/htdocs\Kevin\Ejercicios_Kevin\Projecte/view/inc/translate.js   -->
     <!-- COMPLEMENTS  COMPLEMENTS  COMPLEMENTS  COMPLEMENTS   -->
     <script src="<?php echo JS_PATH?>ini.js"></script>

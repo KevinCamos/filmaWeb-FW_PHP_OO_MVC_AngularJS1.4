@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>shop</name>
+        <uri>shop</uri>
+    </function>
+   <function>
+        <name>listShop</name>
+        <uri>listShop</uri>
+    </function>
+     <!-- <function>
+        <name>homeProducts</name>
+        <uri>homeProducts</uri>
+    </function>
+    <function>
+        <name>countClick</name>
+        <uri>countClick</uri>
+    </function> -->
+  
+</functions>

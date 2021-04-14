@@ -3,9 +3,8 @@ function changeLanguage(language){
 language= language || localStorage.getItem('app-lang')||'en';
 localStorage.setItem('app-lang', language);
 var element= document.querySelectorAll('[data-tr]');
-
 $.ajax({
-    url:'view/inc/language/' + language + '.json',
+    url:'http://localhost/Kevin/Ejercicios_Kevin/Projecte/view/inc/language/' + language + '.json',
     type: 'POST',
     dataType: 'JSON', 
     success: function(data){
@@ -18,7 +17,7 @@ $.ajax({
 })
 }
 function translate(){
-    changeLanguage();
+    changeLanguage();http://localhost/Kevin/Ejercicios_Kevin/Projecte/contact/list_contact/view/inc/language/val.json
 
     $("#btn-es").on("click", function() {
         changeLanguage('es')

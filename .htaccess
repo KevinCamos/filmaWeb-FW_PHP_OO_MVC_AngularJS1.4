@@ -1,13 +1,17 @@
 RewriteEngine on
 RewriteBase /Kevin/Ejercicios_Kevin/Projecte/
 RewriteCond %{REQUEST_FILENAME} !-f
-Rewriterule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?module=$1&function=$2&param=$3&param2=$4 [L,NC]
+RewriteCond %{REQUEST_FILENAME} !-d
+Rewriterule ^([^/]*)/([^/]*)/([^/]*)/([^/]*)$ index.php?module=$1&function=$2&param=$3&param2=$4 [L,NC,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
-Rewriterule ^([^/]*)/([^/]*)/([^/]*)$ index.php?module=$1&function=$2&param=$3 [L,NC]
+RewriteCond %{REQUEST_FILENAME} !-d
+Rewriterule ^([^/]*)/([^/]*)/([^/]*)$ index.php?module=$1&function=$2&param=$3 [L,NC,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
-Rewriterule ^([^/]*)/([^/]*)$ index.php?module=$1&function=$2 [L,NC]
+RewriteCond %{REQUEST_FILENAME} !-d
+Rewriterule ^([^/]*)/([^/]*)$ index.php?module=$1&function=$2 [L,NC,QSA]
 
 RewriteCond %{REQUEST_FILENAME} !-f
-Rewriterule ^([^/]*)$ index.php?module=$1 [L,NC]
+RewriteCond %{REQUEST_FILENAME} !-d
+Rewriterule ^([^/]*)$ index.php?module=$1 [L,NC,QSA]
