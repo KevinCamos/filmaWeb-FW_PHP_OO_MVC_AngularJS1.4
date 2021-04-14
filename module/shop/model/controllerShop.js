@@ -61,11 +61,15 @@ function divsProduct(urls, id) {
   idUser == null ? idUser = -1 : idUser = idUser;
   // alert(idUser);
   // alert(id);
-  ajaxPromise(urls + id, "GET", "JSON", {
+
+  ajaxPromise(friendlyModFunc("shop", "openProduct"), "GET", "JSON", {
+      id: id,
       idUser: idUser
     })
     .then(function (category) {
+      alert(category)
       console.log(category);
+      category = category[0];
       //// .hide PER A OCULTAR EL FORMULARI QUE REOBRIREM AL EIXIR
       $("#formularioFiltro").hide();
       $("#orderBy").hide();
@@ -82,7 +86,6 @@ function divsProduct(urls, id) {
         })
         .appendTo("#listShop");
 
-      // let name = category.movie;
 
       for (var clave in category) {
         // console.log(clave);
@@ -92,7 +95,7 @@ function divsProduct(urls, id) {
             .attr({
               id: "return",
               // class: name,
-              src: "module\\shop\\img\\return.png",
+              src: "http://localhost/Kevin/Ejercicios_Kevin/Projecte/module/shop/img/return.png",
               align: "left",
             })
             .appendTo(table);
@@ -100,7 +103,7 @@ function divsProduct(urls, id) {
           $("<img>")
             .attr({
               id: category.id,
-              src: "module\\movies\\img\\" + img,
+              src: "http://localhost/Kevin/Ejercicios_Kevin/Projecte/module/movies/img/" + img,
               align: "left",
               style: "margin-top: -250px;       margin-left: 25px;",
             })
@@ -197,7 +200,7 @@ function loadHomeProducts(offset = 0) {
     case "details":
       let homeID = sessionStorage.getItem("id");
 
-      divsProduct(urlCategory + "openProduct&product=", homeID);
+      divsProduct(urlCategory + "openProduct&product=", homeID); // FET AL FRAMEWORK
       break;
     case "category":
       let filterCategory = sessionStorage.getItem("filterCategory");
@@ -207,13 +210,9 @@ function loadHomeProducts(offset = 0) {
           pagination(
             urlCategory + "countPage&count=filterCarousel&category=decade"
           );
-          searchAjaxProducts(
-            urlCategory +
-            "filterCarousel&category=decade&od=" +
-            order +
-            "&offset=" +
-            offset
-          );
+
+          searchAjaxProducts(friendlyModFunc("shop", "categoryDecade"), order, offset);
+
           break;
 
         case "formate":
@@ -221,13 +220,8 @@ function loadHomeProducts(offset = 0) {
           pagination(
             urlCategory + "countPage&count=filterCarousel&category=formate"
           );
-          searchAjaxProducts(
-            urlCategory +
-            "filterCarousel&category=formate&od=" +
-            order +
-            "&offset=" +
-            offset
-          );
+          searchAjaxProducts(friendlyModFunc("shop", "categoryFormate"), order, offset);
+
           break;
 
         case "genere":
@@ -235,13 +229,8 @@ function loadHomeProducts(offset = 0) {
           pagination(
             urlCategory + "countPage&count=filterCarousel&category=genere"
           );
-          searchAjaxProducts(
-            urlCategory +
-            "filterCarousel&category=genere&od=" +
-            order +
-            "&offset=" +
-            offset
-          );
+          searchAjaxProducts(friendlyModFunc("shop", "categoryGenere"), order, offset);
+
           break;
 
         default:
@@ -309,7 +298,7 @@ function clickProduct() {
       sessionStorage.setItem("opStore", sessionStorage.getItem("op"));
       id = id.split("-"); ///Dividir imgShop de l'ID. Les ID están juntes a imgShop per a evitar interferències.
       id = id[1];
-      divsProduct(
+      divsProduct( // FET AL FRAMEWORK
         "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
         id
       );
@@ -350,13 +339,14 @@ function countClickProduct(id) {
 
 function searchAjaxProducts(dirUrl, order, offset, sData = undefined, boolTrue = false) {
   var idUser = getUser();
+  alert(dirUrl)
+  var sendData = [-1, order, offset]; //Cambiar -1 per id User en funcionar, modificació per al framework
   ajaxPromise(dirUrl, "GET", "JSON", {
-      order: order,
-      offset: offset,
-      idUser: -1 //Cambiar per -1, modificació per al framework
+      sendData: sendData
     })
     .then(function (category) {
-      if (category.length === 1) {
+      alert(category);
+      if (category.length === 1) { // FET AL FRAMEWORK
         divsProduct(
           "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
           category[0]["id"]
@@ -450,9 +440,8 @@ function searchAjaxProducts(dirUrl, order, offset, sData = undefined, boolTrue =
 
           .appendTo("#listShop");
       } else {
-        searchAjaxProducts(searchAjaxProducts(friendlyModFunc("shop", "listShop"), order, 0, undefined,
+        searchAjaxProducts(friendlyModFunc("shop", "listShop"), order, 0, undefined,
           true
-        )
         );
       }
     });
@@ -633,7 +622,7 @@ $(document).ready(function () {
   // storageFormats();
   // pagination();
 
-  // clickProduct();
+  clickProduct();
   // clickPage();
   // likeCart("svg");
 

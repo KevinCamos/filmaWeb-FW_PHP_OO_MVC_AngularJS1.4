@@ -8,32 +8,32 @@ include("$path.\module\shop\model\DAOShopPage.php");
 
 switch ($_GET['op']) {
 
-    case 'openProduct':
-        $user = $_GET['idUser'];
+    // case 'openProduct':
+    //     $user = $_GET['idUser'];
 
 
-        searhQueryOneRow("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-        ((SELECT DISTINCT li.idmovies, 'like' as likes 
-        FROM liketo li
-        WHERE li.idusers=  $user) AS B)
-        ON mo.id = B.idmovies
-        WHERE mo.id=" . $_GET["product"]);
+    //     searhQueryOneRow("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+    //     ((SELECT DISTINCT li.idmovies, 'like' as likes 
+    //     FROM liketo li
+    //     WHERE li.idusers=  $user) AS B)
+    //     ON mo.id = B.idmovies
+    //     WHERE mo.id=" . $_GET["product"]);
 
-        break;
-    case 'listShop':
-        $user = $_GET['idUser'];
+    //     break;
+    // case 'listShop'://FET
+    //     $user = $_GET['idUser'];
 
 
-        // $searchQuery = base64_decode($_GET["od"]);
-        // searhQueryAllRows("SELECT * FROM movies ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
+    //     // $searchQuery = base64_decode($_GET["od"]);
+    //     // searhQueryAllRows("SELECT * FROM movies ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
 
-        searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-        ((SELECT DISTINCT li.idmovies, 'like' as likes 
-        FROM liketo li
-        WHERE li.idusers=  $user) AS B)
-        ON mo.id = B.idmovies
-        ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
-        break;
+    //     searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+    //     ((SELECT DISTINCT li.idmovies, 'like' as likes 
+    //     FROM liketo li
+    //     WHERE li.idusers=  $user) AS B)
+    //     ON mo.id = B.idmovies
+    //     ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
+    //     break;
 
 
     case 'searchQuery':
@@ -50,38 +50,38 @@ switch ($_GET['op']) {
 
 
 
-    case 'filterCarousel':
-        $user = $_GET['idUser'];
+    // case 'filterCarousel':
+    //     $user = $_GET['idUser'];
 
-        switch ($_GET['category']) {
+    //     switch ($_GET['category']) {
 
-            case 'decade':
-                searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-                ((SELECT DISTINCT li.idmovies, 'like' as likes 
-                FROM liketo li
-                WHERE li.idusers=  $user) AS B)
-                ON mo.id = B.idmovies                     
-                WHERE anyo BETWEEN 1980 AND 1989  
-                ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
-                break;
-            case 'formate':
-                searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-                ((SELECT DISTINCT li.idmovies, 'like' as likes 
-                FROM liketo li
-                WHERE li.idusers=  $user) AS B)
-                ON mo.id = B.idmovies               
-                 WHERE formats LIKE '%VHS%' ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
-                break;
-            case 'genere':
-                searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-                ((SELECT DISTINCT li.idmovies, 'like' as likes 
-                FROM liketo li
-                WHERE li.idusers=  $user) AS B)
-                ON mo.id = B.idmovies               
-                WHERE genere = 'Fantasia' ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
-                break;
-        }
-        break;
+    //         case 'decade':
+    //             searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+    //             ((SELECT DISTINCT li.idmovies, 'like' as likes 
+    //             FROM liketo li
+    //             WHERE li.idusers=  $user) AS B)
+    //             ON mo.id = B.idmovies                     
+    //             WHERE anyo BETWEEN 1980 AND 1989  
+    //             ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
+    //             break;
+    //         case 'formate':
+    //             searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+    //             ((SELECT DISTINCT li.idmovies, 'like' as likes 
+    //             FROM liketo li
+    //             WHERE li.idusers=  $user) AS B)
+    //             ON mo.id = B.idmovies               
+    //              WHERE formats LIKE '%VHS%' ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
+    //             break;
+    //         case 'genere':
+    //             searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+    //             ((SELECT DISTINCT li.idmovies, 'like' as likes 
+    //             FROM liketo li
+    //             WHERE li.idusers=  $user) AS B)
+    //             ON mo.id = B.idmovies               
+    //             WHERE genere = 'Fantasia' ORDER BY " . $_GET['od'] . " , movie asc LIMIT  " . $_GET['offset'] . ", 6");
+    //             break;
+    //     }
+    //     break;
     case 'countClick':
         $homeQuery = new DAOShop();
 

@@ -4,17 +4,32 @@
         <name>shop</name>
         <uri>shop</uri>
     </function>
-   <function>
+    <function>
+        <name>openProduct</name>
+        <uri>openProduct</uri>
+    </function>
+    <function>
         <name>listShop</name>
         <uri>listShop</uri>
     </function>
-     <!-- <function>
-        <name>homeProducts</name>
-        <uri>homeProducts</uri>
+    <function>
+        <name>categoryDecade</name>
+        <uri>categoryDecade</uri>
     </function>
     <function>
-        <name>countClick</name>
-        <uri>countClick</uri>
-    </function> -->
-  
+        <name>categoryFormate</name>
+        <uri>categoryFormate</uri>
+    </function>
+    <function>
+        <name>categoryGenere</name>
+        <uri>categoryGenere</uri>
+    </function>
+    <function>
+        <name>1</name>
+        <uri>1</uri>
+    </function>
+    <function>
+        <name>1</name>
+        <uri>1</uri>
+    </function>
 </functions>

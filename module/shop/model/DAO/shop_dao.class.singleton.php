@@ -14,20 +14,70 @@ class shop_dao
         }
         return self::$_instance;
     }
-
-    public function select_data_listShop($db,$order, $offset,$idUser)
+    public function select_data_openProduct($db, $idProduct, $idUser)
     {
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
         WHERE li.idusers=  $idUser) AS B)
         ON mo.id = B.idmovies
-        ORDER BY $order, movie asc LIMIT $offset, 6";
+        WHERE mo.id= $idProduct";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
 
-    // public function select_data_homeProducts($db, $offset)
+    public function select_data_listShop($db, $sendDatArray)
+    {
+        // return $sendDatArray;
+        $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        FROM liketo li
+        WHERE li.idusers= " . $sendDatArray[0] . ") AS B)
+        ON mo.id = B.idmovies
+        ORDER BY " . $sendDatArray[1] . ", movie asc LIMIT " . $sendDatArray[2] . ",6";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+    public function select_data_categoryDecade($db, $sendDatArray)
+    {
+        // return $sendDatArray;
+        $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        FROM liketo li
+        WHERE li.idusers= " . $sendDatArray[0] . ") AS B)
+        ON mo.id = B.idmovies                     
+        WHERE anyo BETWEEN 1980 AND 1989  
+        ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " . $sendDatArray[2] . ", 6";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+    
+    public function select_data_categoryFormate($db, $sendDatArray)
+    {
+        // return $sendDatArray;
+        $sql ="SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        FROM liketo li
+        WHERE li.idusers=  " . $sendDatArray[0] . ") AS B)
+        ON mo.id = B.idmovies               
+         WHERE formats LIKE '%VHS%' ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " . $sendDatArray[2] . ", 6";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+
+    public function select_data_categoryGenere($db, $sendDatArray)
+    {
+        // return $sendDatArray;
+        $sql ="SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        FROM liketo li
+        WHERE li.idusers=   " . $sendDatArray[0] . ") AS B)
+        ON mo.id = B.idmovies               
+        WHERE genere = 'Fantasia' ORDER BY ". $sendDatArray[1] . " , movie asc LIMIT  " .  $sendDatArray[2] . ", 6";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+    // public function select_data_categoryDecade($db, $offset)
     // {
     //     $sql = "SELECT * FROM movies ORDER BY clicks DESC LIMIT $offset, 2";
     //     $stmt = $db->ejecutar($sql);

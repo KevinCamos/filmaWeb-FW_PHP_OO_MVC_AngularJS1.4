@@ -18,17 +18,32 @@ class shop_bll
 		}
 		return self::$_instance;
 	}
-	public function obtain_listShop_BLL($order,$offset,$idUser)
+	public function obtain_openProduct_BLL($idProduct, $idUser)
+	{
+		// return "hola";
+		return $this->dao->select_data_openProduct($this->db, $idProduct, $idUser);
+	}
+	public function obtain_listShop_BLL($sendDatArray)
 	{
 		// return "holas";
-		return $this->dao->select_data_listShop($this->db,$order, $offset,$idUser);
+		return $this->dao->select_data_listShop($this->db,$sendDatArray);
 	}
-
-	// public function obtain_homeProducts_BLL($arrArgument)
-	// {
-	// 	// return "hola";
-	// 	return $this->dao->select_data_homeProducts($this->db, $arrArgument);
-	// }
+	public function obtain_categoryDecade_BLL($sendDatArray)
+	{
+		// return "holas";
+		return $this->dao->select_data_categoryDecade($this->db,$sendDatArray);
+	}
+	
+	public function obtain_categoryFormate_BLL($sendDatArray)
+	{
+		// return "holas";
+		return $this->dao->select_data_categoryFormate($this->db,$sendDatArray);
+	}
+	public function obtain_categoryGenere_BLL($sendDatArray)
+	{
+		// return "holas";
+		return $this->dao->select_data_categoryGenere($this->db,$sendDatArray);
+	}
 	// public function update_countClick_BLL($arrArgument)
 	// {
 	// 	return $this->dao->update_countClick($this->db, $arrArgument);

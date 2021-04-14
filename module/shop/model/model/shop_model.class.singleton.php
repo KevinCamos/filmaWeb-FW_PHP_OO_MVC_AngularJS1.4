@@ -17,17 +17,31 @@ class shop_model
         return self::$_instance;
     }
 
-    public function listShop($order, $offset)
+    public function openProduct($idProduct, $idUser){
+        // return "hola";
+        return $this->bll->obtain_openProduct_BLL($idProduct, $idUser);
+    }
+    public function listShop($sendDatArray) //0 order, 1 offset, 2 IdUser
     {
         // return  $order;
-        return $this->bll->obtain_listShop_BLL($order, $offset,-1);
+        return $this->bll->obtain_listShop_BLL($sendDatArray);
     }
-
-
-    // public function homeProducts($arrArgument){
-    //     // return "hola";
-    //     return $this->bll->obtain_homeProducts_BLL($arrArgument);
-    // }
+    public function categoryDecade($sendDatArray) //0 order, 1 offset, 2 IdUser
+    {
+        // return  $order;
+        return $this->bll->obtain_categoryDecade_BLL($sendDatArray);
+    }
+    
+    public function categoryFormate($sendDatArray) //0 order, 1 offset, 2 IdUser
+    {
+        // return  $order;
+        return $this->bll->obtain_categoryFormate_BLL($sendDatArray);
+    }
+    public function categoryGenere($sendDatArray) //0 order, 1 offset, 2 IdUser
+    {
+        // return  $order;
+        return $this->bll->obtain_categoryGenere_BLL($sendDatArray);
+    }
     // public function countClick($arrArgument){
     //     // return "hola";
     //     return $this->bll->update_countClick_BLL($arrArgument);
