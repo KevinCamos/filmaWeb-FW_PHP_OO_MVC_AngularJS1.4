@@ -8,31 +8,33 @@ include(UTILS . "mail.inc.php");
 
 //load all class.singleton.php    //esta no está comentada per mi 
 
-
-// spl_autoload_register(null, false);
-
-
 // spl_autoload_register(null, false);
 spl_autoload_extensions('.php,.inc.php,.class.php,.class.singleton.php');
 
 spl_autoload_register('loadClasses');
-function loadClasses($className)
-{
-    //Get module name 
-    $porciones = explode("_", $className);
-    $module_name = $porciones[0];
-    $model_name = "";
 
-    //we need have this because if not exist $porciones[1], app will have problems when we sent error (showErrorPage(2..)).
-    if (isset($porciones[1])) {
-        $model_name = $porciones[1];
-        $model_name = strtoupper($model_name);
-    }
-    if (file_exists('module/' . $module_name . '/model/' . $model_name . '/' . $className . '.class.singleton.php')) {
-        set_include_path('module/' . $module_name . '/model/' . $model_name . '/');
+
+/// AUTOLOAD EJEMPLO 10
+function loadClasses($className) {
+    $breakClass = explode('_', $className);
+    $modelName = "";
+    //////
+    if (isset($breakClass[1])) {
+        $modelName = strtoupper($breakClass[1]);
+    }// end_if
+    //////
+    if (file_exists(SITE_ROOT . 'module/' . $breakClass[0] . '/model/'. $modelName . '/' . $className . '.class.singleton.php')) {
+        set_include_path('module/' . $breakClass[0] . '/model/' . $modelName.'/');
         spl_autoload($className);
-    } elseif (file_exists('model/' . $className . '.class.singleton.php')) {
-        set_include_path('model/');
+    }else if (file_exists(SITE_ROOT . 'model/' . $className . '.class.singleton.php')){
+        set_include_path(SITE_ROOT . 'model/');
         spl_autoload($className);
-    }
+    }else if (file_exists(SITE_ROOT . 'model/' . $className . '.class.php')){
+        set_include_path(SITE_ROOT . 'model/');
+        spl_autoload($className);
+    }else if (file_exists(SITE_ROOT . 'utils/' . $className . '.inc.php')) {
+        set_include_path(SITE_ROOT . 'utils/');
+        spl_autoload($className);
+    }// end_else
 }
+

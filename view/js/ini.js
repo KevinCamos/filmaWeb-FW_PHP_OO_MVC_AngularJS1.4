@@ -1,4 +1,6 @@
 //LA FONT D'AQUESTA SOLUCIÓ SURT D'ACÍ https://es.stackoverflow.com/questions/1366/c%C3%B3mo-incluir-un-archivo-javascript-a-otro-archivo-javascript-sin-utilizar-jquer
+const GENERAL_PATH = "http://" + window.location.hostname + "/Kevin/Ejercicios_Kevin/Projecte/" ;
+
 function importarScript(nombre) {
   var scriptImport = document.createElement("script");
   scriptImport.src = nombre;

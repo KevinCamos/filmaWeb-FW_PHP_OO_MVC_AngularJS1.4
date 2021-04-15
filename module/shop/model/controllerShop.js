@@ -1,5 +1,5 @@
-importarScript("http://localhost/Kevin/Ejercicios_Kevin/Projecte/module/shop/model/filter.js");
-importarScript("http://localhost/Kevin/Ejercicios_Kevin/Projecte/module/shop/model/orderby.js");
+importarScript(GENERAL_PATH + "module/shop/model/filter.js");
+importarScript(GENERAL_PATH + "module/shop/model/orderby.js");
 
 /////FUNCIONES PARA CARGAR LOCALSTORAGE DE LOS FORMATOS
 function clickerItems(itemString, id) {
@@ -41,33 +41,32 @@ function storageFormats() {
 function loadDivsProducts() {
   let section = $("<section></section>")
     .attr({
-      id: "port-sec"
+      id: "port-sec",
     })
     .appendTo("#listShop");
   let divContainer = $("<div></div>")
     .attr({
-      class: "container"
+      class: "container",
     })
     .appendTo(section);
   return $("<ul></ul>")
     .attr({
-      class: "portfolio-items col-3"
+      class: "portfolio-items col-3",
     })
     .appendTo(divContainer);
 }
 //ELS DIVS GENÈRICS DELS PRODUCTES
 function divsProduct(urls, id) {
   var idUser = localStorage.getItem("idusers");
-  idUser == null ? idUser = -1 : idUser = idUser;
+  idUser == null ? (idUser = -1) : (idUser = idUser);
   // alert(idUser);
   // alert(id);
 
   ajaxPromise(friendlyModFunc("shop", "openProduct"), "GET", "JSON", {
       id: id,
-      idUser: idUser
+      idUser: idUser,
     })
     .then(function (category) {
-      alert(category)
       console.log(category);
       category = category[0];
       //// .hide PER A OCULTAR EL FORMULARI QUE REOBRIREM AL EIXIR
@@ -82,10 +81,9 @@ function divsProduct(urls, id) {
 
       var table = $("<p></p>")
         .attr({
-          id: "p" + id
+          id: "p" + id,
         })
         .appendTo("#listShop");
-
 
       for (var clave in category) {
         // console.log(clave);
@@ -95,7 +93,7 @@ function divsProduct(urls, id) {
             .attr({
               id: "return",
               // class: name,
-              src: "http://localhost/Kevin/Ejercicios_Kevin/Projecte/module/shop/img/return.png",
+              src: GENERAL_PATH + "module/shop/img/return.png",
               align: "left",
             })
             .appendTo(table);
@@ -103,7 +101,7 @@ function divsProduct(urls, id) {
           $("<img>")
             .attr({
               id: category.id,
-              src: "http://localhost/Kevin/Ejercicios_Kevin/Projecte/module/movies/img/" + img,
+              src: GENERAL_PATH + "module/movies/img/" + img,
               align: "left",
               style: "margin-top: -250px;       margin-left: 25px;",
             })
@@ -207,36 +205,46 @@ function loadHomeProducts(offset = 0) {
       switch (filterCategory) {
         case "decade":
           console.log("decade 80 <3");
-          pagination(
-            urlCategory + "countPage&count=filterCarousel&category=decade"
-          );
+          "formate";
+          "genere";
+          "searchQuery";
+          "listShop";
 
-          searchAjaxProducts(friendlyModFunc("shop", "categoryDecade"), order, offset);
-
+          pagination("decade");
+          searchAjaxProducts(
+            friendlyModFunc("shop", "categoryDecade"),
+            order,
+            offset
+          ); // FET AL FRAMEWORK
           break;
 
         case "formate":
           console.log("fomato VHS");
-          pagination(
-            urlCategory + "countPage&count=filterCarousel&category=formate"
-          );
-          searchAjaxProducts(friendlyModFunc("shop", "categoryFormate"), order, offset);
+          pagination("formate");
+          searchAjaxProducts(
+            friendlyModFunc("shop", "categoryFormate"),
+            order,
+            offset
+          ); // FET AL FRAMEWORK
 
           break;
 
         case "genere":
           console.log("género fantasía ⚔");
-          pagination(
-            urlCategory + "countPage&count=filterCarousel&category=genere"
-          );
-          searchAjaxProducts(friendlyModFunc("shop", "categoryGenere"), order, offset);
-
+          pagination("genere");
+          searchAjaxProducts(
+            friendlyModFunc("shop", "categoryGenere"),
+            order,
+            offset
+          ); // FET AL FRAMEWORK
           break;
 
         default:
           alert("DEFINIR CATEGORÍA");
           searchAjaxProducts(
-            urlCategory + "listShop&od=" + order + "&offset=" + offset
+            friendlyModFunc("shop", "listShop"),
+            order,
+            offset
           );
           break;
       }
@@ -247,39 +255,31 @@ function loadHomeProducts(offset = 0) {
       console.log("search");
       var search = sessionStorage.getItem("search");
       console.log(search);
-      pagination(
-        "module/search/controller/controllerSearch.php?op=countPage&search=" +
-        search
-      );
+      pagination("searchQuery", search);
       searchAjaxProducts(
-        "module/search/controller/controllerSearch.php?op=search&search=" +
-        search +
-        "&od=" +
-        order +
-        "&offset=" +
-        offset
-      );
+        friendlyModFunc("search", "searchList"),
+        order,
+        offset,
+        search
+      ); //Modul per fer!!!
       break;
+
     case "filter":
       var filter = sessionStorage.getItem("filter");
       // alert(filter);
       filter = window.btoa(unescape(encodeURIComponent(filter)));
       pagination(urlCategory + "countPage&count=searchQuery&query=" + filter);
-
       searchAjaxProducts(
-        urlCategory +
-        "searchQuery&query=" +
-        filter +
-        "&od=" +
-        order +
-        "&offset=" +
-        offset
-      );
+        friendlyModFunc("shop", "filter"),
+        order,
+        offset,
+        filter
+      ); // FET AL FRAMEWORK
       break;
     default:
       // console.log("default");
       pagination();
-      friendlyModFunc("shop", "listShop")
+      friendlyModFunc("shop", "listShop");
 
       searchAjaxProducts(friendlyModFunc("shop", "listShop"), order, offset);
       break;
@@ -298,7 +298,8 @@ function clickProduct() {
       sessionStorage.setItem("opStore", sessionStorage.getItem("op"));
       id = id.split("-"); ///Dividir imgShop de l'ID. Les ID están juntes a imgShop per a evitar interferències.
       id = id[1];
-      divsProduct( // FET AL FRAMEWORK
+      divsProduct(
+        // FET AL FRAMEWORK
         "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
         id
       );
@@ -337,16 +338,23 @@ function countClickProduct(id) {
 }
 //-------FIN-----CARGA ELS PRODUCTES O UN PRODUCTE-------------//
 
-function searchAjaxProducts(dirUrl, order, offset, sData = undefined, boolTrue = false) {
+function searchAjaxProducts(
+  dirUrl,
+  order,
+  offset,
+  search = undefined,
+  boolTrue = false
+) {
   var idUser = getUser();
-  alert(dirUrl)
-  var sendData = [-1, order, offset]; //Cambiar -1 per id User en funcionar, modificació per al framework
+  // alert(dirUrl)
+  var sendData = [-1, order, offset, search]; //Cambiar -1 per id User en funcionar, modificació per al framework
+  // alert(sendData)
   ajaxPromise(dirUrl, "GET", "JSON", {
-      sendData: sendData
+      sendData: sendData,
     })
     .then(function (category) {
-      alert(category);
-      if (category.length === 1) { // FET AL FRAMEWORK
+      if (category.length === 1) {
+        // FET AL FRAMEWORK
         divsProduct(
           "module/shop/controller/controllerShopPage.php?op=openProduct&product=",
           category[0]["id"]
@@ -370,26 +378,26 @@ function searchAjaxProducts(dirUrl, order, offset, sData = undefined, boolTrue =
           let li = $("<li></li>")
             .attr({
               id: "li" + i + "-" + id,
-              class: "portfolio-item"
+              class: "portfolio-item",
             })
             .appendTo(".portfolio-items");
           let div1 = $("<div></div>")
             .attr({
               id: "div1" + i + "-" + id,
-              class: "item-main"
+              class: "item-main",
             })
             .appendTo(li);
           let div2 = $("<div></div>")
             .attr({
               id: "div2" + i + "-" + id,
-              class: "portfolio-image"
+              class: "portfolio-image",
             })
             .appendTo(div1);
           $("<img>")
             .attr({
               id: "imgShop-" + id,
               class: "touch",
-              src: "http://localhost/Kevin/Ejercicios_Kevin/Projecte/module/movies/img/" + img,
+              src: GENERAL_PATH + "module/movies/img/" + img,
             })
             .appendTo(div2);
 
@@ -440,7 +448,11 @@ function searchAjaxProducts(dirUrl, order, offset, sData = undefined, boolTrue =
 
           .appendTo("#listShop");
       } else {
-        searchAjaxProducts(friendlyModFunc("shop", "listShop"), order, 0, undefined,
+        searchAjaxProducts(
+          friendlyModFunc("shop", "listShop"),
+          order,
+          0,
+          undefined,
           true
         );
       }
@@ -454,24 +466,22 @@ function spanFilter(textSpan) {
 }
 
 function genereFilter() {
-  ajaxPromise(
-      "module/shop/controller/controllerShopPage.php?op=genereFilter",
-      "GET",
-      "JSON"
-    )
+  ajaxPromise(friendlyModFunc("shop", "filterType"), "GET", "JSON", {
+      type: "genere",
+    })
     .then(function (data) {
       // console.log(data);
       spanFilter("Género");
       $("<select>")
         .attr({
           id: "genere",
-          style: "color: black"
+          style: "color: black",
         })
         .appendTo("#filters");
 
       $("<option>")
         .attr({
-          value: "default"
+          value: "default",
         })
         .text("Todos los géneros")
         .appendTo("#genere");
@@ -480,7 +490,7 @@ function genereFilter() {
 
         $("<option>")
           .attr({
-            value: valueGenere
+            value: valueGenere,
           })
           .text(valueGenere)
           .appendTo("#genere");
@@ -490,11 +500,9 @@ function genereFilter() {
 }
 
 function countryFilter() {
-  ajaxPromise(
-      "module/shop/controller/controllerShopPage.php?op=countryFilter",
-      "GET",
-      "JSON"
-    )
+  ajaxPromise(friendlyModFunc("shop", "filterType"), "GET", "JSON", {
+      type: "country",
+    })
     .then(function (data) {
       // console.log(data);
       spanFilter("País");
@@ -502,13 +510,13 @@ function countryFilter() {
       $("<select>")
         .attr({
           id: "country",
-          style: "color: black"
+          style: "color: black",
         })
         .appendTo("#filters");
 
       $("<option>")
         .attr({
-          value: "default"
+          value: "default",
         })
         .text("Todo el mundo")
         .appendTo("#country");
@@ -517,7 +525,7 @@ function countryFilter() {
 
         $("<option>")
           .attr({
-            value: valueCountry
+            value: valueCountry,
           })
           .text(valueCountry)
           .appendTo("#country");
@@ -568,27 +576,30 @@ function filtersInput() {
 
 //   <!-- <script src="module\shop\model\filter.js"></script> -->
 // <!-- <script src="module\shop\model\geoloclizacion.js"></script> -->
-function pagination(
-  url = "module/shop/controller/controllerShopPage.php?op=countPage&count=listShop"
-) {
-  // let op = sessionStorage.getItem("op");
-  // ajaxPromise(url, "GET", "JSON")
-  //   .then(function (data) {
-  //     console.log(data);
-  //     var countItems = data["countPage"];
-  //     var numPage = countItems / 6;
-  //     if (countItems % 6 != 0) {
-  //       numPage++;
-  //     }
+function pagination(type = "listShop", search = undefined) {
+  type = [type, search];
+  ajaxPromise(friendlyModFunc("shop", "pagination"), "GET", "JSON", {
+      type: type,
+    })
+    .then(function (data) {
+      console.log(data);
+      // alert(data)
 
-  //     $("#pagination").bootpag({
-  //       total: numPage, // total pages
-  //     });
-  //     return;
-  //   })
-  //   .catch(function (data) {
-  //     console.log(data);
-  //   }); ////END AJAX
+      var countItems = data[0]["countPage"];
+      var numPage = countItems / 6;
+      if (countItems % 6 != 0) {
+        numPage++;
+      }
+
+      $("#pagination").bootpag({
+        total: numPage, // total pages
+      });
+      return;
+    })
+    .catch(function (data) {
+      alert("pagination " + data);
+      console.log(data);
+    }); ////END AJAX
 }
 
 function clickPage() {
@@ -618,17 +629,13 @@ function pagOne(offset) {
 
 $(document).ready(function () {
   loadHomeProducts();
-  // filtersInput();
-  // storageFormats();
-  // pagination();
+  filtersInput();
+  storageFormats();
+  pagination();
 
   clickProduct();
-  // clickPage();
-  // likeCart("svg");
-
-
-
-
+  clickPage();
+  likeCart("svg");
 
   // like("li"); en principi este ja estava així, si al acabar de migrar-ho tot funciona, a tope!
 });

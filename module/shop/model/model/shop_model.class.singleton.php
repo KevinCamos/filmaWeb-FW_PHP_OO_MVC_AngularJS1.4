@@ -17,7 +17,8 @@ class shop_model
         return self::$_instance;
     }
 
-    public function openProduct($idProduct, $idUser){
+    public function openProduct($idProduct, $idUser)
+    {
         // return "hola";
         return $this->bll->obtain_openProduct_BLL($idProduct, $idUser);
     }
@@ -31,7 +32,7 @@ class shop_model
         // return  $order;
         return $this->bll->obtain_categoryDecade_BLL($sendDatArray);
     }
-    
+
     public function categoryFormate($sendDatArray) //0 order, 1 offset, 2 IdUser
     {
         // return  $order;
@@ -41,6 +42,21 @@ class shop_model
     {
         // return  $order;
         return $this->bll->obtain_categoryGenere_BLL($sendDatArray);
+    }
+    public function filter($sendDatArray) //0 order, 1 offset, 2 IdUser
+    {
+        // return  $order;
+        return $this->bll->obtain_filter_BLL($sendDatArray);
+    }
+    public function pagination($type) //0 order, 1 offset, 2 IdUser
+    {
+        // return  $type;
+        return $this->bll->obtain_pagination_BLL($type);
+    }
+    public function filterType($type) //0 order, 1 offset, 2 IdUser
+    {
+        // return  $type;
+        return $this->bll->obtain_filterType_BLL($type);
     }
     // public function countClick($arrArgument){
     //     // return "hola";

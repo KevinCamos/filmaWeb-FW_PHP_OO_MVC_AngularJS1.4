@@ -20,7 +20,6 @@ class controller_shop
 		// echo json_encode(MODEL_SHOP);
 		$json = array();
 		$json = loadModel(MODEL_SHOP, "shop_model", "openProduct", $_GET["id"], $_GET["idUser"]);
-		// $json = loadModel(MODEL_SHOP, "shop_model", "listShop", $_GET["order"], $_GET["offset"]);
 		echo json_encode($json);
 	}
 	function listShop()
@@ -28,7 +27,6 @@ class controller_shop
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
 		$json = loadModel(MODEL_SHOP, "shop_model", "listShop", $_GET["sendData"]);
-		// $json = loadModel(MODEL_SHOP, "shop_model", "listShop", $_GET["order"], $_GET["offset"]);
 		echo json_encode($json);
 	}
 
@@ -39,7 +37,6 @@ class controller_shop
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
 		$json = loadModel(MODEL_SHOP, "shop_model", "categoryDecade", $_GET["sendData"]);
-		// $json = loadModel(MODEL_SHOP, "shop_model", "listShop", $_GET["order"], $_GET["offset"]);
 		echo json_encode($json);
 	}
 	function categoryFormate()
@@ -47,7 +44,6 @@ class controller_shop
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
 		$json = loadModel(MODEL_SHOP, "shop_model", "categoryFormate", $_GET["sendData"]);
-		// $json = loadModel(MODEL_SHOP, "shop_model", "listShop", $_GET["order"], $_GET["offset"]);
 		echo json_encode($json);
 	}
 	function categoryGenere()
@@ -55,7 +51,34 @@ class controller_shop
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
 		$json = loadModel(MODEL_SHOP, "shop_model", "categoryGenere", $_GET["sendData"]);
-		// $json = loadModel(MODEL_SHOP, "shop_model", "listShop", $_GET["order"], $_GET["offset"]);
 		echo json_encode($json);
 	}
+
+	function filter()
+	{
+		// echo json_encode($_GET["sendData"][4]);
+		$json = array();
+		$json = loadModel(MODEL_SHOP, "shop_model", "filter", $_GET["sendData"]);
+		echo json_encode($json);
+	}
+	function pagination()
+	{
+		// echo json_encode($_GET["sendData"][4]);
+		$json = array();
+		$json = loadModel(MODEL_SHOP, "shop_model", "pagination", $_GET["type"]);
+		echo json_encode($json);
+	}
+	function filterType()
+	{
+		// echo json_encode($_GET["type"]);
+		$json = array();
+		$json = loadModel(MODEL_SHOP, "shop_model", "filterType", $_GET["type"]);
+		echo json_encode($json);
+	}
+
+
+	//////////////////////// PAGINATION ///////////////////////
+
+
+
 }

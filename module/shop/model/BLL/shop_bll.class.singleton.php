@@ -26,23 +26,39 @@ class shop_bll
 	public function obtain_listShop_BLL($sendDatArray)
 	{
 		// return "holas";
-		return $this->dao->select_data_listShop($this->db,$sendDatArray);
+		return $this->dao->select_data_listShop($this->db, $sendDatArray);
 	}
 	public function obtain_categoryDecade_BLL($sendDatArray)
 	{
 		// return "holas";
-		return $this->dao->select_data_categoryDecade($this->db,$sendDatArray);
+		return $this->dao->select_data_categoryDecade($this->db, $sendDatArray);
 	}
-	
+
 	public function obtain_categoryFormate_BLL($sendDatArray)
 	{
 		// return "holas";
-		return $this->dao->select_data_categoryFormate($this->db,$sendDatArray);
+		return $this->dao->select_data_categoryFormate($this->db, $sendDatArray);
 	}
 	public function obtain_categoryGenere_BLL($sendDatArray)
 	{
 		// return "holas";
-		return $this->dao->select_data_categoryGenere($this->db,$sendDatArray);
+		return $this->dao->select_data_categoryGenere($this->db, $sendDatArray);
+	}
+
+	public function obtain_filter_BLL($sendDatArray)
+	{
+		// return "holas";
+		return $this->dao->select_data_filter($this->db, $sendDatArray);
+	}
+	public function obtain_pagination_BLL($type)
+	{
+		// return "holas";
+		return $this->dao->select_data_pagination($this->db, $type);
+	}
+	public function obtain_filterType_BLL($type)
+	{
+		// return "holas";
+		return $this->dao->select_data_filterType($this->db, $type);
 	}
 	// public function update_countClick_BLL($arrArgument)
 	// {

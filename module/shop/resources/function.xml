@@ -25,6 +25,26 @@
         <uri>categoryGenere</uri>
     </function>
     <function>
+        <name>filter</name>
+        <uri>filter</uri>
+    </function>
+    <function>
+        <name>pagination</name>
+        <uri>pagination</uri>
+    </function>
+    <function>
+        <name>filterType</name>
+        <uri>filterType</uri>
+    </function>
+    <function>
+        <name>1</name>
+        <uri>1</uri>
+    </function>
+    <function>
+        <name>1</name>
+        <uri>1</uri>
+    </function>
+    <function>
         <name>1</name>
         <uri>1</uri>
     </function>

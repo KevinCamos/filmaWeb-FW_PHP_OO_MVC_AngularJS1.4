@@ -12,6 +12,7 @@ function likeCart(etiqueta) {
     }
   });
 }
+
 function like(like) {
   console.log("entra");
   if (tokenTrue() == true) {
@@ -21,13 +22,17 @@ function like(like) {
     var id = id[1];
     var idUser = localStorage.getItem("idusers");
     console.log(id + " i " + typeLike + "i" + idUser);
-
+    var arr = ["likeds", typeLike, idProduct, idUser]; //// LA QUE HI HA QUE FICAR A AJAXPROMISE 
     ajaxPromise(
-      "module/shop/controller/controllerShopPage.php", //typeForm =
-      "GET",
-      undefined,
-      { op: "likeds", typeLike: typeLike, idProduct: id, idUser: idUser }
-    )
+        "module/shop/controller/controllerShopPage.php", //typeForm =
+        "GET",
+        undefined, {
+          op: "likeds",
+          typeLike: typeLike,
+          idProduct: id,
+          idUser: idUser
+        }
+      )
       .then(function () {
         // console.log(data);
         switch (typeLike) {
@@ -40,7 +45,7 @@ function like(like) {
               onMouseout: "this.style.color='tomato'",
               style: "color: tomato",
             });
-           
+
             toastr.success("'Me Gusta' añadido correctamente!");
 
             break;
@@ -62,6 +67,7 @@ function like(like) {
       });
   }
 }
+
 function cartShop(addCart) {
   // alert("entra");
   if (tokenTrue() == true) {
@@ -73,11 +79,14 @@ function cartShop(addCart) {
     // console.log(id + " i " + siteShop + " i " + idUser);
 
     ajaxPromise(
-      "module/cart/controller/controllerCart.php", //typeForm =
-      "POST",
-      "JSON",
-      { op: "addLine", idProduct: id, idUser: idUser }
-    )
+        "module/cart/controller/controllerCart.php", //typeForm =
+        "POST",
+        "JSON", {
+          op: "addLine",
+          idProduct: id,
+          idUser: idUser
+        }
+      )
       .then(function (data) {
         console.log(data);
         toastr.success("Se ha añadido al carrito correctamente");

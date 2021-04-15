@@ -51,11 +51,11 @@ class shop_dao
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
-    
+
     public function select_data_categoryFormate($db, $sendDatArray)
     {
         // return $sendDatArray;
-        $sql ="SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
         WHERE li.idusers=  " . $sendDatArray[0] . ") AS B)
@@ -68,12 +68,80 @@ class shop_dao
     public function select_data_categoryGenere($db, $sendDatArray)
     {
         // return $sendDatArray;
-        $sql ="SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
         WHERE li.idusers=   " . $sendDatArray[0] . ") AS B)
         ON mo.id = B.idmovies               
-        WHERE genere = 'Fantasia' ORDER BY ". $sendDatArray[1] . " , movie asc LIMIT  " .  $sendDatArray[2] . ", 6";
+        WHERE genere = 'Fantasia' ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " .  $sendDatArray[2] . ", 6";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+
+    public function select_data_filter($db, $sendDatArray)
+    {
+
+        $user = $sendDatArray[0];
+        $order = $sendDatArray[1];
+        $offset = $sendDatArray[2];
+        $searchQuery = base64_decode($sendDatArray[3]);
+
+
+        // return $sendDatArray;
+        $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        ((SELECT DISTINCT li.idmovies, 'like' as likes  
+        FROM liketo li
+        WHERE li.idusers=  $user) AS B)
+        ON mo.id = B.idmovies " . $searchQuery . " ORDER BY  $order , movie asc LIMIT  $offset, 6";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+    public function select_data_pagination($db, $array)
+    {
+        $type = $array[0];
+        $sql =  "SELECT COUNT(*) AS countPage FROM MOVIES ";
+
+        switch ($type) {
+            case "listShop":
+                ///NO FARIA FALTA FER RES DINS
+                break;
+            case "searchQuery":
+                $search = $array[1];
+                $sql =   $sql + base64_decode($search);
+
+                break;
+            case 'decade':
+                $sql =  "SELECT COUNT(*) AS countPage FROM MOVIES " . "WHERE anyo BETWEEN 1980 AND 1989";
+
+                break;
+            case 'formate':
+                $sql =  "SELECT COUNT(*) AS countPage FROM MOVIES " . "WHERE formats LIKE '%VHS%'";
+                break;
+            case 'genere':
+                $sql =  "SELECT COUNT(*) AS countPage FROM MOVIES " . "WHERE genere = 'Fantasia'";
+                break;
+        }
+        // return $sendDatArray;
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+
+    public function select_data_filterType($db, $type)
+    {
+        $sql =  "SELECT COUNT(*) AS countPage FROM MOVIES ";
+
+        switch ($type) {
+
+            case 'country':
+                $sql =  "SELECT DISTINCT country FROM movies ORDER BY  country asc";
+
+                break;
+            case 'genere':
+                $sql =  "SELECT DISTINCT genere FROM movies ORDER BY  genere asc";
+                break;
+        }
+        // return $sendDatArray;
+        // return $sql
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }

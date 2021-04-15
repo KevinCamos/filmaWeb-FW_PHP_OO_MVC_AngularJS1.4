@@ -1,4 +1,3 @@
-
 function validateEmail() {
 	$(".error").remove();
 
@@ -46,17 +45,9 @@ function sendEmail() {
 			$('#send_contact').attr('disabled', true);
 			$('.ajaxLoader').fadeIn("fast");
 			var fin_data = $('#contactForm').serializeArray();
-			// var data = {
-			// 	"cname": $("#cname").val(),
-			// 	"cemail": $("#cemail").val(),
-			// 	"matter": $("#matter").val(),
-			// 	"message": $("#message").val()
-			// };
-			// var fin_data = JSON.stringify(data);
 			alert(fin_data);
-			http: //localhost/1_Fw_PHP_OO_MVC_jQuery_AngularJS/Framework/9_adoptions_dogs/contact_dogs/send_cont/
 
-				ajaxPromise("index.php?module=contact&function=send_cont", "GET", "JSON", {
+			ajaxPromise(friendlyModFunc("contact", "send_cont"), "GET", "JSON", {
 					"fin_data": fin_data
 				})
 				.then(function (data) {
@@ -79,5 +70,6 @@ function sendEmail() {
 }
 $(document).ready(function () {
 	sendEmail()
+	alert("fin_data");
 
 });
