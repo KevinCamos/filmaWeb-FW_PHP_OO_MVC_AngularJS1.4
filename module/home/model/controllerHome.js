@@ -50,7 +50,7 @@ function loadCategoryCarousel() {
             id: "img" + id,
             class: "category",
             value: ObjectCategory,
-            src: "module\\home\\img\\" + img,
+            src: GENERAL_PATH+"module/home/img/" + img,
           })
           .appendTo(firstDiv);
       }
@@ -118,7 +118,7 @@ function ajaxSearch(dirUrl, offset = 0) {
           .attr({
             id: id,
             class: "productHome",
-            src: "module\\movies\\img\\" + img,
+            src: GENERAL_PATH+"module/movies/img/" + img,
           })
           .appendTo("#productsHome");
       }

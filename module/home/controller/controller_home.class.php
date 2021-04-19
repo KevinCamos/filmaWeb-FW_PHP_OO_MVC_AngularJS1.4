@@ -6,7 +6,7 @@ class controller_home
 		$_SESSION['module'] = "home";
 	}
 
-	function home()
+	function list()
 	{
 		require_once(VIEW_PATH_INC . "top_page_home.php");
 		require_once(VIEW_PATH_INC . "header.html");

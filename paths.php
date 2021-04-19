@@ -48,9 +48,9 @@ define('MODEL_SHOP', SITE_ROOT . 'module/shop/model/model/');
 define ('MODEL_PATH_SHOP', SITE_ROOT . 'module/shop/model/model/');
 
 //Search
-define ('MODEL_SEARCH', SITE_PATH . '/module/search/model/');
+define ('MODEL_SEARCH', SITE_ROOT . '/module/search/model/');
 
-define ('MODEL_PATH_SEARCH', SITE_PATH . '/model/');
+define ('MODEL_PATH_SEARCH', SITE_ROOT . '/model/');
 
 //Login
 define('VIEW_PATH_LOGIN', SITE_ROOT . 'module/login/view/');
@@ -67,29 +67,6 @@ define ('MODEL_PATH_PROFILE', SITE_ROOT . '/module/profile/model/model/');
 
 //VIEW_INC JS
 define ('VIEW_JS', VIEW_PATH_INC . 'js/'); // View Path Inc
-
-
-
-
-
-
-//AUTOLOAD
-// Classes_ROOT,$class_name,'.class.singletone.php');
-//     require_path(bd_Root,$class_name,'.php');
-//     require_path(bd_bll,$class_name,'.class.singletone.php');
-//     require_path(bd_conf,$class_name,'.class.singletone.php');
-//     require_path(bd_utils,$class_name,'.php');
-//     require_path(bd_DAO,$class_name,'.class.singletone.php');
-//     require_path(Controller_ROOT,$class_name,'.php');
-//     require_path(Controller_Error,$class_name,'.php');
-//     require_path(Controller_Home,$class_name,'.php');
-//     require_path(Controller_Contact,$class_name,'.php');
-//     require_path(Controller_authentication,$class_name,'.php');
-//     require_path(Controller_About_us,$class_name,'.php');
-//     require_path(Controller_Catalog,$class_name,'.php');
-//     require_path(Controller_Stock_shop,$class_name,'.php');
-//     require_path(Utils_ROOT
-
 
 
 

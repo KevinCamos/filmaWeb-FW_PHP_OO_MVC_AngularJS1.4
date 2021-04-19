@@ -53,6 +53,8 @@
 
 
     <!-- COMPLEMENTS  COMPLEMENTS  COMPLEMENTS  COMPLEMENTS   -->
+    <script src="<?php echo ASSETS_PATH ?>paths.js"></script>
+
     <script src="<?php echo JS_PATH ?>ini.js"></script>
     <script src="<?php echo VIEW_PLUGINS ?>jquery.min.js"></script>
 

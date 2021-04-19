@@ -1,5 +1,4 @@
 //LA FONT D'AQUESTA SOLUCIÓ SURT D'ACÍ https://es.stackoverflow.com/questions/1366/c%C3%B3mo-incluir-un-archivo-javascript-a-otro-archivo-javascript-sin-utilizar-jquer
-const GENERAL_PATH = "http://" + window.location.hostname + "/Kevin/Ejercicios_Kevin/Projecte/" ;
 
 function importarScript(nombre) {
   var scriptImport = document.createElement("script");
@@ -50,14 +49,14 @@ function friendlyModFunc(varModule, varFunction) {
 
 function loadMenu() {
   //////
-  Promise.all([friendlyURL('?module=home'), friendlyURL('?page=movies&op=list'), friendlyURL('?module=shop&function=shop'), friendlyURL('?module=contact&function=list_contact'), friendlyURL('?page=cart')])
+  Promise.all([friendlyURL('?module=home'), friendlyURL('?page=movies&op=list'), friendlyURL('?module=shop&function=shop'), friendlyURL('?module=contact'), friendlyURL('?page=cart')])
     .then(function (values) {
       //  alert(values)
       $('#fixed-menu').empty();
-      $('<li></li>').html('<a href="' + values[0] + '" id="Inicio" data-tr="Inicio"></a>').appendTo('#fixed-menu');
-      $('<li></li>').html('<a href="' + values[1] + '" id="Peliculas" data-tr="Peliculas"></a>').appendTo('#fixed-menu');
+      $('<li></li>').html('<a href="' + values[0] + '/" id="Inicio" data-tr="Inicio"></a>').appendTo('#fixed-menu');
+      // $('<li></li>').html('<a href="' + values[1] + '" id="Peliculas" data-tr="Peliculas"></a>').appendTo('#fixed-menu');
       $('<li></li>').html('<a href="' + values[2] + '" id="Tienda" data-tr="Tienda"></a>').appendTo('#fixed-menu');
-      $('<li></li>').html('<a href="' + values[3] + '" id="Contacta con nosotros"  data-tr="Contacta con nosotros"></a>').appendTo('#fixed-menu');
+      $('<li></li>').html('<a href="' + values[3] + '/" id="Contacta con nosotros"  data-tr="Contacta con nosotros"></a>').appendTo('#fixed-menu');
       $('<li></li>').html(' <button class="lang-btn" data-tr="Valenciano" id="btn-val"></buttton>').appendTo('#fixed-menu');
       $('<li></li>').html(' <button class="lang-btn" data-tr="Castellano" id="btn-es"></buttton>').appendTo('#fixed-menu');
       $('<li></li>').html(' <button class="lang-btn" data-tr="Inglés" id="btn-en"></buttton>').appendTo('#fixed-menu');

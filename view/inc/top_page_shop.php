@@ -52,6 +52,7 @@
     <script src="<?php echo ASSETS_PATH ?>jquery.easy-autocomplete.min.js"></script>
 
 
+    <script src="<?php echo ASSETS_PATH ?>paths.js"></script>
 
     <!-- COMPLEMENTS  COMPLEMENTS  COMPLEMENTS  COMPLEMENTS   -->
     <script src="<?php echo JS_PATH ?>ini.js"></script>

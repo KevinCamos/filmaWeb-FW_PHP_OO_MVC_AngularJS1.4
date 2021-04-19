@@ -1,23 +1,23 @@
 <?php
+
+
 require 'autoload.php';
 require 'assets/JWTKey.php';
-// require_once("paths.php");
-// include(UTILS . "utils.inc.php");
-// include(UTILS . "common.inc.php");
-// include(UTILS . "upload.inc.php");
-// include(UTILS . "mail.inc.php");
 
-if (PRODUCTION) { //estamos en producción
-    ini_set('display_errors', '1');
-    ini_set('error_reporting', E_ERROR | E_WARNING); //error_reporting(E_ALL) ;
-} else {
-    ini_set('display_errors', '0');
-    ini_set('error_reporting', '0'); //error_reporting(0); 
-}
 
-ob_start();
-session_start();
-$_SESSION['module'] = "";
+    if (PRODUCTION) { //estamos en producción
+        ini_set('display_errors', '1');
+        ini_set('error_reporting', E_ERROR | E_WARNING); //error_reporting(E_ALL) ;
+    } else {
+        ini_set('display_errors', '0');
+        ini_set('error_reporting', '0'); //error_reporting(0); 
+    }
+    
+    ob_start();
+    session_start();
+    $_SESSION['module'] = "";
+    
+
 
 function handlerRouter()
 {
@@ -32,7 +32,7 @@ function handlerRouter()
     if (!empty($_GET['function'])) {
         $URI_function = $_GET['function'];
     } else {
-        $URI_function = 'home';
+        $URI_function = 'list';
     }
     handlerModule($URI_module, $URI_function);
 }
@@ -55,14 +55,14 @@ function handlerModule($URI_module, $URI_function)
                 $controllerClass = "controller_" . $URI_module;
                 $obj = new $controllerClass;
             } else {
-                ifNoExistPage();
+               ifNoExistPage();
             }
             handlerfunction(((string) $module->name), $obj, $URI_function);
             break;
         }
     }
     if (!$exist) {
-        ifNoExistPage();
+       ifNoExistPage();
     }
 }
 
@@ -98,3 +98,4 @@ function ifNoExistPage()
     require_once(VIEW_PATH_INC . "footer.html");
 }
 handlerRouter();
+

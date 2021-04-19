@@ -6,7 +6,7 @@ class controller_contact
 		$_SESSION['module'] = "contact";
 	}
 
-	function list_contact_dogs()
+	function list()
 	{
 		////ENTRA!!!
 		require_once(VIEW_PATH_INC . "top_page_contact.php");

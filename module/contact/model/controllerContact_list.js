@@ -70,6 +70,5 @@ function sendEmail() {
 }
 $(document).ready(function () {
 	sendEmail()
-	alert("fin_data");
 
 });
