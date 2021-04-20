@@ -46,12 +46,14 @@ class login_dao
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
-    // public function update_countClick($db, $arrArgument)
-    // {
-    //     $sql = "UPDATE movies SET clicks = clicks+ 1 
-    //     WHERE id = $arrArgument";
-    //     return $db->ejecutar($sql);
-    // }
+    public function select_data_getUser($db, $nameUser)
+    {
+        $sql = "SELECT idusers, email, username, avatar, type
+        FROM users
+        WHERE username LIKE '$nameUser'
+        OR email LIKE '$nameUser'";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);    }
     // public function select_best_breed($db, $arrArgument)
     // {
     //     $sql = "SELECT breed FROM dogs GROUP BY breed ORDER BY count(*) DESC LIMIT $arrArgument,2";

@@ -39,7 +39,6 @@ class login_model
     }
     public function login($userArray) //0 order, 1 offset, 2 IdUser
     {
-        // return  $order;
         $nameUser =  strtolower($userArray[0]['value']);
         $psswordUser =  strtolower($userArray[1]['value']);
         $userSQL =  $this->bll->obtain_validateUserLogin_BLL($nameUser);
@@ -55,11 +54,19 @@ class login_model
             return false;
         }
     }
-    // public function categoryDecade($sendDatArray) //0 order, 1 offset, 2 IdUser
-    // {
-    //     // return  $order;
-    //     return $this->bll->obtain_categoryDecade_BLL($sendDatArray);
-    // }
+    public function getUser($token) //0 order, 1 offset, 2 IdUser
+    {
+        $token = json_decode(jwt_process::decode(SECRET,  $token),true);
+
+		if (time() < $token["exp"]) {
+            return  $this->bll->obtain_getUser_BLL( $token["name"])[0];
+    
+    
+        }else{
+            return false;
+        }
+        // 
+    }
 
     // public function categoryFormate($sendDatArray) //0 order, 1 offset, 2 IdUser
     // {

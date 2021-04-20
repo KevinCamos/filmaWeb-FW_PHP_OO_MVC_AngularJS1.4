@@ -293,7 +293,6 @@ function DOMLogin() {
 function loginMenu() {
   $("#loginMenu").empty();
   $("#loginUser").empty();
-alert("reh")
   console.log(localStorage.getItem("user"));
   console.log("eh");
 
@@ -390,43 +389,44 @@ function checkToken(countCart = false) {
     var token = localStorage.getItem("token");
     console.log(token);
     ajaxPromise(friendlyModFunc("login", "getUser"), //typeForm =
-        "POST",
+        "GET",
         "JSON", {
           token: token
         }
       )
       .then(function (data) {
-        alert(data);
-        // console.log(typeof data);
-        // console.log(data);
-        // if (data == false) {
-        //   localStorage.removeItem("token");
-        //   toastr.warning("La sesión se ha cerrado por seguridad");
-        //   removeItemLogin();
-        //   loginMenu();
-        //   getCart();
-        //   return false;
-        // } else if (typeof data == "object") {
-        //   console.log(data.username);
-        //   localStorage.setItem("idusers", data.idusers);
-        //   localStorage.setItem("user", data.username);
-        //   localStorage.setItem("type", data.type);
-        //   localStorage.setItem("avatar", data.avatar);
-        //   localStorage.setItem("email", data.email);
-        //   if (countCart == true) {
-        //     getCart();
-        //   }
-        //   // updateToken();
-        //   loginMenu();
-        //   return true;
-        // }
+        // alert(data);
+        console.log(data)
+        console.log(typeof data);
+        console.log(data);
+        if (data == false) {
+          localStorage.removeItem("token");
+          toastr.warning("La sesión se ha cerrado por seguridad");
+          removeItemLogin();
+          loginMenu();
+          getCart();
+          return false;
+        } else if (typeof data == "object") {
+          console.log(data.username);
+          localStorage.setItem("idusers", data.idusers);
+          localStorage.setItem("user", data.username);
+          localStorage.setItem("type", data.type);
+          localStorage.setItem("avatar", data.avatar);
+          localStorage.setItem("email", data.email);
+          if (countCart == true) {
+            getCart();
+          }
+          // updateToken();
+          loginMenu();
+          return true;
+        }
       })
       .catch(function (data) {
         console.log(data);
       });
   } else {
     loginMenu();
-    return "3";
+    // return "3";
   }
 }
 
@@ -438,27 +438,22 @@ function tokenTrue() {
       return false;
     }
   }
-  // window.location.href = "index.php?page=login";
-  // alert("debes registrarte para continuar");
-
   return false;
 }
 
 function updateToken() {
   if (localStorage.getItem("user") != null) {
     var user = localStorage.getItem("user");
-    alert(localStorage.getItem("user") );
-    ajaxPromise(
-        "module/login/controller/controllerLogin.php?op=updateToken", //typeForm =
-        "POST",
+    // alert(localStorage.getItem("user") );
+    ajaxPromise(friendlyModFunc("login", "updateToken"), //typeForm =
+        "GET",
         "JSON", {
           user: user
         }
       )
       .then(function (data) {
+        // alert(data);
         console.log("token actualizado");
-        // localStorage.setItem("token", data);
-        // alert("actualitzat");
       })
       .catch(function (data) {
         console.log(data);
@@ -525,5 +520,5 @@ $(document).ready(function () {
   updateToken();
   toastrOptions();
   loadMenu();
-  loginMenu(); //en principi en estar tot operatiu, esta funció ja deuria d'anar sense aquesta línea!
+  // loginMenu(); //en principi en estar tot operatiu, esta funció ja deuria d'anar sense aquesta línea!
 });

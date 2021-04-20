@@ -9,7 +9,7 @@ class jwt_process {
         return $JWT -> encode(self::$header, $payload, $secret);
     }// end_encode
 
-    public static function decode($token, $secret) {
+    public static function decode($secret, $token ) {
         $JWT = new jwt();
         return $JWT -> decode($token, $secret);
     }// end_decode

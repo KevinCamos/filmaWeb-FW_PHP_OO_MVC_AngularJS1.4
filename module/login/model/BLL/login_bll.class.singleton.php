@@ -33,9 +33,9 @@ class login_bll
 	{
 		return $this->dao->select_data_validateUserLogin($this->db, $nameUser);
 	}
-	// public function obtain_data_details_BLL($arrArgument){
-	//   return $this->dao->select_data_details($this->db,$arrArgument);
-	// }
+	public function obtain_getUser_BLL($nameUser){
+	  return $this->dao->select_data_getUser($this->db,$nameUser);
+	}
 	// public function best_breed_home_BLL($arrArgument){
 	//   return $this->dao->select_best_breed($this->db,$arrArgument);
 	// }

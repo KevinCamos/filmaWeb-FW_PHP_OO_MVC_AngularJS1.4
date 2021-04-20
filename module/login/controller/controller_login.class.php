@@ -42,13 +42,13 @@ class controller_login
 
 	function getUser()
 	{
-		// echo json_encode("LOGIN");
 		$json = array();
-		$json = loadModel(MODEL_LOGIN, "login_model", "login", $_GET['serialize']);
+		$json = loadModel(MODEL_LOGIN, "login_model", "getUser", $_GET['token']);
 		echo json_encode($json);
-
-		// $nameUser =  strtolower($formulario[0]['value']);
-		// $email = strtolower($formulario[3]['value']);
+	}
+	function updateToken()
+	{
+		echo json_encode( jwt_process::encode(SECRET,  $_GET['user']));
 	}
 	//////////////////////// PAGINATION ///////////////////////
 
