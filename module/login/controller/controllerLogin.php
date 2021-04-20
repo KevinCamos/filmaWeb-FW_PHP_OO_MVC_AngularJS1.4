@@ -3,7 +3,6 @@ $path = $_SERVER['DOCUMENT_ROOT'] . '\Kevin\Ejercicios_Kevin\Projecte';
 //////
 include("$path.\module\login\model\DAOLogin.php");
 include("$path.\module\login\model\\functionsLogin.php");
-include("$path.\model\\JWT.php");
 include("$path.\assets\\middleWareAuth.php");
 include("$path.\assets\\JWTKey.php");
 

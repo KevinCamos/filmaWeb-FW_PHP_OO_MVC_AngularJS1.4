@@ -6,7 +6,7 @@ class controller_shop
 		$_SESSION['module'] = "shop";
 	}
 
-	function shop()
+	function list()
 	{
 		require_once(VIEW_PATH_INC . "top_page_shop.php");
 		require_once(VIEW_PATH_INC . "header.html");

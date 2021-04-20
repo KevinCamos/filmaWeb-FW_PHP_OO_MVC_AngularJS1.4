@@ -46,16 +46,21 @@ function friendlyModFunc(varModule, varFunction) {
 
   return friendlyURL(url);
 }
+function friendlyMod(varModule) {
+  url = "?module=" + varModule;
+
+  return friendlyURL(url)+"/";
+}
 
 function loadMenu() {
   //////
-  Promise.all([friendlyURL('?module=home'), friendlyURL('?page=movies&op=list'), friendlyURL('?module=shop&function=shop'), friendlyURL('?module=contact'), friendlyURL('?page=cart')])
+  Promise.all([friendlyURL('?module=home'), friendlyURL('?page=movies&op=list'), friendlyURL('?module=shop'), friendlyURL('?module=contact'), friendlyURL('?page=cart')])
     .then(function (values) {
       //  alert(values)
       $('#fixed-menu').empty();
       $('<li></li>').html('<a href="' + values[0] + '/" id="Inicio" data-tr="Inicio"></a>').appendTo('#fixed-menu');
       // $('<li></li>').html('<a href="' + values[1] + '" id="Peliculas" data-tr="Peliculas"></a>').appendTo('#fixed-menu');
-      $('<li></li>').html('<a href="' + values[2] + '" id="Tienda" data-tr="Tienda"></a>').appendTo('#fixed-menu');
+      $('<li></li>').html('<a href="' + values[2] + '/" id="Tienda" data-tr="Tienda"></a>').appendTo('#fixed-menu');
       $('<li></li>').html('<a href="' + values[3] + '/" id="Contacta con nosotros"  data-tr="Contacta con nosotros"></a>').appendTo('#fixed-menu');
       $('<li></li>').html(' <button class="lang-btn" data-tr="Valenciano" id="btn-val"></buttton>').appendTo('#fixed-menu');
       $('<li></li>').html(' <button class="lang-btn" data-tr="Castellano" id="btn-es"></buttton>').appendTo('#fixed-menu');
@@ -288,7 +293,7 @@ function DOMLogin() {
 function loginMenu() {
   $("#loginMenu").empty();
   $("#loginUser").empty();
-
+alert("reh")
   console.log(localStorage.getItem("user"));
   console.log("eh");
 
@@ -318,7 +323,7 @@ function loginMenu() {
       removeItemLogin();
       DOMLogin();
     } else {
-      window.location.href = "index.php?page=login";
+      window.location.href = friendlyURL('?module=login')+"/";
     }
   });
 }
@@ -375,7 +380,7 @@ function loginMenu() {
       removeItemLogin();
       location.reload();
     } else {
-      window.location.href = "index.php?page=login";
+      window.location.href = friendlyURL('?module=login')+"/";
     }
   });
 }
@@ -384,37 +389,37 @@ function checkToken(countCart = false) {
   if (localStorage.getItem("token") != null) {
     var token = localStorage.getItem("token");
     console.log(token);
-    ajaxPromise(
-        "module/login/controller/controllerLogin.php?op=menu", //typeForm =
+    ajaxPromise(friendlyModFunc("login", "getUser"), //typeForm =
         "POST",
         "JSON", {
           token: token
         }
       )
       .then(function (data) {
-        console.log(typeof data);
-        console.log(data);
-        if (data == false) {
-          localStorage.removeItem("token");
-          toastr.warning("La sesión se ha cerrado por seguridad");
-          removeItemLogin();
-          loginMenu();
-          getCart();
-          return false;
-        } else if (typeof data == "object") {
-          console.log(data.username);
-          localStorage.setItem("idusers", data.idusers);
-          localStorage.setItem("user", data.username);
-          localStorage.setItem("type", data.type);
-          localStorage.setItem("avatar", data.avatar);
-          localStorage.setItem("email", data.email);
-          if (countCart == true) {
-            getCart();
-          }
-          // updateToken();
-          loginMenu();
-          return true;
-        }
+        alert(data);
+        // console.log(typeof data);
+        // console.log(data);
+        // if (data == false) {
+        //   localStorage.removeItem("token");
+        //   toastr.warning("La sesión se ha cerrado por seguridad");
+        //   removeItemLogin();
+        //   loginMenu();
+        //   getCart();
+        //   return false;
+        // } else if (typeof data == "object") {
+        //   console.log(data.username);
+        //   localStorage.setItem("idusers", data.idusers);
+        //   localStorage.setItem("user", data.username);
+        //   localStorage.setItem("type", data.type);
+        //   localStorage.setItem("avatar", data.avatar);
+        //   localStorage.setItem("email", data.email);
+        //   if (countCart == true) {
+        //     getCart();
+        //   }
+        //   // updateToken();
+        //   loginMenu();
+        //   return true;
+        // }
       })
       .catch(function (data) {
         console.log(data);
@@ -442,6 +447,7 @@ function tokenTrue() {
 function updateToken() {
   if (localStorage.getItem("user") != null) {
     var user = localStorage.getItem("user");
+    alert(localStorage.getItem("user") );
     ajaxPromise(
         "module/login/controller/controllerLogin.php?op=updateToken", //typeForm =
         "POST",
@@ -519,4 +525,5 @@ $(document).ready(function () {
   updateToken();
   toastrOptions();
   loadMenu();
+  loginMenu(); //en principi en estar tot operatiu, esta funció ja deuria d'anar sense aquesta línea!
 });

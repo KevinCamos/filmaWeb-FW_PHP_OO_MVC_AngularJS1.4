@@ -12,24 +12,19 @@
         <![endif]-->
     <title>Projecte</title>
     <!-- BOOTSTRAP CORE STYLE CSS -->
-    <link href="view/css/bootstrap.css" rel="stylesheet" />
+    <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
+
+    <link href="<?php echo CSS_PATH ?>bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLE CSS -->
-    <link href="view/css/font-awesome.min.css" rel="stylesheet" />
-    <!-- CUSTOM STYLE CSS -->
-    <link href="view/css/style.css" rel="stylesheet" />
+    <link href="<?php echo CSS_PATH ?>font-awesome.min.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-
 
 
     <!-- AUTOCOMPLETAR -->
     <link rel="stylesheet" href="assets/easy-autocomplete.min.css">
     <script src="assets/jquery.easy-autocomplete.min.js"></script>
 
-
-
-    <!-- Mis links -->
-    <link href="view/css/style.css" rel="stylesheet" type="text/css" />
 
 
     <!--Mis JavaScripts-->
@@ -39,19 +34,23 @@
 
 
     <!-- COMPLEMENTS  COMPLEMENTS  COMPLEMENTS  COMPLEMENTS   -->
-    <script src="view\js\ini.js"></script>
+    <script src="<?php echo ASSETS_PATH ?>paths.js"></script>
+
+    <script src="<?php echo JS_PATH ?>ini.js"></script>
 
     <!-- SEARCH SEARCH SEARCH SEARCH -->
     <script src="module\search\model\controllerSearch.js"></script>
 
-    <!-- Custom scripts for this template -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-clean-blog/3.3.7/js/clean-blog.min.js"></script>
-    <script type="text/javascript" src="view/inc/translate.js"></script>
-
+  
+  <!-- Custom scripts for this template -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-clean-blog/3.3.7/js/clean-blog.min.js"></script>
+    <script type="text/javascript" src="<?php echo VIEW_INC ?>translate.js"></script>
+    <script src="<?php echo VIEW_PLUGINS ?>jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo MODEL_LOGIN_JS ?>controllerLogin.js"></script>
+    <link href="<?php echo CSS_LOGIN ?>loginRegister.css" rel="stylesheet" />
 
     <!--Module Login-->
-    <script src="module\login\model\controllerLogin.js"></script>
-    <link href="module\login\css\loginRegister.css" rel="stylesheet" />
+
 
 
 

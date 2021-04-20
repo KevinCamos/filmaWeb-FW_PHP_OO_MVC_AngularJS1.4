@@ -7,6 +7,8 @@ define ('SITE_PATH', 'http://' . $_SERVER['HTTP_HOST'] . PROJECT); // Site Path
 
 define ('VIEW_PATH', SITE_PATH . 'view/'); // Css Path
 define ('ASSETS_PATH', SITE_PATH . 'assets/'); // Css Path
+define ('ASSETS_PATH_PHP', SITE_ROOT . 'assets/'); // Css Path
+
 define ('CSS_PATH', VIEW_PATH . 'css/'); // Css Path
 define ('JS_PATH', VIEW_PATH . 'js/'); // JS Path
 define ('IMG_PATH',VIEW_PATH . 'img/'); // IMG Path
@@ -53,8 +55,10 @@ define ('MODEL_SEARCH', SITE_ROOT . '/module/search/model/');
 define ('MODEL_PATH_SEARCH', SITE_ROOT . '/model/');
 
 //Login
-define('VIEW_PATH_LOGIN', SITE_ROOT . 'module/login/view/');
-define ('MODEL_PATH_LOGIN', SITE_ROOT . '/module/login/model/model/');
+define ('VIEW_PATH_LOGIN', SITE_ROOT . 'module/login/view/');
+define ('MODEL_LOGIN_JS', SITE_PATH . 'module/login/model/');
+define('MODEL_LOGIN', SITE_ROOT  . 'module/login/model/model/');
+define('CSS_LOGIN', SITE_PATH . 'module/login/css/');
 
 //Cart
 define('VIEW_PATH_CART', SITE_ROOT . 'module/cart/view/');

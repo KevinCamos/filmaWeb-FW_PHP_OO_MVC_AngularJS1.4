@@ -16,12 +16,12 @@
         <name>contact</name>
         <uri>contact</uri>
     </module>
-    <!-- <module>
+     <module>
         <name>login</name>
         <uri>login</uri>
-        <uri>register</uri>
+        <!-- <uri>register</uri> -->
     </module>
-    <module>
+   <!-- <module>
         <name>cart</name>
         <uri>cart</uri>
     </module>

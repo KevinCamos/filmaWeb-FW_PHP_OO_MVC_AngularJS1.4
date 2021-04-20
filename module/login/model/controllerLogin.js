@@ -65,11 +65,12 @@ function loginAnimate() {
   });
 }
 
-function ajaxSendForm(serialize, typeForm = "login") {
+function ajaxSendForm(serialize, typeForm = "login") { //EN PROCÉS DE MIGRACIÓ!
   // console.log(serialize);
-  ajaxPromise(
-    "module/login/controller/controllerLogin.php?op=" + typeForm, //typeForm =
-    "POST",
+  ajaxPromise(friendlyModFunc("login", typeForm ),
+
+   //typeForm =
+    "GET",
     "JSON",
     { serialize: serialize }
   )
@@ -80,6 +81,7 @@ function ajaxSendForm(serialize, typeForm = "login") {
 
       switch (typeForm) {
         case "login":
+
           if (data == false) {
             console.log(1);
             $(".error").text(
@@ -90,7 +92,7 @@ function ajaxSendForm(serialize, typeForm = "login") {
             $(".error").text("La contraseña es incorrecta");
           } else {
             localStorage.setItem("token", data);
-            window.location.href = "index.php?page=home";
+            window.location.href = friendlyMod("home");
           }
 
           break;
@@ -101,12 +103,16 @@ function ajaxSendForm(serialize, typeForm = "login") {
             );
           } else {
             toastr.success("Se ha registrado corréctamente");
-            window.location.href = "index.php?page=home";
+            window.location.href = friendlyMod("shop");
           }
+          // alert(data);
+          // console.log(data);
           break;
       }
     })
     .catch(function (data) {
+      alert(data);
+
       console.log(data);
     });
 }

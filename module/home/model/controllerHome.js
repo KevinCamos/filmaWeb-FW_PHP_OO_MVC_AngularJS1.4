@@ -185,7 +185,7 @@ function clickCategory() {
   } else {
 
     // setTimetout() es una función para decirle que pasado X tiempo realice una función
-    window.location.href = friendlyModFunc("shop","shop");
+    window.location.href = friendlyMod("shop");
   }
 }
 
@@ -209,7 +209,7 @@ function clickProductHome() {
     countClickProduct(id);
     // return false;
 
-    window.location.href = friendlyModFunc("shop","shop");
+    window.location.href = friendlyMod("shop");
   }
 }
 

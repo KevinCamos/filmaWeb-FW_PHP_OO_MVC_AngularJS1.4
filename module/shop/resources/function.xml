@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <functions>
     <function>
-        <name>shop</name>
-        <uri>shop</uri>
+        <name>list</name>
+        <uri>list</uri>
     </function>
     <function>
         <name>openProduct</name>
