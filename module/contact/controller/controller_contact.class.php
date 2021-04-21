@@ -12,10 +12,9 @@ class controller_contact
 		require_once(VIEW_PATH_INC . "top_page_contact.php");
 		require_once(VIEW_PATH_INC . "header.html");
 		require_once(VIEW_PATH_INC . "menu.html");
-		loadView(VIEW_PATH_CONTACT. "contact_list.html");
+		loadView(VIEW_PATH_CONTACT . "contact_list.html");
 
 		require_once(VIEW_PATH_INC . "footer.html");
-
 	}
 
 
@@ -45,13 +44,13 @@ class controller_contact
 		];
 		// echo json_encode($arrArgument);
 
-				// set_error_handler('ErrorHandler');
-				try {
-					echo json_encode(send_email($arrArgument))  ;
-				} catch (Exception $e) {
-					echo "<div class='alert alert-error'>Server error. Try later...</div>";
-				}
-				restore_error_handler();
+		// set_error_handler('ErrorHandler');
+		try {
+			echo json_encode(mail::send_email($arrArgument));
+		} catch (Exception $e) {
+			echo "<div class='alert alert-error'>Server error. Try later...</div>";
+		}
+		restore_error_handler();
 
 		// $arrArgument = array(
 		// 	'type' => 'admin',

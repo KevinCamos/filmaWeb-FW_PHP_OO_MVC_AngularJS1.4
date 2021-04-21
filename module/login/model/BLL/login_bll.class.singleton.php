@@ -23,22 +23,23 @@ class login_bll
 		// return "hola";
 		return $this->dao->select_data_validateRegister($this->db, $nameUser, $email);
 	}
-	public function insert_register_BLL($email, $nameUser, $hashed_pass,  $avatar)
+	public function insert_register_BLL($email, $nameUser, $hashed_pass,  $avatar, $token_email)
 	{
 		// return "holas";
-		return $this->dao->insert_data_register($this->db, $email, $nameUser, $hashed_pass,  $avatar);
+		return $this->dao->insert_data_register($this->db, $email, $nameUser, $hashed_pass,  $avatar, $token_email);
 	}
 
 	public function obtain_validateUserLogin_BLL($nameUser)
 	{
 		return $this->dao->select_data_validateUserLogin($this->db, $nameUser);
 	}
-	public function obtain_getUser_BLL($nameUser){
-	  return $this->dao->select_data_getUser($this->db,$nameUser);
+	public function obtain_getUser_BLL($nameUser)
+	{
+		return $this->dao->select_data_getUser($this->db, $nameUser);
 	}
-	// public function best_breed_home_BLL($arrArgument){
-	//   return $this->dao->select_best_breed($this->db,$arrArgument);
-	// }
+	public function update_token_mail_BLL($arrArgument){
+	  return $this->dao->update_data_token_mail($this->db,$arrArgument);
+	}
 	// public function load_name_BLL(){
 	//   return $this->dao->select_load_name($this->db);
 	// }

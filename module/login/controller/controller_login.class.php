@@ -20,14 +20,12 @@ class controller_login
 	}
 	function register()
 	{
-		// echo json_encode($_GET['serialize']);
+		// echo json_encode(friendlyModFunc("asdf", "asdv", "sdfasd"));
+
+		// echo json_encode(friendlyURL("?model=model&function=function&token=pepinoss"));
 		$json = array();
 		$json = loadModel(MODEL_LOGIN, "login_model", "register", $_GET['serialize']);
 		echo json_encode($json);
-
-
-		// $nameUser =  strtolower($formulario[0]['value']);
-		// $email = strtolower($formulario[3]['value']);
 	}
 	function login()
 	{
@@ -48,8 +46,22 @@ class controller_login
 	}
 	function updateToken()
 	{
-		echo json_encode( jwt_process::encode(SECRET,  $_GET['user']));
+		echo json_encode(jwt_process::encode(SECRET,  $_GET['user']));
 	}
+	function token_mail()
+	{
+		// require_once(VIEW_PATH_INC . "top_page_login.php");
+		// require_once(VIEW_PATH_INC . "header.html");
+		// require_once(VIEW_PATH_INC . "menu.html");
+		// loadView(VIEW_PATH_LOGIN . 'login.html');
+		// require_once(VIEW_PATH_INC . "footer.html");
+
+		$json = array();
+		$json = loadModel(MODEL_LOGIN, "login_model", "token_mail", $_GET['param']);
+
+		echo json_encode($json);
+	}
+
 	//////////////////////// PAGINATION ///////////////////////
 
 

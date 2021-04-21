@@ -21,4 +21,8 @@
         <name>updateToken</name>
         <uri>updateToken</uri>
     </function>
+    <function>
+        <name>token_mail</name>
+        <uri>token_mail</uri>
+    </function>
 </functions>

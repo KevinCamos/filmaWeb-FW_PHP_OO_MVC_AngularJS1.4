@@ -78,6 +78,7 @@ function ajaxSendForm(serialize, typeForm = "login") { //EN PROCÉS DE MIGRACIÓ
       console.log(typeForm);
       console.log(typeof data);
       console.log(data);
+      alert(data);
 
       switch (typeForm) {
         case "login":
@@ -103,7 +104,7 @@ function ajaxSendForm(serialize, typeForm = "login") { //EN PROCÉS DE MIGRACIÓ
             );
           } else {
             toastr.success("Se ha registrado corréctamente");
-            window.location.href = friendlyMod("shop");
+            window.location.href = friendlyMod("home");
           }
           // alert(data);
           // console.log(data);

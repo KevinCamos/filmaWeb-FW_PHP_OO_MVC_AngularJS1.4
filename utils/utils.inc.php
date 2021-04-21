@@ -1,18 +1,21 @@
 <?php
-    function amigable($url, $return = false) {
-        $amigableson = URL_AMIGABLES;
-        $link = "";
-        if ($amigableson) {
-            $url = explode("&", str_replace("?", "", $url));
-            foreach ($url as $key => $value) {
-                $aux = explode("=", $value);
-                $link .=  $aux[1]."/";
-            }
-        } else {
-            $link = "index.php?" . $url;
+  function friendlyURL($url) {
+    $link = "";
+    if (URL_FRIENDLY) {
+        $url = explode("&", str_replace("?", "", $url));
+        foreach ($url as $key => $value) {
+            $aux = explode("=", $value);
+            $link .=  $aux[1]."/";
         }
-        if ($return) {
-            return SITE_PATH . $link;
-        }
-        echo SITE_PATH . $link;
+    } else {
+        $link = "index.php?" . $url;
+    }// end_else
+    return SITE_PATH . $link;
+}
+
+
+    function friendlyModFunc($module, $function, $token) {
+        $url=  "?module=$module&function=$function&token=$token";
+
+        return friendlyURL($url);
     }

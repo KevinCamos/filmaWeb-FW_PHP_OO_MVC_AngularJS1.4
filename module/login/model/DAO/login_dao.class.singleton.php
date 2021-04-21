@@ -24,17 +24,17 @@ class login_dao
         return $db->listar($stmt);
     }
 
-    public function insert_data_register($db, $email, $nameUser, $hashed_pass,  $avatar)
+    public function insert_data_register($db, $email, $nameUser, $hashed_pass,  $avatar, $token_email)
     {
         //PREGUNTAR A YOLANDA PER LA CREACIÓ DE LA ID ALEATORIA.
         // return $sendDatArray;
-        $sql = "INSERT INTO `users` (`email`, `username`, `pssword`, `avatar`, `type`)
-        VALUES ( '$email', '$nameUser', '$hashed_pass','$avatar', 'user')";
-        +
+        $sql = "INSERT INTO `users` (`email`, `username`, `pssword`, `avatar`, `token_email` )
+        VALUES ( '$email', '$nameUser', '$hashed_pass','$avatar', '$token_email')";
+
 
         // return $sql;
-        $stmt = $db->ejecutar($sql);
-        return $db->listar($stmt);
+        return $db->ejecutar($sql);
+        // return $db->listar($stmt);
     }
 
     public function select_data_validateUserLogin($db, $nameUser)
@@ -42,7 +42,8 @@ class login_dao
         $sql = "SELECT *
         FROM users
         WHERE username LIKE '$nameUser'
-        OR email LIKE '$nameUser'";
+        OR email LIKE '$nameUser'
+        AND activate LIKE 'activate'";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
@@ -53,7 +54,16 @@ class login_dao
         WHERE username LIKE '$nameUser'
         OR email LIKE '$nameUser'";
         $stmt = $db->ejecutar($sql);
-        return $db->listar($stmt);    }
+        return $db->listar($stmt);
+    }
+
+    public function update_data_token_mail($db, $nameUser)
+    {
+        $sql = "UPDATE `filmoteca`.`users` SET `activate` = 'activate', `token_email` = '' WHERE (`username` = '$nameUser');";
+
+        // return $sql;
+        return $db->ejecutar($sql);
+    }
     // public function select_best_breed($db, $arrArgument)
     // {
     //     $sql = "SELECT breed FROM dogs GROUP BY breed ORDER BY count(*) DESC LIMIT $arrArgument,2";

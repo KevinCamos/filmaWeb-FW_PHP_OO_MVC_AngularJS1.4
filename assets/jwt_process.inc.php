@@ -12,5 +12,13 @@ class jwt_process {
     public static function decode($secret, $token ) {
         $JWT = new jwt();
         return $JWT -> decode($token, $secret);
-    }// end_decode
+    }
+    public static function encode_tokmail($secret, $user) {
+        $payload = json_encode(['iat' => time(), 'exp' => time() + (60 * 60*24), 'name' => $user]);
+        $JWT = new jwt();
+        return $JWT -> encode(self::$header, $payload, $secret);
+    }// end_encode
+
+    
+    // end_decode
 }// end_jwt_process
