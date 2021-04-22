@@ -18,8 +18,9 @@ class login_dao
     {
         $sql = "SELECT username, email 
         FROM users
-        WHERE username LIKE '$nameUser'
-        OR email LIKE  '$email'";
+        WHERE (username LIKE '$nameUser'
+        OR email LIKE  '$email')
+        AND idusers LIKE 'FW-%'";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
@@ -27,9 +28,11 @@ class login_dao
     public function insert_data_register($db, $email, $nameUser, $hashed_pass,  $avatar, $token_email)
     {
         //PREGUNTAR A YOLANDA PER LA CREACIÓ DE LA ID ALEATORIA.
-        // return $sendDatArray;
-        $sql = "INSERT INTO `users` (`email`, `username`, `pssword`, `avatar`, `token_email` )
-        VALUES ( '$email', '$nameUser', '$hashed_pass','$avatar', '$token_email')";
+        // return $sendDatArray;  
+        $idUser = generate_Token_secure(20);
+        $idUser = 'FW-' . $idUser;
+        $sql = "INSERT INTO `users` (`idusers`, `email`, `username`, `pssword`, `avatar`, `token_email`)
+        VALUES ( '$idUser', '$email', '$nameUser', '$hashed_pass','$avatar', '$token_email')";
 
 
         // return $sql;
@@ -41,9 +44,11 @@ class login_dao
     {
         $sql = "SELECT *
         FROM users
-        WHERE username LIKE '$nameUser'
-        OR email LIKE '$nameUser'
-        AND activate LIKE 'activate'";
+        WHERE (username LIKE '$nameUser'
+        OR email LIKE '$nameUser')
+        AND activate LIKE 'activate'
+        AND idusers LIKE 'FW-%'";
+
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
@@ -51,8 +56,9 @@ class login_dao
     {
         $sql = "SELECT idusers, email, username, avatar, type
         FROM users
-        WHERE username LIKE '$nameUser'
-        OR email LIKE '$nameUser'";
+        WHERE (username LIKE '$nameUser'
+        OR email LIKE '$nameUser')
+        AND activate LIKE 'activate'";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
@@ -63,6 +69,27 @@ class login_dao
 
         // return $sql;
         return $db->ejecutar($sql);
+    }
+    public function select_data_validateSocialLogin($db, $nameUser)
+    {
+        $sql = "SELECT * FROM users
+        WHERE idusers LIKE '$nameUser'";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+    public function insert_data_registerSocialLogin($db, $dataUser)
+    {
+        $idUser = $dataUser[0];
+        $email = $dataUser[1];
+        $nameUser = $dataUser[2];
+        $avatar = $dataUser[3];
+        $hashed_pass = generate_Token_secure(100);
+
+        $sql = "INSERT INTO `users` (`idusers`, `email`, `username`, `pssword`, `avatar`, `activate`)
+        VALUES ( '$idUser', '$email', '$nameUser', '$hashed_pass','$avatar', 'activate')";
+
+        return $db->ejecutar($sql);
+        // return $db->listar($stmt);
     }
     // public function select_best_breed($db, $arrArgument)
     // {

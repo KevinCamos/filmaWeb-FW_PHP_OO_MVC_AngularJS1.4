@@ -38,7 +38,6 @@ class login_model
             // return $this->bll->insert_register_BLL($email, $nameUser, $hashed_pass,  $avatar,  $tokenMail);
             $this->bll->insert_register_BLL($email, $nameUser, $hashed_pass,  $avatar,  $tokenMail);
 
-
             $arrArgument = [
                 'type' => 'alta',
                 'token' => $tokenMail,
@@ -57,8 +56,7 @@ class login_model
         if ($userSQL == true) { //El usuari existeix
             if (password_verify($psswordUser, $userSQL[0]['pssword']) == true) {
                 // $token = encodeToken($nameUser);
-                $token = jwt_process::encode(SECRET,  $nameUser);
-                return $token;
+                return jwt_process::encode(SECRET,  $nameUser);
             } else {
                 return 'falsePssword';
             }
@@ -83,12 +81,63 @@ class login_model
 
         if (time() < $token["exp"]) {
             $this->bll->update_token_mail_BLL($token["name"]);
-            return "La validación se ha realizado con exito";
+            return jwt_process::encode(SECRET, $token["name"]);
         } else {
             return false;
         }
         // 
     }
+
+
+    public function socialLogin($dataUser) //0 order, 1 offset, 2 IdUser
+    {
+        $validateReg = $this->bll->obtain_validateSocialLogin_BLL($dataUser[0]);
+        if ($validateReg != true) { //El usuari existeix
+            $this->bll->obtain_registerSocialLogin_BLL($dataUser);
+        }
+        return  jwt_process::encode(SECRET, $dataUser[2]);
+
+
+        // 
+    }
+
+    public function recoveredMail($nameUser) //0 order, 1 offset, 2 IdUser
+    {
+        $userSQL =  $this->bll->obtain_validateUserLogin_BLL($nameUser);
+        if ($userSQL == false) { //El usuari existeix
+            return false;
+        }
+        // return true;
+
+        $tokenMail = jwt_process::encode_tokmail(SECRET,  $userSQL[0]['email']);
+
+        // return $this->bll->insert_register_BLL($email, $nameUser, $hashed_pass,  $avatar,  $tokenMail);
+
+        $arrArgument = [
+            'type' => 'recovered',
+            'token' => $tokenMail,
+            'inputName' => $userSQL[0]['username'],
+            'inputEmail' =>  $userSQL[0]['email'],
+        ];
+        return mail::send_email($arrArgument);        // return  jwt_process::encode(SECRET, $dataUser[2]);
+
+
+        // 
+    }
+
+    public function recoveredPassword($token) //0 order, 1 offset, 2 IdUser
+    {
+        $token = json_decode(jwt_process::decode(SECRET,  $token), true);
+
+        if (time() < $token["exp"]) {
+            // $this->bll->update_token_mail_BLL($token["name"]);
+            return jwt_process::encode(SECRET, $token["name"]);
+        } else {
+            return "Este enlace está obsoleto, vuelve a solicitar una contraseña";
+        }
+        // 
+    }
+
     // public function categoryFormate($sendDatArray) //0 order, 1 offset, 2 IdUser
     // {
     //     // return  $order;

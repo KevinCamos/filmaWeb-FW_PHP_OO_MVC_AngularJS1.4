@@ -32,7 +32,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 
-
+    <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-firestore.js"></script>
     <!-- COMPLEMENTS  COMPLEMENTS  COMPLEMENTS  COMPLEMENTS   -->
     <script src="<?php echo ASSETS_PATH ?>paths.js"></script>
 
@@ -48,6 +50,7 @@
     <script src="<?php echo VIEW_PLUGINS ?>jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo MODEL_LOGIN_JS ?>controllerLogin.js"></script>
     <link href="<?php echo CSS_LOGIN ?>loginRegister.css" rel="stylesheet" />
+    <script src="<?php echo ASSETS_PATH ?>api_kay.js"></script>
 
     <!--Module Login-->
 

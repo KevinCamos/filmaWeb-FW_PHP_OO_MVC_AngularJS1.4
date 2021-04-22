@@ -25,4 +25,16 @@
         <name>token_mail</name>
         <uri>token_mail</uri>
     </function>
+    <function>
+        <name>socialLogin</name>
+        <uri>socialLogin</uri>
+    </function>
+    <function>
+        <name>recoveredMail</name>
+        <uri>recoveredMail</uri>
+    </function>
+    <function>
+        <name>recoveredPassword</name>
+        <uri>recoveredPassword</uri>
+    </function>
 </functions>

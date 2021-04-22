@@ -37,8 +37,17 @@ class login_bll
 	{
 		return $this->dao->select_data_getUser($this->db, $nameUser);
 	}
-	public function update_token_mail_BLL($arrArgument){
-	  return $this->dao->update_data_token_mail($this->db,$arrArgument);
+	public function update_token_mail_BLL($arrArgument)
+	{
+		return $this->dao->update_data_token_mail($this->db, $arrArgument);
+	}
+	public function obtain_validateSocialLogin_BLL($arrArgument)
+	{
+		return $this->dao->select_data_validateSocialLogin($this->db, $arrArgument);
+	}
+	public function obtain_registerSocialLogin_BLL($arrArgument)
+	{
+		return $this->dao->insert_data_registerSocialLogin($this->db, $arrArgument);
 	}
 	// public function load_name_BLL(){
 	//   return $this->dao->select_load_name($this->db);

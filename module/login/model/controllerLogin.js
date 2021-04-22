@@ -44,6 +44,7 @@ function validateRegister() {
   $(".error").empty();
   return true;
 }
+
 function validateLogin() {
   var username = $("#nameUserLogin").val();
   var password = $("#passwordLogin").val();
@@ -54,11 +55,15 @@ function validateLogin() {
   $(".error").empty();
   return true;
 }
+
 function loginAnimate() {
   // https://codepen.io/colorlib/pen/rxddKy plantilla
   $(".message a").click(function () {
-    $(".form .modLog").animate(
-      { height: "toggle", width: "toggle", opacity: "toggle" },
+    $(".form .modLog").animate({
+        height: "toggle",
+        width: "toggle",
+        opacity: "toggle"
+      },
       "slow"
     );
     $(".error").empty();
@@ -67,18 +72,19 @@ function loginAnimate() {
 
 function ajaxSendForm(serialize, typeForm = "login") { //EN PROCÉS DE MIGRACIÓ!
   // console.log(serialize);
-  ajaxPromise(friendlyModFunc("login", typeForm ),
+  ajaxPromise(friendlyModFunc("login", typeForm),
 
-   //typeForm =
-    "GET",
-    "JSON",
-    { serialize: serialize }
-  )
+      //typeForm =
+      "GET",
+      "JSON", {
+        serialize: serialize
+      }
+    )
     .then(function (data) {
       console.log(typeForm);
       console.log(typeof data);
       console.log(data);
-      alert(data);
+      // alert(data);
 
       switch (typeForm) {
         case "login":
@@ -117,6 +123,7 @@ function ajaxSendForm(serialize, typeForm = "login") { //EN PROCÉS DE MIGRACIÓ
       console.log(data);
     });
 }
+
 function sendRegisterForm() {
   if (validateRegister() == true) {
     console.log("valida y entra");
@@ -164,7 +171,150 @@ function getClickEnterForm() {
   });
 }
 
+function socialLoginClick() {
+  // $('#formLogin').html("<img src= " + GENERAL_PATH + "module/login/img/ghub.png> " + "<img src= " + GENERAL_PATH + "module/login/img/gmail.png> ");
+  $("<img>").attr({
+    id: "loginGhub",
+    src: GENERAL_PATH + "module/login/img/ghub.png"
+  }).appendTo("#formLogin");
+  $("<img>").attr({
+    id: "loginGmail",
+    src: GENERAL_PATH + "module/login/img/gmail.png"
+  }).appendTo("#formLogin");
+  firebase.initializeApp(CONFIG);
+
+  $('#loginGmail').on('click', function () {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('email');
+    var authService = firebase.auth();
+    authService.signInWithPopup(provider)
+      .then(function (result) {
+        console.log('Hemos autenticado al usuario ', result.user);
+        // console.log(result.user.displayName);
+        // console.log(result.user.email);
+        // console.log(result.user.photoURL);
+        // console.log(result.user.uid);
+        let dataUser = [("GM-" + result.user.uid), result.user.email, result.user.displayName, result.user.photoURL];
+        console.log(dataUser);
+        socialLoginSendData(dataUser)
+      })
+      .catch(function (error) {
+        console.log('Se ha encontrado un error:', error);
+      });
+  });
+
+  $('#loginGhub').on('click', function () {
+    var provider = new firebase.auth.GithubAuthProvider();
+    var authService = firebase.auth();
+
+    authService.signInWithPopup(provider)
+      .then(function (result) {
+        // console.log(result);
+        // console.log(result.user);
+        // console.log(result.user.displayName);
+        // console.log(result.user.email);
+        // console.log(result.user.photoURL);
+        let dataUser = [("GH-" + result.user.uid), result.user.email, result.user.displayName, result.user.photoURL];
+        console.log(dataUser);
+        socialLoginSendData(dataUser)
+      }).catch(function (error) {
+
+        console.log('Se ha encontrado un error:', error);
+        var errorCode = error.code;
+        console.log(errorCode);
+        var errorMessage = error.message;
+        console.log(errorMessage);
+        var email = error.email;
+        console.log(email);
+        var credential = error.credential;
+        console.log(credential);
+      });
+  });
+}
+
+function socialLoginSendData(dataUser) {
+  ajaxPromise(friendlyModFunc("login", "socialLogin"),
+      "GET",
+      "JSON", {
+        dataUser: dataUser
+      }
+    )
+    .then(function (data) {
+      // alert(data);
+      console.log(data);
+      localStorage.setItem("token", data);
+      window.location.href = friendlyMod("home");
+
+    }).catch(function (data) {
+      alert(data);
+      console.log(data);
+
+    });
+}
+
+function clickRecoveredPssword() {
+
+  $(".recoveredPssword").click(function (event) {
+    event.preventDefault();
+    var dataUser = $("#nameUserLogin").val();
+    if (dataUser.length < 1) {
+      $(".error").text("Introduce un correo o usuario para recordar");
+    } else {
+      $(".error").empty();
+
+      ajaxPromise(friendlyModFunc("login", "recoveredMail"),
+          "GET",
+          "JSON", {
+            dataUser: dataUser
+          }
+        )
+        .then(function (data) {
+          // alert(data);
+          alert("Entra! : " + data);
+          console.log(data);
+
+        }).catch(function (data) {
+          alert(data);
+          console.log(data);
+        });
+    }
+  });
+}
+
+function pathLinkMail() {
+
+  let path = window.location.pathname.split('/');
+
+  if (path[5] === 'token_mail') {
+    window.location.href = friendlyMod("home")
+  } else if (path[5] === 'recoveredPassword') {
+    // alert(path[5])
+
+    alternDOMrecovPsswrd()
+  }
+
+}
+function alternDOMrecovPsswrd(){
+  $('#form').empty().html('<form class="recovered modLog" id="recovered"></form>');
+
+//   <!-- <label>INICIAR SESION</label> -->
+//   <input type="text" id="nameUserLogin" value="Kevin" name="nameUser" placeholder="Usuario o Correo" autocomplete="username" />
+//   <input type="password" id="passwordLogin" value="Kevin" name="password" placeholder="Contraseña"
+//     autocomplete="current-password" />
+//   <input type="button" name="submit" name="email" value="Iniciar Sesión" id="buttonL" class="submit" />
+
+//   <p class="message">¿Todavía no estás registrado/a? <a>Register</a></p>
+//   <p class="recoveredPssword">¿No recuerdas tu contraseña? <a>Recuérdamela</a></p>
+
+}
+
 $(document).ready(function () {
   getClickEnterForm();
   loginAnimate();
+  // if (localStorage.getItem('token')) {
+  //   window.location.href = friendlyMod("home");
+  // };
+  socialLoginClick()
+  clickRecoveredPssword();
+  pathLinkMail()
 });

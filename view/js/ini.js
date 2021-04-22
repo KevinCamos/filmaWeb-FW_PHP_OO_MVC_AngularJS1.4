@@ -388,6 +388,7 @@ function checkToken(countCart = false) {
   if (localStorage.getItem("token") != null) {
     var token = localStorage.getItem("token");
     console.log(token);
+    console.log(typeof(token));
     ajaxPromise(friendlyModFunc("login", "getUser"), //typeForm =
         "GET",
         "JSON", {
