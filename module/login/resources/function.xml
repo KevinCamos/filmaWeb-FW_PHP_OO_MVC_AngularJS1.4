@@ -36,5 +36,9 @@
     <function>
         <name>recoveredPassword</name>
         <uri>recoveredPassword</uri>
+    </function>    
+    <function>
+        <name>changePassword</name>
+        <uri>changePassword</uri>
     </function>
 </functions>

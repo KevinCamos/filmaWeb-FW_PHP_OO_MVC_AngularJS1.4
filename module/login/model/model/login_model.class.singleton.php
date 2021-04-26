@@ -133,11 +133,52 @@ class login_model
             // $this->bll->update_token_mail_BLL($token["name"]);
             return jwt_process::encode(SECRET, $token["name"]);
         } else {
-            return "Este enlace está obsoleto, vuelve a solicitar una contraseña";
+            return false;
         }
         // 
     }
+    
+    public function changePassword($password,$token)
+    {
+        $token = json_decode(jwt_process::decode(SECRET,  $token), true);
+        
+        if (time() < $token["exp"]) {
 
+            // return $token["name"];
+            $hashed_pass = password_hash(strtolower($password), PASSWORD_DEFAULT);
+            $this->bll->update_changePassword_BLL($token["name"],$hashed_pass);
+            return  jwt_process::encode(SECRET, $token["name"]);
+
+        }else {
+            return false;
+        }
+        // return $userArray;
+        // $nameUser =  strtolower($userArray[0]['value']);
+        // $email = strtolower($userArray[3]['value']);
+        // $validateReg = $this->bll->obtain_validateRegister_BLL($nameUser, $email);
+        // if ($validateReg == true) { //El usuari existeix
+        //     return false;
+        // } else {
+        //     $nameUser =  strtolower($userArray[0]['value']);
+        //     // $password =  strtolower($userArray[1]['value']);
+        //     $email = strtolower($userArray[3]['value']);
+        //     $hashavatar = md5(strtolower(trim($email)));
+        //     $hashed_pass = password_hash(strtolower($userArray[1]['value']), PASSWORD_DEFAULT);
+        //     $avatar = "https://www.gravatar.com/avatar/$hashavatar?s=40&d=robohash";
+        //     $tokenMail = jwt_process::encode_tokmail(SECRET,  $nameUser);
+        //     // return $this->bll->insert_register_BLL($email, $nameUser, $hashed_pass,  $avatar,  $tokenMail);
+        //     $this->bll->insert_register_BLL($email, $nameUser, $hashed_pass,  $avatar,  $tokenMail);
+
+        //     $arrArgument = [
+        //         'type' => 'alta',
+        //         'token' => $tokenMail,
+        //         'inputName' => $nameUser,
+        //         'inputEmail' =>  $email,
+        //     ];
+        //     return mail::send_email($arrArgument);
+        // }
+        // return $validateReg;
+    }
     // public function categoryFormate($sendDatArray) //0 order, 1 offset, 2 IdUser
     // {
     //     // return  $order;

@@ -87,6 +87,12 @@ class controller_login
 	}
 	//////////////////////// PAGINATION ///////////////////////
 
+	function changePassword()
+	{
+		// echo json_encode($_GET['password']);
 
+		$json =	loadModel(MODEL_LOGIN, "login_model", "changePassword", $_GET['password'], $_GET['token']);
+		echo json_encode($json);
+	}
 
 }

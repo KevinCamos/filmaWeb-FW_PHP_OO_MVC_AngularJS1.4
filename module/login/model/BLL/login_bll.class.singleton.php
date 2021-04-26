@@ -49,6 +49,11 @@ class login_bll
 	{
 		return $this->dao->insert_data_registerSocialLogin($this->db, $arrArgument);
 	}
+	public function update_changePassword_BLL($nameUser, $password)
+	{
+	 $this->dao->update_data_changePassword($this->db, $nameUser, $password);
+	 return $this->dao->select_data_getUser($this->db, $nameUser);
+	}
 	// public function load_name_BLL(){
 	//   return $this->dao->select_load_name($this->db);
 	// }

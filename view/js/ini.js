@@ -46,10 +46,11 @@ function friendlyModFunc(varModule, varFunction) {
 
   return friendlyURL(url);
 }
+
 function friendlyMod(varModule) {
   url = "?module=" + varModule;
 
-  return friendlyURL(url)+"/";
+  return friendlyURL(url) + "/";
 }
 
 function loadMenu() {
@@ -282,6 +283,8 @@ function removeItemLogin() {
   localStorage.removeItem("avatar");
   localStorage.removeItem("email");
   localStorage.removeItem("token");
+  window.location.href = friendlyMod("home");
+
 }
 
 function DOMLogin() {
@@ -322,7 +325,7 @@ function loginMenu() {
       removeItemLogin();
       DOMLogin();
     } else {
-      window.location.href = friendlyURL('?module=login')+"/";
+      window.location.href = friendlyURL('?module=login') + "/";
     }
   });
 }
@@ -379,7 +382,7 @@ function loginMenu() {
       removeItemLogin();
       location.reload();
     } else {
-      window.location.href = friendlyURL('?module=login')+"/";
+      window.location.href = friendlyURL('?module=login') + "/";
     }
   });
 }
@@ -388,7 +391,7 @@ function checkToken(countCart = false) {
   if (localStorage.getItem("token") != null) {
     var token = localStorage.getItem("token");
     console.log(token);
-    console.log(typeof(token));
+    console.log(typeof (token));
     ajaxPromise(friendlyModFunc("login", "getUser"), //typeForm =
         "GET",
         "JSON", {

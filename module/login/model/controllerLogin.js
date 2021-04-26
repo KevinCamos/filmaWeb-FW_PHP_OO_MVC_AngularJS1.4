@@ -285,29 +285,95 @@ function pathLinkMail() {
 
   let path = window.location.pathname.split('/');
 
-  if (path[5] === 'token_mail') {
-    window.location.href = friendlyMod("home")
-  } else if (path[5] === 'recoveredPassword') {
-    // alert(path[5])
+  if (path[5] === 'token_mail'  && localStorage.getItem('token') != false) {
 
+    window.location.href = friendlyMod("home")
+  } else if (path[5] === 'recoveredPassword'  && localStorage.getItem('token') != false) {
+    // alert(path[5])
     alternDOMrecovPsswrd()
   }
 
 }
-function alternDOMrecovPsswrd(){
+
+function alternDOMrecovPsswrd() {
   $('#form').empty().html('<form class="recovered modLog" id="recovered"></form>');
+  $('<label></label>').text('CAMBIAR CONTRASEÑA').appendTo('#recovered');
+  $('<input>').attr({
+    type: "text",
+    id: "recoPassword1",
+    name: 'recoPassword1'
+  }).appendTo('#recovered');
+  $('<input>').attr({
+    type: "text",
+    id: "recoPassword2",
+    name: 'recoPassword2'
+  }).appendTo('#recovered');
+  $('<input>').attr({
+    type: "button",
+    id: "buttonRec",
+    name: 'buttonRec',
+    value: 'Modificar Contraseña',
+    class: "submit"
+  }).appendTo('#recovered');
+  $('<p>').attr({
+    class: "error"
+  }).appendTo('#recovered');
+  clickRecoveredForm()
+}
 
-//   <!-- <label>INICIAR SESION</label> -->
-//   <input type="text" id="nameUserLogin" value="Kevin" name="nameUser" placeholder="Usuario o Correo" autocomplete="username" />
-//   <input type="password" id="passwordLogin" value="Kevin" name="password" placeholder="Contraseña"
-//     autocomplete="current-password" />
-//   <input type="button" name="submit" name="email" value="Iniciar Sesión" id="buttonL" class="submit" />
+function clickRecoveredForm() {
+  $("#buttonRec").click(function (event) {
 
-//   <p class="message">¿Todavía no estás registrado/a? <a>Register</a></p>
-//   <p class="recoveredPssword">¿No recuerdas tu contraseña? <a>Recuérdamela</a></p>
+    event.preventDefault();
+
+    let password = validaRecoveredForm();
+    if (password != false) {
+      let token = localStorage.getItem('token');
+      ajaxPromise(friendlyModFunc("login", "changePassword"),
+          "GET",
+          "JSON", {
+            password: password,
+            token: token
+          }
+        )
+        .then(function (data) {
+          // alert(data);
+          console.log(data);
+          if (data == false) {
+            console.log(1);
+            $(".error").text(
+              "Lo sentimos, ha habido un problema en la verificación, vuelve a solicitar un cambio de contraseña"
+            );
+
+          } else {
+            localStorage.setItem("token", data);
+            // alert(data);
+            window.location.href = friendlyMod("home");
+          }
+
+        }).catch(function (data) {
+          alert(data);
+          console.log(data);
+
+        });
+    } //if true ajax;
+
+  });
 
 }
 
+function validaRecoveredForm() {
+  var password = $("#recoPassword1").val();
+  var password2 = $("#recoPassword2").val();
+  if (password.length < 5 || password.length > 12) {
+    $(".error").text("La contraseña debe de tener de 4 y 12 carácteres");
+    return false;
+  } else if (password != password2) {
+    $(".error").text("Repite la contraseña la segunda corréctamente");
+    return false;
+  }
+  return password;
+}
 $(document).ready(function () {
   getClickEnterForm();
   loginAnimate();

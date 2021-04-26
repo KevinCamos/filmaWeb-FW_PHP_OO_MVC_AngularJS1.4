@@ -91,6 +91,14 @@ class login_dao
         return $db->ejecutar($sql);
         // return $db->listar($stmt);
     }
+
+    public function update_data_changePassword($db, $nameUser, $password)
+    {
+        $sql = "UPDATE `filmoteca`.`users` SET `pssword` = '$password' WHERE (`email` = '$nameUser') AND idusers LIKE 'FW-%';";
+
+        // return $sql;
+        return $db->ejecutar($sql);
+    }
     // public function select_best_breed($db, $arrArgument)
     // {
     //     $sql = "SELECT breed FROM dogs GROUP BY breed ORDER BY count(*) DESC LIMIT $arrArgument,2";
