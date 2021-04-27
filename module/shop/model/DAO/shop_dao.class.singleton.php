@@ -19,7 +19,7 @@ class shop_dao
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
-        WHERE li.idusers=  $idUser) AS B)
+        WHERE li.idusers LIKE '$idUser') AS B)
         ON mo.id = B.idmovies
         WHERE mo.id= $idProduct";
         $stmt = $db->ejecutar($sql);
@@ -32,7 +32,7 @@ class shop_dao
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
-        WHERE li.idusers= " . $sendDatArray[0] . ") AS B)
+        WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
         ON mo.id = B.idmovies
         ORDER BY " . $sendDatArray[1] . ", movie asc LIMIT " . $sendDatArray[2] . ",6";
         $stmt = $db->ejecutar($sql);
@@ -44,7 +44,7 @@ class shop_dao
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
-        WHERE li.idusers= " . $sendDatArray[0] . ") AS B)
+        WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
         ON mo.id = B.idmovies                     
         WHERE anyo BETWEEN 1980 AND 1989  
         ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " . $sendDatArray[2] . ", 6";
@@ -58,7 +58,7 @@ class shop_dao
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
-        WHERE li.idusers=  " . $sendDatArray[0] . ") AS B)
+        WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
         ON mo.id = B.idmovies               
          WHERE formats LIKE '%VHS%' ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " . $sendDatArray[2] . ", 6";
         $stmt = $db->ejecutar($sql);
@@ -71,7 +71,7 @@ class shop_dao
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
-        WHERE li.idusers=   " . $sendDatArray[0] . ") AS B)
+        WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
         ON mo.id = B.idmovies               
         WHERE genere = 'Fantasia' ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " .  $sendDatArray[2] . ", 6";
         $stmt = $db->ejecutar($sql);
@@ -144,6 +144,25 @@ class shop_dao
         // return $sql
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
+    }
+    public function insert_data_like($db, $get)
+    {
+        $idUser =  $get['idUser'];
+        $idProduct = $get['idProduct'];
+
+        $sql = "INSERT INTO liketo 
+        VALUES ('$idUser', $idProduct)";
+        return $db->ejecutar($sql);
+    }
+    public function remove_data_like($db, $get)
+    {
+        $idUser =  $get['idUser'];
+        $idProduct = $get['idProduct'];
+        $sql = "DELETE FROM liketo 
+               WHERE idusers LIKE '$idUser' 
+               AND idmovies= $idProduct";
+
+      return   $db->ejecutar($sql);
     }
     // public function select_data_categoryDecade($db, $offset)
     // {

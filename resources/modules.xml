@@ -21,13 +21,13 @@
         <uri>login</uri>
         <!-- <uri>register</uri> -->
     </module>
-   <!-- <module>
+   <module>
         <name>cart</name>
         <uri>cart</uri>
     </module>
-    <module>
+    <!-- <module>
         <name>movies</name>
         <uri>movies</uri>
-    </module> -->
+    </module>  -->
 
 </modules>

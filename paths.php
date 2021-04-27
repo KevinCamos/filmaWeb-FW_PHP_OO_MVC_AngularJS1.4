@@ -61,8 +61,11 @@ define('MODEL_LOGIN', SITE_ROOT  . 'module/login/model/model/');
 define('CSS_LOGIN', SITE_PATH . 'module/login/css/');
 
 //Cart
-define('VIEW_PATH_CART', SITE_ROOT . 'module/cart/view/');
-define ('MODEL_PATH_CART', SITE_ROOT . '/module/cart/model/model/');
+define ('VIEW_PATH_CART', SITE_ROOT . 'module/cart/view/');
+define ('MODEL_CART_JS', SITE_PATH . 'module/cart/model/');
+define('MODEL_CART', SITE_ROOT  . 'module/cart/model/model/');
+define('CSS_CART', SITE_PATH . 'module/cart/css/');
+
 
 //Profile
 define('VIEW_PATH_PROFILE', SITE_ROOT . 'module/profile/view/');

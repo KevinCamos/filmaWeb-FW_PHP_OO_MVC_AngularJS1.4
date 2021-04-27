@@ -60,6 +60,15 @@ class shop_bll
 		// return "holas";
 		return $this->dao->select_data_filterType($this->db, $type);
 	}
+	
+	public function insert_like_BLL($get)
+	{
+		return $this->dao->insert_data_like($this->db, $get);
+	}
+	public function remove_like_BLL($get)
+	{
+		return $this->dao->remove_data_like($this->db, $get);
+	}
 	// public function update_countClick_BLL($arrArgument)
 	// {
 	// 	return $this->dao->update_countClick($this->db, $arrArgument);

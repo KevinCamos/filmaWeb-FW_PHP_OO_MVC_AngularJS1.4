@@ -58,6 +58,22 @@ class shop_model
         // return  $type;
         return $this->bll->obtain_filterType_BLL($type);
     }
+
+    public function likeds($get) //0 order, 1 offset, 2 IdUser
+    {
+        // return $get['typeLike'];
+        switch ($get['typeLike']) {
+
+            case 'like':
+             return   $this->bll->insert_like_BLL($get);
+                break;
+            case 'unlike':
+                return  $this->bll->remove_like_BLL($get);
+
+                break;
+        }
+        // return $get['typeLike'];
+    }
     // public function countClick($arrArgument){
     //     // return "hola";
     //     return $this->bll->update_countClick_BLL($arrArgument);

@@ -346,13 +346,15 @@ function searchAjaxProducts(
   boolTrue = false
 ) {
   var idUser = getUser();
+  // alert(idUser)
   // alert(dirUrl)
-  var sendData = [-1, order, offset, search]; //Cambiar -1 per id User en funcionar, modificació per al framework
+  var sendData = [idUser, order, offset, search]; //Cambiar -1 per id User en funcionar, modificació per al framework
   // alert(sendData)
   ajaxPromise(dirUrl, "GET", "JSON", {
       sendData: sendData,
     })
     .then(function (category) {
+      // alert("entra: "+category)
       if (category.length === 1) {
         // FET AL FRAMEWORK
         divsProduct(

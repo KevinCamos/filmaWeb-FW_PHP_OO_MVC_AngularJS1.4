@@ -1,6 +1,6 @@
 function likeCart(etiqueta) {
   $("body").on("click", etiqueta, function () {
-    console.log(this);
+    // console.log(this);
     var thisClass = $(this).attr("class");
     if (
       thisClass == "far fa-heart like" ||
@@ -19,28 +19,28 @@ function like(like) {
     id = $(like).attr("id");
     var id = id.split("-");
     var typeLike = id[0];
-    var id = id[1];
+    var idProduct = id[1];
     var idUser = localStorage.getItem("idusers");
-    console.log(id + " i " + typeLike + "i" + idUser);
+    // alert(idProduct + " i " + typeLike + "i" + idUser);
     var arr = ["likeds", typeLike, idProduct, idUser]; //// LA QUE HI HA QUE FICAR A AJAXPROMISE 
-    ajaxPromise(
-        "module/shop/controller/controllerShopPage.php", //typeForm =
+    ajaxPromise(friendlyModFunc("shop", "likeds"), //typeForm =
         "GET",
         undefined, {
           op: "likeds",
           typeLike: typeLike,
-          idProduct: id,
+          idProduct: idProduct,
           idUser: idUser
         }
       )
-      .then(function () {
+      .then(function (date) {
+        // alert("entra:"+ date)
         // console.log(data);
         switch (typeLike) {
           case "like":
             console.log("we");
-            $("#" + typeLike + "-" + id).attr({
+            $("#" + typeLike + "-" + idProduct).attr({
               class: "fas fa-heart unlike",
-              id: "unlike-" + id,
+              id: "unlike-" + idProduct,
               onMouseover: "this.style.color='black'",
               onMouseout: "this.style.color='tomato'",
               style: "color: tomato",
@@ -50,9 +50,9 @@ function like(like) {
 
             break;
           case "unlike":
-            $("#" + typeLike + "-" + id).attr({
+            $("#" + typeLike + "-" + idProduct).attr({
               class: "far fa-heart like",
-              id: "like-" + id,
+              id: "like-" + idProduct,
               onMouseover: "this.style.color='tomato'",
               onMouseout: "this.style.color='black'",
               style: "color: black",
@@ -62,10 +62,15 @@ function like(like) {
             break;
         }
       })
-      .catch(function () {
+      .catch(function (date) {
+        alert("No entra:"+ date)
         alert("error");
       });
+  }else{
+    toastr.warning("Debes estar registrado para hacer esta acción");
+
   }
+
 }
 
 function cartShop(addCart) {

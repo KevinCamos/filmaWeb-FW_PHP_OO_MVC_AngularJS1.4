@@ -469,6 +469,7 @@ function getUser() {
   if (localStorage.getItem("idusers") != null) {
     return localStorage.getItem("idusers");
   } else {
+
     return -1;
   }
 }
@@ -476,25 +477,27 @@ function getUser() {
 function getCart() {
   var idUser = getUser();
   if (idUser != -1) {
-    ajaxPromise(
-        "module/cart/controller/controllerCart.php", //typeForm =
-        "POST",
+    ajaxPromise(friendlyModFunc("cart", "countCart"), //typeForm =
+        "GET",
         "JSON", {
-          op: "countCart",
           idUser: idUser
         }
       )
       .then(function (data) {
+        // alert(data);
+        console.log(data);
+
         console.log(data.cantidad);
         if (data.cantidad != 0) {
           $("#countCart").text(data.cantidad);
         } else {
-          $("#countCart").text("");
+          $("#countCart").text("0");
         }
         // localStorage.setItem("token", data);
         // alert("actualitzat");
       })
       .catch(function (data) {
+        // alert(data)
         console.log(data);
       });
   }

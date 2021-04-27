@@ -76,6 +76,13 @@ class controller_shop
 		echo json_encode($json);
 	}
 
+	function likeds()
+	{
+		// echo json_encode($_GET["idUser"]);
+		$json = array();
+		$json = loadModel(MODEL_SHOP, "shop_model", "likeds", $_GET);
+		echo json_encode($json);
+	}
 
 	//////////////////////// PAGINATION ///////////////////////
 

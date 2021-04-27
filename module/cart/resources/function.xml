@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<functions>
+    <function>
+        <name>list</name>
+        <uri>list</uri>
+    </function>
+
+   <function>
+        <name>countCart</name>
+        <uri>countCart</uri>
+    </function>
+   <!--   <function>
+        <name>login</name>
+        <uri>login</uri>
+    </function>
+    <function>
+        <name>getUser</name>
+        <uri>getUser</uri>
+    </function>
+    <function>
+        <name>updateToken</name>
+        <uri>updateToken</uri>
+    </function>
+    <function>
+        <name>token_mail</name>
+        <uri>token_mail</uri>
+    </function>
+    <function>
+        <name>socialLogin</name>
+        <uri>socialLogin</uri>
+    </function>
+    <function>
+        <name>recoveredMail</name>
+        <uri>recoveredMail</uri>
+    </function>
+    <function>
+        <name>recoveredPassword</name>
+        <uri>recoveredPassword</uri>
+    </function>    
+    <function>
+        <name>changePassword</name>
+        <uri>changePassword</uri>
+    </function> -->
+</functions>

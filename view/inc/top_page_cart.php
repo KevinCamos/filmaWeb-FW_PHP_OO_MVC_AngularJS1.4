@@ -12,11 +12,11 @@
         <![endif]-->
     <title>Projecte</title>
     <!-- BOOTSTRAP CORE STYLE CSS -->
-    <link href="view/css/bootstrap.css" rel="stylesheet" />
+    <link href="<?php echo CSS_PATH ?>style.css" rel="stylesheet" type="text/css" />
+
+    <link href="<?php echo CSS_PATH ?>bootstrap.css" rel="stylesheet" />
     <!-- FONTAWESOME STYLE CSS -->
-    <link href="view/css/font-awesome.min.css" rel="stylesheet" />
-    <!-- CUSTOM STYLE CSS -->
-    <link href="view/css/style.css" rel="stylesheet" />
+    <link href="<?php echo CSS_PATH ?>font-awesome.min.css" rel="stylesheet" />
     <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
 
@@ -44,11 +44,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- TRANSLATE -->
-    <script type="text/javascript" src="view/inc/translate.js"></script>
+    <script type="text/javascript" src="<?php echo VIEW_INC ?>translate.js"></script>
 
     
     <!-- COMPLEMENTS  COMPLEMENTS  COMPLEMENTS  COMPLEMENTS   -->
-    <script src="view\js\ini.js"></script>
+    <script src="<?php echo ASSETS_PATH ?>paths.js"></script>
+
+<script src="<?php echo JS_PATH ?>ini.js"></script>
+
     
     <!-- SEARCH SEARCH SEARCH SEARCH -->
     <script src="module\search\model\controllerSearch.js"></script>
@@ -56,9 +59,9 @@
 
 
 
+    <script type="text/javascript" src="<?php echo MODEL_CART_JS ?>controllerCart.js"></script>
 
     
-    <script src="module\cart\model\controllerCart.js"></script>
 
 
     <!-- <script src="module\home\model\functionsSearch.js"></script> -->
