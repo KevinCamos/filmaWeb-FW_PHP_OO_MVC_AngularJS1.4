@@ -59,14 +59,70 @@ class cart_dao
         VALUES ($idAlbaran, $idProduct)";
         return $db->ejecutar($sql);
     }
-    public function update_data_addToLine($db, $idAlbaran, $idLinea)
+    public function update_data_addToLine($db, $idAlbaran, $idLineaOrProduct)
     {
 
 
         $sql = "UPDATE `linea_producto` 
         SET `cantidad` = `cantidad`+1 
-        WHERE (`idlinea` = '$idLinea') 
+        WHERE ((`idlinea` = '$idLineaOrProduct')  OR (`idproducto` = '$idLineaOrProduct'))
         AND (`idalbaran` = '$idAlbaran')";
+
+        return $db->ejecutar($sql);
+    }
+    public function update_data_removeToLine($db, $idAlbaran, $idProduct)
+    {
+
+        $sql = "UPDATE `linea_producto` 
+        SET `cantidad` = `cantidad`-1 
+        WHERE (`idproducto` = '$idProduct') 
+        AND (`idalbaran` = '$idAlbaran')";
+        return $db->ejecutar($sql);
+    }
+
+    public function delete_data_dropToLine($db, $idAlbaran, $idProduct)
+    {
+
+        $sql = "UPDATE `linea_producto` 
+        SET `cantidad` = 0 WHERE (`idproducto` = '$idProduct') 
+        AND (`idalbaran` = '$idAlbaran')";
+        return $db->ejecutar($sql);
+    }
+    public function select_data_getCart($db, $idAlbaran)
+    {
+        $sql = "SELECT l.*, m.movie,  m.price,  m.img
+        FROM linea_producto l, movies m
+        WHERE l.idalbaran = $idAlbaran
+        AND l.idproducto = m.id
+        AND l.cantidad <> 0";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+    public function select_data_totalPrice($db, $idAlbaran, $idProduct)
+    {
+        $sql = "SELECT l.idproducto, l.cantidad,  m.price
+        FROM linea_producto l, movies m
+        WHERE l.idalbaran = $idAlbaran
+        and m.id=l.idproducto
+        AND l.idproducto = $idProduct";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+    public function select_data_getTotalCart($db, $idAlbaran)
+    {
+        $sql = "SELECT l.idproducto, l.idalbaran, l.cantidad, m.movie, m.price, (l.cantidad*m.price) AS totalPrice
+        FROM linea_producto l, movies m
+        WHERE l.idproducto=m.id
+        AND l.cantidad <> 0 
+        AND  l.idalbaran = $idAlbaran;";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+    public function update_data_endCart($db, $idAlbaran)
+    {
+        $sql = "UPDATE albaran 
+        SET estado = 'F' 
+        WHERE idalbaran = $idAlbaran";
 
         return $db->ejecutar($sql);
     }

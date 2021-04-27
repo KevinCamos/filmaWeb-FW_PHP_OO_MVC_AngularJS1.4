@@ -476,7 +476,7 @@ function getUser() {
 
 function getCart() {
   var idUser = getUser();
-  
+
   if (idUser != -1) {
     // alert(idUser)
     ajaxPromise(friendlyModFunc("cart", "countCart"), //typeForm =
@@ -489,7 +489,7 @@ function getCart() {
         // alert(data);
         console.log(data);
 
-        console.log(data.cantidad);
+        // console.log(data.cantidad);
         if (data != 0) {
           $("#countCart").text(data);
         } else {

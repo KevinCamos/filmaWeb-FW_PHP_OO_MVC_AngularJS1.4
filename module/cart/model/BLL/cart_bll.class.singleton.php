@@ -48,6 +48,35 @@ class cart_bll
 		// return "holas";
 		return $this->dao->update_data_addToLine($this->db, $idAlbaran, $idLinea);
 	}
+	public function update_removeToLine_BLL($idAlbaran, $idProduct)
+	{
+		// return "holas";
+		return $this->dao->update_data_removeToLine($this->db, $idAlbaran, $idProduct);
+	}
+	public function delete_dropToLine_BLL($idAlbaran, $idProduct)
+	{
+		// return "holas";
+		return $this->dao->delete_data_dropToLine($this->db, $idAlbaran, $idProduct);
+	}
+	public function obtain_getCart_BLL($idAlbaran)
+	{
+		// return "holas";
+		return $this->dao->select_data_getCart($this->db, $idAlbaran);
+	}
+	public function obtain_totalPrice_BLL($idAlbaran, $idProduct)
+	{
+		// return "holas";
+		return $this->dao->select_data_totalPrice($this->db, $idAlbaran, $idProduct);
+	}
+	public function obtain_getTotalCart_BLL($idAlbaran)
+	{
+		// return "holas";
+		return $this->dao->select_data_getTotalCart($this->db, $idAlbaran);
+	}public function update_endCart_BLL($idAlbaran)
+	{
+		// return "holas";
+		return $this->dao->update_data_endCart($this->db, $idAlbaran);
+	}
 	// public function update_token_mail_BLL($arrArgument)
 	// {
 	// 	return $this->dao->update_data_token_mail($this->db, $arrArgument);

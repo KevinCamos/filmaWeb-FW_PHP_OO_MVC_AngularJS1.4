@@ -5,31 +5,39 @@
         <uri>list</uri>
     </function>
 
-   <function>
+    <function>
         <name>countCart</name>
         <uri>countCart</uri>
     </function>
-   <function>
+    <function>
         <name>addLine</name>
         <uri>addLine</uri>
     </function>
-    <!--   <function>
-        <name>getUser</name>
-        <uri>getUser</uri>
+    <function>
+        <name>getCart</name>
+        <uri>getCart</uri>
     </function>
     <function>
-        <name>updateToken</name>
-        <uri>updateToken</uri>
+        <name>updateAmount</name>
+        <uri>updateAmount</uri>
     </function>
     <function>
-        <name>token_mail</name>
-        <uri>token_mail</uri>
+        <name>totalPrice</name>
+        <uri>totalPrice</uri>
     </function>
     <function>
-        <name>socialLogin</name>
-        <uri>socialLogin</uri>
+        <name>getAlbaran</name>
+        <uri>getAlbaran</uri>
     </function>
     <function>
+        <name>getTotalCart</name>
+        <uri>getTotalCart</uri>
+    </function>
+    <function>
+        <name>endCart</name>
+        <uri>endCart</uri>
+    </function>
+    <!--  <function>
         <name>recoveredMail</name>
         <uri>recoveredMail</uri>
     </function>

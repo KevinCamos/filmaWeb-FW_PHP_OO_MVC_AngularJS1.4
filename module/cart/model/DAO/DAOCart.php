@@ -9,42 +9,42 @@ class DAOCart
 
 
 
-    function getAlbaran($idUser)
-    {
+    // function getAlbaran($idUser)
+    // {
 
-        $sql = "SELECT idalbaran 
-        FROM albaran
-        WHERE idcliente = $idUser
-        AND estado LIKE  'proceso'";
+    //     $sql = "SELECT idalbaran 
+    //     FROM albaran
+    //     WHERE idcliente = $idUser
+    //     AND estado LIKE  'proceso'";
 
-        return  close_fetch_object($sql);
-    }
-    function setAlbaran($idUser)
-    {
+    //     return  close_fetch_object($sql);
+    // }
+    // function setAlbaran($idUser)
+    // {
 
-        $sql = "INSERT INTO `albaran` (`idcliente`)
-            VALUES ($idUser)";
-        return  close_no_fetch($sql);
-    }
+    //     $sql = "INSERT INTO `albaran` (`idcliente`)
+    //         VALUES ($idUser)";
+    //     return  close_no_fetch($sql);
+    // }
 
-    function getLine($idAlbaran, $idProduct)
-    {
+    // function getLine($idAlbaran, $idProduct)
+    // {
 
-        $sql = "SELECT idlinea 
-        FROM linea_producto
-        WHERE idalbaran = $idAlbaran
-        AND idproducto =  $idProduct";
+    //     $sql = "SELECT idlinea 
+    //     FROM linea_producto
+    //     WHERE idalbaran = $idAlbaran
+    //     AND idproducto =  $idProduct";
 
-        return  close_fetch_object($sql);
-    }
+    //     return  close_fetch_object($sql);
+    // }
 
-    function setLine($idAlbaran, $idProduct)
-    {
+    // function setLine($idAlbaran, $idProduct)
+    // {
 
-        $sql = "INSERT INTO `linea_producto` (`idalbaran`, `idproducto`)
-        VALUES ($idAlbaran, $idProduct)";
-        return  close_no_fetch($sql);
-    }
+    //     $sql = "INSERT INTO `linea_producto` (`idalbaran`, `idproducto`)
+    //     VALUES ($idAlbaran, $idProduct)";
+    //     return  close_no_fetch($sql);
+    // }
     function updateLineIncreaseLine($idAlbaran, $idLinea)
     {
 
@@ -83,16 +83,16 @@ class DAOCart
         return  close_fetch_object($sql);
     }
 
-    function getCart($idAlbaran)
-    {
+    // function getCart($idAlbaran)
+    // {
 
-        $sql = "SELECT l.*, m.movie,  m.price,  m.img
-        FROM linea_producto l, movies m
-        WHERE l.idalbaran = $idAlbaran
-        AND l.idproducto = m.id
-        AND l.cantidad <> 0";
-        return  close_fetch_all($sql);
-    }
+    //     $sql = "SELECT l.*, m.movie,  m.price,  m.img
+    //     FROM linea_producto l, movies m
+    //     WHERE l.idalbaran = $idAlbaran
+    //     AND l.idproducto = m.id
+    //     AND l.cantidad <> 0";
+    //     return  close_fetch_all($sql);
+    // }
 
     function getTotalPrice($idAlbaran, $idProduct)
     {

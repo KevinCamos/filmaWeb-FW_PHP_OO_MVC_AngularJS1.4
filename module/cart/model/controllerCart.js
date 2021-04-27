@@ -6,11 +6,9 @@ function getAllCart() {
   $("#cartMenu").empty();
   var idUser = getUser();
   if (idUser != -1) {
-    ajaxPromise(
-        "module/cart/controller/controllerCart.php", //typeForm =
-        "POST",
+    ajaxPromise(friendlyModFunc("cart", "getCart"), //typeForm =
+        "GET",
         "JSON", {
-          op: "getCart",
           idUser: idUser
         }
       )
@@ -216,7 +214,7 @@ function ajaxUpdateRemoProduct(
       var type = id[0];
       var idProduct = id[1];
       var idAlbaran = id[2];
-      var idUser = localStorage.getItem("idusers");
+      // var idUser = localStorage.getItem("idusers");
       var deleteQuest = restrictionSumRestDelete(
         thisProduct,
         type,
@@ -228,22 +226,23 @@ function ajaxUpdateRemoProduct(
         if (typeQuest != null) {
           type = typeQuest;
         }
-        console.log(
-          idProduct + " i " + idAlbaran + " i " + type + " i " + idUser
-        );
+        // console.log(
+        //   idProduct + " i " + idAlbaran + " i " + type + " i " + idUser
+        // );
 
-        ajaxPromise(
-            "module/cart/controller/controllerCart.php", //typeForm =
-            "POST",
+        ajaxPromise(friendlyModFunc("cart", "updateAmount"), //typeForm =
+            "GET",
             "JSON", {
-              op: "updateAmount",
               type: type,
               idProduct: idProduct,
-              idUser: idUser,
+              // idUser: idUser,
               idAlbaran: idAlbaran,
             }
           )
           .then(function (date) {
+            // alert(date);
+            console.log(date);
+
             switch (type) {
               case "rest":
                 updateTotalPrice(idProduct, idAlbaran);
@@ -269,6 +268,8 @@ function ajaxUpdateRemoProduct(
             console.log(date);
           })
           .catch(function (date) {
+            // alert(date);
+            console.log(date);
             toastr.error("Error en el proceso de eliminación");
           });
       }
@@ -288,16 +289,15 @@ function sumRestAmount(idProduct, num) {
 }
 
 function updateTotalPrice(idProduct, idAlbaran) {
-  ajaxPromise(
-      "module/cart/controller/controllerCart.php", //typeForm =
-      "POST",
+  ajaxPromise(friendlyModFunc("cart", "totalPrice"), //typeForm =
+      "GET",
       "JSON", {
-        op: "totalPrice",
         idProduct: idProduct,
         idAlbaran: idAlbaran
       }
     )
     .then(function (data) {
+      alert(data)
       console.log(data);
       // totalPrice = totalPrice.toFixed(2).replace(".", ",");
       var price = parseFloat(data.price);
@@ -314,6 +314,7 @@ function updateTotalPrice(idProduct, idAlbaran) {
       $("#totalAmount" + idProduct).text(cantidad);
     })
     .catch(function (data) {
+      // alert("xeee")
       toastr.error("Error en el proceso de eliminación");
     });
 }
@@ -324,27 +325,25 @@ function buyMe() {
     if (tokenTrue() == true) {
       idUser = localStorage.getItem("idusers");
 
-      ajaxPromise("module/cart/controller/controllerCart.php", "POST", "JSON", {
-          op: "getAlbaran",
+      ajaxPromise(friendlyModFunc("cart", "getAlbaran"), "GET", "JSON", {
           idUser: idUser,
         })
         .then(function (data) {
-          var idAlbaran = data.idalbaran;
-          ajaxPromise(
-              "module/cart/controller/controllerCart.php",
-              "POST",
+          var idAlbaran = data;
+          ajaxPromise(friendlyModFunc("cart", "getTotalCart"),
+              "GET",
               "JSON", {
-                op: "getTotal",
                 idAlbaran: idAlbaran
               }
             )
             .then(function (data) {
+              // alert("entra:"+data)
               console.log(data);
               continueBuy(data);
               // totalPrice = totalPrice.toFixed(2).replace(".", ",");
             })
             .catch(function (data) {
-              alert(data);
+              alert("NO ENTRA :"+data)
               console.log(data);
             });
         })
@@ -457,15 +456,19 @@ function returnEndClick(idAlbaran) {
       "Gracias por confiar en nuestos servicios",
       "success"
     ).then(() => {
-      ajaxPromise("module/cart/controller/controllerCart.php", "POST", "JSON", {
-          op: "endCart",
+      ajaxPromise(friendlyModFunc("cart", "endCart"), "GET", "JSON", {
           idAlbaran: idAlbaran,
         })
         .then(function (data) {
+          // alert(data);
           // alert(data)
-          window.location.href = "index.php?page=home";
+          window.location.href = friendlyMod("shop");
         })
-        .catch(function (data) {});
+        .catch(function (data) {
+          alert(data);
+          alert("NO ENTRA");
+
+        });
     });
   });
 }
