@@ -1,16 +1,19 @@
 BASE_IMPONIBLE = 0;
 IVA = 1;
 PRECIO_TOTAL = 2;
+
 function getAllCart() {
   $("#cartMenu").empty();
   var idUser = getUser();
   if (idUser != -1) {
     ajaxPromise(
-      "module/cart/controller/controllerCart.php", //typeForm =
-      "POST",
-      "JSON",
-      { op: "getCart", idUser: idUser }
-    )
+        "module/cart/controller/controllerCart.php", //typeForm =
+        "POST",
+        "JSON", {
+          op: "getCart",
+          idUser: idUser
+        }
+      )
       .then(function (data) {
         console.log(data);
         if (data != -1) {
@@ -30,10 +33,14 @@ function getAllCart() {
             var totalPrice = price * cantidad;
             totalPrice = totalPrice.toFixed(2).replace(".", ",");
             var line = $("<tr>")
-              .attr({ id: "lineProduct" + idproducto })
+              .attr({
+                id: "lineProduct" + idproducto
+              })
               .appendTo(table);
             var columna = $("<th>")
-              .attr({ id: "colImg" + idproducto })
+              .attr({
+                id: "colImg" + idproducto
+              })
               .appendTo(line);
             $("<img>")
               .attr({
@@ -42,22 +49,33 @@ function getAllCart() {
               })
               .appendTo(columna);
             var columna = $("<th>")
-              .attr({ id: "colInfo" + idproducto })
+              .attr({
+                id: "colInfo" + idproducto
+              })
               .appendTo(line);
             $("<div>")
-              .attr({ id: "infoProduct" })
+              .attr({
+                id: "infoProduct"
+              })
               .text(movie)
               .appendTo(columna);
             $("<div>")
-              .attr({ id: "price" + idproducto })
+              .attr({
+                id: "price" + idproducto
+              })
               .text(price + "€") /////recalcular!!!!! OJO!
               .appendTo(columna);
             $("<div>")
-              .attr({ id: "totalprice" + idproducto })
+              .attr({
+                id: "totalprice" + idproducto
+              })
               .html("<h1 class='linePrice'>" + totalPrice + "€<h2>") /////recalcular!!!!! OJO!
               .appendTo(columna);
             var amount = $("<div>")
-              .attr({ id: "amount" + idproducto, class: "amount" })
+              .attr({
+                id: "amount" + idproducto,
+                class: "amount"
+              })
               .appendTo(columna);
             $("<svg>")
               .attr({
@@ -70,7 +88,10 @@ function getAllCart() {
               .appendTo(amount);
 
             $("<span>")
-              .attr({ id: "totalAmount" + idproducto, class: "inputNum" })
+              .attr({
+                id: "totalAmount" + idproducto,
+                class: "inputNum"
+              })
               .text(cantidad)
               .appendTo(amount);
             $("<svg>")
@@ -93,7 +114,11 @@ function getAllCart() {
               .appendTo(amount);
           }
           $("<input>")
-            .attr({ id: "buyMe", type: "button", value: "Comprar" })
+            .attr({
+              id: "buyMe",
+              type: "button",
+              value: "Comprar"
+            })
             .appendTo("#cartMenu");
           buyMe();
         } else {
@@ -110,9 +135,12 @@ function getAllCart() {
 
 function cartEmpty() {
   var table = $("<table>").appendTo("#cartMenu");
-  $("<tr>").attr({ id: "tileLine" }).appendTo(table);
+  $("<tr>").attr({
+    id: "tileLine"
+  }).appendTo(table);
   $("<th>").html("<h1>La Cesta está vacía</h1>").appendTo(tileLine);
 }
+
 function modalDelete(thisProduct) {
   Swal.fire({
     title: "¿De verdad quieres eliminar este producto? :'(",
@@ -159,15 +187,16 @@ function restrictionSumRestDelete(
       } else {
         return true;
       }
-    case "sum":
-      return true;
+      case "sum":
+        return true;
 
-    case "delete":
-      modalDelete(thisProduct);
+      case "delete":
+        modalDelete(thisProduct);
 
-      break;
+        break;
   }
 }
+
 function ajaxUpdateRemoProduct(
   thisProduct,
   deleteQuest2True = false,
@@ -204,17 +233,16 @@ function ajaxUpdateRemoProduct(
         );
 
         ajaxPromise(
-          "module/cart/controller/controllerCart.php", //typeForm =
-          "POST",
-          "JSON",
-          {
-            op: "updateAmount",
-            type: type,
-            idProduct: idProduct,
-            idUser: idUser,
-            idAlbaran: idAlbaran,
-          }
-        )
+            "module/cart/controller/controllerCart.php", //typeForm =
+            "POST",
+            "JSON", {
+              op: "updateAmount",
+              type: type,
+              idProduct: idProduct,
+              idUser: idUser,
+              idAlbaran: idAlbaran,
+            }
+          )
           .then(function (date) {
             switch (type) {
               case "rest":
@@ -247,22 +275,28 @@ function ajaxUpdateRemoProduct(
     }
   }
 }
+
 function clickAction() {
   $("body").on("click", "svg", function () {
     ajaxUpdateRemoProduct(this);
   });
 }
+
 function sumRestAmount(idProduct, num) {
   cantidad = parseInt($("#totalAmount" + idProduct).text(), 10);
   $("#totalAmount" + idProduct).text(cantidad + num);
 }
+
 function updateTotalPrice(idProduct, idAlbaran) {
   ajaxPromise(
-    "module/cart/controller/controllerCart.php", //typeForm =
-    "POST",
-    "JSON",
-    { op: "totalPrice", idProduct: idProduct, idAlbaran: idAlbaran }
-  )
+      "module/cart/controller/controllerCart.php", //typeForm =
+      "POST",
+      "JSON", {
+        op: "totalPrice",
+        idProduct: idProduct,
+        idAlbaran: idAlbaran
+      }
+    )
     .then(function (data) {
       console.log(data);
       // totalPrice = totalPrice.toFixed(2).replace(".", ",");
@@ -283,6 +317,7 @@ function updateTotalPrice(idProduct, idAlbaran) {
       toastr.error("Error en el proceso de eliminación");
     });
 }
+
 function buyMe() {
   $("#buyMe").click(function () {
     checkToken();
@@ -290,17 +325,19 @@ function buyMe() {
       idUser = localStorage.getItem("idusers");
 
       ajaxPromise("module/cart/controller/controllerCart.php", "POST", "JSON", {
-        op: "getAlbaran",
-        idUser: idUser,
-      })
+          op: "getAlbaran",
+          idUser: idUser,
+        })
         .then(function (data) {
           var idAlbaran = data.idalbaran;
           ajaxPromise(
-            "module/cart/controller/controllerCart.php",
-            "POST",
-            "JSON",
-            { op: "getTotal", idAlbaran: idAlbaran }
-          )
+              "module/cart/controller/controllerCart.php",
+              "POST",
+              "JSON", {
+                op: "getTotal",
+                idAlbaran: idAlbaran
+              }
+            )
             .then(function (data) {
               console.log(data);
               continueBuy(data);
@@ -319,6 +356,7 @@ function buyMe() {
     }
   });
 }
+
 function continueBuy(data) {
   $("#cartMenu").empty();
   $("<h2>").text("Proceso de compra").appendTo("#cartMenu");
@@ -340,7 +378,9 @@ function continueBuy(data) {
     totalPriceProduct = totalPriceProduct.toFixed(2).replace(".", ",");
 
     var line = $("<tr>")
-      .attr({ id: "lineProduct" + idproducto })
+      .attr({
+        id: "lineProduct" + idproducto
+      })
       .appendTo(table);
     $("<td>").text(cantidad).appendTo(line);
     $("<td>")
@@ -356,7 +396,7 @@ function continueBuy(data) {
   BaseImponible = (totalPrice / 1.21).toFixed(2).replace(".", ",");
   iva = ((totalPrice / 1.21) * 0.21).toFixed(2).replace(".", ",");
   totalPrice = totalPrice.toFixed(2).replace(".", ",");
-  
+
   for (var i = 0; i < 3; i++) {
     var line = $("<tr>").appendTo(table);
 
@@ -391,10 +431,18 @@ function continueBuy(data) {
     }
   }
   $("<input>")
-    .attr({ id: "returnCart", type: "button", value: "Volver a la cesta" })
+    .attr({
+      id: "returnCart",
+      type: "button",
+      value: "Volver a la cesta"
+    })
     .appendTo("#cartMenu");
   $("<input>")
-    .attr({ id: "endCart", type: "button", value: "Finalizar Compra" })
+    .attr({
+      id: "endCart",
+      type: "button",
+      value: "Finalizar Compra"
+    })
     .appendTo("#cartMenu");
   returnEndClick(idAlbaran);
 }
@@ -410,9 +458,9 @@ function returnEndClick(idAlbaran) {
       "success"
     ).then(() => {
       ajaxPromise("module/cart/controller/controllerCart.php", "POST", "JSON", {
-        op: "endCart",
-        idAlbaran: idAlbaran,
-      })
+          op: "endCart",
+          idAlbaran: idAlbaran,
+        })
         .then(function (data) {
           // alert(data)
           window.location.href = "index.php?page=home";

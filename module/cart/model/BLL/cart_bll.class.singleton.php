@@ -23,20 +23,31 @@ class cart_bll
 		// return "hola";
 		return $this->dao->select_data_countCart($this->db, $idAlbaran);
 	}
-	public function obtain_getAlbaran_BLL( $idUser)
+	public function obtain_getAlbaran_BLL($idUser)
 	{
 		// return "holas";
 		return $this->dao->select_data_getAlbaran($this->db, $idUser);
 	}
-
-	// public function obtain_validateUserLogin_BLL($nameUser)
-	// {
-	// 	return $this->dao->select_data_validateUserLogin($this->db, $nameUser);
-	// }
-	// public function obtain_getUser_BLL($nameUser)
-	// {
-	// 	return $this->dao->select_data_getUser($this->db, $nameUser);
-	// }
+	public function insert_albaran_BLL($idUser)
+	{
+		// return "holas";
+		return $this->dao->insert_data_albaran($this->db, $idUser);
+	}
+	public function obtain_getLine_BLL($idAlbaran, $idProduct)
+	{
+		// return "holas";
+		return $this->dao->select_data_getLine($this->db, $idAlbaran, $idProduct);
+	}
+	public function insert_line_BLL($idAlbaran, $idProduct)
+	{
+		// return "holas";
+		return $this->dao->insert_data_line($this->db, $idAlbaran, $idProduct);
+	}
+	public function update_addToLine_BLL($idAlbaran, $idLinea)
+	{
+		// return "holas";
+		return $this->dao->update_data_addToLine($this->db, $idAlbaran, $idLinea);
+	}
 	// public function update_token_mail_BLL($arrArgument)
 	// {
 	// 	return $this->dao->update_data_token_mail($this->db, $arrArgument);

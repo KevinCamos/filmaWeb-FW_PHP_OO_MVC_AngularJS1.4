@@ -24,19 +24,44 @@ class cart_model
     public function countCart($idUser)
     {
 
-        $idAlbaran = $this->bll->obtain_getAlbaran_BLL($idUser);
-        if (!isset($idAlbaran[0])) {
+        $idAlbaran = $this->bll->obtain_getAlbaran_BLL($idUser)[0]['idalbaran'];
+        if (!isset($idAlbaran)) {
             return -1;
         }
         // $idAlbaran = $idAlbaran->idalbaran;
-        $idAlbaran = $idAlbaran->$idAlbaran[0];
-        $countCart =  $this->bll->obtain_countCart_BLL($idAlbaran);
-        if (!isset($countCart[0])) {
+        $countCart =  $this->bll->obtain_countCart_BLL($idAlbaran)[0]['cantidad'];
+        // return $countCart;
+        if (!isset($countCart)) {
             return -1;
         } else {
             return $countCart;
         }
     }
+
+
+    public function addLine($get)
+    {
+        $idUser = $get['idUser'];
+        $idProduct = $get['idProduct'];
+        $idAlbaran = $this->bll->obtain_getAlbaran_BLL($idUser)[0]['idalbaran'];
+        if (!isset($idAlbaran)) {
+            $idAlbaran = $this->bll->insert_albaran_BLL($idUser);
+            $idAlbaran = $this->bll->obtain_getAlbaran_BLL($idUser);
+        }
+        $idLinea = $this->bll->obtain_getLine_BLL($idAlbaran, $idProduct)[0]['idlinea'];
+// return $idLinea;
+        if (!isset($idLinea)) {
+            $this->bll->insert_line_BLL($idAlbaran, $idProduct);
+            return "linea Creada";
+        } else {
+            $this->bll->update_addToLine_BLL($idAlbaran, $idLinea);
+            return "linea afegida";
+
+        }
+        return "error";
+    }
+
+
 
 
 

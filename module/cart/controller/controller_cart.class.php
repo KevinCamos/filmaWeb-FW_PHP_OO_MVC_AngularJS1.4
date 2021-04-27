@@ -26,4 +26,12 @@ class controller_cart
 		$json = loadModel(MODEL_CART, "cart_model", "countCart", $_GET['idUser']);
 		echo json_encode($json);
 	}
+	function addLine()
+	{
+		// echo json_encode($_GET['idUser']);
+
+		$json = array();
+		$json = loadModel(MODEL_CART, "cart_model", "addLine", $_GET);
+		echo json_encode($json);
+	}
 }

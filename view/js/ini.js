@@ -476,7 +476,9 @@ function getUser() {
 
 function getCart() {
   var idUser = getUser();
+  
   if (idUser != -1) {
+    // alert(idUser)
     ajaxPromise(friendlyModFunc("cart", "countCart"), //typeForm =
         "GET",
         "JSON", {
@@ -488,8 +490,8 @@ function getCart() {
         console.log(data);
 
         console.log(data.cantidad);
-        if (data.cantidad != 0) {
-          $("#countCart").text(data.cantidad);
+        if (data != 0) {
+          $("#countCart").text(data);
         } else {
           $("#countCart").text("0");
         }
@@ -497,7 +499,7 @@ function getCart() {
         // alert("actualitzat");
       })
       .catch(function (data) {
-        // alert(data)
+        alert(data)
         console.log(data);
       });
   }

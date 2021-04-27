@@ -9,11 +9,11 @@
         <name>countCart</name>
         <uri>countCart</uri>
     </function>
-   <!--   <function>
-        <name>login</name>
-        <uri>login</uri>
+   <function>
+        <name>addLine</name>
+        <uri>addLine</uri>
     </function>
-    <function>
+    <!--   <function>
         <name>getUser</name>
         <uri>getUser</uri>
     </function>

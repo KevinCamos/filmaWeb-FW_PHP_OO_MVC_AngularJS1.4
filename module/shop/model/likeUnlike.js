@@ -63,11 +63,11 @@ function like(like) {
         }
       })
       .catch(function (date) {
-        alert("No entra:"+ date)
+        alert("No entra:" + date)
         alert("error");
       });
-  }else{
-    toastr.warning("Debes estar registrado para hacer esta acción");
+  } else {
+    toastr.warning("Debes registrarte para hacer esta acción");
 
   }
 
@@ -76,23 +76,22 @@ function like(like) {
 function cartShop(addCart) {
   // alert("entra");
   if (tokenTrue() == true) {
-    id = $(addCart).attr("id");
-    var id = id.split("-");
-    var siteShop = id[0];
-    var id = id[1];
+    idProduct = $(addCart).attr("id");
+    var idProduct = idProduct.split("-");
+    var siteShop = idProduct[0];
+    var idProduct = idProduct[1];
     var idUser = localStorage.getItem("idusers");
     // console.log(id + " i " + siteShop + " i " + idUser);
 
-    ajaxPromise(
-        "module/cart/controller/controllerCart.php", //typeForm =
-        "POST",
+    ajaxPromise(friendlyModFunc("cart", "addLine"), //typeForm =
+        "GET",
         "JSON", {
-          op: "addLine",
-          idProduct: id,
+          idProduct: idProduct,
           idUser: idUser
         }
       )
       .then(function (data) {
+        // alert(data);
         console.log(data);
         toastr.success("Se ha añadido al carrito correctamente");
 
@@ -100,7 +99,9 @@ function cartShop(addCart) {
 
       })
       .catch(function () {
-        alert("error");
+        // alert(data);
+
+        toastr.warning("Ha habido un error intentando guardar este producto en el carrito");
       });
   }
 }

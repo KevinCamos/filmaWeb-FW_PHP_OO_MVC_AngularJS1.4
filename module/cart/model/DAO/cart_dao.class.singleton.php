@@ -23,15 +23,52 @@ class cart_dao
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
-  public function select_data_getAlbaran($db, $idUser)
+    public function select_data_getAlbaran($db, $idUser)
     {
-      
+
         $sql = "SELECT idalbaran 
         FROM albaran
         WHERE idcliente LIKE '$idUser'
         AND estado LIKE  'proceso'";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
+    }
+    public function insert_data_albaran($db, $idUser)
+    {
+
+
+        $sql = "INSERT INTO `albaran` (`idcliente`)
+            VALUES ('$idUser')";
+        return $db->ejecutar($sql);
+    }
+    public function select_data_getLine($db, $idAlbaran, $idProduct)
+    {
+
+        $sql = "SELECT idlinea 
+        FROM linea_producto
+        WHERE idalbaran = $idAlbaran
+        AND idproducto =  $idProduct";
+        $stmt = $db->ejecutar($sql);
+        return $db->listar($stmt);
+    }
+    public function insert_data_line($db, $idAlbaran, $idProduct)
+    {
+
+
+        $sql = "INSERT INTO `linea_producto` (`idalbaran`, `idproducto`)
+        VALUES ($idAlbaran, $idProduct)";
+        return $db->ejecutar($sql);
+    }
+    public function update_data_addToLine($db, $idAlbaran, $idLinea)
+    {
+
+
+        $sql = "UPDATE `linea_producto` 
+        SET `cantidad` = `cantidad`+1 
+        WHERE (`idlinea` = '$idLinea') 
+        AND (`idalbaran` = '$idAlbaran')";
+
+        return $db->ejecutar($sql);
     }
     // public function insert_data_register($db, $email, $nameUser, $hashed_pass,  $avatar, $token_email)
     // {
