@@ -21,19 +21,19 @@ class controller_cart
 	function countCart()
 	{
 		$json = array();
-		$json = loadModel(MODEL_CART, "cart_model", "countCart", $_GET['idUser']);
+		$json = loadModel(MODEL_CART, "cart_model", "countCart", $_POST['idUser']);
 		echo json_encode($json);
 	}
 	function addLine()
 	{
 		$json = array();
-		$json = loadModel(MODEL_CART, "cart_model", "addLine", $_GET);
+		$json = loadModel(MODEL_CART, "cart_model", "addLine", $_POST);
 		echo json_encode($json);
 	}
 	function getCart()
 	{
 		$json = array();
-		$json = loadModel(MODEL_CART, "cart_model", "getCart", $_GET['idUser']);
+		$json = loadModel(MODEL_CART, "cart_model", "getCart", $_POST['idUser']);
 		echo json_encode($json);
 	}
 
@@ -41,30 +41,31 @@ class controller_cart
 	function updateAmount()
 	{
 		$json = array();
-		$json = loadModel(MODEL_CART, "cart_model", "updateAmount", $_GET);
+		$json = loadModel(MODEL_CART, "cart_model", "updateAmount", $_POST);
 		echo json_encode($json);
 	}
 	function totalPrice()
 	{
 		$json = array();
-		$json = loadModel(MODEL_CART, "cart_model", "totalPrice", $_GET);
+		$json = loadModel(MODEL_CART, "cart_model", "totalPrice", $_POST);
 		echo json_encode($json);
 	}
 	function getAlbaran()
 	{
 		$json = array();
-		$json = loadModel(MODEL_CART, "cart_model", "getAlbaran",  $_GET['idUser']);
+		$json = loadModel(MODEL_CART, "cart_model", "getAlbaran",  $_POST['idUser']);
 		echo json_encode($json);
 	}
 	function getTotalCart()
 	{
 		$json = array();
-		$json = loadModel(MODEL_CART, "cart_model", "getTotalCart",  $_GET['idAlbaran']);
+		$json = loadModel(MODEL_CART, "cart_model", "getTotalCart",  $_POST['idAlbaran']);
 		echo json_encode($json);
-	}	function endCart()
+	}
+	function endCart()
 	{
 		$json = array();
-		$json = loadModel(MODEL_CART, "cart_model", "endCart",  $_GET['idAlbaran']);
+		$json = loadModel(MODEL_CART, "cart_model", "endCart",  $_POST['idAlbaran']);
 		echo json_encode($json);
 	}
 }

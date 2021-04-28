@@ -7,7 +7,7 @@ function getAllCart() {
   var idUser = getUser();
   if (idUser != -1) {
     ajaxPromise(friendlyModFunc("cart", "getCart"), //typeForm =
-        "GET",
+        "POST",
         "JSON", {
           idUser: idUser
         }
@@ -229,9 +229,8 @@ function ajaxUpdateRemoProduct(
         // console.log(
         //   idProduct + " i " + idAlbaran + " i " + type + " i " + idUser
         // );
-
         ajaxPromise(friendlyModFunc("cart", "updateAmount"), //typeForm =
-            "GET",
+            "POST",
             "JSON", {
               type: type,
               idProduct: idProduct,
@@ -290,14 +289,14 @@ function sumRestAmount(idProduct, num) {
 
 function updateTotalPrice(idProduct, idAlbaran) {
   ajaxPromise(friendlyModFunc("cart", "totalPrice"), //typeForm =
-      "GET",
+      "POST",
       "JSON", {
         idProduct: idProduct,
         idAlbaran: idAlbaran
       }
     )
     .then(function (data) {
-      alert(data)
+      // alert(data)
       console.log(data);
       // totalPrice = totalPrice.toFixed(2).replace(".", ",");
       var price = parseFloat(data.price);
@@ -325,13 +324,13 @@ function buyMe() {
     if (tokenTrue() == true) {
       idUser = localStorage.getItem("idusers");
 
-      ajaxPromise(friendlyModFunc("cart", "getAlbaran"), "GET", "JSON", {
+      ajaxPromise(friendlyModFunc("cart", "getAlbaran"), "POST", "JSON", {
           idUser: idUser,
         })
         .then(function (data) {
           var idAlbaran = data;
           ajaxPromise(friendlyModFunc("cart", "getTotalCart"),
-              "GET",
+              "POST",
               "JSON", {
                 idAlbaran: idAlbaran
               }
@@ -456,7 +455,7 @@ function returnEndClick(idAlbaran) {
       "Gracias por confiar en nuestos servicios",
       "success"
     ).then(() => {
-      ajaxPromise(friendlyModFunc("cart", "endCart"), "GET", "JSON", {
+      ajaxPromise(friendlyModFunc("cart", "endCart"), "POST", "JSON", {
           idAlbaran: idAlbaran,
         })
         .then(function (data) {

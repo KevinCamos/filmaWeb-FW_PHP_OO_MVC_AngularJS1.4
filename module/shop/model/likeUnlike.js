@@ -84,7 +84,7 @@ function cartShop(addCart) {
     // console.log(id + " i " + siteShop + " i " + idUser);
 
     ajaxPromise(friendlyModFunc("cart", "addLine"), //typeForm =
-        "GET",
+        "POST",
         "JSON", {
           idProduct: idProduct,
           idUser: idUser

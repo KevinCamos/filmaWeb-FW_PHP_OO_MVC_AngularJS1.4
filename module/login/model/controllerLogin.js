@@ -72,10 +72,9 @@ function loginAnimate() {
 
 function ajaxSendForm(serialize, typeForm = "login") { //EN PROCÉS DE MIGRACIÓ!
   // console.log(serialize);
+  alert("ei")
   ajaxPromise(friendlyModFunc("login", typeForm),
-
-      //typeForm =
-      "GET",
+      "POST",
       "JSON", {
         serialize: serialize
       }
@@ -234,7 +233,7 @@ function socialLoginClick() {
 
 function socialLoginSendData(dataUser) {
   ajaxPromise(friendlyModFunc("login", "socialLogin"),
-      "GET",
+      "POST",
       "JSON", {
         dataUser: dataUser
       }
@@ -263,7 +262,7 @@ function clickRecoveredPssword() {
       $(".error").empty();
 
       ajaxPromise(friendlyModFunc("login", "recoveredMail"),
-          "GET",
+          "POST",
           "JSON", {
             dataUser: dataUser
           }
@@ -285,12 +284,15 @@ function pathLinkMail() {
 
   let path = window.location.pathname.split('/');
 
-  if (path[5] === 'token_mail'  && localStorage.getItem('token') != false) {
+  if (path[5] === 'token_mail' && localStorage.getItem('token') != false) {
 
     window.location.href = friendlyMod("home")
-  } else if (path[5] === 'recoveredPassword'  && localStorage.getItem('token') != false) {
+  } else if (path[5] === 'recoveredPassword' && localStorage.getItem('token') != false) {
     // alert(path[5])
     alternDOMrecovPsswrd()
+  } else if (path[5] === 'token_mail' && localStorage.getItem('token') != false) {
+    window.location.href = friendlyMod("home");
+    toastr.success("Su cuenta está activada y lista para usarse");
   }
 
 }
@@ -330,7 +332,7 @@ function clickRecoveredForm() {
     if (password != false) {
       let token = localStorage.getItem('token');
       ajaxPromise(friendlyModFunc("login", "changePassword"),
-          "GET",
+          "POST",
           "JSON", {
             password: password,
             token: token

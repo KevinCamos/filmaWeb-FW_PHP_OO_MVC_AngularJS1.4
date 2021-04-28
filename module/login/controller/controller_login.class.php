@@ -24,14 +24,14 @@ class controller_login
 
 		// echo json_encode(friendlyURL("?model=model&function=function&token=pepinoss"));
 		$json = array();
-		$json = loadModel(MODEL_LOGIN, "login_model", "register", $_GET['serialize']);
+		$json = loadModel(MODEL_LOGIN, "login_model", "register", $_POST['serialize']);
 		echo json_encode($json);
 	}
 	function login()
 	{
 		// echo json_encode("LOGIN");
 		$json = array();
-		$json = loadModel(MODEL_LOGIN, "login_model", "login", $_GET['serialize']);
+		$json = loadModel(MODEL_LOGIN, "login_model", "login", $_POST['serialize']);
 		echo json_encode($json);
 
 		// $nameUser =  strtolower($formulario[0]['value']);
@@ -41,12 +41,16 @@ class controller_login
 	function getUser()
 	{
 		$json = array();
-		$json = loadModel(MODEL_LOGIN, "login_model", "getUser", $_GET['token']);
+		$json = loadModel(MODEL_LOGIN, "login_model", "getUser", $_POST['token']);
 		echo json_encode($json);
 	}
 	function updateToken()
 	{
-		// echo json_encode(jwt_process::encode(SECRET,  $_GET['user']));
+		// echo json_encode($_POST['token']);
+
+		$json = array();
+		$json = loadModel(MODEL_LOGIN, "login_model", "updateToken", $_POST['token']);
+		echo json_encode($json);
 	}
 	function token_mail()
 	{
@@ -64,14 +68,14 @@ class controller_login
 		// echo json_encode($_GET['dataUser'][1]);
 		// echo json_encode("LOGIN");
 
-		$json =	loadModel(MODEL_LOGIN, "login_model", "socialLogin", $_GET['dataUser']);
+		$json =	loadModel(MODEL_LOGIN, "login_model", "socialLogin", $_POST['dataUser']);
 		echo json_encode($json);
 	}
 	function recoveredMail()
 	{
 		// echo json_encode($_GET['dataUser']);
 
-		$json =	loadModel(MODEL_LOGIN, "login_model", "recoveredMail", $_GET['dataUser']);
+		$json =	loadModel(MODEL_LOGIN, "login_model", "recoveredMail", $_POST['dataUser']);
 		echo json_encode($json);
 	}
 	function recoveredPassword()
@@ -91,7 +95,7 @@ class controller_login
 	{
 		// echo json_encode($_GET['password']);
 
-		$json =	loadModel(MODEL_LOGIN, "login_model", "changePassword", $_GET['password'], $_GET['token']);
+		$json =	loadModel(MODEL_LOGIN, "login_model", "changePassword", $_POST['password'], $_POST['token']);
 		echo json_encode($json);
 	}
 

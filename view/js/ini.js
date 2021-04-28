@@ -68,10 +68,9 @@ function loadMenu() {
       $('<li></li>').html(' <button class="lang-btn" data-tr="Inglés" id="btn-en"></buttton>').appendTo('#fixed-menu');
       $('<li></li>').html('<a href="' + values[4] + '" id="Cart" class="fas fa-shopping-cart" style="font-size: 3em;"><label id="countCart"></label></a>').appendTo('#fixed-menu');
       translate();
-
+      getCart();
 
     });
-  //////
 }
 
 function clickShopMenu() {
@@ -393,7 +392,7 @@ function checkToken(countCart = false) {
     console.log(token);
     console.log(typeof (token));
     ajaxPromise(friendlyModFunc("login", "getUser"), //typeForm =
-        "GET",
+        "POST",
         "JSON", {
           token: token
         }
@@ -446,18 +445,23 @@ function tokenTrue() {
 }
 
 function updateToken() {
-  if (localStorage.getItem("user") != null) {
-    var user = localStorage.getItem("user");
+  if (localStorage.getItem("token") != null) {
+    var token = localStorage.getItem("token");
     // alert(localStorage.getItem("user") );
     ajaxPromise(friendlyModFunc("login", "updateToken"), //typeForm =
-        "GET",
+        "POST",
         "JSON", {
-          user: user
+          token: token
         }
       )
       .then(function (data) {
-        // alert(data);
-        console.log("token actualizado");
+        if(data != false){
+          console.log("token actualizad")
+     localStorage.setItem("token",data);
+        }{
+          console.log("token no actualizado")
+
+        }
       })
       .catch(function (data) {
         console.log(data);
@@ -480,7 +484,7 @@ function getCart() {
   if (idUser != -1) {
     // alert(idUser)
     ajaxPromise(friendlyModFunc("cart", "countCart"), //typeForm =
-        "GET",
+        "POST",
         "JSON", {
           idUser: idUser
         }
@@ -514,7 +518,7 @@ function toastrOptions() {
     positionClass: "toast-top-right",
     preventDuplicates: false,
     onclick: null,
-    showDuration: "100",
+    showDuration: "200",
     hideDuration: "1000",
     timeOut: "  1000",
     extendedTimeOut: "1000",

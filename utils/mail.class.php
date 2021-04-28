@@ -28,13 +28,13 @@ class mail
                 $email = $arr['inputEmail'];
                 break;
 
-            case 'contact':
-                $subject = 'Tu Petición a Filmaweb ha sido enviada<br>';
-                $ruta = '<a href=' . 'http://localhost/1_Fw_PHP_OO_MVC_jQuery_AngularJS/Framework/9_adoptions_dogs/' . '>aqu&iacute;</a>';
-                $body = 'Para visitar nuestra web, pulsa ' . $ruta;
-                $from = $arr['inputEmail'];
-                $email = 'filmawebdaw@gmail.com';
-                $inputMessage = $arr['inputMessage'];
+            // case 'contact':
+            //     $subject = 'Tu Petición a Filmaweb ha sido enviada<br>';
+            //     $ruta = '<a href=' . 'http://localhost/1_Fw_PHP_OO_MVC_jQuery_AngularJS/Framework/9_adoptions_dogs/' . '>aqu&iacute;</a>';
+            //     $body = 'Para visitar nuestra web, pulsa ' . $ruta;
+            //     $from = $arr['inputEmail'];
+            //     $email = 'filmawebdaw@gmail.com';
+            //     $inputMessage = $arr['inputMessage'];
 
                 break;
 
