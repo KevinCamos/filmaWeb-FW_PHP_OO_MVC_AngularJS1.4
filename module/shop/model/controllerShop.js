@@ -268,7 +268,7 @@ function loadHomeProducts(offset = 0) {
       var filter = sessionStorage.getItem("filter");
       // alert(filter);
       filter = window.btoa(unescape(encodeURIComponent(filter)));
-      pagination(urlCategory + "countPage&count=searchQuery&query=" + filter);
+      pagination("filterQuery", filter);
       searchAjaxProducts(
         friendlyModFunc("shop", "filter"),
         order,
@@ -584,8 +584,12 @@ function pagination(type = "listShop", search = undefined) {
       type: type,
     })
     .then(function (data) {
-      console.log(data);
-      // alert(data)
+      // console.log("e");
+
+      // console.log(data);
+      // console.log("e");
+
+      // alert("pagination " + data);
 
       var countItems = data[0]["countPage"];
       var numPage = countItems / 6;
@@ -599,7 +603,7 @@ function pagination(type = "listShop", search = undefined) {
       return;
     })
     .catch(function (data) {
-      alert("pagination " + data);
+      // alert("pagination " + data);
       console.log(data);
     }); ////END AJAX
 }

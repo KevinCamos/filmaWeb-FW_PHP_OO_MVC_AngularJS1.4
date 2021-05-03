@@ -4,4 +4,8 @@
         <name>autoComplete</name>
         <uri>autoComplete</uri>
     </function>
+        <function>
+        <name>searchList</name>
+        <uri>searchList</uri>
+    </function>
 </functions>

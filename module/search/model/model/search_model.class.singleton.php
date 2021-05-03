@@ -22,6 +22,11 @@ class search_model
         // return "hola";
         return $this->bll->obtain_autoComplete_BLL();
     }
+    public function searchList($data)
+    {
+        // return "hola";
+        return $this->bll->obtain_searchList_BLL($data);
+    }
     // public function listsearch($sendDatArray) //0 order, 1 offset, 2 IdUser
     // {
     //     // return  $order;
@@ -33,7 +38,7 @@ class search_model
     //     return $this->bll->obtain_categoryDecade_BLL($sendDatArray);
     // }
 
-   
+
     // public function countClick($arrArgument){
     //     // return "hola";
     //     return $this->bll->update_countClick_BLL($arrArgument);

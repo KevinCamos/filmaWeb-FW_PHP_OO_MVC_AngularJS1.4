@@ -72,26 +72,6 @@ class shop_model
 
                 break;
         }
-        // return $get['typeLike'];
     }
-    // public function countClick($arrArgument){
-    //     // return "hola";
-    //     return $this->bll->update_countClick_BLL($arrArgument);
-    // }
-    // public function obtain_data_details($arrArgument){
-    //     return $this->bll->obtain_data_details_BLL($arrArgument);
-    // }
-    // public function best_breed_home($arrArgument){
-    //     return $this->bll->best_breed_home_BLL($arrArgument);
-    // }
-    // public function load_name(){
-    //     return $this->bll->load_name_BLL();
-    // }
-    // public function select_auto_name($arrArgument){
-    //     return $this->bll->select_auto_name_BLL($arrArgument);
-    // }
-    // public function active_user($arrArgument){
-    //     return $this->bll->active_user_BLL($arrArgument);
-    // }
 
 }

@@ -20,55 +20,14 @@ class search_bll
 	}
 	public function obtain_autoComplete_BLL()
 	{
-		// return "hola";
 		return $this->dao->select_data_autoComplete($this->db);
 	}
-	public function obtain_listsearch_BLL($sendDatArray)
+		public function obtain_searchList_BLL($data)
 	{
-		// return "holas";
-		return $this->dao->select_data_listsearch($this->db, $sendDatArray);
-	}
-	public function obtain_categoryDecade_BLL($sendDatArray)
-	{
-		// return "holas";
-		return $this->dao->select_data_categoryDecade($this->db, $sendDatArray);
-	}
-
-	public function obtain_categoryFormate_BLL($sendDatArray)
-	{
-		// return "holas";
-		return $this->dao->select_data_categoryFormate($this->db, $sendDatArray);
-	}
-	public function obtain_categoryGenere_BLL($sendDatArray)
-	{
-		// return "holas";
-		return $this->dao->select_data_categoryGenere($this->db, $sendDatArray);
-	}
-
-	public function obtain_filter_BLL($sendDatArray)
-	{
-		// return "holas";
-		return $this->dao->select_data_filter($this->db, $sendDatArray);
-	}
-	public function obtain_pagination_BLL($type)
-	{
-		// return "holas";
-		return $this->dao->select_data_pagination($this->db, $type);
-	}
-	public function obtain_filterType_BLL($type)
-	{
-		// return "holas";
-		return $this->dao->select_data_filterType($this->db, $type);
+		// return "hola";
+		return $this->dao->select_data_searchList($this->db,$data);
 	}
 	
-	public function insert_like_BLL($get)
-	{
-		return $this->dao->insert_data_like($this->db, $get);
-	}
-	public function remove_like_BLL($get)
-	{
-		return $this->dao->remove_data_like($this->db, $get);
-	}
 	// public function update_countClick_BLL($arrArgument)
 	// {
 	// 	return $this->dao->update_countClick($this->db, $arrArgument);

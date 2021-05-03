@@ -100,16 +100,27 @@ class shop_dao
     {
         $type = $array[0];
         $sql =  "SELECT COUNT(*) AS countPage FROM MOVIES ";
+    //  return $array;
 
         switch ($type) {
             case "listShop":
                 ///NO FARIA FALTA FER RES DINS
                 break;
             case "searchQuery":
-                $search = $array[1];
-                $sql =   $sql + base64_decode($search);
+                $search =$array[1];
+                $sql = "SELECT COUNT(*) AS countPage FROM MOVIES
+                WHERE movie LIKE '%$search%'
+                OR formats LIKE '%$search%'
+                OR director LIKE '%$search%' 
+                OR genere LIKE '%$search%' 
+                OR anyo LIKE '%$search%'";
 
                 break;
+                case "filterQuery":
+                    $searchQuery = base64_decode($array[1]);
+
+                    $sql =  $sql. $searchQuery;
+                    break;
             case 'decade':
                 $sql =  "SELECT COUNT(*) AS countPage FROM MOVIES " . "WHERE anyo BETWEEN 1980 AND 1989";
 
@@ -162,7 +173,7 @@ class shop_dao
                WHERE idusers LIKE '$idUser' 
                AND idmovies= $idProduct";
 
-      return   $db->ejecutar($sql);
+        return   $db->ejecutar($sql);
     }
     // public function select_data_categoryDecade($db, $offset)
     // {

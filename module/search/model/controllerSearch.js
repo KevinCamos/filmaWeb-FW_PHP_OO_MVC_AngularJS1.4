@@ -27,9 +27,10 @@ function cargarSearch() {
       // console.log(datas);
 
       var options = {
-        data: datas[0],
+        data: datas,
         placeholder: "Busca tu película",
         getValue: "movie",
+
         list: {
           match: {
             enabled: true,
@@ -53,10 +54,8 @@ function cargarSearch() {
 }
 
 function formSubmit() {
-  ///GRÀCIES JOSE ANTONIO <3
   $(".formuSearch").on("submit", function () {
     event.preventDefault();
-    ///GRÀCIES JOSE ANTONIO <3
 
     searchMenu();
   });

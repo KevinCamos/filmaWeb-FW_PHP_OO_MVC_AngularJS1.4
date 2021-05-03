@@ -10,9 +10,10 @@ switch ($_GET['op']) {
 
     case 'search':
         $offset = $_GET['offset'];
+        $offset = $_GET['order'];
+
         $user = $_GET['idUser'];
         $search = $_GET['search'];
-
 
         searhQueryAllRows("SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
@@ -35,8 +36,7 @@ switch ($_GET['op']) {
         OR formats LIKE '%$search%'
         OR director LIKE '%$search%' 
         OR genere LIKE '%$search%' 
-        OR anyo LIKE '%$search%'
-        ";
+        OR anyo LIKE '%$search%'";
 
         searhQueryOneRow($selCountFrom);
 
