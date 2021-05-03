@@ -36,8 +36,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script>
 
     <!-- AUTOCOMPLETAR -->
-    <link rel="stylesheet" href="assets/easy-autocomplete.min.css">
-    <script src="assets/jquery.easy-autocomplete.min.js"></script>
+    <link rel="stylesheet" href="<?php echo ASSETS_PATH ?>easy-autocomplete.min.css">
+    <script src="<?php echo ASSETS_PATH ?>jquery.easy-autocomplete.min.js"></script>
+
 
 
 

@@ -47,9 +47,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+ 
     <!-- AUTOCOMPLETAR -->
     <link rel="stylesheet" href="<?php echo ASSETS_PATH ?>easy-autocomplete.min.css">
     <script src="<?php echo ASSETS_PATH ?>jquery.easy-autocomplete.min.js"></script>
+
 
 
     <script src="<?php echo ASSETS_PATH ?>paths.js"></script>
@@ -58,12 +60,12 @@
     <script src="<?php echo JS_PATH ?>ini.js"></script>
 
     <!-- SEARCH SEARCH SEARCH SEARCH -->
-    <script src="<?php echo MODEL_PATH_SEARCH ?>controllerSearch.js"></script>
+    <script src="<?php echo MODEL_SEARCH?>controllerSearch.js"></script>
 
     <!---->
     <!-- CAROUSEL POR LIBRERÍAS  -->
     <script src="<?php echo VIEW_PLUGINS ?>jquery.min.js"></script>
-    <script src="<?php echo VIEW_PLUGINS ?>owl.carousel.min.js"></script>
+    <!-- <script src="<?php echo VIEW_PLUGINS ?>owl.carousel.min.js"></script> -->
     <!-- <script src="module\shop\js\shop.js"></script> -->
     <script src="<?php echo ASSETS_PATH ?>api_kay.js"></script>
     <script src="<?php echo MODEL_SHOP_JS ?>controllerShop.js"></script>
@@ -79,7 +81,7 @@
 
 
 
-
+    
 
     </script>
 </head>

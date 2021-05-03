@@ -1,5 +1,5 @@
 <?php
-class shop_dao
+class search_dao
 {
     static $_instance;
 
@@ -14,19 +14,14 @@ class shop_dao
         }
         return self::$_instance;
     }
-    public function select_data_openProduct($db, $idProduct, $idUser)
+    public function select_data_autoComplete($db)
     {
-        $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-        ((SELECT DISTINCT li.idmovies, 'like' as likes 
-        FROM liketo li
-        WHERE li.idusers LIKE '$idUser') AS B)
-        ON mo.id = B.idmovies
-        WHERE mo.id= $idProduct";
+        $sql = 'SELECT movie, anyo FROM movies ORDER BY movie';
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
 
-    public function select_data_listShop($db, $sendDatArray)
+    public function select_data_listsearch($db, $sendDatArray)
     {
         // return $sendDatArray;
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
@@ -91,7 +86,7 @@ class shop_dao
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes  
         FROM liketo li
-        WHERE li.idusers LIKE  '$user') AS B)
+        WHERE li.idusers=  $user) AS B)
         ON mo.id = B.idmovies " . $searchQuery . " ORDER BY  $order , movie asc LIMIT  $offset, 6";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
@@ -102,7 +97,7 @@ class shop_dao
         $sql =  "SELECT COUNT(*) AS countPage FROM MOVIES ";
 
         switch ($type) {
-            case "listShop":
+            case "listsearch":
                 ///NO FARIA FALTA FER RES DINS
                 break;
             case "searchQuery":

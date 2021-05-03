@@ -7,8 +7,6 @@ function APIspam() {
     )
     .appendTo("#apispam");
 
-  //   $("#apispam").addClass("owl-carousel");
-  // var four = 4;
   for (i = 0; i < 4; i++) {
     var number = Math.round(Math.random() * 100);
     console.log(number);
@@ -29,19 +27,10 @@ function APIspam() {
             .attr({ src: data.Poster, id: "apiPublicidad" })
             .appendTo(hrefWeb);
         }
-        // $.each(data, function (index, list) {});
       })
       .catch(function () {
         console.log("error API_SPAM");
       });
   }
-  //   $("#apispam").owlCarousel({
-  //     // items: category.length, //Puc canviar-la de lloc, però ¡¡ULL!! Hi hauria que deixar de gastar category.lenght
-  //     loop: true,
-  //     center: true,
-  //     nav: true,
-  //     margin: 0, //Separación entre imágenes
-  //     // URLhashListener: true
-  //     items: 3,
-  //   });
+
 }

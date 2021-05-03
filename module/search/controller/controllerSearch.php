@@ -38,14 +38,6 @@ switch ($_GET['op']) {
         OR anyo LIKE '%$search%'
         ";
 
-
-        //     . 'WHERE  movie LIKE  "%' . $search . '%"
-        //     OR movie LIKE  "%' . $search . '%"
-        //    OR formats LIKE  "%' . $search . '%"
-        //    OR director LIKE  "%' . $search . '%"
-        //    OR genere LIKE  "%' . $search . '%"
-        //    OR anyo LIKE "%' . $search . '%'
-
         searhQueryOneRow($selCountFrom);
 
         break;

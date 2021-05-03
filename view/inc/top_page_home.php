@@ -50,7 +50,7 @@
     <script src="<?php echo JS_PATH ?>ini.js"></script>
 
     <!-- SEARCH SEARCH SEARCH SEARCH -->
-    <script src="<?php echo MODEL_PATH_SEARCH ?>controllerSearch.js"></script>
+    <script src="<?php echo MODEL_SEARCH?>controllerSearch.js"></script>
 
 
     <!-- CAROUSEL W3SCHOOL -->

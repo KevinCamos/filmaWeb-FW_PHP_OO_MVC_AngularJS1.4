@@ -11,23 +11,23 @@ function searchMenu() {
     console.log("BUSQUEDA!");
     sessionStorage.setItem("op", "search");
     sessionStorage.setItem("search", chairSearch);
-    window.location.href = "index.php?page=shop";
+    window.location.href =  friendlyMod("shop");
   }
 }
 
 // inputSearch
 function cargarSearch() {
-  ajaxPromise(
-    "module/search/controller/controllerSearch.php?op=autoComplete",
+  ajaxPromise(friendlyModFunc("search", "autoComplete"),
     "GET",
     "JSON"
   )
     .then(function (datas) {
+      // alert(datas);
       $("#inputSearch").empty();
       // console.log(datas);
 
       var options = {
-        data: datas,
+        data: datas[0],
         placeholder: "Busca tu película",
         getValue: "movie",
         list: {
@@ -46,7 +46,8 @@ function cargarSearch() {
 
       // $("#inputSearch").easyAutocomplete(options);
     })
-    .catch(function () {
+    .catch(function (datas) {
+
       console.log("xeee");
     });
 }
@@ -62,7 +63,7 @@ function formSubmit() {
 }
 
 $(document).ready(function () {
-  importarScript("assets/jquery.easy-autocomplete.min.js");
+  importarScript(GENERAL_PATH+"assets/jquery.easy-autocomplete.min.js");
   cargarSearch();
   formSubmit();
 });

@@ -269,7 +269,9 @@ function clickRecoveredPssword() {
         )
         .then(function (data) {
           // alert(data);
-          alert("Entra! : " + data);
+          toastr.success("Se ha enviado a tu e-mail un enlace para restablecer la contraseña");
+
+          // alert("Entra! : " + data);
           console.log(data);
 
         }).catch(function (data) {
@@ -285,17 +287,16 @@ function pathLinkMail() {
   let path = window.location.pathname.split('/');
 
   if (path[5] === 'token_mail' && localStorage.getItem('token') != false) {
-
+    
     window.location.href = friendlyMod("home")
+    toastr.success("Su cuenta está activada y lista para usarse");
+
   } else if (path[5] === 'recoveredPassword' && localStorage.getItem('token') != false) {
     // alert(path[5])
     alternDOMrecovPsswrd()
-  } else if (path[5] === 'token_mail' && localStorage.getItem('token') != false) {
-    window.location.href = friendlyMod("home");
-    toastr.success("Su cuenta está activada y lista para usarse");
+  } 
   }
 
-}
 
 function alternDOMrecovPsswrd() {
   $('#form').empty().html('<form class="recovered modLog" id="recovered"></form>');
