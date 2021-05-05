@@ -1,0 +1,40 @@
+.c1 {
+  color: #2d3666;
+}
+
+.c1-bg {
+  background-color: #2d3666;
+}
+
+.c1-bo {
+  border-color: #2d3666 !important;
+}
+
+.c2 {
+  color: #0b060c;
+}
+
+.c2-bg {
+  background-color: #0b060c;
+}
+
+.c2-bo {
+  border-color: #0b060c !important;
+}
+
+.c3 {
+  color: #4698ff;
+}
+
+.c3-bg {
+  background-color: #4698ff;
+}
+
+.c3-bo {
+  border-color: #4698ff !important;
+}
+
+.trns {
+  -webkit-transition: all 0.3s cubic-bezier(0.84, 0.35, 0.39, 0.74) 0s;
+  transition: all 0.3s cubic-bezier(0.84, 0.35, 0.39, 0.74) 0s;
+}
