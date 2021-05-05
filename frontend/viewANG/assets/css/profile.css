@@ -1,0 +1,64 @@
+#container-profile {
+    display: flex
+}
+#container-avatar {
+    padding: 20px;
+}
+#profile-left {
+    flex: 50%;
+    max-width: 50%;
+    margin-right: 20px;
+}
+#container-options {
+    margin-top: 20px;
+    padding: 5px;
+}
+#data-favs {
+    max-height: 550px;
+    overflow-y: auto;
+}
+#container-options a {
+    display: block;
+}
+#profile-right {
+    flex: 50%;
+    max-width: 50%;
+    margin-left: 20px;
+}
+.neumorph-sec {
+    background-color: #19181a;
+    border-radius: 20px;
+    box-shadow: 20px 20px 25px rgb(8, 8, 8),
+                -20px -20px 25px #262427;
+}
+.neumorph-child {
+    user-select: none;
+    cursor: pointer;
+    padding: 20px;
+    background-color: #19181a;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgb(14, 14, 14),
+                -2px -2px 15px #262427;
+}
+.neumorph-child:active {
+    box-shadow: inset 5px 5px 10px rgb(14, 14, 14),
+                inset -2px -2px 15px #262427;
+}
+.neumorph-btn {
+    user-select: none;
+    cursor: pointer;
+    padding: 10px;
+    background: linear-gradient(170deg,#c42c2c, #6e1212);
+    border-radius: 5px;
+    box-shadow: 10px 10px 15px rgb(14, 14, 14),
+                -10px -10px 20px #262427;
+}
+.neumorph-btn:active {
+    box-shadow: inset 10px 10px 15px rgb(14, 14, 14),
+                inset -15px -15px 20px #262427;
+}
+.fav-cars {
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}

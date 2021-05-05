@@ -1,0 +1,24 @@
+<div class = "container-login">
+    <form method = "POST" name = "registerForm" id = "registerForm" autocomplete = "off">
+        <h2>Register</h2>
+        <div class = "input">
+            <h6>Username</h6>
+            <input required type = "text" ng-pattern = "regUsername" ng-model = "username" name = "username" id = "username" placeholder = "Username"/>
+        </div>
+        <div class = "input">
+            <h6 id="input-email">Email</h6>
+            <input required type="text" ng-pattern = "regEmail" ng-model = "email" name="email" id="email" placeholder = "example@domain.com"/>
+        </div>
+        <div class = "input">
+            <h6 id="input-password">Password</h6>
+            <input required type="password" ng-pattern = "regPassword" ng-model = "password" name="password" id="password" placeholder = "Password"/>
+        </div>
+        <div class = "input">
+            <h6 id="input-re_password">Re-type Password</h6>
+            <input required type="password" ng-pattern = "regPassword" ng-model = "repassword" name="repassword" id="repassword" placeholder = "Password"/>
+        </div>
+        <div class = "input">
+            <input type="submit" ng-disabled = "registerForm.username.$invalid || registerForm.email.$invalid || registerForm.password.$invalid || registerForm.repassword.$invalid" ng-click = "register()" value = "Register" class = "reg-check-btn" style = "color: #0ca3e9"/>
+        </div>
+    </form>
+</div>

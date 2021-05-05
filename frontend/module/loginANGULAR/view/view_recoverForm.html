@@ -1,0 +1,16 @@
+<div class = "container-login">
+    <form method="POST" name = "setPasswordForm" id = "setPasswordForm" autocomplete="off">
+        <h2>Set your new password</h2>
+        <div class = "input">
+            <h6 id = "input-new-password">Password</h6>
+            <input required type="password" ng-model = "newPassword" ng-pattern = "regPassword" name="newPassword" id="newPassword" placeholder = "New Password"/>
+        </div>
+        <div class = "input">
+            <h6 id = "input-new-re-password">Re-type Password</h6>
+            <input required type="password" ng-model = "newRePassword" name="newRePassword" ng-pattern = "regPassword" id="newRePassword" placeholder = "New Password"/>
+        </div>
+        <div class = "input">
+            <input type="submit" ng-click = "setNewPassword()" ng-disabled = "setPasswordForm.newPassword.$invalid || setPasswordForm.newRePassword.$invalid" id = "update-pass-btn" value = "Update" style = "color: #0ca3e9"/>
+        </div>
+    </form>
+</div>

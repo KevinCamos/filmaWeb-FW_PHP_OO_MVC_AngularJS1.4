@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="filmaweb" lang="zxx">
+
+<head>
+    <title>Filmaweb</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- <base href = "http://192.168.0.182/frameworkCars.v.1.3/"/> -->
+    <link rel="icon" href="frontend/view/img/logoPage.png" type="image/ico" />
+    <!-- CSS -->
+    <!-- <link rel="stylesheet" href="frontend/viewANG/assets/css/barfiller.css">
+    <link rel="stylesheet" href="frontend/viewANG/assets/css/animate.css"> -->
+
+    <!-- <link rel = "stylesheet" href = "frontend/view/assets/css/font-awesome.min.css"> -->
+
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+    <!-- <link rel = "stylesheet" href = "frontend/view/assets/css/bootstrap.min.css">
+    	<link rel = "stylesheet" href = "frontend/view/assets/css/slicknav.css">
+        <link rel = "stylesheet" href = "frontend/view/assets/css/main.css">		 -->
+
+    <link rel="stylesheet" href="frontend/view/css/bootstrap.css">
+    <link rel="stylesheet" href="frontend/view/css/bootstrap.min.css">
+    <link rel="stylesheet" href="frontend/view/css/style.css">
+    <link rel="stylesheet" href="frontend/view/css/font-awesome.min.css">
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i" rel="stylesheet">
+
+    <!-- <link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" /> -->
+    <!-- JS Imports -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular-route.min.js"></script>
+
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-animate.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-touch.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-sanitize.js"></script>
+    <script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script> -->
+
+    <!-- <script src = "frontend/view/assets/js/vendor/popper.min.js"></script>
+        <script src = "frontend/view/assets/js/vendor/isotope.pkgd.min.js"></script> -->
+    <!-- Application Imports -->
+    <script src="frontend/app.js"></script>
+    <!-- <script type = "text/javascript" src = "keys/apis.js"></script> -->
+    <!-- <script src = "https://www.gstatic.com/firebasejs/4.10.1/firebase.js"></script>
+        <script src = "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script> -->
+    <script src="frontend/apiconnector.js"></script>
+    <!-- <script type = "text/javascript" src = "frontend/module/login/services/services_localStorage.js"></script> -->
+    <!-- <script type = "text/javascript" src = "frontend/module/login/services/services_logIn.js"></script>
+        <script type = "text/javascript" src = "frontend/module/shop/services/services_shop.js"></script>
+        <script type = "text/javascript" src = "frontend/components/products/js/directive_products.js"></script>
+        <script type = "text/javascript" src = "frontend/components/buttons/js/directive_cartButton.js"></script>
+        <script type = "text/javascript" src = "frontend/components/buttons/js/directive_favButton.js"></script>
+        <script type = "text/javascript" src = "frontend/module/cart/controller/controller_cart.js"></script>
+
+        <script type = "text/javascript" src = "frontend/module/contact/controller/controller_contact.js"></script>
+        <script type = "text/javascript" src = "frontend/module/profile/controller/controller_profile.js"></script> -->
+    <script type="text/javascript" src="frontend/module/home/controller/controller_home.js"></script>
+    <!-- <script type = "text/javascript" src = "frontend/view/js/effects.js"></script>
+        <script type = "text/javascript" src = "frontend/module/login/services/services_logInSocial.js"></script>
+        <script type = "text/javascript" src = "frontend/module/login/controller/controller_login.js"></script>
+        <script type = "text/javascript" src = "frontend/module/login/controller/controller_register.js"></script>
+        <script type = "text/javascript" src = "frontend/module/login/controller/controller_recover.js"></script>
+        <script type = "text/javascript" src = "frontend/module/shop/controller/controller_shop.js"></script>
+        <script type = "text/javascript" src = "frontend/module/shop/controller/controller_shopDetails.js"></script> -->
+</head>
+
+<body>
+    <div ng-include='"frontend/view/inc/menu.view.html"'></div>
+    <div ng-view autoscroll="true"></div>
+    <!-- <div ng-include='"frontend/view/inc/footer.view.html"'></div> -->
+</body>
+
+</html>

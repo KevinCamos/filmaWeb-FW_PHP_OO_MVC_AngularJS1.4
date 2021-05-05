@@ -1,0 +1,12 @@
+<div class = "container-login">
+    <form method="POST" name = "recoverForm" id = "recoverForm" autocomplete="off">
+        <h2>Recover Password</h2>
+        <div class = "input">
+            <h6 id = "input-username">Username</h6>
+            <input required type="text" ng-model = "usernameRecover" ng-pattern = "regUsername" name="usernameRecover" id="usernameRecover" placeholder = "Username"/>
+        </div>
+        <div class = "input">
+            <input ng-disabled = "recoverForm.usernameRecover.$invalid" ng-click = "sendRecoverEmail()" type="submit" id = "send-recover-btn" value = "Recover" style = "color: #0ca3e9"/>
+        </div>
+    </form>
+</div>

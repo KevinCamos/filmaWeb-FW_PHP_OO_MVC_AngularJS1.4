@@ -1,0 +1,19 @@
+#options-sideNav {
+    position: fixed;
+    z-index: 10001;
+    height: 100%;
+    top: 0;
+    right: 0;
+    overflow-x: hidden;
+    background-color: #2d2a2e;
+    display: none;
+    width: 250px;
+    box-shadow: 7.5px 7.5px 7.5px 7.5px #3d3d3d
+                , 10px 10px 10px 10px #3d3d3d;
+}
+.item-sideNav {
+    display: block;
+}
+.item-sideNav a {
+    color: #b9b9b9;
+}

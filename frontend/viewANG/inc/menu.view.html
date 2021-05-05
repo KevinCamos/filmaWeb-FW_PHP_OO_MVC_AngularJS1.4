@@ -1,0 +1,51 @@
+<header>
+	<div class="container">
+		<div class="row">
+			<div class="col-6 col-sm-3 logo-column">
+				<a href="#/home" id = "home" class="logo menu-btn">Get Your Car</a>
+			</div>
+			<div class="col-6 col-sm-9 nav-column clearfix">
+				<nav id="menu" class="d-none d-lg-block" ng-controller = "controller_menu">
+					<ul id ="fixed-menu">
+						<li><a href = "#/shop" class = "menu-btn" id = "shop" data-tr = "Shop">Shop</a></li>
+						<li><a href = "#/contact" class = "menu-btn" id = "contact" data-tr = "Contact">Contact</a></li>
+						<li><a href = "#/cart" class = "menu-btn" id = "cart" data-tr = "Cart"><svg id="Capa_1" enable-background="new 0 0 512 512" height="22" viewBox="0 0 512 512" width="22" xmlns="http://www.w3.org/2000/svg"><g><path fill = "#b9b9b9" d="m452 120h-60.946c-7.945-67.478-65.477-120-135.054-120s-127.109 52.522-135.054 120h-60.946c-11.046 0-20 8.954-20 20v352c0 11.046 8.954 20 20 20h392c11.046 0 20-8.954 20-20v-352c0-11.046-8.954-20-20-20zm-196-80c47.484 0 87.019 34.655 94.659 80h-189.318c7.64-45.345 47.175-80 94.659-80zm176 432h-352v-312h40v60c0 11.046 8.954 20 20 20s20-8.954 20-20v-60h192v60c0 11.046 8.954 20 20 20s20-8.954 20-20v-60h40z"/></g></svg></a></li>
+						<li><a href = "#/login" class = "menu-btn" id = "login" data-tr = "Log In" ng-show = "showLogIn">Log In</a></li>
+						<li ng-show = "showProfile">
+							<img src = "{{profileImg}}" width="25px"/>
+							<a href = "#/profile" class = "menu-btn" id = "profile" data-tr = "Profile" style = "padding: 0 5px;">{{profileName}}</a>
+							<ul class = "sub-menu">
+								<li ng-show = "panelAdmin"><a href= "#/admin">Panel Admin</a></li>
+								<li><a href ="#/profile">Profile</a></li>
+								<li><a ng-click = "logOut()">Log Out</a></li>
+							</ul>
+						</li>
+						<li><a href = "#/our-cars" class = "menu-btn" id = "more" data-tr = "Our Cars" ng-show = "showCRUD">Our Cars</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+</header>
+<div class = "container-search spt">
+	<form id = "formSearch" class = "container-form">
+		<div class = "input">
+			<select id ="drop-province" style = "width: 90%;">
+				<option value = "0">Provinces</option>
+			</select>
+		</div>
+		<div class = "input">
+			<select id = "drop-con" style = "width: 100%;">
+				<option value = "0">Concessionaires</option>
+			</select>
+		</div>
+		<div class = "input">
+			<input type = "text" id="autocom" autocomplete="off"/>
+			<div id = "searchAuto"></div>
+		</div>
+		<div class = "input">
+			<input type = "button" value = "Search" id = "search-btn"/>
+		</div>
+	</form>
+</div>
+</div>

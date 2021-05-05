@@ -1,0 +1,136 @@
+.container-login {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    min-height: 100vh;
+}
+.container-form {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.container-login  form {
+    position: relative;
+    width: 350px;
+    padding: 40px 40px 60px;
+    background-color: #2a292b;
+    border-radius: 10px;
+    box-shadow: -7px -7px 12px #232124,
+                5px 5px 15px #0f0e0f; 
+}
+.container-login h2 {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+.container-login .input {
+    margin-top: 30px;
+}
+.container-login .input h6 {
+    display: block;
+    margin-bottom: 10px;
+}
+.container-login .input input {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    padding: 5px 15px;
+    background-color: #2a292b;
+    color: #fc7820;
+    font-size: 18px;
+    box-shadow: inset -3px -3px 9px #323133,
+                inset 2px 2px 7px #0f0e0f;
+}
+.container-login .input input[type="button"] {
+    margin-top: 10px;
+    box-shadow: -4px -4px 9px #323133,
+                2px 2px 7px #0f0e0f;
+}
+
+.container-login .input input[type="button"]:active {
+    box-shadow: inset -4px -4px 9px #323133,
+                inset 2px 2px 7px #0f0e0f;
+}
+.container-login .input input[type="submit"] {
+    margin-top: 10px;
+    box-shadow: -4px -4px 9px #323133,
+                2px 2px 7px #0f0e0f;
+}
+.container-login .input input[type="submit"]:active {
+    box-shadow: inset -4px -4px 9px #323133,
+                inset 2px 2px 7px #0f0e0f;
+}
+.container-login .input input::placeholder {
+    color: #8b8b8b;
+}
+.question {
+    margin-top: 25px;
+}
+.container-form .input input {
+    width: 100%;
+    height: 50px;
+    border: none;
+    outline: none;
+    padding: 5px 15px;
+    background-color: #19181a;
+    color: #fc7820;
+    font-size: 18px;
+}
+.container-form .input input[type="text"] {
+    width: 600px;
+    border-bottom: 2px solid #fc7820;
+}
+.default-form {
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 1px rgb(8, 8, 8);
+}
+
+.default-form .tittle {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.default-form .text {
+    width: 50%;
+    height: 50px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 5px 15px;
+    background-color: #2a292b;
+    color: #0ca3e9;
+    font-size: 18px;
+}
+.default-form .area {
+    width: 50%;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 5px 15px;
+    background-color: #2a292b;
+    color: #0ca3e9;
+    font-size: 18px;
+    resize: none;
+}
+select {
+    width: 50%;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 5px 15px;
+    background-color: #2a292b;
+    color: #7c7b7c;
+    font-size: 16px;
+ }
+.default-input {
+    width: 50%;
+    height: 30px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 5px 15px;
+    background-color: #2a292b;
+    color: #0ca3e9;
+}

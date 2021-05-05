@@ -1,0 +1,23 @@
+
+#pagination-shop ul li {
+    text-decoration: none;
+    background-color: #2d2a2e;
+    border: 1px solid #2d2a2e;
+    border-radius: 2px;
+    color: #fc7820;
+    margin: 0 2px;
+    transition: all 0.15s cubic-bezier(0.84, 0.35, 0.39, 0.74) 0s
+}
+#pagination-shop ul li:hover {
+    background-color: #343135;
+    border: 1px solid #343135;
+}
+#pagination-shop ul li:active {
+    background-color: #4d484e;
+    border: 1px solid #4d484e;
+}
+#pagination-shop ul li a {
+    padding: 12px 18px;
+    color: #fc7820;
+    font-size: 16px;
+}
