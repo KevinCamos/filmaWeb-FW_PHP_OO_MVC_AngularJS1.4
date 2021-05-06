@@ -1,5 +1,5 @@
 <body id="contenido">
-
+    <br><br><br><br>
     <!-- CARROUSEL CABEZERA -->
     <!-- <section id="carousel-products"></section> -->
 
@@ -10,8 +10,8 @@
         <option value="ala">Alfabético (A-Z)</option>
         <option value="ald">Alfabético (Z-A)</option>
     </select>
-
     <form id="formularioFiltro" method="POST" autocomplete="off">
+
         <fieldset>
             Título
             <br>
@@ -35,13 +35,43 @@
             <br>
             De <input type="number" name="precioMin" id="precioMin" style="width: 50px;" placeholder="0"> a <input
                 type="number" name="precioMax" id="precioMax" style="width: 50px;" placeholder="999"></p>
-            <input value="Buscar" name="buscar" id="buscar" type="button" onclick="searchFilter()" />
+            <input value="Buscar" name="buscar" id="buscar" type="button" />
         </fieldset>
 
     </form>
 
 
-    <div id="listShop"></div>
+    <div id="listShop" ng-show="listProducts">
+
+        <section id="port-sec">
+            <div class="container">
+                <ul class="portfolio-items col-3">
+                    <li class="portfolio-item" ng-repeat="product in products">
+                        <div class="item-main">
+                            <div class="portfolio-image">
+                                <img id="imgShop-{{product.id}}" class="touch"
+                                    ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
+                                <h5>{{product.movie}}</h5>
+                                <h2>{{product.price}}</h2>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+    </div>
     <p id="pagination"></p>
+
+
+    <div class="center" id="eh">
+        <ul class="pagination">
+            <li><a ng-click="paginationClick('prev')">«</a></li>
+            <li id="page-{{page}}" ng-repeat="page in pagination">
+                <a class="page" ng-click="paginationClick(this)">{{page}}</a>
+            </li>
+            <li><a ng-click="paginationClick('next')">»</a></li>
+        </ul>
+    </div>
     <div id="map"></div>
     <div id="apispam"></div>

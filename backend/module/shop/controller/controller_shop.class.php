@@ -26,7 +26,8 @@ class controller_shop
 	{
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "listShop", $_GET["sendData"]);
+		// $json = loadModel(MODEL_SHOP, "shop_model", "listShop", $_GET["sendData"]);
+		$json = loadModel(MODEL_SHOP, "shop_model", "listShop", 0);
 		echo json_encode($json);
 	}
 

@@ -168,7 +168,6 @@ function dialogBeastProducts() {
     .append(document.createTextNode("Nuestros mejores productos"))
     .appendTo("#productsHome");
 }
-
 function clickCategory() {
   //FUNCIÓ A LA LÍNEA 45!
   cleanItems();

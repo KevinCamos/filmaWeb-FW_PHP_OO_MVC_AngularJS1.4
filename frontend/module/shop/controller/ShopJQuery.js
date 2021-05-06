@@ -55,6 +55,9 @@ function loadDivsProducts() {
     })
     .appendTo(divContainer);
 }
+
+
+
 //ELS DIVS GENÈRICS DELS PRODUCTES
 function divsProduct(urls, id) {
   var idUser = localStorage.getItem("idusers");
@@ -376,13 +379,15 @@ function searchAjaxProducts(
           let name = category[i]["name"];
           let img = "";
           img = "" + category[i]["img"];
-
           let li = $("<li></li>")
             .attr({
               id: "li" + i + "-" + id,
               class: "portfolio-item",
             })
             .appendTo(".portfolio-items");
+
+          
+
           let div1 = $("<div></div>")
             .attr({
               id: "div1" + i + "-" + id,

@@ -20,17 +20,30 @@
 
 
 
-
+    <p id="font-center-home">Nuestros mejores productos</p>
 
     <!-- CARROUSEL CABEZERA -->
-    <div id="productsHome" ng-repeat="product in products" index="$index">
-        <img id={{product.id}}
-            ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"
-            class="productHome">
-
-    </div>
+ 
 
 
+
+        <section id="port-sec">
+            <div class="container">
+                <ul class="portfolio-items col-3">
+                    <li class="portfolio-item" ng-repeat="product in products">
+                        <div class="item-main">
+                            <div class="portfolio-image">
+                                <img id="{{product.id}}" class="touch"
+                                    ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
+                             
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+    <paging-control paging-size="pagingSize" noofitem="dataPerPage" total-items="totalItems" display-items="displayItems"></paging-control>
 
 
     <div id="messages-list"></div>

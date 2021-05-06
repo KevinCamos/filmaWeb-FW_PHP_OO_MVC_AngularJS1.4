@@ -29,12 +29,19 @@ class shop_dao
     public function select_data_listShop($db, $sendDatArray)
     {
         // return $sendDatArray;
+        // $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        // ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        // FROM liketo li
+        // WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
+        // ON mo.id = B.idmovies
+        // ORDER BY " . $sendDatArray[1] . ", movie asc LIMIT " . $sendDatArray[2] . ",6";
+
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
-        WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
+        WHERE li.idusers LIKE '0') AS B)
         ON mo.id = B.idmovies
-        ORDER BY " . $sendDatArray[1] . ", movie asc LIMIT " . $sendDatArray[2] . ",6";
+        ORDER BY  movie asc";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
@@ -100,14 +107,14 @@ class shop_dao
     {
         $type = $array[0];
         $sql =  "SELECT COUNT(*) AS countPage FROM MOVIES ";
-    //  return $array;
+        //  return $array;
 
         switch ($type) {
             case "listShop":
                 ///NO FARIA FALTA FER RES DINS
                 break;
             case "searchQuery":
-                $search =$array[1];
+                $search = $array[1];
                 $sql = "SELECT COUNT(*) AS countPage FROM MOVIES
                 WHERE movie LIKE '%$search%'
                 OR formats LIKE '%$search%'
@@ -116,11 +123,11 @@ class shop_dao
                 OR anyo LIKE '%$search%'";
 
                 break;
-                case "filterQuery":
-                    $searchQuery = base64_decode($array[1]);
+            case "filterQuery":
+                $searchQuery = base64_decode($array[1]);
 
-                    $sql =  $sql. $searchQuery;
-                    break;
+                $sql =  $sql . $searchQuery;
+                break;
             case 'decade':
                 $sql =  "SELECT COUNT(*) AS countPage FROM MOVIES " . "WHERE anyo BETWEEN 1980 AND 1989";
 

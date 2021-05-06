@@ -24,7 +24,7 @@ class home_dao
 
     public function select_data_homeProducts($db, $offset)
     {
-        $sql = "SELECT * FROM movies ORDER BY clicks DESC LIMIT $offset, 2";
+        $sql = "SELECT * FROM movies ORDER BY clicks DESC LIMIT $offset, 18";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
