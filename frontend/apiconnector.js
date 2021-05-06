@@ -7,15 +7,15 @@ filmaweb.factory("services", ['$http','$q', function ($http, $q) {
             var promise = defered.promise;
             $http({
                   method: 'GET',
-                  url: serviceBase + module + '&function=' + functi
-                  // url: `${serviceBase}${module}&function=${functi}`
+                  // url: serviceBase + module + '&function=' + functi
+                  url: `${serviceBase}${module}&function=${functi}`
 
               }).success(function(data, status, headers, config) {
-                 console.log(data);
+                //  console.log(data);
                //   alert(data);
                  defered.resolve(data);
               }).error(function(data, status, headers, config) {
-                 console.log(data);
+                //  console.log(data);
                  alert("no entra")
                  defered.reject(data);
               });

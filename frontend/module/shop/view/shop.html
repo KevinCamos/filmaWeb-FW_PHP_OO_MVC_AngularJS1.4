@@ -1,0 +1,47 @@
+<body id="contenido">
+
+    <!-- CARROUSEL CABEZERA -->
+    <!-- <section id="carousel-products"></section> -->
+
+    <select name="orderBy" id="orderBy" type="text">
+        <option value="pop">Más populares</option>
+        <option value="pra">Precio:ascendente</option>
+        <option value="prd">Precio:descendente</option>
+        <option value="ala">Alfabético (A-Z)</option>
+        <option value="ald">Alfabético (Z-A)</option>
+    </select>
+
+    <form id="formularioFiltro" method="POST" autocomplete="off">
+        <fieldset>
+            Título
+            <br>
+            <input type="text" name="movie" id="movie" placeholder="Exemple: Star Wars">
+            <p>
+            </p>
+
+            Director
+            <br>
+            <input type="text" name="director" id="director" placeholder="Exemple: George Lucas">
+            <p>
+            </p>
+            Año
+            <br>
+            <input type="number" id="anyo" placeholder="Exemple: 2021"></p>
+            <br>
+            <p></p>
+            <div id="filters"></div>
+            </p>
+            Precio
+            <br>
+            De <input type="number" name="precioMin" id="precioMin" style="width: 50px;" placeholder="0"> a <input
+                type="number" name="precioMax" id="precioMax" style="width: 50px;" placeholder="999"></p>
+            <input value="Buscar" name="buscar" id="buscar" type="button" onclick="searchFilter()" />
+        </fieldset>
+
+    </form>
+
+
+    <div id="listShop"></div>
+    <p id="pagination"></p>
+    <div id="map"></div>
+    <div id="apispam"></div>

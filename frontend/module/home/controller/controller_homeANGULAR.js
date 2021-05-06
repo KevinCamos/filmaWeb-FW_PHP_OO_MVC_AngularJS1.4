@@ -1,4 +1,9 @@
-filmaweb.controller('controller_home', function($scope, $window, featuredCars, viewedBrands) {
+filmaweb.controller('controller_home', function ($scope, $window, carousel, homeProducts) {
+
+
+    console.log(carousel);
+    console.log(homeProducts);
+
     let brands = 3;
     let total = viewedBrands.length;
 
@@ -8,7 +13,7 @@ filmaweb.controller('controller_home', function($scope, $window, featuredCars, v
     $scope.slides = featuredCars;
     $scope.viewedBrands = viewedBrands.slice(0, brands);
 
-    angular.element($window).on('mousewheel', function() {
+    angular.element($window).on('mousewheel', function () {
         let footerHeight = document.getElementById('container-footer').offsetHeight;
         let position = $window.scrollY + footerHeight;
         let bottom = document.body.scrollHeight - $window.innerHeight;
@@ -18,22 +23,22 @@ filmaweb.controller('controller_home', function($scope, $window, featuredCars, v
                 brands += 3;
                 $scope.viewedBrands = viewedBrands.slice(0, brands);
                 $scope.$apply();
-            }else {
+            } else {
                 angular.element($window).off('mousewheel');
-            }// end_else
-        }// end_if
+            } // end_else
+        } // end_if
     });
 
-    $scope.redirectShopBrand = function(brand) {
+    $scope.redirectShopBrand = function (brand) {
         localStorage.brandShop = brand;
         location.href = "#/shop";
-    };// end_redirectShopBrand
-});// end_controller
+    }; // end_redirectShopBrand
+}); // end_controller
 
-filmaweb.controller('controller_menu', function($scope, services_logIn) {
+filmaweb.controller('controller_menu', function ($scope, services_logIn) {
     services_logIn.printMenu();
 
-    $scope.logOut = function() {
+    $scope.logOut = function () {
         services_logIn.logOut();
-    };// endlogOut
+    }; // endlogOut
 })

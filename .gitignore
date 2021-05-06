@@ -1,3 +1,5 @@
 assets/api_kay.js
 assets/JWTKey.php
 model/db.ini
+backend/assets/JWTKey.php
+frontend/assets/api_kay.js

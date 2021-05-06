@@ -1,7 +1,36 @@
 <body>
-    <div id="carousel-header"></div>
-   
+    <br>
+    <section id="carousel-products">
+        <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+            <div uib-slide ng-repeat="slide in slides track by slide.img" index="$index">
+                <img ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/home/img/{{slide.img}}"
+                    style="overflow: hidden; height: 200; max-height: 200;">
+                <div class="carousel-caption">
+                    <h4>{{slide.category}}</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
     <!-- CARROUSEL CABEZERA -->
-    <section id="carousel-products"></section>
-    <div id="productsHome"></div>
+    <div id="productsHome" ng-repeat="product in products" index="$index">
+        <img id={{product.id}}
+            ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"
+            class="productHome">
+
+    </div>
+
+
+
+
     <div id="messages-list"></div>

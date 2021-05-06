@@ -1,4 +1,4 @@
-var filmaweb = angular.module('filmaweb', ['ngRoute']);
+ var filmaweb = angular.module('filmaweb', ['ngRoute', 'ui.bootstrap']);
 // var filmaweb = angular.module('filmaweb', ['ngRoute', 'ngAnimate', 'ngTouch', 'ngSanitize', 'toastr', 'ui.bootstrap']);
 //////
 filmaweb.config(['$routeProvider', '$locationProvider',
@@ -9,16 +9,16 @@ filmaweb.config(['$routeProvider', '$locationProvider',
                 controller: "controller_home",
                 resolve: {
                     carousel: function (services) {
-                        console.log(services);
+                        // console.log(services);
                         var data = services.get('home', 'carousel');
                         // console.log(data);
-                        // return data;
+                        return data;
                     },
                     homeProducts: function (services) {
-                        console.log(services);
+                        // console.log(services);
                         var data = services.get('home', 'homeProducts');
                         // console.log(data);
-                        // alert(data);
+                        return data;
                     }
                 } // end_resolve
                 // }).when("/contact", {
