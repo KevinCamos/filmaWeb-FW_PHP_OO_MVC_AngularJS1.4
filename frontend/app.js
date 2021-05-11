@@ -9,14 +9,12 @@
                  controller: "controller_home",
                  resolve: {
                      carousel: function (services) {
-                         // console.log(services);
-                         var data = services.get('home', 'carousel');
-                         // console.log(data);
+                         var data = services.twoGet('home', 'carousel');
                          return data;
                      },
                      homeProducts: function (services) {
                          // console.log(services);
-                         var data = services.get('home', 'homeProducts');
+                         var data = services.twoGet('home', 'homeProducts');
                          // console.log(data);
                          return data;
                      }
@@ -26,41 +24,39 @@
                  //     controller: "controller_contact"
              }).when("/shop", {
                  templateUrl: "frontend/module/shop/view/view_shop.html",
-                 controller: "controller_shop",
-                 resolve: {
-                     //  filters: function (services) {
-                     //      return services.get('shop', 'sendFilters');
-                     //  },
-                     listShop: function (services) {
-                         return services.get('shop', 'listShop');
-                     },
-                     //  favs: function(services) {
-                     //      return services.post('shop', 'sendFavs', {JWT: localStorage.token});
-                     //  },
-                     //  cart: function(services) {
-                     //      return services.post('cart', 'selectCart', {JWT: localStorage.token});
-                     //  }
-                 }
-            //  }).when('/shop/:carPlate', {
-            //      templateUrl: "frontend/module/shop/view/view_shopDetails.html",
-            //      controller: "controller_shopDetails",
-            //      resolve: {
-            //          car: function (services, $route) {
-            //              return services.post('shop', 'read', {
-            //                  'carPlate': $route.current.params.carPlate
-            //              })
-            //          },
-            //          favs: function (services) {
-            //              return services.post('shop', 'sendFavs', {
-            //                  JWT: localStorage.token
-            //              });
-            //          },
-            //          cart: function (services) {
-            //              return services.post('cart', 'selectCart', {
-            //                  JWT: localStorage.token
-            //              });
-            //          }
-            //      } // end_resolve
+                 controller: "controller_shop"
+                //  ,
+                //  resolve: {
+                //      listShop: function (services) {
+                //          return services.twoGet('shop', 'listShop');
+                //      },
+                //      //  favs: function(services) {
+                //      //      return services.post('shop', 'sendFavs', {JWT: localStorage.token});
+                //      //  },
+                //      //  cart: function(services) {
+                //      //      return services.post('cart', 'selectCart', {JWT: localStorage.token});
+                //      //  }
+                //  }
+                 //  }).when('/shop/:carPlate', {
+                 //      templateUrl: "frontend/module/shop/view/view_shopDetails.html",
+                 //      controller: "controller_shopDetails",
+                 //      resolve: {
+                 //          car: function (services, $route) {
+                 //              return services.post('shop', 'read', {
+                 //                  'carPlate': $route.current.params.carPlate
+                 //              })
+                 //          },
+                 //          favs: function (services) {
+                 //              return services.post('shop', 'sendFavs', {
+                 //                  JWT: localStorage.token
+                 //              });
+                 //          },
+                 //          cart: function (services) {
+                 //              return services.post('cart', 'selectCart', {
+                 //                  JWT: localStorage.token
+                 //              });
+                 //          }
+                 //      } // end_resolve
                  // }).when("/login", {
                  //     templateUrl: "frontend/module/login/view/view_logIn.html",
                  //     controller: "controller_logIn"

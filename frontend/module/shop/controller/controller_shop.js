@@ -1,49 +1,20 @@
-filmaweb.controller('controller_shop', function ($scope, services, listShop) {
-    var listProducts = true;
-    $scope.listProducts = listProducts;
+filmaweb.controller('controller_shop', function ($scope, services, filters_shop) {
 
+    if (localStorage.typeFilter == "productID") {
+        $scope.listProducts = false;
+        $scope.oneProduct = true;
 
-
-
-    if (listProducts) {
-        position = 0
-        movies = 6;
-        // movies = position == maxPagination ? maxPagination : position + 6;
-        $scope.products = listShop.slice(position, position + 6);
-
-        // let page= (listShop.length/6);
-        let page = (listShop.length % 6) == 0 ? (listShop.length / 6) : (listShop.length / 6 + 1).toFixed(); //saca el número de páginas en un entero
-        var maxPagination = listShop.length % 6 == 0 ? (listShop.length - 6) : listShop.length- (listShop.length % 6)
-
-        console.log(page);
-        var pagination = [0]
-
-        for (var i = 1; i <= page; i++) {
-            pagination.push(i)
-        }
-        pagination.shift();
-        console.log(pagination)
-
-        $scope.pagination = pagination;
-
+        filters_shop.getProduct(localStorage.productID);
+    } else {
+        $scope.listProducts = true;
+        $scope.oneProduct = false;
+        console.log(localStorage.typeFilter)
+        filters_shop.getListShop(localStorage.typeFilter);
+        // $scope.$apply();
 
     }
-    $scope.paginationClick = function (data) {
-        switch (data) {
-            case "prev":
-                position = position == 0 ? position : position - 6;
-                break;
-            case "next":
-                position = position == maxPagination ? position : position + 6;
-                break;
-            default:
-                position = data.page == pagination[pagination.length] ? maxPagination : data.page * 6 - 6;;
-        }
-        $scope.products = listShop.slice(position, position + 6);
-        // alert(position);
-        $scope.$apply();
 
-
-    };
+    // {{show ? 'hide' : 'show'}}
+    // filters_shop.paginationClick()
 
 });

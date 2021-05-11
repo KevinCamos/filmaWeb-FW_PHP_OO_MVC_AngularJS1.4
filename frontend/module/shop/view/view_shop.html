@@ -2,76 +2,107 @@
     <br><br><br><br>
     <!-- CARROUSEL CABEZERA -->
     <!-- <section id="carousel-products"></section> -->
+    <div ng-show="listProducts">
+        <select name="orderBy" id="orderBy" type="text" ng-show="listProducts">
+            <option value="pop">Más populares</option>
+            <option value="pra">Precio:ascendente</option>
+            <option value="prd">Precio:descendente</option>
+            <option value="ala">Alfabético (A-Z)</option>
+            <option value="ald">Alfabético (Z-A)</option>
+        </select>
+        <form id="formularioFiltro" method="POST" autocomplete="off" ng-show="listProducts">
 
-    <select name="orderBy" id="orderBy" type="text">
-        <option value="pop">Más populares</option>
-        <option value="pra">Precio:ascendente</option>
-        <option value="prd">Precio:descendente</option>
-        <option value="ala">Alfabético (A-Z)</option>
-        <option value="ald">Alfabético (Z-A)</option>
-    </select>
-    <form id="formularioFiltro" method="POST" autocomplete="off">
+            <fieldset>
+                Título
+                <br>
+                <input type="text" name="movie" id="movie" placeholder="Exemple: Star Wars">
+                <p>
+                </p>
 
-        <fieldset>
-            Título
-            <br>
-            <input type="text" name="movie" id="movie" placeholder="Exemple: Star Wars">
-            <p>
-            </p>
+                Director
+                <br>
+                <input type="text" name="director" id="director" placeholder="Exemple: George Lucas">
+                <p>
+                </p>
+                Año
+                <br>
+                <input type="number" id="anyo" placeholder="Exemple: 2021"></p>
+                <br>
+                <p></p>
+                <div id="filters"></div>
+                </p>
+                Precio
+                <br>
+                De <input type="number" name="precioMin" id="precioMin" style="width: 50px;" placeholder="0"> a <input
+                    type="number" name="precioMax" id="precioMax" style="width: 50px;" placeholder="999"></p>
+                <input value="Buscar" name="buscar" id="buscar" type="button" />
+            </fieldset>
 
-            Director
-            <br>
-            <input type="text" name="director" id="director" placeholder="Exemple: George Lucas">
-            <p>
-            </p>
-            Año
-            <br>
-            <input type="number" id="anyo" placeholder="Exemple: 2021"></p>
-            <br>
-            <p></p>
-            <div id="filters"></div>
-            </p>
-            Precio
-            <br>
-            De <input type="number" name="precioMin" id="precioMin" style="width: 50px;" placeholder="0"> a <input
-                type="number" name="precioMax" id="precioMax" style="width: 50px;" placeholder="999"></p>
-            <input value="Buscar" name="buscar" id="buscar" type="button" />
-        </fieldset>
-
-    </form>
+        </form>
 
 
-    <div id="listShop" ng-show="listProducts">
+        <div id="listShop" ng-show="listProducts">
 
-        <section id="port-sec">
-            <div class="container">
-                <ul class="portfolio-items col-3">
-                    <li class="portfolio-item" ng-repeat="product in products">
-                        <div class="item-main">
-                            <div class="portfolio-image">
-                                <img id="imgShop-{{product.id}}" class="touch"
-                                    ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
-                                <h5>{{product.movie}}</h5>
-                                <h2>{{product.price}}</h2>
+            <section id="port-sec">
+                <div class="container">
+                    <ul class="portfolio-items col-3">
+                        <li class="portfolio-item" ng-repeat="product in products">
+                            <div class="item-main">
+                                <div class="portfolio-image">
+                                    <img id="imgShop-{{product.id}}" class="touch"
+                                        ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
+                                    <h5>{{product.movie}}</h5>
+                                    <h2>{{product.price}}</h2>
+                                </div>
                             </div>
-                        </div>
-                    </li>
+                        </li>
 
-                </ul>
-            </div>
-        </section>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <p id="pagination"></p>
+
+
+        <div class="center" ng-show="listProducts">
+            <ul class="pagination">
+                <li><a ng-click="paginationClick('prev')">«</a></li>
+                <li id="page-{{page}}" ng-repeat="page in pagination">
+                    <!-- <span ngIf="({{page}}=={{clickPage}} ? 'asdasd' : 'dd' "> -->
+                    <a class="page " ng-click="paginationClick(this)">{{page}}</a>
+                    <!-- </span> -->
+                </li>
+                <li><a ng-click="paginationClick('next')">»</a></li>
+            </ul>
+        </div>
     </div>
-    <p id="pagination"></p>
+
+    <div ng-show="oneProduct">
+        <br><br><br>
+        <br><br><br>
+        <br><br><br>
+        <p>
+            
+            <!-- align: "left", el return y la imagen -->
+        <ul class="attribute-item">
+            <li><b>ID: </b>{{product.id}}</li>
+            <li><b>Reference: </b>{{product.reference}}</li>
+            <li><b>Película: </b>{{product.movie}}</li>
+            <li><b>Director: </b>{{product.director}}</li>
+            <li><b>País: </b>{{product.country}}</li>
+            <li><b>Año: </b>{{product.anyo}}</li>
+            <li><b>Precio: </b>{{product.price}}</li>
 
 
-    <div class="center" id="eh">
-        <ul class="pagination">
-            <li><a ng-click="paginationClick('prev')">«</a></li>
-            <li id="page-{{page}}" ng-repeat="page in pagination">
-                <a class="page" ng-click="paginationClick(this)">{{page}}</a>
-            </li>
-            <li><a ng-click="paginationClick('next')">»</a></li>
         </ul>
+        <img id="return"
+        ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/return.png" />
+
+        <img id="shopImg"
+            ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}" />
+        </p>
+
+
     </div>
     <div id="map"></div>
     <div id="apispam"></div>

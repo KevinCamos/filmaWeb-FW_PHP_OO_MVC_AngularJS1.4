@@ -48,13 +48,20 @@ class shop_dao
     public function select_data_categoryDecade($db, $sendDatArray)
     {
         // return $sendDatArray;
+        // $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        // ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        // FROM liketo li
+        // WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
+        // ON mo.id = B.idmovies                     
+        // WHERE anyo BETWEEN 1980 AND 1989  
+        // ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " . $sendDatArray[2] . ", 6";
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
-        WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
+        WHERE li.idusers LIKE '0') AS B)
         ON mo.id = B.idmovies                     
         WHERE anyo BETWEEN 1980 AND 1989  
-        ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " . $sendDatArray[2] . ", 6";
+        ORDER BY  movie asc";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
@@ -62,12 +69,19 @@ class shop_dao
     public function select_data_categoryFormate($db, $sendDatArray)
     {
         // return $sendDatArray;
+        // $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        // ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        // FROM liketo li
+        // WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
+        // ON mo.id = B.idmovies               
+        //  WHERE formats LIKE '%VHS%' ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " . $sendDatArray[2] . ", 6";        // return $sendDatArray;
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
-        WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
-        ON mo.id = B.idmovies               
-         WHERE formats LIKE '%VHS%' ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " . $sendDatArray[2] . ", 6";
+        WHERE li.idusers LIKE '0') AS B)
+        ON mo.id = B.idmovies   
+        WHERE formats LIKE '%VHS%'            
+        ORDER BY  movie asc";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
@@ -75,12 +89,19 @@ class shop_dao
     public function select_data_categoryGenere($db, $sendDatArray)
     {
         // return $sendDatArray;
-        $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-        ((SELECT DISTINCT li.idmovies, 'like' as likes 
-        FROM liketo li
-        WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
-        ON mo.id = B.idmovies               
-        WHERE genere = 'Fantasia' ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " .  $sendDatArray[2] . ", 6";
+        // $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        // ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        // FROM liketo li
+        // WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
+        // ON mo.id = B.idmovies               
+        // WHERE genere = 'Fantasia' ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " .  $sendDatArray[2] . ", 6";
+         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+         ((SELECT DISTINCT li.idmovies, 'like' as likes 
+         FROM liketo li
+         WHERE li.idusers LIKE '0') AS B)
+         ON mo.id = B.idmovies               
+         WHERE genere = 'Fantasia'  
+         ORDER BY  movie asc";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }

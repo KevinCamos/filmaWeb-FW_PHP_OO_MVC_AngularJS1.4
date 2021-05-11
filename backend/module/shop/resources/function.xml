@@ -6,7 +6,7 @@
     </function>
     <function>
         <name>openProduct</name>
-        <uri>openProduct</uri>
+        <uri>productID</uri>
     </function>
     <function>
         <name>listShop</name>
@@ -14,15 +14,15 @@
     </function>
     <function>
         <name>categoryDecade</name>
-        <uri>categoryDecade</uri>
+        <uri>decade</uri>
     </function>
     <function>
         <name>categoryFormate</name>
-        <uri>categoryFormate</uri>
+        <uri>formate</uri>
     </function>
     <function>
         <name>categoryGenere</name>
-        <uri>categoryGenere</uri>
+        <uri>genere</uri>
     </function>
     <function>
         <name>filter</name>

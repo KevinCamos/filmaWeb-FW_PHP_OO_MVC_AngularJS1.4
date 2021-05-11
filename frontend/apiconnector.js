@@ -2,7 +2,7 @@ filmaweb.factory("services", ['$http', '$q', function ($http, $q) {
   let serviceBase = '/Kevin/Ejercicios_Kevin/Projecte/backend/index.php?module=';
   let obj = {};
 
-  obj.get = function (module, functi) {
+  obj.twoGet = function (module, functi) {
     var defered = $q.defer();
     var promise = defered.promise;
     $http({
@@ -54,20 +54,20 @@ filmaweb.factory("services", ['$http', '$q', function ($http, $q) {
   //       return promise;
   //   };
 
-  //   obj.post = function (module, option, data) {
-  //     var defered = $q.defer();
-  //     var promise = defered.promise;
-  //     $http({
-  //           method: 'POST',
-  //           url: serviceBase + module + '&function=' + option,
-  //           data: data
-  //       }).success(function(response, status, headers, config) {
-  //          defered.resolve(response);
-  //       }).error(function(error, status, headers, config) {
-  //          defered.reject(error);
-  //       });
-  //     return promise;
-  //   };
+  obj.threePost = function (module, option, data) {
+    var defered = $q.defer();
+    var promise = defered.promise;
+    $http({
+      method: 'POST',
+      url: serviceBase + module + '&function=' + option,
+      data: data
+    }).success(function (response, status, headers, config) {
+      defered.resolve(response);
+    }).error(function (error, status, headers, config) {
+      defered.reject(error);
+    });
+    return promise;
+  };
 
   //   obj.put = function (module, functi, dada) {
   //     var defered=$q.defer();

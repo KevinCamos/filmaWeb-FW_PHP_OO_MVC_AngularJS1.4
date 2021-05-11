@@ -6,20 +6,20 @@ class controller_shop
 		$_SESSION['module'] = "shop";
 	}
 
-	function list()
-	{
-		require_once(VIEW_PATH_INC . "top_page_shop.php");
-		require_once(VIEW_PATH_INC . "header.html");
-		require_once(VIEW_PATH_INC . "menu.html");
-		loadView(VIEW_PATH_SHOP . 'shop.html');
+	// function list()
+	// {
+	// 	require_once(VIEW_PATH_INC . "top_page_shop.php");
+	// 	require_once(VIEW_PATH_INC . "header.html");
+	// 	require_once(VIEW_PATH_INC . "menu.html");
+	// 	loadView(VIEW_PATH_SHOP . 'shop.html');
 
-		require_once(VIEW_PATH_INC . "footer.html");
-	}
+	// 	require_once(VIEW_PATH_INC . "footer.html");
+	// }
 	function openProduct()
 	{
 		// echo json_encode(MODEL_SHOP);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "openProduct", $_GET["id"], $_GET["idUser"]);
+		$json = loadModel(MODEL_SHOP, "shop_model", "openProduct", $_POST["id"],0);
 		echo json_encode($json);
 	}
 	function listShop()
@@ -37,21 +37,21 @@ class controller_shop
 	{
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "categoryDecade", $_GET["sendData"]);
+		$json = loadModel(MODEL_SHOP, "shop_model", "categoryDecade", 0);
 		echo json_encode($json);
 	}
 	function categoryFormate()
 	{
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "categoryFormate", $_GET["sendData"]);
+		$json = loadModel(MODEL_SHOP, "shop_model", "categoryFormate", 0);
 		echo json_encode($json);
 	}
 	function categoryGenere()
 	{
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "categoryGenere", $_GET["sendData"]);
+		$json = loadModel(MODEL_SHOP, "shop_model", "categoryGenere",0);
 		echo json_encode($json);
 	}
 

@@ -4,7 +4,8 @@
         <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
             <div uib-slide ng-repeat="slide in slides track by slide.img" index="$index">
                 <img ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/home/img/{{slide.img}}"
-                    style="overflow: hidden; height: 200; max-height: 200;">
+                    style="overflow: hidden; height: 200; max-height: 200;" id={{slide.category}}
+                    ng-click="categoryClick(this)">
                 <div class="carousel-caption">
                     <h4>{{slide.category}}</h4>
                 </div>
@@ -23,27 +24,29 @@
     <p id="font-center-home">Nuestros mejores productos</p>
 
     <!-- CARROUSEL CABEZERA -->
- 
 
 
 
-        <section id="port-sec">
-            <div class="container">
-                <ul class="portfolio-items col-3">
-                    <li class="portfolio-item" ng-repeat="product in products">
-                        <div class="item-main">
-                            <div class="portfolio-image">
-                                <img id="{{product.id}}" class="touch"
-                                    ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
-                             
-                            </div>
+
+    <section id="port-sec">
+        <div class="container">
+            <ul class="portfolio-items col-3">
+                <li class="portfolio-item" ng-repeat="product in products">
+                    <div class="item-main">
+                        <div class="portfolio-image">
+                            <img id="{{product.id}}"     ng-click="productClick(this)" class="touch"
+                                ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"
+                            ></img>
+
                         </div>
-                    </li>
+                    </div>
+                </li>
 
-                </ul>
-            </div>
-        </section>
-    <paging-control paging-size="pagingSize" noofitem="dataPerPage" total-items="totalItems" display-items="displayItems"></paging-control>
+            </ul>
+        </div>
+    </section>
+    <paging-control paging-size="pagingSize" noofitem="dataPerPage" total-items="totalItems"
+        display-items="displayItems"></paging-control>
 
 
     <div id="messages-list"></div>
