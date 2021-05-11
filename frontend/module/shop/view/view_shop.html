@@ -15,27 +15,27 @@
             <fieldset>
                 Título
                 <br>
-                <input type="text" name="movie" id="movie" placeholder="Exemple: Star Wars">
+                <input type="text" name="movie" id="movie" placeholder="Exemple: Star Wars"  ng-model="titulo">
                 <p>
                 </p>
 
                 Director
                 <br>
-                <input type="text" name="director" id="director" placeholder="Exemple: George Lucas">
+                <input type="text" name="director" id="director" placeholder="Exemple: George Lucas" ng-model="director">
                 <p>
                 </p>
                 Año
                 <br>
-                <input type="number" id="anyo" placeholder="Exemple: 2021"></p>
+                <input type="number" id="anyo" placeholder="Exemple: 2021" ng-model="year" ></p>
                 <br>
                 <p></p>
                 <div id="filters"></div>
                 </p>
                 Precio
                 <br>
-                De <input type="number" name="precioMin" id="precioMin" style="width: 50px;" placeholder="0"> a <input
-                    type="number" name="precioMax" id="precioMax" style="width: 50px;" placeholder="999"></p>
-                <input value="Buscar" name="buscar" id="buscar" type="button" />
+                De <input type="number" name="precioMin" id="precioMin" style="width: 50px;" placeholder="0"  ng-model="priceMin"> a <input
+                    type="number" name="precioMax" id="precioMax" style="width: 50px;" placeholder="999" ng-model="priceMax"></p>
+                <input value="Buscar" name="buscar" id="buscar" type="button" ng-click="filterClick()" />
             </fieldset>
 
         </form>
@@ -49,7 +49,7 @@
                         <li class="portfolio-item" ng-repeat="product in products">
                             <div class="item-main">
                                 <div class="portfolio-image">
-                                    <img id="imgShop-{{product.id}}" class="touch"
+                                    <img id="imgShop-{{product.id}}" class="touch" ng-click="productClick(this)"
                                         ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
                                     <h5>{{product.movie}}</h5>
                                     <h2>{{product.price}}</h2>
@@ -68,9 +68,9 @@
             <ul class="pagination">
                 <li><a ng-click="paginationClick('prev')">«</a></li>
                 <li id="page-{{page}}" ng-repeat="page in pagination">
-                    <!-- <span ngIf="({{page}}=={{clickPage}} ? 'asdasd' : 'dd' "> -->
-                    <a class="page " ng-click="paginationClick(this)">{{page}}</a>
-                    <!-- </span> -->
+                    <span ngIf="({{page}}=={{clickPage}} ? 'asdasd' : 'dd' ">
+                        <a class="page " ng-click="paginationClick(this)">{{page}}</a>
+                    </span>
                 </li>
                 <li><a ng-click="paginationClick('next')">»</a></li>
             </ul>
@@ -82,7 +82,7 @@
         <br><br><br>
         <br><br><br>
         <p>
-            
+
             <!-- align: "left", el return y la imagen -->
         <ul class="attribute-item">
             <li><b>ID: </b>{{product.id}}</li>
@@ -96,7 +96,7 @@
 
         </ul>
         <img id="return"
-        ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/return.png" />
+            ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/return.png" />
 
         <img id="shopImg"
             ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}" />

@@ -57,9 +57,9 @@ class controller_shop
 
 	function filter()
 	{
-		// echo json_encode($_GET["sendData"][4]);
+		// echo json_encode($_POST["arrayFilter"]['titulo']);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "filter", $_GET["sendData"]);
+		$json = loadModel(MODEL_SHOP, "shop_model", "filter", $_POST["arrayFilter"]);
 		echo json_encode($json);
 	}
 	function pagination()

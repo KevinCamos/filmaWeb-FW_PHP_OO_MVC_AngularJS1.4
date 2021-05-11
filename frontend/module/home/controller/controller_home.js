@@ -49,7 +49,7 @@ filmaweb.controller('controller_home', function ($scope, $window, carousel, home
         console.log(data.product.id)
         localStorage.typeFilter = "productID";
         localStorage.productID = data.product.id;
-        
+
         location.href = "#/shop";
 
     }

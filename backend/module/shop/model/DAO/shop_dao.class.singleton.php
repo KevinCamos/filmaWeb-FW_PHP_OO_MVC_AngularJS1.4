@@ -95,7 +95,7 @@ class shop_dao
         // WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
         // ON mo.id = B.idmovies               
         // WHERE genere = 'Fantasia' ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " .  $sendDatArray[2] . ", 6";
-         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
          ((SELECT DISTINCT li.idmovies, 'like' as likes 
          FROM liketo li
          WHERE li.idusers LIKE '0') AS B)
@@ -109,18 +109,32 @@ class shop_dao
     public function select_data_filter($db, $sendDatArray)
     {
 
-        $user = $sendDatArray[0];
-        $order = $sendDatArray[1];
-        $offset = $sendDatArray[2];
-        $searchQuery = base64_decode($sendDatArray[3]);
+        // $user = $sendDatArray[0];
+        // $order = $sendDatArray[1];
+        // $offset = $sendDatArray[2];
+        // $searchQuery = base64_decode($sendDatArray[3]);
 
+        if ($sendDatArray[2] != 0) {
+            $whereYear = "AND anyo = $sendDatArray[2]";
+        } else {
+            $whereYear = '';
+        }
 
-        // return $sendDatArray;
+        // return $sendDatArray[0];
+        // $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        // ((SELECT DISTINCT li.idmovies, 'like' as likes  
+        // FROM liketo li
+        // WHERE li.idusers LIKE  '$user') AS B)
+        // ON mo.id = B.idmovies " . $searchQuery . " ORDER BY  $order , movie asc LIMIT  $offset, 6";
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-        ((SELECT DISTINCT li.idmovies, 'like' as likes  
+        ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
-        WHERE li.idusers LIKE  '$user') AS B)
-        ON mo.id = B.idmovies " . $searchQuery . " ORDER BY  $order , movie asc LIMIT  $offset, 6";
+        WHERE li.idusers LIKE '0') AS B)
+        ON mo.id = B.idmovies               
+        WHERE movie LIKE '%$sendDatArray[0]%'
+        AND director LIKE '%$sendDatArray[1]%'
+         $whereYear
+         AND price BETWEEN  $sendDatArray[3] AND $sendDatArray[4]";
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }

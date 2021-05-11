@@ -6,9 +6,12 @@ filmaweb.factory('filters_shop', ['$rootScope', 'services', function ($rootScope
     };
     return service
 
-    function getListShop(typeFilter) {
-
-        services.threePost('shop', typeFilter)
+    function getListShop(typeFilter, arrayFilter) {
+        arrayFilter = arrayFilter ? arrayFilter : '';
+        console.log(arrayFilter)
+        services.threePost('shop', typeFilter, {
+                "arrayFilter": arrayFilter
+            })
             .then(function (productsList) {
 
                 console.log(productsList)
@@ -89,7 +92,13 @@ filmaweb.factory('filters_shop', ['$rootScope', 'services', function ($rootScope
                 console.log(error);
 
             });
+    }
 
 
-    } // end_logIn
-}]); // end_services_login
+
+
+
+
+
+
+}]);
