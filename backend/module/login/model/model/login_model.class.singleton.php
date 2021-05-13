@@ -22,17 +22,17 @@ class login_model
     {
 
         // return $userArray;
-        $nameUser =  strtolower($userArray[0]['value']);
-        $email = strtolower($userArray[3]['value']);
+        $nameUser =  strtolower($userArray[0]);
+        $email = strtolower($userArray[1]);
         $validateReg = $this->bll->obtain_validateRegister_BLL($nameUser, $email);
         if ($validateReg == true) { //El usuari existeix
             return false;
         } else {
-            $nameUser =  strtolower($userArray[0]['value']);
+            $nameUser =  strtolower($userArray[0]);
             // $password =  strtolower($userArray[1]['value']);
-            $email = strtolower($userArray[3]['value']);
+            $email = strtolower($userArray[1]);
             $hashavatar = md5(strtolower(trim($email)));
-            $hashed_pass = password_hash(strtolower($userArray[1]['value']), PASSWORD_DEFAULT);
+            $hashed_pass = password_hash(strtolower($userArray[2]), PASSWORD_DEFAULT);
             $avatar = "https://www.gravatar.com/avatar/$hashavatar?s=40&d=robohash";
             $tokenMail = jwt_process::encode_tokmail(SECRET,  $nameUser);
             // return $this->bll->insert_register_BLL($email, $nameUser, $hashed_pass,  $avatar,  $tokenMail);

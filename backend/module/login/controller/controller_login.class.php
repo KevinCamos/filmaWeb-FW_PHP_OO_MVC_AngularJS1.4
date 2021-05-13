@@ -24,7 +24,7 @@ class controller_login
 
 		// echo json_encode(friendlyURL("?model=model&function=function&token=pepinoss"));
 		$json = array();
-		$json = loadModel(MODEL_LOGIN, "login_model", "register", $_POST['serialize']);
+		$json = loadModel(MODEL_LOGIN, "login_model", "register", $_POST['user']);
 		echo json_encode($json);
 	}
 	function login()

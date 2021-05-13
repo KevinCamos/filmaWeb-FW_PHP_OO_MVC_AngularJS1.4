@@ -1,0 +1,39 @@
+<body>
+  <!--   https://codepen.io/colorlib/pen/rxddKy plantilla -->
+  <div class="login-page">
+    <div class="form" id="form" ng-show="regShow">
+      <form class="modLog" id="formRegister" name="formRegister">
+
+        <!-- <label>CREAR USUARIO</label> -->
+        <input type="text" ng-model="nameUserRegister" ng-pattern="regUsername" name="nameUser"
+          placeholder="Nombre: por ejemplo: hitchcock99" autocomplete="username" />
+        <input type="password" ng-model="passwordRegister" ng-pattern="regPassword" name="password1"
+          placeholder="Contraseña" autocomplete="current-password" />
+        <input type="password" ng-model="passwordRegister2" ng-pattern="regPassword" name="password2"
+          placeholder="Repite la contraseña" autocomplete="off" />
+        <input type="text" ng-model="emailRegister" ng-pattern="regEmail" name="email" placeholder="Dirección e-mail" />
+        <input type="button"
+          ng-disabled="formRegister.username.$invalid || formRegister.email.$invalid || formRegister.password.$invalid || formRegister.repassword.$invalid"
+          value="Crear Usuario" id="buttonR" class="submit" ng-click="register()" />
+        <p class="message">¿Tienes una cuenta de usuario? <a ng-click="signShow()">Sign In</a></p>
+      </form>
+      <p class="error">{{error}}</p>
+
+    </div>
+    <div class="form" id="form" ng-show="logShow">
+
+      <form class="modLog" id="formLogin">
+        <!-- <label>INICIAR SESION</label> -->
+        <input type="text" ng-model="nameUserLogin" name="nameUser" placeholder="Usuario o Correo"
+          autocomplete="username" />
+        <input type="password" ng-model="passwordLogin" name="password" placeholder="Contraseña"
+          autocomplete="current-password" />
+        <input type="button" name="submit" name="email" value="Iniciar Sesión" id="buttonL" class="submit" />
+
+        <p class="message">¿Todavía no estás registrado/a? <a ng-click="regiShow()">Register</a></p>
+        <p class="recoveredPssword">¿No recuerdas tu contraseña? <a>Recuérdamela</a></p>
+
+      </form>
+      <p class="error"></p>
+    </div>
+  </div>

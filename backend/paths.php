@@ -2,7 +2,7 @@
 //////
 
 define('PROJECTBACK', '/Kevin/Ejercicios_Kevin/Projecte/backend/'); // Project Path
-define('PROJECT', '/Kevin/Ejercicios_Kevin/Projecte/'); // Project Path
+define('PROJECT', '/Kevin/Ejercicios_Kevin/Projecte/backend/'); // Project Path
 
 //CARPETAS A NIVEL DE APLICACIÓN
 define('SITE_ROOT_APP_LEVEL', $_SERVER['DOCUMENT_ROOT'] . PROJECT); // Site Root

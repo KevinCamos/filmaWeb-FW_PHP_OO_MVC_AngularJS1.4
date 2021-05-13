@@ -135,6 +135,7 @@ class shop_dao
         AND director LIKE '%$sendDatArray[1]%'
          $whereYear
          AND price BETWEEN  $sendDatArray[3] AND $sendDatArray[4]";
+        // $sql = mysql_real_escape_string($sql);
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }

@@ -3,38 +3,40 @@
     <!-- CARROUSEL CABEZERA -->
     <!-- <section id="carousel-products"></section> -->
     <div ng-show="listProducts">
-        <select name="orderBy" id="orderBy" type="text" ng-show="listProducts">
+        <!-- <select name="orderBy" id="orderBy" type="text" ng-show="listProducts" ng-change="selectOrder()">
             <option value="pop">Más populares</option>
             <option value="pra">Precio:ascendente</option>
             <option value="prd">Precio:descendente</option>
             <option value="ala">Alfabético (A-Z)</option>
             <option value="ald">Alfabético (Z-A)</option>
-        </select>
+        </select> -->
         <form id="formularioFiltro" method="POST" autocomplete="off" ng-show="listProducts">
 
             <fieldset>
                 Título
                 <br>
-                <input type="text" name="movie" id="movie" placeholder="Exemple: Star Wars"  ng-model="titulo">
+                <input type="text" name="movie" id="movie" placeholder="Exemple: Star Wars" ng-model="titulo">
                 <p>
                 </p>
 
                 Director
                 <br>
-                <input type="text" name="director" id="director" placeholder="Exemple: George Lucas" ng-model="director">
+                <input type="text" name="director" id="director" placeholder="Exemple: George Lucas"
+                    ng-model="director">
                 <p>
                 </p>
                 Año
                 <br>
-                <input type="number" id="anyo" placeholder="Exemple: 2021" ng-model="year" ></p>
+                <input type="number" id="anyo" placeholder="Exemple: 2021" ng-model="year"></p>
                 <br>
                 <p></p>
                 <div id="filters"></div>
                 </p>
                 Precio
                 <br>
-                De <input type="number" name="precioMin" id="precioMin" style="width: 50px;" placeholder="0"  ng-model="priceMin"> a <input
-                    type="number" name="precioMax" id="precioMax" style="width: 50px;" placeholder="999" ng-model="priceMax"></p>
+                De <input type="number" name="precioMin" id="precioMin" style="width: 50px;" placeholder="0"
+                    ng-model="priceMin"> a <input type="number" name="precioMax" id="precioMax" style="width: 50px;"
+                    placeholder="999" ng-model="priceMax"></p>
                 <input value="Buscar" name="buscar" id="buscar" type="button" ng-click="filterClick()" />
             </fieldset>
 
@@ -52,7 +54,7 @@
                                     <img id="imgShop-{{product.id}}" class="touch" ng-click="productClick(this)"
                                         ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
                                     <h5>{{product.movie}}</h5>
-                                    <h2>{{product.price}}</h2>
+                                    <h2>{{product.price}}€</h2>
                                 </div>
                             </div>
                         </li>
@@ -68,9 +70,9 @@
             <ul class="pagination">
                 <li><a ng-click="paginationClick('prev')">«</a></li>
                 <li id="page-{{page}}" ng-repeat="page in pagination">
-                    <span ngIf="({{page}}=={{clickPage}} ? 'asdasd' : 'dd' ">
+                    <!-- <span ngIf="({{page}}=={{clickPage}} ? 'asdasd' : 'dd' "> -->
                         <a class="page " ng-click="paginationClick(this)">{{page}}</a>
-                    </span>
+                    <!-- </span> -->
                 </li>
                 <li><a ng-click="paginationClick('next')">»</a></li>
             </ul>

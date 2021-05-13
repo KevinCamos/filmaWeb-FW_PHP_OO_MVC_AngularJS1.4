@@ -2,7 +2,7 @@ filmaweb.factory('filters_shop', ['$rootScope', 'services', function ($rootScope
     let service = {
         getListShop: getListShop,
         paginationClick: paginationClick,
-        getProduct: getProduct
+        getProduct: getProduct,
     };
     return service
 
@@ -95,7 +95,7 @@ filmaweb.factory('filters_shop', ['$rootScope', 'services', function ($rootScope
     }
 
 
-
+      
 
 
 

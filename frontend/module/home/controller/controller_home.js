@@ -1,4 +1,4 @@
-filmaweb.controller('controller_home', function ($scope, $window, carousel, homeProducts) {
+filmaweb.controller('controller_home', function ($scope, $window, carousel,services, homeProducts) {
 
     $scope.myInterval = 3000;
     $scope.noWrapSlides = false;
@@ -49,7 +49,14 @@ filmaweb.controller('controller_home', function ($scope, $window, carousel, home
         console.log(data.product.id)
         localStorage.typeFilter = "productID";
         localStorage.productID = data.product.id;
-
+        services.threePost('home', "countClick", {
+                id: data.product.id
+            })
+            .then(function (product) {
+                console.log(product);
+            }, function (error) {
+                console.log(error);
+            });
         location.href = "#/shop";
 
     }

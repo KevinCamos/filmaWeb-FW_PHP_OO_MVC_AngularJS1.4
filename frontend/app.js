@@ -19,10 +19,13 @@
                          return data;
                      }
                  } // end_resolve
-             }).when("/shop", {
-                 templateUrl: "frontend/module/shop/view/view_shop.html",
-                 controller: "controller_shop"
-
+                }).when("/shop", {
+                    templateUrl: "frontend/module/shop/view/view_shop.html",
+                    controller: "controller_shop"
+                }).when("/login", {
+                    templateUrl: "frontend/module/login/view/view_login.html",
+                    controller: "controller_login"
+      
              }).otherwise("/home", {
                  templateUrl: "frontend/module/home/view/view_home.html",
                  controller: "controller_home",

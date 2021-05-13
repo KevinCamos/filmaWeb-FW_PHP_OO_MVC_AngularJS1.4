@@ -44,9 +44,9 @@ class controller_home
 	{
 		// echo json_encode($_GET["id"]);
 
-		if (isset($_GET["id"])) {
+		if (isset($_POST["id"])) {
 			$json = array();
-			$json = loadModel(MODEL_HOME, "home_model", "countClick", $_GET["id"]);
+			$json = loadModel(MODEL_HOME, "home_model", "countClick", $_POST["id"]);
 			echo json_encode($json);
 		}
 	}
