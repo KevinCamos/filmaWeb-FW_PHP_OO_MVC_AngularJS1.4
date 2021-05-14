@@ -1,6 +1,7 @@
 <?php
 //////
-class jwt_process {
+class jwt_process
+{
     private static $header = '{"typ": "JWT", "alg": "HS256"}';
     //////
     public static function encode($secret, $user) {
@@ -11,8 +12,16 @@ class jwt_process {
 
     public static function decode($secret, $token ) {
         $JWT = new jwt();
+
         return $JWT -> decode($token, $secret);
     }
+
+
+
+
+
+
+    
     public static function encode_tokmail($secret, $user) {
         $payload = json_encode(['iat' => time(), 'exp' => time() + (60 * 60*24), 'name' => $user]);
         $JWT = new jwt();

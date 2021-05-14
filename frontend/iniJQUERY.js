@@ -455,10 +455,10 @@ function updateToken() {
         }
       )
       .then(function (data) {
-        if(data != false){
+        if (data != false) {
           console.log("token actualizad")
-     localStorage.setItem("token",data);
-        }{
+          localStorage.setItem("token", data);
+        } {
           console.log("token no actualizado")
 
         }

@@ -50,15 +50,15 @@ class login_model
     }
     public function login($userArray) //0 order, 1 offset, 2 IdUser
     {
-        $nameUser =  strtolower($userArray[0]['value']);
-        $psswordUser =  strtolower($userArray[1]['value']);
+        $nameUser =  strtolower($userArray[0]);
+        $psswordUser =  strtolower($userArray[1]);
         $userSQL =  $this->bll->obtain_validateUserLogin_BLL($nameUser);
         if ($userSQL == true) { //El usuari existeix
             if (password_verify($psswordUser, $userSQL[0]['pssword']) == true) {
                 // $token = encodeToken($nameUser);
                 return jwt_process::encode(SECRET,  $nameUser);
             } else {
-                return 'falsePssword';
+                return -1;
             }
         } else {
             return false;
@@ -66,6 +66,7 @@ class login_model
     }
     public function getUser($token) //0 order, 1 offset, 2 IdUser
     {
+        $token = explode('"', $token)[1];
         $token = json_decode(jwt_process::decode(SECRET,  $token), true);
 
         if (time() < $token["exp"]) {
@@ -73,12 +74,10 @@ class login_model
         } else {
             return false;
         }
-        // 
     }
     public function token_mail($token) //0 order, 1 offset, 2 IdUser
     {
         $token = json_decode(jwt_process::decode(SECRET,  $token), true);
-
         if (time() < $token["exp"]) {
             $this->bll->update_token_mail_BLL($token["name"]);
             return jwt_process::encode(SECRET, $token["name"]);
@@ -154,7 +153,7 @@ class login_model
     }
     public function updateToken($token)
     {
-
+        $token = explode('"', $token)[1];
         $token = json_decode(jwt_process::decode(SECRET,  $token), true);
 
         if (time() < $token["exp"]) {

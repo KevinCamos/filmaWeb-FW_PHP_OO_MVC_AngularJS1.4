@@ -5,7 +5,7 @@
             <div uib-slide ng-repeat="slide in slides track by slide.img" index="$index">
                 <img ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/home/img/{{slide.img}}"
                     style="overflow: hidden; height: 200; max-height: 200;" id={{slide.category}}
-                    ng-click="categoryClick(this)">
+                    ng-click="categoryClick(this)" class="carousel">
                 <div class="carousel-caption">
                     <h4>{{slide.category}}</h4>
                 </div>
@@ -13,20 +13,9 @@
         </div>
     </section>
 
-
-
-
-
-
-
-
-
     <p id="font-center-home">Nuestros mejores productos</p>
 
     <!-- CARROUSEL CABEZERA -->
-
-
-
 
     <section id="port-sec">
         <div class="container">
@@ -34,9 +23,8 @@
                 <li class="portfolio-item" ng-repeat="product in products">
                     <div class="item-main">
                         <div class="portfolio-image">
-                            <img id="{{product.id}}"     ng-click="productClick(this)" class="touch"
-                                ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"
-                            ></img>
+                            <img id="{{product.id}}" ng-click="productClick(this)" class="touch"
+                                ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
 
                         </div>
                     </div>
@@ -49,4 +37,4 @@
         display-items="displayItems"></paging-control>
 
 
-    <div id="messages-list"></div>
+    <!-- <div id="messages-list"></div> -->

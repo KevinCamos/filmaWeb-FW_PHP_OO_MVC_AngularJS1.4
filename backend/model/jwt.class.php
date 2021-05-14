@@ -23,6 +23,9 @@ class JWT {
     }
     
     public function decode($token, $key) {
+        // return $token;
+        // return $key;
+        // $token= "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjA5MjE0ODIsImV4cCI6MTYyMDkyNTA4MiwibmFtZSI6ImtldmluIn0.h7WYGHtiCimTn5mMYB24XjCl2sn91EvZ2jDosoWpedM";
         list($header, $payload, $signature) = explode('.', $token);
         $this->data = $header . '.' . $payload;
         if ($signature == $this->JWS($this->base64url_decode($header), $key)) {

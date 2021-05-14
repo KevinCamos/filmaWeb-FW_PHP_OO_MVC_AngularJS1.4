@@ -1,6 +1,6 @@
 <?php
 require_once(MODEL_PATH . "jwt.class.php");
-require_once(ASSETS_PATH_PHP . "middleWareAuth.php");
+// require_once(ASSETS_PATH_PHP . "middleWareAuth.php");
 require_once(ASSETS_PATH_PHP . "jwt_process.inc.php");
 
 class controller_login
@@ -31,7 +31,7 @@ class controller_login
 	{
 		// echo json_encode("LOGIN");
 		$json = array();
-		$json = loadModel(MODEL_LOGIN, "login_model", "login", $_POST['serialize']);
+		$json = loadModel(MODEL_LOGIN, "login_model", "login", $_POST['user']);
 		echo json_encode($json);
 
 		// $nameUser =  strtolower($formulario[0]['value']);
@@ -40,6 +40,7 @@ class controller_login
 
 	function getUser()
 	{
+		// echo json_encode($_POST['token']);
 		$json = array();
 		$json = loadModel(MODEL_LOGIN, "login_model", "getUser", $_POST['token']);
 		echo json_encode($json);
