@@ -1,4 +1,4 @@
-filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope,  services, $route) {
+filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, services, $route) {
     let service = {
         updateMenu: updateMenu,
         dropLocalStorage: dropLocalStorage,
@@ -26,13 +26,15 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
         localStorage.removeItem('type');
         localStorage.removeItem('avatar');
         localStorage.removeItem('email');
+        localStorage.removeItem('token');
 
     }
 
     function closeSession() {
         $rootScope.closeSessionClick = function () {
             dropLocalStorage();
-            location.reload()        }
+            location.reload()
+        }
 
 
     }
@@ -47,9 +49,12 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
                         console.log("checkToken: " + data)
                         console.log(typeof data);
                         console.log(data);
-                        if (data == false) {
+                        alert(data)
+
+                        if (!data) {
+                            alert("false")
                             dropLocalStorage()
-                            return false;
+                            // return false;
                         } else if (typeof data == "object") {
                             localStorage.token = data;
                         }

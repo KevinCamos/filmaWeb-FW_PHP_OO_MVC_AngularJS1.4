@@ -12,9 +12,7 @@
         <input type="password" ng-model="passwordRegister2" ng-pattern="regPassword" name="password2"
           placeholder="Repite la contraseña" autocomplete="off" />
         <input type="text" ng-model="emailRegister" ng-pattern="regEmail" name="email" placeholder="Dirección e-mail" />
-        <input type="button"
-     
-          value="Crear Usuario"  class="submit" ng-click="register()" />
+        <input type="button" value="Crear Usuario" class="submit" ng-click="register()" />
         <p class="message">¿Tienes una cuenta de usuario? <a ng-click="signShow()">Sign In</a></p>
       </form>
       <p class="error">{{errorReg}}</p>
@@ -28,12 +26,16 @@
           placeholder="Usuario o Correo" autocomplete="username" />
         <input type="password" ng-model="passwordLogin" name="password" ng-pattern="regPassword"
           placeholder="Contraseña" autocomplete="current-password" />
-        <input type="button" value="Iniciar Sesión" class="submit"  ng-click="login()"/>
+        <input type="button" value="Iniciar Sesión" class="submit" ng-click="login()" />
 
         <p class="message">¿Todavía no estás registrado/a? <a ng-click="regiShow()">Register</a></p>
         <p class="recoveredPssword">¿No recuerdas tu contraseña? <a>Recuérdamela</a></p>
 
       </form>
       <p class="error">{{errorLog}}</p>
+        <img id="gmail" class="SLog" ng-click="socialLoginClick('gmail')"
+          ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/login/img/gmail.png"></img>
+        <img id="ghub"  class="SLog" ng-click="socialLoginClick('ghub')"
+          ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/login/img/ghub.png"></img>
     </div>
   </div>

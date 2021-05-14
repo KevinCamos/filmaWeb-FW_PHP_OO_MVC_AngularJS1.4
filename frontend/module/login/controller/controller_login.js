@@ -1,4 +1,4 @@
-filmaweb.controller("controller_login", function ($scope, services, toolsLogin) {
+filmaweb.controller("controller_login", function ($scope, services, toolsLogin, socialLogin, services_Google, services_GitHub) {
     $scope.regUsername = /^[A-Za-z0-9._-]{5,15}$/;
     $scope.regUsernameMail = /^[A-Za-z0-9._-][@]{5,50}$/ | /^[A-Za-z0-9._-]{5,20}@[a-z]{3,10}.[a-z]{2,4}$/;
 
@@ -103,9 +103,9 @@ filmaweb.controller("controller_login", function ($scope, services, toolsLogin) 
                     token: localStorage.token
                 })
                 .then(function (data) {
-                    console.log("EHHH: " + data)
-                    console.log(data)
-                    if (data == false) {
+                        console.log("EHHH: " + data)
+                        console.log(data)
+                        if (data == false) {
                             alert("Eliminar token")
                             //  localStorage.removeItem("token");
                             //  toastr.warning("La sesión se ha cerrado por seguridad");
@@ -127,8 +127,21 @@ filmaweb.controller("controller_login", function ($scope, services, toolsLogin) 
                     function (error) {
                         console.log(error);
                     });
-        
+
         }
 
     }
+    socialLogin.initialize()
+    $scope.socialLoginClick = function (data) {
+        switch (data) {
+            case "gmail":
+                services_Google.logIn();
+                break;
+            case "ghub":
+                services_GitHub.logIn();
+                break;
+            default:
+                console.log("Hay un error en el servicio");
+        }
+    } // services_Google
 });

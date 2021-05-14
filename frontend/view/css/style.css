@@ -756,6 +756,6 @@ div.center {
   margin-top: -250px;
   margin-left: 25px;
 }
-#closeSession, .carousel{
+#closeSession, .carousel, .SLog{
   cursor: pointer;
 }
