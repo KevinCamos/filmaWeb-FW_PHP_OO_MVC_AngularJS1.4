@@ -1,7 +1,8 @@
-filmaweb.factory('socialLogin', ['$rootScope', 'services', function ($rootScope, services, $route, api_kay) {
+filmaweb.factory('socialLogin', ['$rootScope', 'services', function ($rootScope, services, toolsLogin, api_kay) {
     let service = {
         initialize: initialize,
         socialLoginSendData: socialLoginSendData
+
     };
     return service
 
@@ -11,7 +12,7 @@ filmaweb.factory('socialLogin', ['$rootScope', 'services', function ($rootScope,
     } // end_initialize
 
 
- 
+
     function socialLoginSendData(dataUser) {
 
         services.threePost('login', "socialLogin", {
@@ -21,10 +22,12 @@ filmaweb.factory('socialLogin', ['$rootScope', 'services', function ($rootScope,
                 console.log(data);
                 alert(data);
                 localStorage.token = data;
-                location.href = "#/home";
+                // toolsLogin.getUser();
+                // location.href = "#/home";
 
             }, function (error) {
                 alert(data);
+                return false;
                 console.log(data);
             });
     }
