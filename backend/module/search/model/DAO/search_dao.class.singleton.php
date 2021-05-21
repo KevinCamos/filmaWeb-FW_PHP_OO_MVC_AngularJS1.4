@@ -24,22 +24,30 @@ class search_dao
     public function select_data_searchList($db, $sendDatArray)
     {
         // return $sendDatArray;
-        $offset = $sendDatArray[2];
-        $order = $sendDatArray[1];
+        // $offset = $sendDatArray[2];
+        // $order = $sendDatArray[1];
 
-        $user = $sendDatArray[0];
-        $search = $sendDatArray[3];
+        // $user = $sendDatArray[0];
+        // $search = $sendDatArray[3];
 
-        $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-        ((SELECT DISTINCT li.idmovies, 'like' as likes 
-        FROM liketo li
-        WHERE li.idusers LIKE  '$user') AS B)
-        ON mo.id = B.idmovies
+        // $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
+        // ((SELECT DISTINCT li.idmovies, 'like' as likes 
+        // FROM liketo li
+        // WHERE li.idusers LIKE  '$user') AS B)
+        // ON mo.id = B.idmovies
+        // WHERE  movie LIKE  '%$search%'
+        // OR formats LIKE '%$search%'
+        // OR director LIKE '%$search%' 
+        // OR genere LIKE '%$search%' 
+        // OR anyo LIKE '%$search%'  ORDER BY $order, movie asc  LIMIT $offset, 6  ";
+   $search = $sendDatArray;
+         $sql = "SELECT * FROM movies
         WHERE  movie LIKE  '%$search%'
         OR formats LIKE '%$search%'
         OR director LIKE '%$search%' 
         OR genere LIKE '%$search%' 
-        OR anyo LIKE '%$search%'  ORDER BY $order, movie asc  LIMIT $offset, 6  ";
+        OR anyo LIKE '%$search%'  ORDER BY  movie asc  ";
+        
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }

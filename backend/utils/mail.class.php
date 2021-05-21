@@ -14,7 +14,7 @@ class mail
         switch ($arr['type']) {
             case 'alta':
                 $subject = '¡Tu Alta en FilmaWeb!';
-                $ruta = "<a href='" . friendlyModFunc("login", "token_mail", $arr['token']) . "'>aqu&iacute;</a>";
+                $ruta = "<a href='http://localhost/Kevin/Ejercicios_Kevin/Projecte/#/login/userVerify/" . $arr['token'] . "/" . "'>aqu&iacute;</a>";
                 $body = 'Hola ' . $arr['inputName'] . ' <p>Gracias por unirte a nuestra aplicaci&oacute;n<br> Para finalizar el registro, pulsa ' . $ruta . ' antes de 24h! </p>';
                 $from = 'filmawebdaw@gmail.com';
                 $email = $arr['inputEmail'];
@@ -22,19 +22,19 @@ class mail
 
             case 'recovered':
                 $subject = '¿De verdad te has olvidado tu contraseña en Filmaweb?';
-                $ruta = "<a href='" . friendlyModFunc("login", "recoveredPassword", $arr['token']) . "'>aqu&iacute;</a>";
+                $ruta = "<a href='http://localhost/Kevin/Ejercicios_Kevin/Projecte/#/login/recoveredPassword/" . $arr['token'] . "/" . "'>aqu&iacute;</a>";
                 $body = 'Hola ' . $arr['inputName'] . ' <p>Si no has sido tu, ignora este mensaje, sino pulsa ' . $ruta . ' antes de 24h! </p>';
                 $from = 'filmawebdaw@gmail.com';
                 $email = $arr['inputEmail'];
                 break;
 
-            // case 'contact':
-            //     $subject = 'Tu Petición a Filmaweb ha sido enviada<br>';
-            //     $ruta = '<a href=' . 'http://localhost/1_Fw_PHP_OO_MVC_jQuery_AngularJS/Framework/9_adoptions_dogs/' . '>aqu&iacute;</a>';
-            //     $body = 'Para visitar nuestra web, pulsa ' . $ruta;
-            //     $from = $arr['inputEmail'];
-            //     $email = 'filmawebdaw@gmail.com';
-            //     $inputMessage = $arr['inputMessage'];
+                // case 'contact':
+                //     $subject = 'Tu Petición a Filmaweb ha sido enviada<br>';
+                //     $ruta = '<a href=' . 'http://localhost/1_Fw_PHP_OO_MVC_jQuery_AngularJS/Framework/9_adoptions_dogs/' . '>aqu&iacute;</a>';
+                //     $body = 'Para visitar nuestra web, pulsa ' . $ruta;
+                //     $from = $arr['inputEmail'];
+                //     $email = 'filmawebdaw@gmail.com';
+                //     $inputMessage = $arr['inputMessage'];
 
                 break;
 

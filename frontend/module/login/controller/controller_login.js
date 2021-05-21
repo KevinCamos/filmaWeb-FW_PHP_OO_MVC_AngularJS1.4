@@ -1,28 +1,49 @@
-filmaweb.controller("controller_login", function ($scope, services, toolsLogin, socialLogin, services_Google, services_GitHub) {
+filmaweb.controller("controller_login", function ($scope, services, toolsLogin, services_Google, services_GitHub) {
     $scope.regUsername = /^[A-Za-z0-9._-]{5,15}$/;
     $scope.regUsernameMail = /^[A-Za-z0-9._-][@]{5,50}$/ | /^[A-Za-z0-9._-]{5,20}@[a-z]{3,10}.[a-z]{2,4}$/;
 
     $scope.regEmail = /^[A-Za-z0-9._-]{5,20}@[a-z]{3,10}.[a-z]{2,4}$/;
     $scope.regPassword = /^[A-Za-z0-9._-]{5,20}$/;
+
+    toolsLogin.closeSession();
+
     $scope.logShow = true;
+    $scope.recoveredShow = false;
     $scope.regShow = false;
+    $scope.recoveringShow = false;
+
+
     //FUNTIONS SHOW DOM
     $scope.regiShow = function () {
         $scope.logShow = false;
+        $scope.recoveredShow = false;
+        $scope.recoveringShow = false;
+
         $scope.regShow = true;
     }
     $scope.signShow = function () {
         $scope.regShow = false;
+        $scope.recoveredShow = false;
+        $scope.recoveringShow = false;
+
         $scope.logShow = true;
     }
+    $scope.recovShow = function () {
+        $scope.regShow = false;
+        $scope.logShow = false;
+        $scope.recoveringShow = false;
 
+        $scope.recoveredShow = true;
+    }
     //END FUNTIONS SHOW DOM
+
+
     $scope.register = function () {
         console.log("entra1");
         if ($scope.nameUserRegister && $scope.emailRegister && $scope.passwordRegister && $scope.passwordRegister2) {
             console.log("entra3");
 
-            $scope.errorReg = '';
+            // $scope.errorReg = '';
             $scope.errorReg = $scope.passwordRegister == $scope.passwordRegister2 ? '' : 'Escribe correctamente la contraseña en los dos campos';
             if ($scope.errorReg == '') {
                 console.log("entra2");
@@ -80,7 +101,7 @@ filmaweb.controller("controller_login", function ($scope, services, toolsLogin, 
                             $scope.errorLog = "La contraseña es incorrecta";
                         } else {
                             localStorage.token = data;
-                            getUser()
+                            toolsLogin.getUser()
                             location.href = "#/home";
                         }
 
@@ -97,45 +118,42 @@ filmaweb.controller("controller_login", function ($scope, services, toolsLogin, 
         }
     }
 
-    function getUser() {
-        if (localStorage.token) {
-            services.threePost('login', "getUser", {
-                    token: localStorage.token
-                })
-                .then(function (data) {
-                        console.log("EHHH: " + data)
-                        console.log(data)
-                        if (data == false) {
-                            alert("Eliminar token")
-                            //  localStorage.removeItem("token");
-                            //  toastr.warning("La sesión se ha cerrado por seguridad");
-                            //  removeItemLogin();
-                            //  loginMenu();
-                            //  getCart();
-                            return false;
-                        } else if (typeof data == "object") {
-                            alert("hi ha token")
-                            localStorage.userID = data.idusers
-                            localStorage.user = data.username
-                            localStorage.type = data.type
-                            localStorage.avatar = data.avatar
-                            localStorage.email = data.email
-                            toolsLogin.updateMenu()
 
-                        }
-                    },
-                    function (error) {
+
+    $scope.recovered = function () {
+
+        if ($scope.nameUserRecov) {
+            $scope.errorRec = '';
+            if ($scope.errorRec == '') {
+                //S'ha validat i entra
+                var user = $scope.nameUserRecov
+
+
+
+                services.threePost('login', "recoveredMail", {
+                        user: user
+                    })
+                    .then(function (data) {
+                        // toastr.success("Se ha enviado a tu e-mail un enlace para restablecer la contraseña");
+                        alert("Se ha enviado a tu e-mail un enlace para restablecer la contraseña");
+
+
+                    }, function (error) {
                         console.log(error);
                     });
+            }
+        } else {
+            $scope.errorRec = 'Escribe un usuario o correo válido'
+
 
         }
-
     }
-    socialLogin.initialize()
     $scope.socialLoginClick = function (data) {
+
         switch (data) {
             case "gmail":
                 services_Google.logIn();
+
                 break;
             case "ghub":
                 services_GitHub.logIn();
@@ -144,4 +162,66 @@ filmaweb.controller("controller_login", function ($scope, services, toolsLogin, 
                 console.log("Hay un error en el servicio");
         }
     } // services_Google
+});
+
+filmaweb.controller("recoveredPassword", function ($scope, services, toolsLogin, dataRecovered, services_Google, services_GitHub) {
+    $scope.regUsername = /^[A-Za-z0-9._-]{5,15}$/;
+    $scope.regUsernameMail = /^[A-Za-z0-9._-][@]{5,50}$/ | /^[A-Za-z0-9._-]{5,20}@[a-z]{3,10}.[a-z]{2,4}$/;
+
+    $scope.regEmail = /^[A-Za-z0-9._-]{5,20}@[a-z]{3,10}.[a-z]{2,4}$/;
+    $scope.regPassword = /^[A-Za-z0-9._-]{5,20}$/;
+
+    toolsLogin.closeSession();
+
+    localStorage.token = dataRecovered
+
+    toolsLogin.getUser()
+
+    $scope.recoveringShow = true;
+    $scope.logShow = false;
+    $scope.recoveredShow = false;
+    $scope.regShow = false;
+
+
+
+
+
+    $scope.recovering = function () {
+        console.log("entra1");
+        if ($scope.passwordRecoverin && $scope.passwordRecoverin2) {
+            console.log("entra3");
+
+            // $scope.errorReg = '';
+            $scope.errorRecovering = $scope.passwordRecoverin == $scope.passwordRecoverin2 ? '' : 'Escribe correctamente la contraseña en los dos campos';
+            if ($scope.errorRecovering == '') {
+                console.log("entra2");
+
+                var password = $scope.passwordRecoverin
+
+                services.threePost('login', "changePassword", {
+                        token:localStorage.token,
+                        password: password
+                    })
+                    .then(function (data) {
+                        console.log(data);
+
+                        if (data == false) {
+                            $scope.errorRecovering = "Ha habido un problema, vuelve a intentarlo";
+                        } else {
+                            // toastr.success("Se ha registrado corréctamente");
+                            alert("Se ha modificado correctamente");
+                            location.href = "#/home";
+                        }
+                    }, function (error) {
+                        console.log("noEntra");
+
+                        console.log(error);
+                    });
+            }
+
+        } else $scope.errorRecovering = 'Rellena ambos campos con contraseñas válidas';
+
+    }
+
+
 });

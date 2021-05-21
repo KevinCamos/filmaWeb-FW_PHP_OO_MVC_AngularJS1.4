@@ -2,8 +2,10 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
     let service = {
         updateMenu: updateMenu,
         dropLocalStorage: dropLocalStorage,
+        saveUserStorage: saveUserStorage,
+        closeSession: closeSession,
         checkToken: checkToken,
-        closeSession: closeSession
+        getUser: getUser
     };
     return service
 
@@ -30,6 +32,15 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
 
     }
 
+    function saveUserStorage(data) {
+        localStorage.userID = data.idusers
+        localStorage.user = data.username
+        localStorage.type = data.type
+        localStorage.avatar = data.avatar
+        localStorage.email = data.email
+
+    }
+
     function closeSession() {
         $rootScope.closeSessionClick = function () {
             dropLocalStorage();
@@ -49,14 +60,17 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
                         console.log("checkToken: " + data)
                         console.log(typeof data);
                         console.log(data);
-                        alert(data)
 
                         if (!data) {
-                            alert("false")
+                            alert("NO")
+                            alert(data)
+
                             dropLocalStorage()
                             // return false;
-                        } else if (typeof data == "object") {
+                        } else {
                             localStorage.token = data;
+
+                            localStorage.username ? getUser() : updateMenu();
                         }
                     },
                     function (error) {
@@ -64,4 +78,31 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
                     });
         }
     };
+
+    function getUser() {
+        console.log("getUserIni")
+        if (localStorage.token) {
+            services.threePost('login', "getUser", {
+                    token: localStorage.token
+                })
+                .then(function (data) {
+                        console.log(data)
+                        if (data == false) {
+                            console.log("Eliminar token")
+
+                            return false;
+                        } else if (typeof data == "object") {
+                            console.log("hi ha token")
+                            saveUserStorage(data)
+                            updateMenu()
+
+                        }
+                    },
+                    function (error) {
+                        console.log(error);
+                    });
+
+        }
+
+    }
 }]);

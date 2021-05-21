@@ -10,15 +10,15 @@ class controller_login
 		$_SESSION['module'] = "login";
 	}
 
-	static function list()
-	{
-		require_once(VIEW_PATH_INC . "top_page_login.php");
-		require_once(VIEW_PATH_INC . "header.html");
-		require_once(VIEW_PATH_INC . "menu.html");
-		loadView(VIEW_PATH_LOGIN . 'login.html');
-		require_once(VIEW_PATH_INC . "footer.html");
-	}
-	function register()
+	// static function list()
+	// {
+	// 	require_once(VIEW_PATH_INC . "top_page_login.php");
+	// 	require_once(VIEW_PATH_INC . "header.html");
+	// 	require_once(VIEW_PATH_INC . "menu.html");
+	// 	loadView(VIEW_PATH_LOGIN . 'login.html');
+	// 	require_once(VIEW_PATH_INC . "footer.html");
+	// }
+	function register()//FET
 	{
 		// echo json_encode(friendlyModFunc("asdf", "asdv", "sdfasd"));
 
@@ -27,7 +27,7 @@ class controller_login
 		$json = loadModel(MODEL_LOGIN, "login_model", "register", $_POST['user']);
 		echo json_encode($json);
 	}
-	function login()
+	function login()//FET
 	{
 		// echo json_encode("LOGIN");
 		$json = array();
@@ -38,14 +38,14 @@ class controller_login
 		// $email = strtolower($formulario[3]['value']);
 	}
 
-	function getUser()
+	function getUser()//FET
 	{
 		// echo json_encode($_POST['token']);
 		$json = array();
 		$json = loadModel(MODEL_LOGIN, "login_model", "getUser", $_POST['token']);
 		echo json_encode($json);
 	}
-	function updateToken()
+	function updateToken()//FET
 	{
 		// echo json_encode($_POST['token']);
 
@@ -57,14 +57,14 @@ class controller_login
 	{
 
 
-		$json =	loadModel(MODEL_LOGIN, "login_model", "token_mail", $_GET['param']);
+		$json =	loadModel(MODEL_LOGIN, "login_model", "token_mail", $_POST['token']);
 
 
 		self::list();
 		// die('<script>window.location.href="' . $callback . '";</script>');
 		echo ("<script> localStorage.setItem('token', '$json');	</script>");
 	}
-	function socialLogin()
+	function socialLogin()//FET
 	{
 		// echo json_encode($_GET['dataUser'][1]);
 		// echo json_encode("LOGIN");
@@ -72,23 +72,23 @@ class controller_login
 		$json =	loadModel(MODEL_LOGIN, "login_model", "socialLogin", $_POST['dataUser']);
 		echo json_encode($json);
 	}
-	function recoveredMail()
+	function recoveredMail()//FET
 	{
 		// echo json_encode($_GET['dataUser']);
 
-		$json =	loadModel(MODEL_LOGIN, "login_model", "recoveredMail", $_POST['dataUser']);
+		$json =	loadModel(MODEL_LOGIN, "login_model", "recoveredMail", $_POST['user']);
 		echo json_encode($json);
 	}
 	function recoveredPassword()
 	{
-		self::list();
+		// self::list();
 
 
-		$json =	loadModel(MODEL_LOGIN, "login_model", "recoveredPassword", $_GET['param']);
+		$json =	loadModel(MODEL_LOGIN, "login_model", "recoveredPassword", $_POST['token']);
 
 
 		// die('<script>window.location.href="' . $callback . '";</script>');
-		echo ("<script> localStorage.setItem('token', '$json');	</script>");
+		echo json_encode($json);
 	}
 	//////////////////////// PAGINATION ///////////////////////
 

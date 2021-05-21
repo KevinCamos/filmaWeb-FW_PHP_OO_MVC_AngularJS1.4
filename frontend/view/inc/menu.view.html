@@ -39,8 +39,8 @@
 
 			</ul>
 			<form class="formuSearch">
-				<div id="formuID"></div>
-
+				<input type="text" ng-model="searchIn"  name="searchIn"
+				placeholder="Busca tu producto" autocomplete="off"  ng-keypress="searchShop($event, this.searchIn)"/>
 
 			</form>
 

@@ -1,4 +1,4 @@
-filmaweb.factory('socialLogin', ['$rootScope', 'services', function ($rootScope, services, toolsLogin, api_kay) {
+filmaweb.factory('socialLogin', ['services','toolsLogin', function (services,toolsLogin) {
     let service = {
         initialize: initialize,
         socialLoginSendData: socialLoginSendData
@@ -22,12 +22,10 @@ filmaweb.factory('socialLogin', ['$rootScope', 'services', function ($rootScope,
                 console.log(data);
                 alert(data);
                 localStorage.token = data;
-                // toolsLogin.getUser();
-                // location.href = "#/home";
-
+                toolsLogin.getUser();
+                location.href = "#/home";
             }, function (error) {
                 alert(data);
-                return false;
                 console.log(data);
             });
     }
@@ -35,13 +33,15 @@ filmaweb.factory('socialLogin', ['$rootScope', 'services', function ($rootScope,
 
 }]);
 
-filmaweb.factory('services_Google', ['socialLogin', function (socialLogin) {
+filmaweb.factory('services_Google', ['socialLogin','toolsLogin', function (socialLogin) {
     let service = {
         logIn: logIn
     };
     return service;
 
-    function logIn() {
+    function logIn(getUser) {
+        socialLogin.initialize()
+
         let provider = new firebase.auth.GoogleAuthProvider();
         provider.addScope('email');
         let authService = firebase.auth();
@@ -50,6 +50,7 @@ filmaweb.factory('services_Google', ['socialLogin', function (socialLogin) {
             .then(function (result) {
                 let dataUser = [("GM-" + result.user.uid), result.user.email, result.user.displayName, result.user.photoURL];
                 socialLogin.socialLoginSendData(dataUser);
+                getUser();
             }).catch(function (error) {
                 console.log(error);
             });
@@ -63,6 +64,8 @@ filmaweb.factory('services_GitHub', ['socialLogin', function (socialLogin) {
     return service;
 
     function logIn() {
+        socialLogin.initialize()
+
         let provider = new firebase.auth.GithubAuthProvider();
         provider.addScope('email');
         let authService = firebase.auth();

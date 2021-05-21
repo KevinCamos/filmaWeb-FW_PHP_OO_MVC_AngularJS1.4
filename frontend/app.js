@@ -25,7 +25,34 @@
              }).when("/login", {
                  templateUrl: "frontend/module/login/view/view_login.html",
                  controller: "controller_login"
+             }).when("/login/recoveredPassword/:token", {
+                 templateUrl: "frontend/module/login/view/view_login.html",
+                 controller: "recoveredPassword",
+                 resolve: {
+                     dataRecovered: function (services, $route) {
+                         var data = services.threePost('login', 'recoveredPassword', {
+                             'token': $route.current.params.token
+                         });
+                         return data;
+                     } // end_checkToken
+                 } // end_resolve
+             }).when("/login/userVerify/:token", {
+                 resolve: {
+                     userVerify: function (services, $route) {
+                         services.put('login', 'recoveredMail', {
+                                 'token': $route.current.params.token
+                             })
+                             .then(function (response) {
+                                 // toastr.success("Se ha enviado a tu e-mail un enlace para restablecer la contraseña");
 
+                                 location.href = "#/login";
+                             }, function (error) {
+                                 // toastr.success("Ha habido un error en el servicio");
+
+                                 console.log(error);
+                             }); // end_services
+                     } // end_activateUser
+                 }
              }).otherwise("/home", {
                  templateUrl: "frontend/module/home/view/view_home.html",
                  controller: "controller_home",
@@ -48,12 +75,13 @@
      }
  ]);
 
- filmaweb.run(function ($rootScope, $route, toolsLogin) {
+ filmaweb.run(function ($rootScope, $route, toolsLogin, search_services) {
      //      angular.element(document).ready(function() {
      //     });
- 
+
      toolsLogin.checkToken();
-     toolsLogin.closeSession()
+     toolsLogin.closeSession();
+     search_services.searchFunction($route);
      if (localStorage.userID) {
          toolsLogin.updateMenu();
      } else {
@@ -62,7 +90,10 @@
      }
 
      //  alert(localStorage.token)
-
+    //  $rootScope.myFunct = function (keyEvent) {
+    //      if (keyEvent.which === 13)
+    //          alert('I am an alert');
+    //  }
 
      $rootScope.shopClick = function () {
          localStorage.typeFilter = "listShop";

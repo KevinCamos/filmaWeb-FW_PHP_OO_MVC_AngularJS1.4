@@ -54,12 +54,22 @@ filmaweb.factory("services", ['$http', '$q', function ($http, $q) {
   //       return promise;
   //   };
 
-  obj.threePost = function (module, option, data) {
+
+
+
+  /**
+   * Función para enviar 3 valores en el método POST, el primero que pertenece al módulo, el segundo a la función y el tercero a los datos que enviamos
+   * @param {*} module 
+   * @param {*} option 
+   * @param {*} data 
+   */
+  obj.threePost = function (module, functi, data) {
     var defered = $q.defer();
     var promise = defered.promise;
     $http({
       method: 'POST',
-      url: serviceBase + module + '&function=' + option,
+      url: `${serviceBase}${module}&function=${functi}`,
+
       data: data
     }).success(function (response, status, headers, config) {
       defered.resolve(response);

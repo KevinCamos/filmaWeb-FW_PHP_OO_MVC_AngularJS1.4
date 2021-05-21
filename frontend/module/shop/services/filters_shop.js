@@ -7,23 +7,26 @@ filmaweb.factory('filters_shop', ['$rootScope', 'services', function ($rootScope
     return service
 
     function getListShop(typeFilter, arrayFilter) {
-        arrayFilter = arrayFilter ? arrayFilter : '';
-        console.log(arrayFilter)
-        services.threePost('shop', typeFilter, {
+        // if (localStorage.filter) arrayFilter = localStorage.filter
+        // else if (!arrayFilter) arrayFilter == '';
+          arrayFilter = arrayFilter ? arrayFilter : '';
+
+       
+        modulo = localStorage.typeFilter == 'searchList' ? 'search' : 'shop'
+        // console.log(arrayFilter)
+        services.threePost(modulo, typeFilter, {
                 "arrayFilter": arrayFilter
             })
             .then(function (productsList) {
-
-                console.log(productsList)
+                // console.log(productsList)
                 position = 0
                 movies = 6;
                 $rootScope.products = productsList.slice(position, position + 6);
 
-
                 let page = (productsList.length % 6) == 0 ? (productsList.length / 6) : (productsList.length / 6 + 0.5).toFixed(); //saca el número de páginas en un entero
                 var maxPagination = productsList.length % 6 == 0 ? (productsList.length - 6) : productsList.length - (productsList.length % 6)
 
-                console.log(page);
+                // console.log(page);
                 var pagination = [0]
 
                 for (var i = 1; i <= page; i++) {
@@ -95,7 +98,7 @@ filmaweb.factory('filters_shop', ['$rootScope', 'services', function ($rootScope
     }
 
 
-      
+
 
 
 

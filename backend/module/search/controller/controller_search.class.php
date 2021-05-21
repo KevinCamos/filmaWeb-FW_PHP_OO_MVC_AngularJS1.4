@@ -18,7 +18,7 @@ class controller_search
 	{
 		// echo json_encode($_GET["sendData"]);
 		$json = array();
-		$json = loadModel(MODEL_SEARCH_PHP, "search_model", "searchList", $_GET["sendData"]);
+		$json = loadModel(MODEL_SEARCH_PHP, "search_model", "searchList", $_POST["arrayFilter"]);
 		echo json_encode($json);
 	}
 

@@ -4,7 +4,7 @@
     <div class="form" id="form" ng-show="regShow">
       <form class="modLog" id="formRegister" name="formRegister">
 
-        <!-- <label>CREAR USUARIO</label> -->
+        <!-- <label>REGISTER</label> -->
         <input type="text" ng-model="nameUserRegister" ng-pattern="regUsername" name="nameUser"
           placeholder="Nombre: por ejemplo: hitchcock99" autocomplete="username" />
         <input type="password" ng-model="passwordRegister" ng-pattern="regPassword" name="password1"
@@ -18,10 +18,11 @@
       <p class="error">{{errorReg}}</p>
 
     </div>
+    <!-- <label>LOGIN</label> -->
+
     <div class="form" id="form" ng-show="logShow">
 
       <form class="modLog" id="formLogin">
-        <!-- <label>INICIAR SESION</label> -->
         <input type="text" ng-model="nameUserLogin" name="nameUser" ng-pattern="regUsernameMail"
           placeholder="Usuario o Correo" autocomplete="username" />
         <input type="password" ng-model="passwordLogin" name="password" ng-pattern="regPassword"
@@ -29,13 +30,49 @@
         <input type="button" value="Iniciar Sesión" class="submit" ng-click="login()" />
 
         <p class="message">¿Todavía no estás registrado/a? <a ng-click="regiShow()">Register</a></p>
-        <p class="recoveredPssword">¿No recuerdas tu contraseña? <a>Recuérdamela</a></p>
+        <p class="recoveredPssword">¿No recuerdas tu contraseña? <a ng-click="recovShow()">Recuérdamela</a></p>
 
       </form>
       <p class="error">{{errorLog}}</p>
-        <img id="gmail" class="SLog" ng-click="socialLoginClick('gmail')"
-          ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/login/img/gmail.png"></img>
-        <img id="ghub"  class="SLog" ng-click="socialLoginClick('ghub')"
-          ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/login/img/ghub.png"></img>
+      <img id="gmail" class="SLog" ng-click="socialLoginClick('gmail')"
+        ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/login/img/gmail.png"></img>
+      <img id="ghub" class="SLog" ng-click="socialLoginClick('ghub')"
+        ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/login/img/ghub.png"></img>
+    </div>
+
+    <!-- <label>RECOVER SEND EMAIL</label> -->
+
+    <div class="form" id="form" ng-show="recoveredShow">
+
+      <form class="modLog" id="formRecovered">
+        <input type="text" ng-model="nameUserRecov" name="nameUser" ng-pattern="regUsernameMail"
+          placeholder="Usuario o Correo" autocomplete="username" />
+
+        <input type="button" value="Recordar Contraseña" class="submit" ng-click="recovered()" />
+
+        <p class="message">¡Ya me acuerdo de la contraseña <a ng-click="signShow()">Login</a></p>
+        <p class="message">¡Ups! No tengo usuario <a ng-click="regiShow()">Register</a></p>
+
+
+      </form>
+      <p class="error">{{errorRec}}</p>
+
+    </div>
+    <!-- <label>RECOVERING PASSWORD</label> -->
+
+    <div class="form" id="form" ng-show="recoveringShow">
+
+      <form class="modLog" id="formRecovering">
+        <input type="password" ng-model="passwordRecoverin" ng-pattern="regPassword" name="password1"
+          placeholder="Contraseña" autocomplete="current-password" />
+        <input type="password" ng-model="passwordRecoverin2" ng-pattern="regPassword" name="password2"
+          placeholder="Repite la contraseña" autocomplete="off" />
+
+        <input type="button" value="Cambiar Contraseña" class="submit" ng-click="recovering()" />
+
+
+      </form>
+      <p class="error">{{errorRecovering}}</p>
+
     </div>
   </div>

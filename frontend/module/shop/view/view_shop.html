@@ -53,9 +53,22 @@
                                 <div class="portfolio-image">
                                     <img id="imgShop-{{product.id}}" class="touch" ng-click="productClick(this)"
                                         ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
+
                                     <h5>{{product.movie}}</h5>
-                                    <h2>{{product.price}}€</h2>
+
+
+                                    <h2> <span href="#/shop" id="Cart" class="far fa-heart like"
+                                            style="font-size: 1em;"></span> {{product.price}}€ <span href="#/shop" id="Cart" class="fas fa-shopping-cart
+                                            "
+                                            style="font-size: 1em;"></span></h2>
+
                                 </div>
+
+
+
+
+
+
                             </div>
                         </li>
 
@@ -71,7 +84,7 @@
                 <li><a ng-click="paginationClick('prev')">«</a></li>
                 <li id="page-{{page}}" ng-repeat="page in pagination">
                     <!-- <span ngIf="({{page}}=={{clickPage}} ? 'asdasd' : 'dd' "> -->
-                        <a class="page " ng-click="paginationClick(this)">{{page}}</a>
+                    <a class="page " ng-click="paginationClick(this)">{{page}}</a>
                     <!-- </span> -->
                 </li>
                 <li><a ng-click="paginationClick('next')">»</a></li>

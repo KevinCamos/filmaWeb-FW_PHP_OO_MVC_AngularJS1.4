@@ -67,7 +67,9 @@ filmaweb.controller("controller_shop", function ($scope, services, filters_shop)
             $scope.listProducts = true;
             $scope.oneProduct = false;
             console.log(localStorage.typeFilter);
-            filters_shop.getListShop(localStorage.typeFilter);
+            filter = localStorage.filter ?  localStorage.filter : '';
+
+            filters_shop.getListShop(localStorage.typeFilter,filter);
             // $scope.$apply();
         }
     }
