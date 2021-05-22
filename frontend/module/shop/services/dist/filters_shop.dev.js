@@ -12,12 +12,14 @@ filmaweb.factory('filters_shop', ['$rootScope', 'services', function ($rootScope
     // if (localStorage.filter) arrayFilter = localStorage.filter
     // else if (!arrayFilter) arrayFilter == '';
     arrayFilter = arrayFilter ? arrayFilter : '';
+    var userID = localStorage.userID ? localStorage.userID : -1;
     modulo = localStorage.typeFilter == 'searchList' ? 'search' : 'shop'; // console.log(arrayFilter)
 
     services.threePost(modulo, typeFilter, {
-      "arrayFilter": arrayFilter
+      arrayFilter: arrayFilter,
+      userID: userID
     }).then(function (productsList) {
-      // console.log(productsList)
+      console.log(productsList);
       position = 0;
       movies = 6;
       $rootScope.products = productsList.slice(position, position + 6);
