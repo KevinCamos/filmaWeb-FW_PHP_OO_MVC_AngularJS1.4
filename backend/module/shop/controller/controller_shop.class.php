@@ -81,7 +81,7 @@ class controller_shop
 	{
 		// echo json_encode($_GET["idUser"]);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "likeds", $_GET);
+		$json = loadModel(MODEL_SHOP, "shop_model", "likeds", $_POST);
 		echo json_encode($json);
 	}
 

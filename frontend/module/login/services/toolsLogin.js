@@ -64,7 +64,6 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
                         if (!data) {
                             alert("NO")
                             alert(data)
-
                             dropLocalStorage()
                             // return false;
                         } else {
@@ -74,6 +73,7 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
                         }
                     },
                     function (error) {
+
                         console.log(error);
                     });
         }
@@ -89,6 +89,7 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
                         console.log(data)
                         if (data == false) {
                             console.log("Eliminar token")
+                            dropLocalStorage()
 
                             return false;
                         } else if (typeof data == "object") {

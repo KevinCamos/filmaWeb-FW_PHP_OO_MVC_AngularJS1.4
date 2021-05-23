@@ -2,10 +2,9 @@
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-filmaweb.controller("controller_shop", function ($scope, services, filters_shop) {
-  openShop(); // $scope.selectOrder = function () {
-  //     alert("eh");
-  // };
+filmaweb.controller("controller_shop", function ($scope, services, filters_shop, like_cart_shop) {
+  openShop();
+  like_cart_shop.likeClick();
 
   $scope.productClick = function (data) {
     localStorage.typeFilter = "productID";

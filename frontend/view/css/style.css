@@ -534,13 +534,20 @@ td {
   color: black;
   margin-left: 20px;
 }
+.like:hover {
+
+  color: tomato;
+}
 
 .unlike {
   font-size: 1em;
   color: tomato;
   margin-left: 20px;
 }
+.unlike:hover {
 
+  color: black;
+}
 .fas,
 .far {
   cursor: pointer;

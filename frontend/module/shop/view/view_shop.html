@@ -59,25 +59,19 @@
 
                                     <h2>
                                         <span ng-if="'like'==product.likes">
-                                            <span href="#/shop" id="{{product.id}}" class="fas fa-heart unlike"
-                                                onMouseover="this.style.color='black'"
-                                                onMouseout="this.style.color='tomato'" style="font-size: 1em;"></span>
+                                            <span href="#/shop" id="like-{{product.id}}" class="fas fa-heart unlike"
+                                                style="font-size: 1em;" ng-click="likeClick(product.id)"></span>
                                         </span>
                                         <span ng-if="'like'!=product.likes">
-                                            <span href="#/shop" id="{{product.id}}" class="far fa-heart like"
-                                            onMouseover= "this.style.color='tomato'"
-                                            onMouseout="this.style.color='black'"
-                                                style="font-size: 1em;"></span>
+                                            <span href="#/shop" id="like-{{product.id}}" class="far fa-heart like"
+                                              style="font-size: 1em;" ng-click="likeClick(product.id)"></span>
                                         </span>
+
+
                                         {{product.price}}€ <span href="#/shop" id="Cart" class="fas fa-shopping-cart
                                             " style="font-size: 1em;"></span></h2>
 
                                 </div>
-
-
-
-
-
 
                             </div>
                         </li>

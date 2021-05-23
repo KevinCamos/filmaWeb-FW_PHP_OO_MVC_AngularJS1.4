@@ -1,11 +1,7 @@
-filmaweb.controller("controller_shop", function ($scope, services, filters_shop) {
+filmaweb.controller("controller_shop", function ($scope, services, filters_shop,like_cart_shop) {
 
     openShop();
-
-
-    // $scope.selectOrder = function () {
-    //     alert("eh");
-    // };
+    like_cart_shop.likeClick();
 
     $scope.productClick = function (data) {
         localStorage.typeFilter = "productID";
