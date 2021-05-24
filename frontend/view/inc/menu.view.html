@@ -16,13 +16,12 @@
 				<li><a href="#/home" id="home" data-tr="Inicio">Home</a></li>
 				<li><a href="#/shop" id="shop" data-tr="shop" ng-click="shopClick()">Shop</a></li>
 				<!-- TRANSLATE -->
-				<li> <button class="lang-btn" data-tr="Valenciano" id="btn-val">Val</buttton>
+				<!-- <li> <button class="lang-btn" data-tr="Valenciano" id="btn-val">Val</buttton>
 				</li>
 				<li> <button class="lang-btn" data-tr="Castellano" id="btn-es">Cas</button> </li>
-				<li> <button class="lang-btn" data-tr="Inglés" id="btn-en">Eng</button></li>
-				<li><a href="#/shop" id="Cart" class="fas fa-shopping-cart" style="font-size: 3em;"><label
-							id="countCart"></label></a></li>
-				<fa-icon [icon]="fas fa-shopping-cart" style="font-size: 3em;">{{countCart}}</fa-icon>
+				<li> <button class="lang-btn" data-tr="Inglés" id="btn-en">Eng</button></li> -->
+				<li><a href="#/cart" id="Cart" class="fas fa-shopping-cart" style="font-size: 3em;"><label
+							id="countCart">{{countCart}}</label></a></li>
 
 			</ul>
 			<ul style="list-style:none;">
@@ -32,15 +31,15 @@
 					</li>
 				</div>
 
-				<div  ng-show="menuUserShow">
+				<div ng-show="menuUserShow">
 					<li style="color:whitesmoke;">{{user}}<img id="menuAvatar" ng-src={{avatar}}></img></li>
 					<li><a id="closeSession" ng-click="closeSessionClick()">Cerrar Sesion</a></li>
 				</div>
 
 			</ul>
 			<form class="formuSearch">
-				<input type="text" ng-model="searchIn"  name="searchIn"
-				placeholder="Busca tu producto" autocomplete="off"  ng-keypress="searchShop($event, this.searchIn)"/>
+				<input type="text" ng-model="searchIn" name="searchIn" placeholder="Busca tu producto"
+					autocomplete="off" ng-keypress="searchShop($event, this.searchIn)" />
 
 			</form>
 

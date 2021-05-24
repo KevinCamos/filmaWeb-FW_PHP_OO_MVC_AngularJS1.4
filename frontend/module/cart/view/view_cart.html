@@ -1,0 +1,37 @@
+<body>
+
+
+    <div id=cartMenu ng-show='cartMenu'>
+
+
+        <table>
+            <tr ng-repeat="product in products">
+                <th>
+                    <img
+                        ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
+                </th>
+                <th>
+                    <div>{{product.movie}}</div>
+                    <div>{{product.price}}€</div>
+                    <div>
+                        <h1 class='linePrice'> {{product.price*product.cantidad}}€</h1>
+                    </div>
+                    <div class="amount">{{product.price}}€
+
+                        <span class='fas fa-minus restCart'></span>
+                        <span class='inputNum'>{{product.cantidad}}</span>
+                        <span class='fas fa-plus sumCart'></span>
+                        <span class='fas fa-trash-alt trashCart'></span>
+                    </div> Recalcular
+                </th>
+            </tr>
+
+        </table>
+
+        <submit id='buyMe' type='button' value='comprar'>Comprar</submit>
+
+
+
+
+
+    </div>

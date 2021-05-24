@@ -342,7 +342,7 @@ function buyMe() {
               // totalPrice = totalPrice.toFixed(2).replace(".", ",");
             })
             .catch(function (data) {
-              alert("NO ENTRA :"+data)
+              alert("NO ENTRA :" + data)
               console.log(data);
             });
         })

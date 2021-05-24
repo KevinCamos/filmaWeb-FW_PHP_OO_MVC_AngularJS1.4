@@ -302,7 +302,7 @@ table {
   width: 1040px;
   align-content: center;
   margin: auto;
-  background-color: wheat;
+  background-color: #fff;
   border-color: orange;
 }
 
@@ -557,6 +557,15 @@ td {
   color: green;
 
 }
+.restCart:hover{
+  color: red;
+}
+.sumCart:hover{
+  color: green;
+}
+.trashCart:hover{
+  color: grey;
+}
 
 #item-shop>.fa-heart {
   font-size: 2em;
@@ -688,8 +697,8 @@ input[type="date"] {
   cursor: pointer;
 }
 
-table tr:hover {
-  background-color: rgb(255, 255, 255);
+tr:hover {
+  background-color: #e1e1e1;
   cursor: pointer;
 }
 

@@ -11,15 +11,14 @@
             <option value="ald">Alfabético (Z-A)</option>
         </select> -->
         <form id="formularioFiltro" method="POST" autocomplete="off" ng-show="listProducts">
-        
+
             <fieldset>
-                <br><br>   
+                <br><br>
                 Título
                 <br>
                 <input type="text" name="movie" id="movie" placeholder="Exemple: Star Wars" ng-model="titulo">
                 <p>
                 </p>
-
                 Director
                 <br>
                 <input type="text" name="director" id="director" placeholder="Exemple: George Lucas"
@@ -69,8 +68,8 @@
                                         </span>
 
 
-                                        {{product.price}}€ <span href="#/shop"  class="fas fa-shopping-cart cart-shop
-                                            " style="font-size: 1em;"  ng-click="cartClick(product.id)"></span></h2>
+                                        {{product.price}}€ <span href="#/shop" class="fas fa-shopping-cart cart-shop
+                                            " style="font-size: 1em;" ng-click="cartClick(product.id)"></span></h2>
 
                                 </div>
 
@@ -113,19 +112,19 @@
             <li><b>Año: </b>{{product.anyo}}</li>
             <li><b>Precio: </b>{{product.price}}</li>
 
-                       <span ng-if="'like'==product.likes">
-                <span href="#/shop" id="product-{{product.id}}" class="fas fa-heart unlike"
-                    style="font-size: 1em;" ng-click="likeClick(product.id,'product')"></span>
+            <span ng-if="'like'==product.likes">
+                <span href="#/shop" id="product-{{product.id}}" class="fas fa-heart unlike" style="font-size: 1em;"
+                    ng-click="likeClick(product.id,'product')"></span>
             </span>
             <span ng-if="'like'!=product.likes">
-                <span href="#/shop" id="product-{{product.id}}" class="far fa-heart like"
-                    style="font-size: 1em;" ng-click="likeClick(product.id,'product')"></span>
+                <span href="#/shop" id="product-{{product.id}}" class="far fa-heart like" style="font-size: 1em;"
+                    ng-click="likeClick(product.id,'product')"></span>
             </span>
 
 
             <!-- {{product.price}}€ -->
-             <span href="#/shop"  class="fas fa-shopping-cart cart-shop
-                " style="font-size: 1em;"  ng-click="cartClick(product.id)"></span>
+            <span href="#/shop" class="fas fa-shopping-cart cart-shop
+                " style="font-size: 1em;" ng-click="cartClick(product.id)"></span>
         </ul>
         <img id="return"
             ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/return.png" />

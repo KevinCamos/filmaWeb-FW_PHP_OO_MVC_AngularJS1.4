@@ -54,6 +54,23 @@ filmaweb.config(['$routeProvider', '$locationProvider', function ($routeProvider
       } // end_activateUser
 
     }
+  }).when("/cart", {
+    templateUrl: "frontend/module/cart/view/view_cart.html",
+    controller: "controller_cart",
+    resolve: {
+      getAllCart: function getAllCart(services) {
+        var idUser = localStorage.userID ? localStorage.userID : -1;
+
+        if (idUser != -1) {
+          var data = services.threePost('cart', 'getCart', {
+            idUser: idUser
+          });
+          return data;
+        } else {
+          return null;
+        }
+      }
+    }
   }).otherwise("/home", {
     templateUrl: "frontend/module/home/view/view_home.html",
     controller: "controller_home",
