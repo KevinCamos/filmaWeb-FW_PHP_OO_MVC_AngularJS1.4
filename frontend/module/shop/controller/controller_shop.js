@@ -1,21 +1,22 @@
-filmaweb.controller("controller_shop", function ($scope, services, filters_shop,like_cart_shop) {
+filmaweb.controller("controller_shop", function ($scope, services, filters_shop, like_cart_shop) {
 
     openShop();
     like_cart_shop.likeClick();
+    like_cart_shop.cartShop();
 
     $scope.productClick = function (data) {
         localStorage.typeFilter = "productID";
 
         console.log(data.product.id);
         localStorage.productID = data.product.id;
-
         services
             .threePost("home", "countClick", {
-                id: data.product.id,
+                id: data.product.id
+
             })
             .then(
                 function (product) {
-                    alert("eh");
+                    // alert("eh");
                     console.log(product);
                 },
                 function (error) {
@@ -63,9 +64,9 @@ filmaweb.controller("controller_shop", function ($scope, services, filters_shop,
             $scope.listProducts = true;
             $scope.oneProduct = false;
             console.log(localStorage.typeFilter);
-            filter = localStorage.filter ?  localStorage.filter : '';
+            filter = localStorage.filter ? localStorage.filter : '';
 
-            filters_shop.getListShop(localStorage.typeFilter,filter);
+            filters_shop.getListShop(localStorage.typeFilter, filter);
             // $scope.$apply();
         }
     }

@@ -5,6 +5,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 filmaweb.controller("controller_shop", function ($scope, services, filters_shop, like_cart_shop) {
   openShop();
   like_cart_shop.likeClick();
+  like_cart_shop.cartShop();
 
   $scope.productClick = function (data) {
     localStorage.typeFilter = "productID";
@@ -13,7 +14,7 @@ filmaweb.controller("controller_shop", function ($scope, services, filters_shop,
     services.threePost("home", "countClick", {
       id: data.product.id
     }).then(function (product) {
-      alert("eh");
+      // alert("eh");
       console.log(product);
     }, function (error) {
       console.log(error);

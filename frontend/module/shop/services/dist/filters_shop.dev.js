@@ -83,8 +83,10 @@ filmaweb.factory('filters_shop', ['$rootScope', 'services', function ($rootScope
   ;
 
   function getProduct(id) {
+    var userID = localStorage.userID ? localStorage.userID : -1;
     services.threePost('shop', "productID", {
-      id: id
+      id: id,
+      userID: userID
     }).then(function (product) {
       console.log(product);
       $rootScope.product = product[0];

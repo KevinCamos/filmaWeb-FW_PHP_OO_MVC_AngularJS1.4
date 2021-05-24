@@ -1,7 +1,8 @@
 filmaweb.factory('like_cart_shop', ['$rootScope', 'services', 'toolsLogin', function ($rootScope, services, toolsLogin) {
     let service = {
 
-        likeClick: likeClick
+        likeClick: likeClick,
+        cartShop: cartShop
     };
     return service
 
@@ -9,14 +10,15 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', 'toolsLogin', func
 
 
 
-        $rootScope.likeClick = function (idProduct) {
+        $rootScope.likeClick = function (idProduct, classLike) {
 
-            console.log(idProduct);
-            toolsLogin.getUser();
-            var typeLike = document.getElementById('like-' + idProduct).className;
-            typeLike = typeLike.split(' ')[2];
 
             if (localStorage.userID) {
+                console.log(idProduct);
+                // alert(classLike + '-' + idProduct)
+                var typeLike = classLike == 'product' ? document.getElementById('product-' + idProduct).className : document.getElementById('like-' + idProduct).className
+                typeLike = typeLike.split(' ')[2];
+                // alert(typeLike)
                 services.threePost('shop', "likeds", {
                         op: "likeds",
                         typeLike: typeLike,
@@ -26,13 +28,14 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', 'toolsLogin', func
                     .then(function () {
 
                         if (typeLike == 'unlike') {
-                            var iconoLike = document.getElementById("like-" + idProduct);
-                            iconoLike.className = "far fa-heart like";
+                            document.getElementById("like-" + idProduct)?  document.getElementById("like-" + idProduct).className = "far fa-heart like":null;
+                            document.getElementById("product-" + idProduct)?  document.getElementById("product-" + idProduct).className = "far fa-heart like":null;
+
                         } else if (typeLike = 'like') {
-                            var iconoLike = document.getElementById("like-" + idProduct);
-                            iconoLike.className = "fas fa-heart unlike";
+                            document.getElementById("like-" + idProduct)?  document.getElementById("like-" + idProduct).className = "fas fa-heart unlike":null;
+                            document.getElementById("product-" + idProduct)?  document.getElementById("product-" + idProduct).className = "fas fa-heart unlike":null;
+
                         }
-                        // console.log(product);
                     }, function (error) {
                         console.log(error);
 
@@ -45,6 +48,33 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', 'toolsLogin', func
     }
 
 
+    function cartShop() {
+
+
+
+        $rootScope.cartClick = function (idProduct) {
+
+
+            if (localStorage.userID) {
+                console.log(idProduct);
+                services.threePost('cart', "addLine", {
+                        idProduct: idProduct,
+                        idUser: localStorage.userID
+                    })
+                    .then(function (data) {
+                        console.log(data);
+                        // toastr.success("Se ha añadido al carrito correctamente");
+
+                    }, function (error) {
+                        console.log(error);
+
+                    });
+            } else {
+                alert("T'has de loguetjar, ficar toastr")
+            }
+        }
+
+    }
 
 
 

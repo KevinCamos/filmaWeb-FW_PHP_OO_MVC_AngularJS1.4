@@ -17,9 +17,9 @@ class controller_shop
 	// }
 	function openProduct()
 	{
-		// echo json_encode(MODEL_SHOP);
+		// echo json_encode( $_POST["id"]);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "openProduct", $_POST["id"],0);
+		$json = loadModel(MODEL_SHOP, "shop_model", "openProduct", $_POST["id"], $_POST["userID"]);
 		echo json_encode($json);
 	}
 	function listShop()
@@ -37,21 +37,21 @@ class controller_shop
 	{
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "categoryDecade", 0);
+		$json = loadModel(MODEL_SHOP, "shop_model", "categoryDecade", $_POST);
 		echo json_encode($json);
 	}
 	function categoryFormate()
 	{
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "categoryFormate", 0);
+		$json = loadModel(MODEL_SHOP, "shop_model", "categoryFormate", $_POST);
 		echo json_encode($json);
 	}
 	function categoryGenere()
 	{
 		// echo json_encode($_GET["sendData"][0]);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "categoryGenere",0);
+		$json = loadModel(MODEL_SHOP, "shop_model", "categoryGenere",$_POST);
 		echo json_encode($json);
 	}
 

@@ -553,9 +553,9 @@ td {
   cursor: pointer;
 }
 
-.fa-cart-plus {
-  color: "gray";
-  font-size: 1em;
+.cart-shop:hover {
+  color: green;
+
 }
 
 #item-shop>.fa-heart {
