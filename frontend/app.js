@@ -105,7 +105,7 @@
          $rootScope.menuUserShow = false;
          $rootScope.menuLogShow = true;
      }
-     like_cart_shop.countIconCart();
+    //  like_cart_shop.countIconCart();
 
      //  alert(localStorage.token)
      //  $rootScope.myFunct = function (keyEvent) {

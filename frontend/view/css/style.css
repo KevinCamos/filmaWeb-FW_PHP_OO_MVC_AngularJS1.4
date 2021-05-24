@@ -561,7 +561,7 @@ td {
   color: red;
 }
 .sumCart:hover{
-  color: green;
+  color: #4caf50;
 }
 .trashCart:hover{
   color: grey;

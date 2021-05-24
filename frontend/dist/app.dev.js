@@ -101,13 +101,13 @@ filmaweb.run(function ($rootScope, $route, toolsLogin, search_services, like_car
   } else {
     $rootScope.menuUserShow = false;
     $rootScope.menuLogShow = true;
-  }
-
-  like_cart_shop.countIconCart(); //  alert(localStorage.token)
+  } //  like_cart_shop.countIconCart();
+  //  alert(localStorage.token)
   //  $rootScope.myFunct = function (keyEvent) {
   //      if (keyEvent.which === 13)
   //          alert('I am an alert');
   //  }
+
 
   $rootScope.shopClick = function () {
     localStorage.typeFilter = "listShop";

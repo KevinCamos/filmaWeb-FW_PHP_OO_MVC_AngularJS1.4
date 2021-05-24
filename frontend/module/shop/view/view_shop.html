@@ -55,8 +55,6 @@
                                         ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
 
                                     <h5>{{product.movie}}</h5>
-
-
                                     <h2>
                                         <span ng-if="'like'==product.likes">
                                             <span href="#/shop" id="like-{{product.id}}" class="fas fa-heart unlike"
@@ -66,8 +64,6 @@
                                             <span href="#/shop" id="like-{{product.id}}" class="far fa-heart like"
                                                 style="font-size: 1em;" ng-click="likeClick(product.id)"></span>
                                         </span>
-
-
                                         {{product.price}}€ <span href="#/shop" class="fas fa-shopping-cart cart-shop
                                             " style="font-size: 1em;" ng-click="cartClick(product.id)"></span></h2>
 

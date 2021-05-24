@@ -14,15 +14,17 @@
                     <div>{{product.movie}}</div>
                     <div>{{product.price}}€</div>
                     <div>
-                        <h1 class='linePrice'> {{product.price*product.cantidad}}€</h1>
+                        <h1 class='linePrice'> {{miFormato(product.price*product.cantidad)}}€</h1>
                     </div>
-                    <div class="amount">{{product.price}}€
+                    <div class="amount">
 
-                        <span class='fas fa-minus restCart'></span>
+                        <span class='fas fa-minus restCart'
+                            ng-click="updateAmountClick('rest',this.$index,product.idproducto,product.idalbaran)"></span>
                         <span class='inputNum'>{{product.cantidad}}</span>
-                        <span class='fas fa-plus sumCart'></span>
+                        <span class='fas fa-plus sumCart'
+                            ng-click="updateAmountClick('sum',this.$index,product.idproducto,product.idalbaran)"></span>
                         <span class='fas fa-trash-alt trashCart'></span>
-                    </div> Recalcular
+                    </div> 
                 </th>
             </tr>
 
