@@ -18,7 +18,7 @@ class controller_login
 	// 	loadView(VIEW_PATH_LOGIN . 'login.html');
 	// 	require_once(VIEW_PATH_INC . "footer.html");
 	// }
-	function register()//FET
+	function register() //FET
 	{
 		// echo json_encode(friendlyModFunc("asdf", "asdv", "sdfasd"));
 
@@ -27,7 +27,7 @@ class controller_login
 		$json = loadModel(MODEL_LOGIN, "login_model", "register", $_POST['user']);
 		echo json_encode($json);
 	}
-	function login()//FET
+	function login() //FET
 	{
 		// echo json_encode("LOGIN");
 		$json = array();
@@ -38,20 +38,25 @@ class controller_login
 		// $email = strtolower($formulario[3]['value']);
 	}
 
-	function getUser()//FET
+	function getUser() //FET
 	{
 		// echo json_encode($_POST['token']);
-		$json = array();
-		$json = loadModel(MODEL_LOGIN, "login_model", "getUser", $_POST['token']);
-		echo json_encode($json);
+		try {
+			$json = array();
+			$json = loadModel(MODEL_LOGIN, "login_model", "getUser", $_POST['token']);
+			echo json_encode($json);
+		} catch (Exception $e) {
+			echo json_encode(false);
+		}
 	}
-	function updateToken()//FET
+	function updateToken() //FET
 	{
 		// echo json_encode($_POST['token']);
-
-		$json = array();
-		$json = loadModel(MODEL_LOGIN, "login_model", "updateToken", $_POST['token']);
-		echo json_encode($json);
+	
+			$json = array();
+			$json = loadModel(MODEL_LOGIN, "login_model", "updateToken", $_POST['token']);
+			echo json_encode($json);
+	
 	}
 	function token_mail()
 	{
@@ -64,7 +69,7 @@ class controller_login
 		// die('<script>window.location.href="' . $callback . '";</script>');
 		echo ("<script> localStorage.setItem('token', '$json');	</script>");
 	}
-	function socialLogin()//FET
+	function socialLogin() //FET
 	{
 		// echo json_encode($_GET['dataUser'][1]);
 		// echo json_encode("LOGIN");
@@ -72,7 +77,7 @@ class controller_login
 		$json =	loadModel(MODEL_LOGIN, "login_model", "socialLogin", $_POST['dataUser']);
 		echo json_encode($json);
 	}
-	function recoveredMail()//FET
+	function recoveredMail() //FET
 	{
 		// echo json_encode($_GET['dataUser']);
 
@@ -99,5 +104,4 @@ class controller_login
 		$json =	loadModel(MODEL_LOGIN, "login_model", "changePassword", $_POST['password'], $_POST['token']);
 		echo json_encode($json);
 	}
-
 }

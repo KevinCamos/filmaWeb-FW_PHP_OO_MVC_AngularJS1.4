@@ -73,9 +73,8 @@ filmaweb.config(['$routeProvider', '$locationProvider', function ($routeProvider
     }
   });
 }]);
-filmaweb.run(function ($rootScope, $route, toolsLogin, search_services) {
+filmaweb.run(function ($rootScope, $route, toolsLogin, search_services, like_cart_shop) {
   //      angular.element(document).ready(function() {
-  //     });
   toolsLogin.checkToken();
   toolsLogin.closeSession();
   search_services.searchFunction($route);
@@ -85,12 +84,13 @@ filmaweb.run(function ($rootScope, $route, toolsLogin, search_services) {
   } else {
     $rootScope.menuUserShow = false;
     $rootScope.menuLogShow = true;
-  } //  alert(localStorage.token)
+  }
+
+  like_cart_shop.countIconCart(); //  alert(localStorage.token)
   //  $rootScope.myFunct = function (keyEvent) {
   //      if (keyEvent.which === 13)
   //          alert('I am an alert');
   //  }
-
 
   $rootScope.shopClick = function () {
     localStorage.typeFilter = "listShop";

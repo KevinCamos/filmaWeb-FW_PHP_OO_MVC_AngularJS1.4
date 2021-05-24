@@ -4,37 +4,46 @@
  * Copyright(c)2011 Miguel Angel Nubla Ruiz (miguelangel.nubla@gmail.com). All rights reserved
  */
 
-class JWT {
+class JWT
+{
     private $alg;
     private $hash;
     private $data;
-    
-    private function base64url_encode($data) {
+
+    private function base64url_encode($data)
+    {
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
     }
 
-    private function base64url_decode($data) {
+    private function base64url_decode($data)
+    {
         return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
     }
-    
-    public function encode($header, $payload, $key) {
+
+    public function encode($header, $payload, $key)
+    {
         $this->data = $this->base64url_encode($header) . '.' . $this->base64url_encode($payload);
-        return $this->data.'.'.$this->JWS($header, $key);
+        return $this->data . '.' . $this->JWS($header, $key);
     }
-    
-    public function decode($token, $key) {
-        // return $token;
-        // return $key;
-        // $token= "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MjA5MjE0ODIsImV4cCI6MTYyMDkyNTA4MiwibmFtZSI6ImtldmluIn0.h7WYGHtiCimTn5mMYB24XjCl2sn91EvZ2jDosoWpedM";
-        list($header, $payload, $signature) = explode('.', $token);
-        $this->data = $header . '.' . $payload;
-        if ($signature == $this->JWS($this->base64url_decode($header), $key)) {
-            return $this->base64url_decode($payload);
-        }
-        exit('Invalid Signature');
+
+    public function decode($token, $key)
+    {
+        // try {
+
+
+            list($header, $payload, $signature) = explode('.', $token);
+            $this->data = $header . '.' . $payload;
+            if ($signature == $this->JWS($this->base64url_decode($header), $key)) {
+                return $this->base64url_decode($payload);
+            }
+            exit('Invalid Signature');
+        // } catch (Exception $e) {
+        //     return false;
+        // }
     }
-    
-    private function setAlgorithm($algorithm) {
+
+    private function setAlgorithm($algorithm)
+    {
         switch ($algorithm[0]) {
             case "n":
                 $this->alg = 'plaintext';
@@ -42,8 +51,8 @@ class JWT {
             case "H":
                 $this->alg = 'HMAC';
                 break;
-            // By now, the only native is HMAC
-            /* 
+                // By now, the only native is HMAC
+                /* 
             case R:
                 $this->alg = 'RSA';
                 break;
@@ -51,7 +60,8 @@ class JWT {
                 $this->alg = 'ECDSA';
                 break;
             */
-            default: exit("RSA and ECDSA not implemented yet!");
+            default:
+                exit("RSA and ECDSA not implemented yet!");
         }
         switch ($algorithm[2]) {
             case "a":
@@ -70,7 +80,8 @@ class JWT {
         if (in_array($hash, hash_algos())) $this->hash = $hash;
     }
 
-    private function JWS($header, $key) {
+    private function JWS($header, $key)
+    {
         $json = json_decode($header);
         $this->setAlgorithm($json->alg);
         if ($this->alg == 'plaintext') {

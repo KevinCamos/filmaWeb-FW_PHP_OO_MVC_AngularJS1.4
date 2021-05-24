@@ -2,7 +2,7 @@
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, services, $route) {
+filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', function ($rootScope, services, like_cart_shop) {
   var service = {
     updateMenu: updateMenu,
     dropLocalStorage: dropLocalStorage,
@@ -18,6 +18,7 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
     $rootScope.menuUserShow = true;
     $rootScope.user = localStorage.user;
     $rootScope.avatar = localStorage.avatar;
+    like_cart_shop.countIconCart();
   }
 
   function dropLocalStorage() {
@@ -52,8 +53,9 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
         console.log("checkToken: " + data);
         console.log(_typeof(data));
         console.log(data);
+        isError = data.split(' '); // console.log(isError[3])
 
-        if (!data) {
+        if (!data || isError[3] == 'Undefined') {
           alert("NO");
           alert(data);
           dropLocalStorage(); // return false;
@@ -84,7 +86,8 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', function ($rootScope, 
           return false;
         } else if (_typeof(data) == "object") {
           console.log("hi ha token");
-          saveUserStorage(data);
+          saveUserStorage(data); // like_cart_shop.countIconCart();
+
           updateMenu();
         }
       }, function (error) {

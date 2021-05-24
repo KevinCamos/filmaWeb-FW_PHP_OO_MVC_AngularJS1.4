@@ -1,9 +1,10 @@
 "use strict";
 
-filmaweb.factory('like_cart_shop', ['$rootScope', 'services', 'toolsLogin', function ($rootScope, services, toolsLogin) {
+filmaweb.factory('like_cart_shop', ['$rootScope', 'services', function ($rootScope, services) {
   var service = {
     likeClick: likeClick,
-    cartShop: cartShop
+    cartShop: cartShop,
+    countIconCart: countIconCart
   };
   return service;
 
@@ -45,7 +46,10 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', 'toolsLogin', func
           idProduct: idProduct,
           idUser: localStorage.userID
         }).then(function (data) {
-          console.log(data); // toastr.success("Se ha añadido al carrito correctamente");
+          console.log(data);
+          countIconCart(); // toastr.success("Se ha añadido al carrito correctamente");
+          //     });
+          //  like_cart_shop.countIconCart();
         }, function (error) {
           console.log(error);
         });
@@ -53,5 +57,21 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', 'toolsLogin', func
         alert("T'has de loguetjar, ficar toastr");
       }
     };
+  }
+
+  function countIconCart() {
+    // idUser = localStorage.userID ? localStorage.userID : -1;
+    if (localStorage.userID) {
+      idUser = localStorage.userID;
+      services.threePost('cart', "countCart", {
+        idUser: idUser
+      }).then(function (data) {
+        data = data.split('"');
+        $rootScope.countCart = data[1];
+        console.log($rootScope.countCart); // toastr.success("Se ha añadido al carrito correctamente");
+      }, function (error) {
+        console.log(error);
+      });
+    }
   }
 }]);

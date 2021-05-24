@@ -155,8 +155,14 @@ class login_model
     }
     public function updateToken($token)
     {
-        $token = explode('"', $token)[1];
-        $token = json_decode(jwt_process::decode(SECRET,  $token), true);
+        try {
+            
+            $token = explode('"', $token)[1];
+
+            $token = json_decode(jwt_process::decode(SECRET,  $token), true);
+        } catch (Exception $e) {
+            echo json_encode(false);
+        }
 
         if (time() < $token["exp"]) {
             return jwt_process::encode(SECRET, $token["name"]);
@@ -164,5 +170,4 @@ class login_model
             return false;
         }
     }
-   
 }
