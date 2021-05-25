@@ -6,10 +6,19 @@ filmaweb.controller('controller_cart', function ($scope, services, getAllCart) {
   console.log(getAllCart);
   $scope.products = getAllCart;
   $scope.cartMenu = true;
+  $scope.showModal = false; // $scope.toggleModal = function () {
+  //     $scope.showModal = !$scope.showModal;
+  // };
+
+  $scope.toggleOk = function (pepino) {
+    console.log(pepino);
+    alert(pepino);
+  };
   /**
    * https://es.stackoverflow.com/questions/77202/obtener-solo-2-decimales
    * @param {*} valor 
    */
+
 
   $scope.miFormato = function (valor) {
     return isNaN(valor) ? valor : parseFloat(valor).toFixed(2);
@@ -17,15 +26,11 @@ filmaweb.controller('controller_cart', function ($scope, services, getAllCart) {
 
   $scope.updateAmountClick = function (type, index, idProduct, idAlbaran) {
     console.log(index);
-    console.log(idProduct); //     ajaxPromise(friendlyModFunc("cart", "updateAmount"), //typeForm =
-    //     "POST",
-    //     "JSON", {
-    //       type: type,
-    //       idProduct: idProduct,
-    //       // idUser: idUser,
-    //       idAlbaran: idAlbaran,
-    //     }
-    //   )
+    console.log(idProduct);
+
+    if (type == 'delete') {
+      $scope.showModal = !$scope.showModal;
+    }
 
     services.threePost('cart', 'updateAmount', _defineProperty({
       type: type,

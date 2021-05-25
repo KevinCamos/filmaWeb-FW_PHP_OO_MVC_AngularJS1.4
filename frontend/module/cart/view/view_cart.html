@@ -1,39 +1,58 @@
 <body>
 
 
-    <div id=cartMenu ng-show='cartMenu'>
+  <div id=cartMenu ng-show='cartMenu'>
 
 
-        <table>
-            <tr ng-repeat="product in products">
-                <th>
-                    <img
-                        ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
-                </th>
-                <th>
-                    <div>{{product.movie}}</div>
-                    <div>{{product.price}}€</div>
-                    <div>
-                        <h1 class='linePrice'> {{miFormato(product.price*product.cantidad)}}€</h1>
-                    </div>
-                    <div class="amount">
+    <table>
+      <tr ng-repeat="product in products">
+        <th>
+          <img ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
+        </th>
+        <th>
+          <div>{{product.movie}}</div>
+          <div>{{product.price}}€</div>
+          <div>
+            <h1 class='linePrice'> {{miFormato(product.price*product.cantidad)}}€</h1>
+          </div>
+          <div class="amount">
 
-                        <span class='fas fa-minus restCart'
-                            ng-click="updateAmountClick('rest',this.$index,product.idproducto,product.idalbaran)"></span>
-                        <span class='inputNum'>{{product.cantidad}}</span>
-                        <span class='fas fa-plus sumCart'
-                            ng-click="updateAmountClick('sum',this.$index,product.idproducto,product.idalbaran)"></span>
-                        <span class='fas fa-trash-alt trashCart'></span>
-                    </div> 
-                </th>
-            </tr>
+            <span class='fas fa-minus restCart'
+              ng-click="updateAmountClick('rest',this.$index,product.idproducto,product.idalbaran)"></span>
+            <span class='inputNum'>{{product.cantidad}}</span>
+            <span class='fas fa-plus sumCart'
+              ng-click="updateAmountClick('sum',this.$index,product.idproducto,product.idalbaran)"></span>
+            <span class='fas fa-trash-alt trashCart'
+              ng-click="updateAmountClick('delete',this.$index,product.idproducto,product.idalbaran)"></span>
+          </div>
+        </th>
+      </tr>
+      <submit id='buyMe' type='button' value='comprar'>Comprar</submit>
 
-        </table>
+    </table>
 
-        <submit id='buyMe' type='button' value='comprar'>Comprar</submit>
+    <!-- <div ng-controller="MainCtrl" class="container"> -->
+    <!-- <span ng-click="toggleModal()"class='fas fa-trash-alt trashCart'> -->
+
+    <modal title="¡Alerta!" visible="showModal">
+      <form role="form">
+        <div class="form-group">
+          <label>¿De verdad quieres eliminar este producto?</label>
+          <!-- <input type="email" class="form-control" id="email" placeholder="Enter email" /> -->
+        </div>
+
+        <submit type="button" value=1 class="btn btn-default" ng-click="toggleOk( product)">"¡Sí, quiero eliminarlo!"
+        </submit>
+        <submit type="button" value=0 class="btn btn-default" ng-click="toggleOk(this)">¡No, no, no...! Mejor no
+        </submit>
+
+      </form>
+    </modal>
+    <!-- </span> -->
+
+    <!-- </div> -->
 
 
 
 
-
-    </div>
+  </div>
