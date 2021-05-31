@@ -5,7 +5,8 @@
 
 
     <table>
-      <tr ng-repeat="product in products">
+
+      <tr ng-repeat="product in products" id="row-{{this.$index}}">
         <th>
           <img ng-src="http://localhost/Kevin/Ejercicios_Kevin/Projecte/frontend/module/shop/img/{{product.img}}"></img>
         </th>
@@ -17,37 +18,48 @@
           </div>
           <div class="amount">
 
-            <span class='fas fa-minus restCart'
-              ng-click="updateAmountClick('rest',this.$index,product.idproducto,product.idalbaran)"></span>
+            <span class='fas fa-minus restCart' ng-click="restDeleteClick('rest',this.$index)"></span>
             <span class='inputNum'>{{product.cantidad}}</span>
-            <span class='fas fa-plus sumCart'
-              ng-click="updateAmountClick('sum',this.$index,product.idproducto,product.idalbaran)"></span>
-            <span class='fas fa-trash-alt trashCart'
-              ng-click="updateAmountClick('delete',this.$index,product.idproducto,product.idalbaran)"></span>
+            <span class='fas fa-plus sumCart' ng-click="updateAmountClick('sum', this.$index)"></span>
+            <span class='fas fa-trash-alt trashCart' ng-click="restDeleteClick('delete',this.$index)"></span>
           </div>
         </th>
       </tr>
-      <submit id='buyMe' type='button' value='comprar'>Comprar</submit>
-
     </table>
+    <submit id='buyMe' type='button' value='comprar' ng-click='showModalBuyClick()'>Comprar</submit>
 
     <!-- <div ng-controller="MainCtrl" class="container"> -->
     <!-- <span ng-click="toggleModal()"class='fas fa-trash-alt trashCart'> -->
 
-    <modal title="¡Alerta!" visible="showModal">
+    <modal-delete title="¡Alerta!" visible="showModalDelete">
       <form role="form">
         <div class="form-group">
           <label>¿De verdad quieres eliminar este producto?</label>
           <!-- <input type="email" class="form-control" id="email" placeholder="Enter email" /> -->
         </div>
-
-        <submit type="button" value=1 class="btn btn-default" ng-click="toggleOk( product)">"¡Sí, quiero eliminarlo!"
+        <submit type="button" value=1 class="btn btn-default" ng-click="modalOptionDelete()">"¡Sí, quiero eliminarlo!"
         </submit>
-        <submit type="button" value=0 class="btn btn-default" ng-click="toggleOk(this)">¡No, no, no...! Mejor no
+        <submit type="button" value=0 class="btn btn-default" ng-click="toggleModal(this.index)">¡No, no, no...! Mejor
+          no
         </submit>
 
       </form>
-    </modal>
+    </modal-delete>
+
+    <modal-buy title="¡Alerta!" visible="showModalBuy">
+      <form role="form">
+        <div class="form-group">
+          <label>¿Quieres confirmar la comrpa?</label>
+          <!-- <input type="email" class="form-control" id="email" placeholder="Enter email" /> -->
+        </div>
+        <submit type="button" value=1 class="btn btn-default" ng-click="modalOptionBuy()">"¡Sí, lo compramos!"
+        </submit>
+        <submit type="button" value=0 class="btn btn-default" ng-click="toggleModal(this.index, 'buy')">¡No, no, no...!
+          Aun quiero comprar más
+        </submit>
+
+      </form>
+    </modal-buy>
     <!-- </span> -->
 
     <!-- </div> -->

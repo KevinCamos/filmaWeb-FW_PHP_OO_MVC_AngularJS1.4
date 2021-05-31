@@ -156,7 +156,7 @@ class login_model
     public function updateToken($token)
     {
         try {
-            
+
             $token = explode('"', $token)[1];
 
             $token = json_decode(jwt_process::decode(SECRET,  $token), true);

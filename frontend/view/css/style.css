@@ -775,3 +775,9 @@ div.center {
 #closeSession, .carousel, .SLog{
   cursor: pointer;
 }
+
+
+.hideRow{
+
+  display:none,
+}

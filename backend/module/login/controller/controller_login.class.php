@@ -1,6 +1,5 @@
 <?php
 require_once(MODEL_PATH . "jwt.class.php");
-// require_once(ASSETS_PATH_PHP . "middleWareAuth.php");
 require_once(ASSETS_PATH_PHP . "jwt_process.inc.php");
 
 class controller_login

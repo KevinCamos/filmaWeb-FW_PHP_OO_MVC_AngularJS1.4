@@ -37,6 +37,10 @@
         <name>endCart</name>
         <uri>endCart</uri>
     </function>
+    <function>
+        <name>buyCart</name>
+        <uri>buyCart</uri>
+    </function>
     <!--  <function>
         <name>recoveredMail</name>
         <uri>recoveredMail</uri>

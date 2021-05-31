@@ -53,14 +53,12 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', func
         console.log("checkToken: " + data);
         console.log(_typeof(data));
         console.log(data);
-        isError = data.split(' ');
-        console.log(isError[3]);
+        isError = data.split(' '); // console.log(isError[3])
 
-        if (data == false || isError[3] == 'Undefined') {
-          console.log("fora"); // alert(data)
-
-          dropLocalStorage();
-          location.href = "#/"; // return false;
+        if (!data || data.length >200  || data.length <50  || isError[3] == 'Undefined') {
+          alert("NO");
+          alert(data);
+          dropLocalStorage(); // return false;
         } else {
           localStorage.token = data;
           localStorage.username ? getUser() : updateMenu();

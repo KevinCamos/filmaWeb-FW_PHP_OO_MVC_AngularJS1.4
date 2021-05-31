@@ -1,8 +1,6 @@
 <?php
-// require_once(MODEL_PATH . "jwt.class.php");
-// require_once(ASSETS_PATH_PHP . "middleWareAuth.php");
-// require_once(ASSETS_PATH_PHP . "jwt_process.inc.php");
-
+require_once(MODEL_PATH . "jwt.class.php");
+require_once(ASSETS_PATH_PHP . "jwt_process.inc.php");
 class controller_cart
 {
 	function __construct()
@@ -62,10 +60,16 @@ class controller_cart
 		$json = loadModel(MODEL_CART, "cart_model", "getTotalCart",  $_POST['idAlbaran']);
 		echo json_encode($json);
 	}
-	function endCart()
+	// function endCart()
+	// {
+	// 	$json = array();
+	// 	$json = loadModel(MODEL_CART, "cart_model", "endCart",  $_POST['idAlbaran']);
+	// 	echo json_encode($json);
+	// }
+	function buyCart()
 	{
 		$json = array();
-		$json = loadModel(MODEL_CART, "cart_model", "endCart",  $_POST['idAlbaran']);
+		$json = loadModel(MODEL_CART, "cart_model", "buyCart",  $_POST['token']);
 		echo json_encode($json);
 	}
 }

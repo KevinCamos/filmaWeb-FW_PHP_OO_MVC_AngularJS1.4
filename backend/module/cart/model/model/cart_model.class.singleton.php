@@ -118,9 +118,24 @@ class cart_model
 
         $this->bll->update_endCart_BLL($idAlbaran);
     }
-    // public function active_user($arrArgument){
-    //     return $this->bll->active_user_BLL($arrArgument);
-    // }
+    public function buyCart($token)
+    {
+        $token = explode('"', $token)[1];
+        $token = json_decode(jwt_process::decode(SECRET,  $token), true);
+
+        if (time() < $token["exp"]) {
+            $user =  $this->bll->obtain_getUser_BLL($token["name"])[0];
+            $idAlbaran = $this->bll->obtain_getAlbaran_BLL($user['idusers'])[0]['idalbaran'];
+            $this->bll->update_endCart_BLL($idAlbaran);
+            $factura = $this->bll->obtain_getFactura_BLL($idAlbaran);
+            $totalCart = $this->bll->obtain_getCart_BLL($idAlbaran);
 
 
+            $arrArgument = array('type'=>'factura','factura' => $factura[0], 'totalCart' => $totalCart,'dataUser' => $user);
+            // return $arrArgument;
+            return mail::send_email($arrArgument);
+        } else {
+            return false;
+        }        // $this->bll->update_endCart_BLL($idAlbaran);
+    }
 }

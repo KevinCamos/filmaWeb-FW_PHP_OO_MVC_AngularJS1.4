@@ -49,7 +49,6 @@ filmaweb.controller("controller_shop", function ($scope, services, filters_shop,
         }
 
         // localStorage.typeFilter = "filter";
-        // localStorage.typeFilter = "filter";
 
         filters_shop.getListShop("filter", filter);
     }; ///END filterClick

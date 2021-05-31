@@ -9,8 +9,6 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', function ($rootSco
 
     function likeClick() {
 
-
-
         $rootScope.likeClick = function (idProduct, classLike) {
 
 
@@ -45,7 +43,6 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', function ($rootSco
                 alert("T'has de loguetjar, ficar toastr")
             }
         }
-
     }
 
 

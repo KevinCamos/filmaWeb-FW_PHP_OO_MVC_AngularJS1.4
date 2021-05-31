@@ -2,36 +2,66 @@
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-filmaweb.controller('controller_cart', function ($scope, services, getAllCart) {
+filmaweb.controller('controller_cart', function ($scope, $route, services, getAllCart, servicesCart) {
   console.log(getAllCart);
   $scope.products = getAllCart;
-  $scope.cartMenu = true;
-  $scope.showModal = false; // $scope.toggleModal = function () {
-  //     $scope.showModal = !$scope.showModal;
+  console.log($scope.countCart);
+  $scope.cartMenu = $scope.countCart > 0 ? true : false;
+  $scope.showModalDelete = false; // $scope.toggleModal = function () {
+  //     $scope.showModalDelete = !$scope.showModalDelete;scope
   // };
 
-  $scope.toggleOk = function (pepino) {
-    console.log(pepino);
-    alert(pepino);
-  };
   /**
    * https://es.stackoverflow.com/questions/77202/obtener-solo-2-decimales
    * @param {*} valor 
    */
 
-
   $scope.miFormato = function (valor) {
     return isNaN(valor) ? valor : parseFloat(valor).toFixed(2);
   };
 
-  $scope.updateAmountClick = function (type, index, idProduct, idAlbaran) {
+  $scope.restDeleteClick = function (type, index) {
+    type == 'delete' || $scope.products[this.$index].cantidad == 1 ? toggleModal(this.$index) : updateAmount(type, this.$index);
+  }; //FUNCIONES BOTON COMPRAR
+
+
+  $scope.showModalBuyClick = function () {
+    toggleModal(null, 'buy');
+  };
+
+  $scope.modalOptionBuy = function (confirmation) {
+    services.threePost('cart', 'buyCart', {
+      token: localStorage.token
+    }).then(function (response) {
+      console.log(response);
+    }, function (error) {
+      console.log(error);
+    });
+    alert("eh");
+    $scope.showModalDelete = false;
+  }; //FIN FUNCIONES BOTON COMPRAR
+
+
+  $scope.modalOptionDelete = function () {
+    updateAmount('delete', localStorage.indexModal);
+    $scope.showModalDelete = false;
+  };
+
+  $scope.modalOptionDelete = function () {
+    updateAmount('delete', localStorage.indexModal);
+    $scope.showModalDelete = false;
+  };
+
+  $scope.updateAmountClick = function (type, index) {
+    updateAmount(type, index);
+  };
+
+  function updateAmount(type, index) {
+    console.log($scope.products);
+    idProduct = $scope.products[index].idproducto;
+    idAlbaran = $scope.products[index].idalbaran;
     console.log(index);
     console.log(idProduct);
-
-    if (type == 'delete') {
-      $scope.showModal = !$scope.showModal;
-    }
-
     services.threePost('cart', 'updateAmount', _defineProperty({
       type: type,
       idProduct: idProduct,
@@ -49,26 +79,21 @@ filmaweb.controller('controller_cart', function ($scope, services, getAllCart) {
         case 'sum':
           $scope.products[index].cantidad = parseInt($scope.products[index].cantidad) + 1;
           break;
+
+        case 'delete':
+          // let row = "#row-" + this.$index;
+          // document.getElementById("row-" + index).className = "hideRow"
+          $route.reload();
+          $scope.products[index] = null;
+          break;
       }
     }, function (error) {
       console.log(error);
-    }); //         .then(function(response) {
-    //             console.log(response);
-    //             updateCart();
-    //         }, function(error) {
-    //             console.log(error);
-    //         });
-    // $scope.products[index].cantidad =5;
-  }; //     $scope.changeDays = function(carPlate) {
-  //          var idUser = getUser();
-  //   if (idUser != -1) {
-  //         services.put('cart', 'updateDays', {days: $scope.qtyDays[carPlate], JWT: localStorage.token, carPlate: carPlate})
-  //         .then(function(response) {
-  //             console.log(response);
-  //             updateCart();
-  //         }, function(error) {
-  //             console.log(error);
-  //         });
-  //     };// end_changeDays
+    });
+  }
 
+  function toggleModal(index, type) {
+    localStorage.indexModal = index;
+    type ? $scope.showModalBuy = !$scope.showModalBuy : $scope.showModalDelete = !$scope.showModalDelete;
+  }
 });

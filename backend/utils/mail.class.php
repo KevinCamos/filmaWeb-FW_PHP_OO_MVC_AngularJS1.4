@@ -28,6 +28,18 @@ class mail
                 $email = $arr['inputEmail'];
                 break;
 
+
+                case 'factura':
+                    $subject = 'Gracias por confiar en nosotros, este es tu carrito adquirido, en caso de haber cometido algún error tienes no dudes en comunicarnoslo';
+                    // $ruta = "<a href='http://localhost/Kevin/Ejercicios_Kevin/Projecte/'>Filmaweb;</a>";
+
+
+                    $body = json_encode($arr['factura']) ."\n\n\n\n\n" . json_encode($arr['totalCart']);
+                    // return $arr['factura'];
+                    $from = 'filmawebdaw@gmail.com';
+                    $email = $arr['dataUser']['email'];
+                    break;
+    
                 // case 'contact':
                 //     $subject = 'Tu Petición a Filmaweb ha sido enviada<br>';
                 //     $ruta = '<a href=' . 'http://localhost/1_Fw_PHP_OO_MVC_jQuery_AngularJS/Framework/9_adoptions_dogs/' . '>aqu&iacute;</a>';

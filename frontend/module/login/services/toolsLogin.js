@@ -1,4 +1,4 @@
-filmaweb.factory('toolsLogin', ['$rootScope', 'services','like_cart_shop', function ($rootScope, services,like_cart_shop) {
+filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', function ($rootScope, services, like_cart_shop) {
     let service = {
         updateMenu: updateMenu,
         dropLocalStorage: dropLocalStorage,
@@ -62,11 +62,13 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services','like_cart_shop', funct
                         console.log(typeof data);
                         console.log(data);
                         isError = data.split(' ');
-                        // console.log(isError[3])
-                        if (!data || isError[3] == 'Undefined') {
-                            alert("NO")
-                            alert(data)
+                        console.log(isError[3])
+                        if (data ==false || isError[3] == 'Undefined') {
+                            console.log("fora")
+                            // alert(data)
                             dropLocalStorage()
+                            location.href = "#/";
+
                             // return false;
                         } else {
                             localStorage.token = data;
@@ -85,7 +87,7 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services','like_cart_shop', funct
     function getUser() {
         console.log("getUserIni")
         if (localStorage.token) {
-            
+
             services.threePost('login', "getUser", {
                     token: localStorage.token
                 })
