@@ -25,9 +25,6 @@
         <name>cart</name>
         <uri>cart</uri>
     </module>
-    <!-- <module>
-        <name>movies</name>
-        <uri>movies</uri>
-    </module>  -->
+ 
 
 </modules>

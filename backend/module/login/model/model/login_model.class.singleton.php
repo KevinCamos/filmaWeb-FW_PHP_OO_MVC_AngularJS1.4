@@ -61,7 +61,7 @@ class login_model
                 return -1;
             }
         } else {
-            return false;
+            return 0;
         }
     }
     public function getUser($token) //0 order, 1 offset, 2 IdUser

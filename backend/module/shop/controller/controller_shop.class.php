@@ -6,15 +6,6 @@ class controller_shop
 		$_SESSION['module'] = "shop";
 	}
 
-	// function list()
-	// {
-	// 	require_once(VIEW_PATH_INC . "top_page_shop.php");
-	// 	require_once(VIEW_PATH_INC . "header.html");
-	// 	require_once(VIEW_PATH_INC . "menu.html");
-	// 	loadView(VIEW_PATH_SHOP . 'shop.html');
-
-	// 	require_once(VIEW_PATH_INC . "footer.html");
-	// }
 	function openProduct()
 	{
 		// echo json_encode( $_POST["id"]);
@@ -59,7 +50,7 @@ class controller_shop
 	{
 		// echo json_encode($_POST["arrayFilter"]['titulo']);
 		$json = array();
-		$json = loadModel(MODEL_SHOP, "shop_model", "filter", $_POST["arrayFilter"]);
+		$json = loadModel(MODEL_SHOP, "shop_model", "filter", $_POST);
 		echo json_encode($json);
 	}
 	function pagination()

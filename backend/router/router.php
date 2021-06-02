@@ -89,13 +89,5 @@ function handlerfunction($module, $obj, $URI_function)
         call_user_func(array($obj, $event));
     }
 }
-// function ifNoExistPage()
-// {
-//     require_once(VIEW_PATH_INC . "top_page_home.php");
-//     require_once(VIEW_PATH_INC . "header.html");
-//     require_once(VIEW_PATH_INC . "menu.html");
-//     loadView(VIEW_PATH_HOME . 'home.html');
 
-//     require_once(VIEW_PATH_INC . "footer.html");
-// }
 handlerRouter();

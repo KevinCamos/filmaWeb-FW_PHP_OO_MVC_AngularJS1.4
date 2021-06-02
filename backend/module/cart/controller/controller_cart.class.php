@@ -60,12 +60,7 @@ class controller_cart
 		$json = loadModel(MODEL_CART, "cart_model", "getTotalCart",  $_POST['idAlbaran']);
 		echo json_encode($json);
 	}
-	// function endCart()
-	// {
-	// 	$json = array();
-	// 	$json = loadModel(MODEL_CART, "cart_model", "endCart",  $_POST['idAlbaran']);
-	// 	echo json_encode($json);
-	// }
+	
 	function buyCart()
 	{
 		$json = array();

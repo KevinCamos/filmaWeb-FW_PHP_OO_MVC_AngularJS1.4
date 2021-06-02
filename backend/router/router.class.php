@@ -44,20 +44,7 @@ class router
 
     function handlerRouter()
     {
-        
-        // if (!empty($_GET['module'])) {
-        //     $URI_module = $_GET['module'];
-        // } else {
-        //     $URI_module = 'home';
-
-            // echo'<script>window.location.href = "./home/list_home/";</script>';
-        // }
-
-        // if (!empty($_GET['function'])) {
-        //     $URI_function = $_GET['function'];
-        // } else {
-        //     $URI_function = 'list';
-        // }
+    
         $this->handlerModule();
     }
 

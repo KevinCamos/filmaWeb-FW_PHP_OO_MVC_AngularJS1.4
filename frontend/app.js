@@ -1,4 +1,4 @@
- var filmaweb = angular.module('filmaweb', ['ngRoute', 'ui.bootstrap']);
+ var filmaweb = angular.module('filmaweb', ['ngRoute', 'ui.bootstrap', 'toastr']);
  // var filmaweb = angular.module('filmaweb', ['ngRoute', 'ngAnimate', 'ngTouch', 'ngSanitize', 'toastr', 'ui.bootstrap']);
  //////
  filmaweb.config(['$routeProvider', '$locationProvider',
@@ -9,6 +9,7 @@
                  controller: "controller_home",
                  resolve: {
                      carousel: function (services) {
+
                          var data = services.twoGet('home', 'carousel');
                          return data;
                      },
@@ -47,7 +48,6 @@
 
                                  location.href = "#/login";
                              }, function (error) {
-                                 // toastr.success("Ha habido un error en el servicio");
 
                                  console.log(error);
                              }); // end_services
@@ -56,20 +56,20 @@
              }).when("/cart", {
                  templateUrl: "frontend/module/cart/view/view_cart.html",
                  controller: "controller_cart",
-                 resolve:{
-                 getAllCart: function (services) {
-                     var idUser = localStorage.userID ? localStorage.userID : -1;
-                     if (idUser != -1) {
-                         var data = services.threePost('cart', 'getCart', {
-                             idUser: idUser
-                         })
-                         return data;
-                     } else {
-                         return null;
-                     }
+                 resolve: {
+                     getAllCart: function (services) {
+                         var idUser = localStorage.userID ? localStorage.userID : -1;
+                         if (idUser != -1) {
+                             var data = services.threePost('cart', 'getCart', {
+                                 idUser: idUser
+                             })
+                             return data;
+                         } else {
+                             return null;
+                         }
 
+                     }
                  }
-}
              }).otherwise("/home", {
                  templateUrl: "frontend/module/home/view/view_home.html",
                  controller: "controller_home",
@@ -98,6 +98,8 @@
      toolsLogin.checkToken();
      toolsLogin.closeSession();
      search_services.searchFunction($route);
+     toolsLogin.checkTokenClick();
+
      if (localStorage.userID) {
 
          toolsLogin.updateMenu();
@@ -105,13 +107,6 @@
          $rootScope.menuUserShow = false;
          $rootScope.menuLogShow = true;
      }
-    //  like_cart_shop.countIconCart();
-
-     //  alert(localStorage.token)
-     //  $rootScope.myFunct = function (keyEvent) {
-     //      if (keyEvent.which === 13)
-     //          alert('I am an alert');
-     //  }
 
      $rootScope.shopClick = function () {
          localStorage.typeFilter = "listShop";

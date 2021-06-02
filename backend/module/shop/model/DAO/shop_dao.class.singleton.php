@@ -109,7 +109,8 @@ class shop_dao
     public function select_data_filter($db, $sendDatArray)
     {
 
-        // $user = $sendDatArray[0];
+        $user = $sendDatArray['userID'];
+        $sendDatArray = $sendDatArray['arrayFilter'];
         // $order = $sendDatArray[1];
         // $offset = $sendDatArray[2];
         // $searchQuery = base64_decode($sendDatArray[3]);
@@ -129,7 +130,7 @@ class shop_dao
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
-        WHERE li.idusers LIKE '$sendDatArray[userID]') AS B)
+        WHERE li.idusers LIKE '$user') AS B)
         ON mo.id = B.idmovies               
         WHERE movie LIKE '%$sendDatArray[0]%'
         AND director LIKE '%$sendDatArray[1]%'

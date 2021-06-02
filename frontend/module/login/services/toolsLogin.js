@@ -1,9 +1,10 @@
-filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', function ($rootScope, services, like_cart_shop) {
+filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', 'toastr', function ($rootScope, services, like_cart_shop, toastr) {
     let service = {
         updateMenu: updateMenu,
         dropLocalStorage: dropLocalStorage,
         saveUserStorage: saveUserStorage,
         closeSession: closeSession,
+        checkTokenClick: checkTokenClick,
         checkToken: checkToken,
         getUser: getUser
     };
@@ -18,8 +19,6 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', func
         $rootScope.avatar = localStorage.avatar;
 
         like_cart_shop.countIconCart();
-
-
     }
 
     function dropLocalStorage() {
@@ -29,6 +28,7 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', func
         localStorage.removeItem('avatar');
         localStorage.removeItem('email');
         localStorage.removeItem('token');
+        toastr.error("La sesión ha sido finalizada", "LogOut");
 
     }
 
@@ -38,6 +38,7 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', func
         localStorage.type = data.type
         localStorage.avatar = data.avatar
         localStorage.email = data.email
+        toastr.success("Bienvenido al sistema " + data.username, "LogIn");
 
     }
 
@@ -48,6 +49,13 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', func
         }
 
 
+    }
+
+    function checkTokenClick() {
+        $rootScope.checkTokenClick = function () {
+            checkToken();
+            // alert('eh')
+        }
     }
 
     function checkToken() {
@@ -63,7 +71,7 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', func
                         console.log(data);
                         isError = data.split(' ');
                         console.log(isError[3])
-                        if (data ==false || isError[3] == 'Undefined') {
+                        if (data == false || isError[3] == 'Undefined') {
                             console.log("fora")
                             // alert(data)
                             dropLocalStorage()
@@ -72,9 +80,7 @@ filmaweb.factory('toolsLogin', ['$rootScope', 'services', 'like_cart_shop', func
                             // return false;
                         } else {
                             localStorage.token = data;
-
                             localStorage.username ? getUser() : updateMenu();
-
                         }
                     },
                     function (error) {

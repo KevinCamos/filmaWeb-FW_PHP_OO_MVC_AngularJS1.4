@@ -23,9 +23,13 @@
             <span class='fas fa-plus sumCart' ng-click="updateAmountClick('sum', this.$index)"></span>
             <span class='fas fa-trash-alt trashCart' ng-click="restDeleteClick('delete',this.$index)"></span>
           </div>
-        </th>
+        </th>    
+
       </tr>
     </table>
+    <h3 class='fac'>Base Imponible: {{miFormato(baseImponible)}}€</h3>
+    <h3 class='fac'>Total Iva: {{miFormato(totalIVA)}}€</h3>
+    <h1 class='fac'>Precio total: {{miFormato(totalPrice)}}€</h1>
     <submit id='buyMe' type='button' value='comprar' ng-click='showModalBuyClick()'>Comprar</submit>
 
     <!-- <div ng-controller="MainCtrl" class="container"> -->

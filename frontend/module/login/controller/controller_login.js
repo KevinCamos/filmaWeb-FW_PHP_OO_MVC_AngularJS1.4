@@ -95,7 +95,13 @@ filmaweb.controller("controller_login", function ($scope, services, toolsLogin, 
                         user: user
                     })
                     .then(function (data) {
-                        if (data == false) {
+                        // data = data.split(' ')
+                        // data = data.split('n')
+                        // console.log(data)
+                        // console.log(typeof (data))
+
+                        if (data == 0) {
+                            console.log("ehhh")
                             $scope.errorLog = "Lo sentimos, este usuario o correo electrónico no se encuentra registrado";
                         } else if (data == -1) {
                             $scope.errorLog = "La contraseña es incorrecta";
@@ -199,7 +205,7 @@ filmaweb.controller("recoveredPassword", function ($scope, services, toolsLogin,
                 var password = $scope.passwordRecoverin
 
                 services.threePost('login', "changePassword", {
-                        token:localStorage.token,
+                        token: localStorage.token,
                         password: password
                     })
                     .then(function (data) {

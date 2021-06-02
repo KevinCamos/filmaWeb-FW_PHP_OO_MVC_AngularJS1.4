@@ -54,13 +54,5 @@ class login_bll
 	 $this->dao->update_data_changePassword($this->db, $nameUser, $password);
 	 return $this->dao->select_data_getUser($this->db, $nameUser);
 	}
-	// public function load_name_BLL(){
-	//   return $this->dao->select_load_name($this->db);
-	// }
-	// public function select_auto_name_BLL($arrArgument){
-	//   return $this->dao->select_auto_name($this->db,$arrArgument);
-	// }
-	// public function active_user_BLL($arrArgument){
-	//   return $this->dao->update_active_user($this->db,$arrArgument);
-	// }
+	
 }

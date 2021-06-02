@@ -1,4 +1,4 @@
-filmaweb.factory('like_cart_shop', ['$rootScope', 'services', function ($rootScope, services) {
+filmaweb.factory('like_cart_shop', ['$rootScope', 'services', 'toastr', function ($rootScope, services, toastr) {
     let service = {
 
         likeClick: likeClick,
@@ -17,7 +17,6 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', function ($rootSco
                 // alert(classLike + '-' + idProduct)
                 var typeLike = classLike == 'product' ? document.getElementById('product-' + idProduct).className : document.getElementById('like-' + idProduct).className
                 typeLike = typeLike.split(' ')[2];
-                // alert(typeLike)
                 services.threePost('shop', "likeds", {
                         op: "likeds",
                         typeLike: typeLike,
@@ -29,10 +28,12 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', function ($rootSco
                         if (typeLike == 'unlike') {
                             document.getElementById("like-" + idProduct) ? document.getElementById("like-" + idProduct).className = "far fa-heart like" : null;
                             document.getElementById("product-" + idProduct) ? document.getElementById("product-" + idProduct).className = "far fa-heart like" : null;
+                            toastr.success("Se ha eliminado este producto a favoritos", "Eliminado");
 
                         } else if (typeLike = 'like') {
                             document.getElementById("like-" + idProduct) ? document.getElementById("like-" + idProduct).className = "fas fa-heart unlike" : null;
                             document.getElementById("product-" + idProduct) ? document.getElementById("product-" + idProduct).className = "fas fa-heart unlike" : null;
+                            toastr.success("Se ha añadido este producto a favoritos", "Añadido");
 
                         }
                     }, function (error) {
@@ -40,7 +41,7 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', function ($rootSco
 
                     });
             } else {
-                alert("T'has de loguetjar, ficar toastr")
+                toastr.error("Tienes que conectarte con una cuenta de usuario", "Error");
             }
         }
     }
@@ -59,35 +60,33 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', function ($rootSco
                     .then(function (data) {
                         console.log(data);
                         countIconCart()
-                        // toastr.success("Se ha añadido al carrito correctamente");
-                             //     });
-    //  like_cart_shop.countIconCart();
+                        toastr.success("Se ha añadido este producto a carrito", "Añadido");
 
                     }, function (error) {
                         console.log(error);
                     });
             } else {
-                alert("T'has de loguetjar, ficar toastr")
+                toastr.error("Tienes que conectarte con una cuenta de usuario", "Error");
+
             }
         }
 
     }
 
     function countIconCart() {
-
-        // idUser = localStorage.userID ? localStorage.userID : -1;
-if(localStorage.userID ){
-    idUser = localStorage.userID;
-        services.threePost('cart', "countCart", {
-                idUser: idUser
-            })
-            .then(function (data) {
-                data=data.split('"');
-                $rootScope.countCart= data[1]; 
-                console.log($rootScope.countCart)              // toastr.success("Se ha añadido al carrito correctamente");
-            }, function (error) {
-                console.log(error);
-            });
+        if (localStorage.userID) {
+            idUser = localStorage.userID;
+            services.threePost('cart', "countCart", {
+                    idUser: idUser
+                })
+                .then(function (data) {
+                    data = data.split('"');
+                    
+                    $rootScope.countCart = data[1];
+                    console.log($rootScope.countCart)
+                }, function (error) {
+                    console.log(error);
+                });
         }
 
     }

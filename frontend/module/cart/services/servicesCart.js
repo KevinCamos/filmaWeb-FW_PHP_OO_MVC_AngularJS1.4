@@ -1,20 +1,18 @@
-filmaweb.factory('servicesCart', ['services', 'toolsLogin', function (services, toolsLogin, $rootScope) {
+filmaweb.factory('servicesCart', ['toolsLogin', function ($rootScope) {
     let service = {
-        prueba: prueba
-
+        countCart: countCart,
     };
-    return service
+    return service;
 
+    function countCart() {
+        console.log($rootScope.countCart);
+        $rootScope.countCart = 99;
+        console.log($rootScope.countCart);
 
-
-    function prueba() {
-
-        console.log($rootScope)
     }
 
     // function products(getAllCart) {
 
     //     $rootScope.products=getAllCart;
     // }
-
 }]);
