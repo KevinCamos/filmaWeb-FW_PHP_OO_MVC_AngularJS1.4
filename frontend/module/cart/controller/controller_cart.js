@@ -1,4 +1,4 @@
-filmaweb.controller('controller_cart', function ($scope, $rootScope, $route, services, getAllCart, toastr, servicesCart) {
+filmaweb.controller('controller_cart', function ($scope, $rootScope, $route, services, getAllCart, toastr) {
 
     console.log(getAllCart);
     $scope.products = getAllCart;

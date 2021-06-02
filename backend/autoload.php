@@ -3,7 +3,6 @@
 require_once("paths.php");
 include(UTILS . "utils.inc.php");
 include(UTILS . "common.inc.php");
-include(UTILS . "upload.inc.php");
 include(UTILS . "mail.class.php");
 
 //load all class.singleton.php    //esta no está comentada per mi 
