@@ -29,8 +29,7 @@ class controller_home
 
 	function homeProducts()
 	{
-		// echo json_encode($_GET["offset"]);
-
+		
 		if (isset($_GET["offset"])) {
 			$json = array();
 			$json = loadModel(MODEL_HOME, "home_model", "homeProducts", $_GET["offset"]);
@@ -42,7 +41,6 @@ class controller_home
 	}
 	function countClick()
 	{
-		// echo json_encode($_GET["id"]);
 
 		if (isset($_POST["id"])) {
 			$json = array();

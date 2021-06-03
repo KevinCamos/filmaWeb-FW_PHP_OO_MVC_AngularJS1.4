@@ -28,23 +28,5 @@ class search_bll
 		return $this->dao->select_data_searchList($this->db,$data);
 	}
 	
-	// public function update_countClick_BLL($arrArgument)
-	// {
-	// 	return $this->dao->update_countClick($this->db, $arrArgument);
-	// }
-	// public function obtain_data_details_BLL($arrArgument){
-	//   return $this->dao->select_data_details($this->db,$arrArgument);
-	// }
-	// public function best_breed_home_BLL($arrArgument){
-	//   return $this->dao->select_best_breed($this->db,$arrArgument);
-	// }
-	// public function load_name_BLL(){
-	//   return $this->dao->select_load_name($this->db);
-	// }
-	// public function select_auto_name_BLL($arrArgument){
-	//   return $this->dao->select_auto_name($this->db,$arrArgument);
-	// }
-	// public function active_user_BLL($arrArgument){
-	//   return $this->dao->update_active_user($this->db,$arrArgument);
-	// }
+	
 }

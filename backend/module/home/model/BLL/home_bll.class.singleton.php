@@ -20,13 +20,12 @@ class home_bll
 	}
 	public function obtain_carousel_BLL()
 	{
-		// return "holas";
 		return $this->dao->select_data_carousel($this->db);
 	}
 
 	public function obtain_homeProducts_BLL($arrArgument)
 	{
-		// return "hola";
+		
 		return $this->dao->select_data_homeProducts($this->db, $arrArgument);
 	}
 	public function update_countClick_BLL($arrArgument)

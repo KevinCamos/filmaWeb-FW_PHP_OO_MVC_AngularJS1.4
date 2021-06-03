@@ -42,6 +42,9 @@ filmaweb.controller('controller_cart', function ($scope, $rootScope, $route, ser
                     );
                     $scope.showModalBuy = false;
                     location.href = "#/home";
+
+
+
                 },
                 function (error) {
                     console.log(error);

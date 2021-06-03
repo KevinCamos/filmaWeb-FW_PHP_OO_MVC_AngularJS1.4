@@ -88,13 +88,7 @@ class shop_dao
 
     public function select_data_categoryGenere($db, $sendDatArray)
     {
-        // return $sendDatArray;
-        // $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-        // ((SELECT DISTINCT li.idmovies, 'like' as likes 
-        // FROM liketo li
-        // WHERE li.idusers LIKE '$sendDatArray[0]') AS B)
-        // ON mo.id = B.idmovies               
-        // WHERE genere = 'Fantasia' ORDER BY " . $sendDatArray[1] . " , movie asc LIMIT  " .  $sendDatArray[2] . ", 6";
+      
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
          ((SELECT DISTINCT li.idmovies, 'like' as likes 
          FROM liketo li
@@ -111,22 +105,14 @@ class shop_dao
 
         $user = $sendDatArray['userID'];
         $sendDatArray = $sendDatArray['arrayFilter'];
-        // $order = $sendDatArray[1];
-        // $offset = $sendDatArray[2];
-        // $searchQuery = base64_decode($sendDatArray[3]);
-
+       
         if ($sendDatArray[2] != 0) {
             $whereYear = "AND anyo = $sendDatArray[2]";
         } else {
             $whereYear = '';
         }
 
-        // return $sendDatArray[0];
-        // $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
-        // ((SELECT DISTINCT li.idmovies, 'like' as likes  
-        // FROM liketo li
-        // WHERE li.idusers LIKE  '$user') AS B)
-        // ON mo.id = B.idmovies " . $searchQuery . " ORDER BY  $order , movie asc LIMIT  $offset, 6";
+       
         $sql = "SELECT mo.*, B.likes  FROM movies mo LEFT JOIN 
         ((SELECT DISTINCT li.idmovies, 'like' as likes 
         FROM liketo li
@@ -136,7 +122,6 @@ class shop_dao
         AND director LIKE '%$sendDatArray[1]%'
          $whereYear
          AND price BETWEEN  $sendDatArray[3] AND $sendDatArray[4]";
-        // $sql = mysql_real_escape_string($sql);
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
@@ -148,7 +133,6 @@ class shop_dao
 
         switch ($type) {
             case "listShop":
-                ///NO FARIA FALTA FER RES DINS
                 break;
             case "searchQuery":
                 $search = $array[1];
@@ -195,8 +179,7 @@ class shop_dao
                 $sql =  "SELECT DISTINCT genere FROM movies ORDER BY  genere asc";
                 break;
         }
-        // return $sendDatArray;
-        // return $sql
+     
         $stmt = $db->ejecutar($sql);
         return $db->listar($stmt);
     }
@@ -219,42 +202,5 @@ class shop_dao
 
         return   $db->ejecutar($sql);
     }
-    // public function select_data_categoryDecade($db, $offset)
-    // {
-    //     $sql = "SELECT * FROM movies ORDER BY clicks DESC LIMIT $offset, 2";
-    //     $stmt = $db->ejecutar($sql);
-    //     return $db->listar($stmt);
-    // }
-    // public function update_countClick($db, $arrArgument)
-    // {
-    //     $sql = "UPDATE movies SET clicks = clicks+ 1 
-    //     WHERE id = $arrArgument";
-    //     return $db->ejecutar($sql);
-    // }
-    // public function select_best_breed($db, $arrArgument)
-    // {
-    //     $sql = "SELECT breed FROM dogs GROUP BY breed ORDER BY count(*) DESC LIMIT $arrArgument,2";
-    //     $stmt = $db->ejecutar($sql);
-    //     return $db->listar($stmt);
-    // }
-
-    // public function select_load_name($db)
-    // {
-    //     $sql = "SELECT DISTINCT name FROM dogs WHERE state = 0";
-    //     $stmt = $db->ejecutar($sql);
-    //     return $db->listar($stmt);
-    // }
-
-    // public function select_auto_name($db, $arrArgument)
-    // {
-    //     $sql = "SELECT DISTINCT name,chip,breed,sex,stature,picture,date_birth FROM dogs WHERE name LIKE '%$arrArgument%' AND state = 0";
-    //     $stmt = $db->ejecutar($sql);
-    //     return $db->listar($stmt);
-    // }
-
-    // public function update_active_user($db, $arrArgument)
-    // {
-    //     $sql = "UPDATE users SET activate = 1 WHERE token = '$arrArgument'";
-    //     return $db->ejecutar($sql);
-    // }
+  
 }

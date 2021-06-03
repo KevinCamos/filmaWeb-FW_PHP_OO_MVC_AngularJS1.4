@@ -6,12 +6,12 @@ require 'assets/JWTKey.php';
 
 $_POST = json_decode(file_get_contents('php://input'), true);
 
-if (PRODUCTION) { //estamos en producción
+if (PRODUCTION) { 
     ini_set('display_errors', '1');
-    ini_set('error_reporting', E_ERROR | E_WARNING); //error_reporting(E_ALL) ;
+    ini_set('error_reporting', E_ERROR | E_WARNING); 
 } else {
     ini_set('display_errors', '0');
-    ini_set('error_reporting', '0'); //error_reporting(0); 
+    ini_set('error_reporting', '0'); 
 }
 
 ob_start();
@@ -26,8 +26,6 @@ function handlerRouter()
         $URI_module = $_GET['module'];
     } else {
         $URI_module = 'home';
-
-        // echo'<script>window.location.href = "./home/list_home/";</script>';
     }
 
     if (!empty($_GET['function'])) {
@@ -56,14 +54,14 @@ function handlerModule($URI_module, $URI_function)
                 $controllerClass = "controller_" . $URI_module;
                 $obj = new $controllerClass;
             } else {
-                // ifNoExistPage();
+                echo ("<script>  location.href = '#/home';	</script>");
             }
             handlerfunction(((string) $module->name), $obj, $URI_function);
             break;
         }
     }
     if (!$exist) {
-        // ifNoExistPage();
+        echo ("<script>  location.href = '#/home';	</script>");
     }
 }
 
@@ -84,7 +82,7 @@ function handlerfunction($module, $obj, $URI_function)
     }
 
     if (!$exist) {
-        // ifNoExistPage();
+        echo ("<script>  location.href = '#/home';	</script>");
     } else {
         call_user_func(array($obj, $event));
     }

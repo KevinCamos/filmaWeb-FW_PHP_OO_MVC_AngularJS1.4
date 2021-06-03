@@ -20,12 +20,10 @@ class login_bll
 	}
 	public function obtain_validateRegister_BLL($nameUser, $email)
 	{
-		// return "hola";
 		return $this->dao->select_data_validateRegister($this->db, $nameUser, $email);
 	}
 	public function insert_register_BLL($email, $nameUser, $hashed_pass,  $avatar, $token_email)
 	{
-		// return "holas";
 		return $this->dao->insert_data_register($this->db, $email, $nameUser, $hashed_pass,  $avatar, $token_email);
 	}
 

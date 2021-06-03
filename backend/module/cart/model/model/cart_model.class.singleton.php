@@ -28,9 +28,7 @@ class cart_model
         if (!isset($idAlbaran[0])) {
             return 0;
         }
-        // $idAlbaran = $idAlbaran->idalbaran;
         $countCart =  $this->bll->obtain_countCart_BLL($idAlbaran[0]['idalbaran'])[0]['cantidad'];
-        // return $countCart;
         if (!isset($countCart)) {
             return 0;
         } else {
@@ -50,7 +48,6 @@ class cart_model
         }
         $idAlbaran = $idAlbaran[0]['idalbaran'];
         $idLinea = $this->bll->obtain_getLine_BLL($idAlbaran, $idProduct);
-        // return $idLinea;
         if (!isset($idLinea[0]['idlinea'])) {
             $this->bll->insert_line_BLL($idAlbaran, $idProduct);
             return "linea Creada";
@@ -75,7 +72,6 @@ class cart_model
 
         $type = $get['type'];
         $idProduct = $get['idProduct'];
-        // $idUser = $get['idUser'];
         $idAlbaran = $get['idAlbaran'];
         switch ($type) {
             case 'sum':
@@ -132,10 +128,9 @@ class cart_model
 
 
             $arrArgument = array('type'=>'factura','factura' => $factura[0], 'totalCart' => $totalCart,'dataUser' => $user);
-            // return $arrArgument;
             return mail::send_email($arrArgument);
         } else {
             return false;
-        }        // $this->bll->update_endCart_BLL($idAlbaran);
+        }       
     }
 }

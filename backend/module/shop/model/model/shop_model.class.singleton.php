@@ -19,49 +19,49 @@ class shop_model
 
     public function openProduct($idProduct, $idUser)
     {
-        // return "hola";
+        
         return $this->bll->obtain_openProduct_BLL($idProduct, $idUser);
     }
-    public function listShop($sendDatArray) //0 order, 1 offset, 2 IdUser
+    public function listShop($sendDatArray) 
     {
-        // return  $order;
+       
         return $this->bll->obtain_listShop_BLL($sendDatArray);
     }
-    public function categoryDecade($sendDatArray) //0 order, 1 offset, 2 IdUser
+    public function categoryDecade($sendDatArray) 
     {
-        // return  $order;
+       
         return $this->bll->obtain_categoryDecade_BLL($sendDatArray);
     }
 
-    public function categoryFormate($sendDatArray) //0 order, 1 offset, 2 IdUser
+    public function categoryFormate($sendDatArray) 
     {
-        // return  $order;
+       
         return $this->bll->obtain_categoryFormate_BLL($sendDatArray);
     }
-    public function categoryGenere($sendDatArray) //0 order, 1 offset, 2 IdUser
+    public function categoryGenere($sendDatArray) 
     {
-        // return  $order;
+       
         return $this->bll->obtain_categoryGenere_BLL($sendDatArray);
     }
-    public function filter($sendDatArray) //0 order, 1 offset, 2 IdUser
+    public function filter($sendDatArray) 
     {
-        // return  $order;
+       
         return $this->bll->obtain_filter_BLL($sendDatArray);
     }
-    public function pagination($type) //0 order, 1 offset, 2 IdUser
+    public function pagination($type) 
     {
-        // return  $type;
+        
         return $this->bll->obtain_pagination_BLL($type);
     }
-    public function filterType($type) //0 order, 1 offset, 2 IdUser
+    public function filterType($type) 
     {
-        // return  $type;
+        
         return $this->bll->obtain_filterType_BLL($type);
     }
 
-    public function likeds($get) //0 order, 1 offset, 2 IdUser
+    public function likeds($get) 
     {
-        // return $get['typeLike'];
+       
         switch ($get['typeLike']) {
 
             case 'like':

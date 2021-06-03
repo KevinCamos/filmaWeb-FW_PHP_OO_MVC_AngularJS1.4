@@ -13,10 +13,8 @@
             $obj = $modelClass::getInstance();
             if (isset($arrArgument)){
                 if (isset($arrArgument2)) {
-                    //return $obj->$function($arrArgument,$arrArgument2);
                     return call_user_func(array($obj, $function),$arrArgument,$arrArgument2);
                 }
-                //return $obj->$function($arrArgument);
                 return call_user_func(array($obj, $function),$arrArgument);
             }   
             
@@ -29,7 +27,6 @@
         $view_path = $rutaVista . $templateName;
         $arrData = '';
           if (file_exists($view_path)) {
-            //   echo ($view_path);
             if (isset($arrPassValue))
                       
 

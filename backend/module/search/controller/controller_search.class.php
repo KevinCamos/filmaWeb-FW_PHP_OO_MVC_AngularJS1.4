@@ -9,24 +9,15 @@ class controller_search
 
 	function autoComplete()
 	{
-		// echo json_encode(MODEL_SEARCH_PHP);
 		$json = array();
 		$json = loadModel(MODEL_SEARCH_PHP, "search_model", "autoComplete");
 		echo json_encode($json);
 	}
 	function searchList()
 	{
-		// echo json_encode($_GET["sendData"]);
 		$json = array();
 		$json = loadModel(MODEL_SEARCH_PHP, "search_model", "searchList", $_POST["arrayFilter"]);
 		echo json_encode($json);
 	}
-
-
-
-
-	//////////////////////// PAGINATION ///////////////////////
-
-
 
 }

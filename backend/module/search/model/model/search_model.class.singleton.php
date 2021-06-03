@@ -19,12 +19,10 @@ class search_model
 
     public function autoComplete()
     {
-        // return "hola";
         return $this->bll->obtain_autoComplete_BLL();
     }
     public function searchList($data)
     {
-        // return "hola";
         return $this->bll->obtain_searchList_BLL($data);
     }
  

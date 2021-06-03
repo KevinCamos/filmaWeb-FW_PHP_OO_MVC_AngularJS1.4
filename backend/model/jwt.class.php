@@ -28,8 +28,6 @@ class JWT
 
     public function decode($token, $key)
     {
-        // try {
-
 
             list($header, $payload, $signature) = explode('.', $token);
             $this->data = $header . '.' . $payload;
@@ -37,9 +35,7 @@ class JWT
                 return $this->base64url_decode($payload);
             }
             exit('Invalid Signature');
-        // } catch (Exception $e) {
-        //     return false;
-        // }
+       
     }
 
     private function setAlgorithm($algorithm)
@@ -51,15 +47,7 @@ class JWT
             case "H":
                 $this->alg = 'HMAC';
                 break;
-                // By now, the only native is HMAC
-                /* 
-            case R:
-                $this->alg = 'RSA';
-                break;
-            case E:
-                $this->alg = 'ECDSA';
-                break;
-            */
+             
             default:
                 exit("RSA and ECDSA not implemented yet!");
         }

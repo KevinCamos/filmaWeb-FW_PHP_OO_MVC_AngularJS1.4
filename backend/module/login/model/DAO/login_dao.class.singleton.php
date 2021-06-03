@@ -27,17 +27,13 @@ class login_dao
 
     public function insert_data_register($db, $email, $nameUser, $hashed_pass,  $avatar, $token_email)
     {
-        //PREGUNTAR A YOLANDA PER LA CREACIÓ DE LA ID ALEATORIA.
-        // return $sendDatArray;  
         $idUser = generate_Token_secure(20);
         $idUser = 'FW-' . $idUser;
         $sql = "INSERT INTO `users` (`idusers`, `email`, `username`, `pssword`, `avatar`, `token_email`)
         VALUES ( '$idUser', '$email', '$nameUser', '$hashed_pass','$avatar', '$token_email')";
 
 
-        // return $sql;
         return $db->ejecutar($sql);
-        // return $db->listar($stmt);
     }
 
     public function select_data_validateUserLogin($db, $nameUser)
@@ -67,7 +63,6 @@ class login_dao
     {
         $sql = "UPDATE `filmoteca`.`users` SET `activate` = 'activate', `token_email` = '' WHERE (`username` = '$nameUser');";
 
-        // return $sql;
         return $db->ejecutar($sql);
     }
     public function select_data_validateSocialLogin($db, $nameUser)
@@ -89,14 +84,12 @@ class login_dao
         VALUES ( '$idUser', '$email', '$nameUser', '$hashed_pass','$avatar', 'activate')";
 
         return $db->ejecutar($sql);
-        // return $db->listar($stmt);
     }
 
     public function update_data_changePassword($db, $nameUser, $password)
     {
         $sql = "UPDATE `filmoteca`.`users` SET `pssword` = '$password' WHERE (`email` = '$nameUser') AND idusers LIKE 'FW-%';";
 
-        // return $sql;
         return $db->ejecutar($sql);
     }
   
