@@ -59,7 +59,7 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', 'toastr', function
                     })
                     .then(function (data) {
                         console.log(data);
-                        countIconCart()
+                        sumClientCart();
                         toastr.success("Se ha añadido este producto a carrito", "Añadido");
 
                     }, function (error) {
@@ -73,7 +73,12 @@ filmaweb.factory('like_cart_shop', ['$rootScope', 'services', 'toastr', function
 
     }
 
+    function sumClientCart() {
+        console.log("entra")
+         $rootScope.countCart>=0? ($rootScope.countCart= parseInt($rootScope.countCart)+1):countIconCart();
+    }
     function countIconCart() {
+        console.log('+1')
         if (localStorage.userID) {
             idUser = localStorage.userID;
             services.threePost('cart', "countCart", {
