@@ -1,4 +1,4 @@
-filmaweb.controller("controller_login", function ($scope, services, toolsLogin, services_Google, services_GitHub) {
+filmaweb.controller("controller_login", function ($scope, services,toastr, toolsLogin, services_Google, services_GitHub) {
     $scope.regUsername = /^[A-Za-z0-9._-]{5,15}$/;
     $scope.regUsernameMail = /^[A-Za-z0-9._-][@]{5,50}$/ | /^[A-Za-z0-9._-]{5,20}@[a-z]{3,10}.[a-z]{2,4}$/;
 
@@ -64,7 +64,7 @@ filmaweb.controller("controller_login", function ($scope, services, toolsLogin, 
                             $scope.errorReg = "Lo sentimos, este usuario o correo electrónico ya se encuentra registrado";
                         } else {
                             // toastr.success("Se ha registrado corréctamente");
-                            alert("se ha enviado un correo");
+                            toastr.success("se ha enviado un correo");
                             location.href = "#/home";
                         }
                     }, function (error) {
@@ -140,8 +140,8 @@ filmaweb.controller("controller_login", function ($scope, services, toolsLogin, 
                         user: user
                     })
                     .then(function (data) {
-                        // toastr.success("Se ha enviado a tu e-mail un enlace para restablecer la contraseña");
-                        alert("Se ha enviado a tu e-mail un enlace para restablecer la contraseña");
+                        toastr.success("Se ha enviado a tu e-mail un enlace para restablecer la contraseña");
+                        // alert("Se ha enviado a tu e-mail un enlace para restablecer la contraseña");
 
 
                     }, function (error) {
@@ -214,8 +214,8 @@ filmaweb.controller("recoveredPassword", function ($scope, services, toolsLogin,
                         if (data == false) {
                             $scope.errorRecovering = "Ha habido un problema, vuelve a intentarlo";
                         } else {
-                            // toastr.success("Se ha registrado corréctamente");
-                            alert("Se ha modificado correctamente");
+                            toastr.success("Se ha registrado corréctamente");
+                            // alert("Se ha modificado correctamente");
                             location.href = "#/home";
                         }
                     }, function (error) {
